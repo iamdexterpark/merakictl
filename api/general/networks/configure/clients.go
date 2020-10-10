@@ -23,3 +23,27 @@ func GetClientPolicy(networkId, clientId string) (ClientPolicy, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return clientpolicy, traceback
 }
+
+type SplashAuthorization struct {
+	Ssids struct {
+		Num0 struct {
+			IsAuthorized bool   `json:"isAuthorized"`
+			AuthorizedAt string `json:"authorizedAt"`
+			ExpiresAt    string `json:"expiresAt"`
+		} `json:"0"`
+		Num2 struct {
+			IsAuthorized bool `json:"isAuthorized"`
+		} `json:"2"`
+	} `json:"ssids"`
+}
+
+// Return The Splash Authorization For A Client For Each SSID They've Associated With Through Splash
+func GetSplashAuthorization(networkId, clientId string) (SplashAuthorization, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/splashAuthorizationStatus", api.BaseUrl(), networkId, clientId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var splashauthorization = SplashAuthorization{}
+	user_agent.UnMarshalJSON(session.Body, &splashauthorization)
+	traceback := user_agent.TraceBack(session)
+	return splashauthorization, traceback
+}

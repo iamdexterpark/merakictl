@@ -39,7 +39,7 @@
             - [x] Return The Policy Assigned To A Client On The Network Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
             - [ ] Update The Policy Assigned To A Client On The Network Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
         - [ ] Splash Authorization
-            - [ ] Return The Splash Authorization For A Client For Each SSID Theyve Associated With Through Splash Only Enabled SSI Ds With Click Through Splash Enabled Will Be Included Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether
+            - [x] Return The Splash Authorization For A Client For Each SSID Theyve Associated With Through Splash Only Enabled SSI Ds With Click Through Splash Enabled Will Be Included Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether
             - [ ] Update A Clients Splash Authorization Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
         - [ ] Provisions A Client With A Name And Policy Clients Can Be Provisioned Before They Associate To The Network
     - [ ] Devices
