@@ -8,6 +8,9 @@ import (
 )
 
 type GroupPolicies []struct {
+	GroupPolicy
+}
+type GroupPolicy struct {
 	Name          string `json:"name"`
 	GroupPolicyID string `json:"groupPolicyId"`
 	Scheduling    struct {
@@ -129,11 +132,11 @@ func GetGroupPolicies(networkId string) (GroupPolicies, interface{}) {
 }
 
 // Display A Group Policy
-func GetGroupPolicy(networkId, groupPolicyId string) (GroupPolicies, interface{}) {
+func GetGroupPolicy(networkId, groupPolicyId string) (GroupPolicy, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/groupPolicies/%s", api.BaseUrl(), networkId, groupPolicyId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var results = GroupPolicies{}
+	var results = GroupPolicy{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback

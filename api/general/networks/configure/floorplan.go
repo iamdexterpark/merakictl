@@ -6,8 +6,10 @@ import (
 	user_agent "github.com/ddexterpark/merakictl/user-agent"
 	"io"
 )
-
-type FloorPlan []struct {
+type FloorPlans []struct {
+	FloorPlan
+}
+type FloorPlan struct {
 	FloorPlanID       string `json:"floorPlanId"`
 	ImageURL          string `json:"imageUrl"`
 	ImageURLExpiresAt string `json:"imageUrlExpiresAt"`
@@ -59,11 +61,11 @@ type FloorPlan []struct {
 }
 
 // List The Floor Plans That Belong To Your Network
-func GetFloorPlans(networkId string) (FloorPlan, interface{}) {
+func GetFloorPlans(networkId string) (FloorPlans, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/floorPlans", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var floorplan = FloorPlan{}
+	var floorplan = FloorPlans{}
 	user_agent.UnMarshalJSON(session.Body, &floorplan)
 	traceback := user_agent.TraceBack(session)
 	return floorplan, traceback

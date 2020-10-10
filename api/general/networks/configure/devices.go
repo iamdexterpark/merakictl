@@ -6,8 +6,10 @@ import (
 	user_agent "github.com/ddexterpark/merakictl/user-agent"
 	"io"
 )
-
 type Devices []struct {
+	Device
+}
+type Device struct {
 	Name           string  `json:"name"`
 	Lat            float64 `json:"lat"`
 	Lng            float64 `json:"lng"`

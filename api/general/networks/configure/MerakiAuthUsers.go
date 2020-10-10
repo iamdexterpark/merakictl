@@ -7,8 +7,10 @@ import (
 	"io"
 	"time"
 )
-
 type MerakiAuthUsers []struct {
+	MerakiAuthUser
+}
+type MerakiAuthUser struct {
 	MerakiAuthUserID string    `json:"merakiAuthUserId"`
 	Email            string    `json:"email"`
 	Name             string    `json:"name"`
@@ -35,11 +37,11 @@ func GetMerakiAuthUsers(networkId string) (MerakiAuthUsers, interface{}) {
 }
 
 // Return The Meraki Auth Splash Guest RADIUS Or Client VPN User
-func GetMerakiAuthUser(networkId, merakiAuthUserId string) (MerakiAuthUsers, interface{}) {
+func GetMerakiAuthUser(networkId, merakiAuthUserId string) (MerakiAuthUser, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/merakiAuthUsers/%s", api.BaseUrl(), networkId, merakiAuthUserId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var results = MerakiAuthUsers{}
+	var results = MerakiAuthUser{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
