@@ -68,7 +68,7 @@
         - [ ] Delete A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Deleted
         - [ ] Update A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Updated
     - [ ] Mqtt Brokers
-        - [ ] List The MQTT Brokers For This Network
+        - [x] List The MQTT Brokers For This Network
         - [ ] Add An MQTT Broker
         - [ ] Return An MQTT Broker
         - [ ] Update An MQTT Broker
