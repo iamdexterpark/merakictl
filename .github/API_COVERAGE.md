@@ -52,7 +52,7 @@
     - [ ] Floor Plans
         - [x] List The Floor Plans That Belong To Your Network
         - [ ] Upload A Floor Plan
-        - [ ] Find A Floor Plan By ID
+        - [x] Find A Floor Plan By ID
         - [ ] Update A Floor Plans Geolocation And Other Meta Data
         - [ ] Destroy A Floor Plan
     - [ ] Group Policies

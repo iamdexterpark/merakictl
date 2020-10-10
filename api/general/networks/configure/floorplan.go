@@ -68,3 +68,14 @@ func GetFloorPlans(networkId string) (FloorPlan, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return floorplan, traceback
 }
+
+// List The Floor Plans That Belong To Your Network
+func GetFloorPlan(networkId, floorPlanId string) (FloorPlan, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/floorPlans/%s", api.BaseUrl(), networkId, floorPlanId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var floorplan = FloorPlan{}
+	user_agent.UnMarshalJSON(session.Body, &floorplan)
+	traceback := user_agent.TraceBack(session)
+	return floorplan, traceback
+}
