@@ -19,12 +19,12 @@
     - [ ] Live Tools
         - [ ] Blink The LEDs On A Device
         - [ ] Reboot A Device
-    - [ ] Monitor
-        - [ ] Clients
+    - [x] Monitor
+        - [x] Clients
             - [x] List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
-        - [ ] Lldp Cdp
+        - [x] Lldp Cdp
             - [x] List LLDP and CDP information for a device
-        - [ ] Loss And Latency History
+        - [x] Loss And Latency History
             - [x] Get the uplink loss percentage and latency in milliseconds for a wired network device.
           
 
