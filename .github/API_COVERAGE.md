@@ -47,7 +47,7 @@
         - [ ] Claim Devices Into A Network
         - [ ] Remove A Single Device
     - [ ] Firmware Upgrades
-        - [ ] Get Current Maintenance Window For A Network
+        - [x] Get Current Maintenance Window For A Network
         - [ ] Update Current Maintenance Window For A Network
     - [ ] Floor Plans
         - [ ] List The Floor Plans That Belong To Your Network
