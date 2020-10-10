@@ -38,6 +38,10 @@ There are also some optional env vars that you can set to customize your API cal
 ```
 
 **MERAKI_API_VERSION**
+
+The default version is v1, this tool has limited support for v0 as it is being sunset in 2022. 
+Not all endpoints will work in v0.
+ 
 ```shell script
     Default = 'v1'
 ```
