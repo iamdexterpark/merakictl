@@ -23,7 +23,7 @@
         - [ ] Clients
             - [x] List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
         - [ ] Lldp Cdp
-            - [ ] List LLDP and CDP information for a device
+            - [x] List LLDP and CDP information for a device
         - [ ] Loss And Latency History
             - [ ] Get the uplink loss percentage and latency in milliseconds for a wired network device.
           

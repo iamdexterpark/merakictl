@@ -18,3 +18,18 @@ var clients = &cobra.Command{
 		shell.Display(deviceClients, traceback, "deviceClients", cmd.Flags())
 	},
 }
+
+
+
+// lldpCdp - List LLDP and CDP information for a device
+var lldpCdp = &cobra.Command{
+	Use:   "lldpCdp",
+	Short: "List LLDP and CDP information for a device.",
+	Long: ``,
+	Run: func(cmd *cobra.Command, args []string) {
+
+		serial := cmd.Flag("device").Value.String()
+		lldpCdp, traceback := monitor.GetlldpCdp(serial)
+		shell.Display(lldpCdp, traceback, "lldpCdp", cmd.Flags())
+	},
+}

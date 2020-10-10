@@ -17,5 +17,6 @@ func init() {
 	DeviceCmd.AddCommand(management)
 	DeviceCmd.AddCommand(device)
 	DeviceCmd.AddCommand(clients)
+	DeviceCmd.AddCommand(lldpCdp)
 }
 

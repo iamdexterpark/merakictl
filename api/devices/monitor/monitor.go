@@ -23,7 +23,7 @@ type DeviceClients []struct {
 	DhcpHostname string      `json:"dhcpHostname"`
 }
 
-// GetSingleDevice - Return A Single Device
+// GetDeviceClients - Return A Devices Clients
 func GetDeviceClients(serial string) (DeviceClients, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s/clients", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
@@ -32,4 +32,44 @@ func GetDeviceClients(serial string) (DeviceClients, interface{}) {
 	user_agent.UnMarshalJSON(session.Body, &device)
 	traceback := user_agent.TraceBack(session)
 	return device, traceback
+}
+
+
+type lldpCdp struct {
+	SourceMac string `json:"sourceMac"`
+	Ports     struct {
+		Num8 struct {
+			Cdp struct {
+				DeviceID   string `json:"deviceId"`
+				PortID     string `json:"portId"`
+				Address    string `json:"address"`
+				SourcePort string `json:"sourcePort"`
+			} `json:"cdp"`
+		} `json:"8"`
+		Num12 struct {
+			Cdp struct {
+				DeviceID   string `json:"deviceId"`
+				PortID     string `json:"portId"`
+				Address    string `json:"address"`
+				SourcePort string `json:"sourcePort"`
+			} `json:"cdp"`
+			Lldp struct {
+				SystemName        string `json:"systemName"`
+				PortID            string `json:"portId"`
+				ManagementAddress string `json:"managementAddress"`
+				SourcePort        string `json:"sourcePort"`
+			} `json:"lldp"`
+		} `json:"12"`
+	} `json:"ports"`
+}
+
+// Get - Return
+func GetlldpCdp(serial string) (lldpCdp, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/lldpCdp", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var lldpCdp = lldpCdp{}
+	user_agent.UnMarshalJSON(session.Body, &lldpCdp)
+	traceback := user_agent.TraceBack(session)
+	return lldpCdp, traceback
 }
