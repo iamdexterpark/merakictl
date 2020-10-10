@@ -32,3 +32,4 @@ var alertconfig = &cobra.Command{
 		shell.Display(alertconfig, traceback, "clients", cmd.Flags())
 	},
 }
+

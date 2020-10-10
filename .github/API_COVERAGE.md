@@ -43,7 +43,7 @@
             - [ ] Update A Clients Splash Authorization Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
         - [ ] Provisions A Client With A Name And Policy Clients Can Be Provisioned Before They Associate To The Network
     - [ ] Devices
-        - [ ] List The Devices In A Network
+        - [x] List The Devices In A Network
         - [ ] Claim Devices Into A Network
         - [ ] Remove A Single Device
     - [ ] Firmware Upgrades
