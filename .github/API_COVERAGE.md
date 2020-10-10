@@ -9,7 +9,6 @@
 
 ## GENERAL
 
-
 - [ ] Devices
     - [ ] Configure
         - [ ] Management Interface
@@ -22,7 +21,7 @@
         - [ ] Reboot A Device
     - [ ] Monitor
         - [ ] Clients
-            - [ ] List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
+            - [x] List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
         - [ ] Lldp Cdp
             - [ ] List LLDP and CDP information for a device
         - [ ] Loss And Latency History

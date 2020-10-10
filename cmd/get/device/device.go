@@ -16,5 +16,6 @@ var DeviceCmd = &cobra.Command{
 func init() {
 	DeviceCmd.AddCommand(management)
 	DeviceCmd.AddCommand(device)
+	DeviceCmd.AddCommand(clients)
 }
 
