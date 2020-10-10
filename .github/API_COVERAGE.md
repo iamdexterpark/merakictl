@@ -58,7 +58,7 @@
     - [ ] Group Policies
         - [x] List The Group Policies In A Network
         - [ ] Create A Group Policy
-        - [ ] Display A Group Policy
+        - [X] Display A Group Policy
         - [ ] Update A Group Policy
         - [ ] Delete A Group Policy
     - [ ] Meraki Auth Users

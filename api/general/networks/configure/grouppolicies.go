@@ -127,3 +127,14 @@ func GetGroupPolicies(networkId string) (GroupPolicies, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+// Display A Group Policy
+func GetGroupPolicy(networkId, groupPolicyId string) (GroupPolicies, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/groupPolicies/%s", api.BaseUrl(), networkId, groupPolicyId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = GroupPolicies{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
