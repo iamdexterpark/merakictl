@@ -74,7 +74,7 @@
         - [ ] Update An MQTT Broker
         - [ ] Delete An MQTT Broker
     - [ ] Netflow
-        - [ ] Return The Net Flow Traffic Reporting Settings For A Network
+        - [x] Return The Net Flow Traffic Reporting Settings For A Network
         - [ ] Update The Net Flow Traffic Reporting Settings For A Network
     - [ ] Network Health
         - [ ] Channel Utilization
