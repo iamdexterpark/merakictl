@@ -64,7 +64,7 @@
     - [ ] Meraki Auth Users
         - [x] List The Splash Or RADIUS Users Configured Under Meraki Authentication For A Network
         - [ ] Create A User Configured With Meraki Authentication For A Network Currently Supports 802 1 X And Splash Guest Users And Currently Organizations Have A 50 000 User Cap
-        - [ ] Return The Meraki Auth Splash Or RADIUS User
+        - [x] Return The Meraki Auth Splash Or RADIUS User
         - [ ] Delete A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Deleted
         - [ ] Update A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Updated
     - [ ] Mqtt Brokers

@@ -33,3 +33,14 @@ func GetMerakiAuthUsers(networkId string) (MerakiAuthUsers, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+// Return The Meraki Auth Splash Guest RADIUS Or Client VPN User
+func GetMerakiAuthUser(networkId, merakiAuthUserId string) (MerakiAuthUsers, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/merakiAuthUsers/%s", api.BaseUrl(), networkId, merakiAuthUserId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = MerakiAuthUsers{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
