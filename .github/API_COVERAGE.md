@@ -80,8 +80,8 @@
         - [x] Channel Utilization
             - [x] Get the channel utilization over each radio for all APs in a network.
     - [ ] Pii
-        - [ ] Pii Keys
-            - [ ] List the keys required to access Personally Identifiable Information (PII) for a given identifier.
+        - [x] Pii Keys
+            - [x] List the keys required to access Personally Identifiable Information (PII) for a given identifier.
         - [ ] Requests
             - [ ] List The PII Requests For This Network Or Organization
             - [ ] Submit A New Delete Or Restrict Processing PII Request
