@@ -7,8 +7,10 @@ import (
 	"io"
 	"time"
 )
-
-type ChannelUtilization []struct {
+type ChannelUtilizations []struct {
+	ChannelUtilization
+}
+type ChannelUtilization struct {
 	Serial string `json:"serial"`
 	Model  string `json:"model"`
 	Tags   string `json:"tags"`
@@ -29,11 +31,11 @@ type ChannelUtilization []struct {
 }
 
 // Get the channel utilization over each radio for all APs in a network.
-func GetChannelUtilization(networkId string) (ChannelUtilization, interface{}) {
+func GetChannelUtilization(networkId string) (ChannelUtilizations, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/networkHealth/channelUtilization", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var results = ChannelUtilization{}
+	var results = ChannelUtilizations{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
