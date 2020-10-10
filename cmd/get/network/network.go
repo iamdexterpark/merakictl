@@ -15,4 +15,5 @@ var NetCmd = &cobra.Command{
 // init - Entrypoint for NetCmd sub-commands.
 func init() {
 	NetCmd.AddCommand(clients)
+	NetCmd.AddCommand(alertconfig)
 }

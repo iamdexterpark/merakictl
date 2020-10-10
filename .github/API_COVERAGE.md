@@ -32,7 +32,7 @@
     - [ ] Configure
         - [ ] Alerts
             - [ ] Settings
-                - [ ] Return The Alert Configuration For This Network
+                - [x] Return The Alert Configuration For This Network
                 - [ ] Update The Alert Configuration For This Network
         - [ ] Clients
             - [ ] Policy
