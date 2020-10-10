@@ -56,7 +56,7 @@
         - [ ] Update A Floor Plans Geolocation And Other Meta Data
         - [ ] Destroy A Floor Plan
     - [ ] Group Policies
-        - [ ] List The Group Policies In A Network
+        - [x] List The Group Policies In A Network
         - [ ] Create A Group Policy
         - [ ] Display A Group Policy
         - [ ] Update A Group Policy
