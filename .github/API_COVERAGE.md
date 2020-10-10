@@ -76,9 +76,9 @@
     - [ ] Netflow
         - [x] Return The Net Flow Traffic Reporting Settings For A Network
         - [ ] Update The Net Flow Traffic Reporting Settings For A Network
-    - [ ] Network Health
-        - [ ] Channel Utilization
-            - [ ] Get the channel utilization over each radio for all APs in a network.
+    - [x] Network Health
+        - [x] Channel Utilization
+            - [x] Get the channel utilization over each radio for all APs in a network.
     - [ ] Pii
         - [ ] Pii Keys
             - [ ] List the keys required to access Personally Identifiable Information (PII) for a given identifier.
