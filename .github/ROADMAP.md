@@ -16,6 +16,7 @@
 - [x] Exponential Backoff Policy
 - [x] Connection Reuse Policy
 - [x] Meraki API V0 Support
+- [x] Meraki API V1 Support
 - [x] Deprecation Policy
 - [x] Sunset Policy
 - [x] HTTP Response Status Code Handler
@@ -25,7 +26,6 @@
 
 
 ### Backlog
-- [x] Meraki API V1 Support
 - [ ] Pagination Support
 - [ ] Meraki Tags Flag
 - [ ] Diff Flag (GET: compare config file against current API state)
