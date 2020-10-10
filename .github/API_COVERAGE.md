@@ -15,7 +15,7 @@
         - [ ] Management Interface
             - [x] Return The Management Interface Settings For A Device
             - [ ] Update The Management Interface Settings For A Device
-        - [ ] Return A Single Device
+        - [x] Return A Single Device
         - [ ] Update The Attributes Of A Device
     - [ ] Live Tools
         - [ ] Blink The LEDs On A Device

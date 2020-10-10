@@ -7,7 +7,7 @@ import (
 
 // DeviceCmd - Root for all organization CLI commands.
 var DeviceCmd = &cobra.Command{
-	Use:   "device",
+	Use:   "devices",
 	Short: "",
 	Long: "Entrypoint for Device subcommands.",
 }
@@ -15,5 +15,6 @@ var DeviceCmd = &cobra.Command{
 // init - Entrypoint for DeviceCmd sub-commands.
 func init() {
 	DeviceCmd.AddCommand(management)
+	DeviceCmd.AddCommand(device)
 }
 

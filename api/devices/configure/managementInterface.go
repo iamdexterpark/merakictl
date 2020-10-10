@@ -39,3 +39,35 @@ func GetManagementInterface(serial string) (ManagementInterface, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return clients, traceback
 }
+
+type Device struct {
+	Name           string   `json:"name"`
+	Lat            float64  `json:"lat"`
+	Lng            float64  `json:"lng"`
+	Serial         string   `json:"serial"`
+	Mac            string   `json:"mac"`
+	Model          string   `json:"model"`
+	Address        string   `json:"address"`
+	Notes          string   `json:"notes"`
+	LanIP          string   `json:"lanIp"`
+	Tags           []string `json:"tags"`
+	NetworkID      string   `json:"networkId"`
+	BeaconIDParams struct {
+		UUID  string `json:"uuid"`
+		Major int    `json:"major"`
+		Minor int    `json:"minor"`
+	} `json:"beaconIdParams"`
+	Firmware    string `json:"firmware"`
+	FloorPlanID string `json:"floorPlanId"`
+}
+
+// GetSingleDevice - Return A Single Device
+func GetSingleDevice(serial string) (Device, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var device = Device{}
+	user_agent.UnMarshalJSON(session.Body, &device)
+	traceback := user_agent.TraceBack(session)
+	return device, traceback
+}
