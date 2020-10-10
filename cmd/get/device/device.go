@@ -18,5 +18,6 @@ func init() {
 	DeviceCmd.AddCommand(device)
 	DeviceCmd.AddCommand(clients)
 	DeviceCmd.AddCommand(lldpCdp)
+	DeviceCmd.AddCommand(uplink)
 }
 

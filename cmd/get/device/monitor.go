@@ -33,3 +33,17 @@ var lldpCdp = &cobra.Command{
 		shell.Display(lldpCdp, traceback, "lldpCdp", cmd.Flags())
 	},
 }
+
+// uplink - Get the uplink loss percentage and latency in milliseconds for a wired network device.
+var uplink = &cobra.Command{
+	Use:   "uplink",
+	Short: "Get the uplink loss percentage and latency in milliseconds for a wired network device.",
+	Long: ``,
+	Run: func(cmd *cobra.Command, args []string) {
+
+		serial := cmd.Flag("device").Value.String()
+		uplink, traceback := monitor.GetUplinkLoss(serial, args[0], args[1],
+			args[2], args[3], args[4], args[5])
+		shell.Display(uplink, traceback, "uplinkLoss", cmd.Flags())
+	},
+}

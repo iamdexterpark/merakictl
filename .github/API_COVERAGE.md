@@ -25,7 +25,7 @@
         - [ ] Lldp Cdp
             - [x] List LLDP and CDP information for a device
         - [ ] Loss And Latency History
-            - [ ] Get the uplink loss percentage and latency in milliseconds for a wired network device.
+            - [x] Get the uplink loss percentage and latency in milliseconds for a wired network device.
           
 
 - [ ] Networks

@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/merakictl/api"
 	user_agent "github.com/ddexterpark/merakictl/user-agent"
 	"io"
+	"time"
 )
 
 type DeviceClients []struct {
@@ -63,7 +64,7 @@ type lldpCdp struct {
 	} `json:"ports"`
 }
 
-// Get - Return
+// GetlldpCdp - List LLDP and CDP information for a device
 func GetlldpCdp(serial string) (lldpCdp, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s/lldpCdp", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
@@ -72,4 +73,33 @@ func GetlldpCdp(serial string) (lldpCdp, interface{}) {
 	user_agent.UnMarshalJSON(session.Body, &lldpCdp)
 	traceback := user_agent.TraceBack(session)
 	return lldpCdp, traceback
+}
+
+type UplinkLoss  []struct {
+	StartTime   time.Time `json:"startTime"`
+	EndTime     time.Time `json:"endTime"`
+	LossPercent int       `json:"lossPercent"`
+	LatencyMs   int       `json:"latencyMs"`
+}
+
+// GetlldpCdp - Get the uplink loss percentage and latency in milliseconds for a wired network device.
+func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) (UplinkLoss, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/lossAndLatencyHistory", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan",timespan)
+	parameters.Add("resolution", resolution)
+	parameters.Add("uplink", uplink)
+	parameters.Add("ip", ip)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var UplinkLoss = UplinkLoss{}
+	user_agent.UnMarshalJSON(session.Body, &UplinkLoss)
+	traceback := user_agent.TraceBack(session)
+	return UplinkLoss, traceback
 }
