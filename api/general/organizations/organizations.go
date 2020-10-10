@@ -56,7 +56,7 @@ func GetOrganization(organizationId string) (Organization, interface{}) {
 // CreateOrganization - Create a new organization
 func CreateOrganization( name string) (Organization, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations", api.BaseUrl())
-	data := Organization {
+	data := Organization{
 		Name: name,
 	}
 	payload := user_agent.MarshalJSON(data)

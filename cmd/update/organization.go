@@ -1,7 +1,7 @@
 package update
 
 import (
-	"github.com/ddexterpark/merakictl/api/organizations"
+	"github.com/ddexterpark/merakictl/api/general/organizations"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )

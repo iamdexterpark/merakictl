@@ -1,7 +1,7 @@
 package device
 
 import (
-	"github.com/ddexterpark/merakictl/api/devices/monitor"
+	"github.com/ddexterpark/merakictl/api/general/devices/monitor"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )

@@ -1,8 +1,8 @@
 package network
 
 import (
-	"github.com/ddexterpark/merakictl/api/networks"
-	"github.com/ddexterpark/merakictl/api/networks/configure"
+	"github.com/ddexterpark/merakictl/api/general/networks"
+	"github.com/ddexterpark/merakictl/api/general/networks/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )

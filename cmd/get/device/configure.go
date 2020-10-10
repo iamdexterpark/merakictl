@@ -2,7 +2,7 @@ package device
 
 
 import (
-	"github.com/ddexterpark/merakictl/api/devices/configure"
+	"github.com/ddexterpark/merakictl/api/general/devices/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )

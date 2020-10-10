@@ -1,7 +1,7 @@
 package wireless
 
 import (
-	"github.com/ddexterpark/merakictl/api/wireless"
+	"github.com/ddexterpark/merakictl/api/products/wireless/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
@@ -23,7 +23,7 @@ var ssid = &cobra.Command{
 		var format interface{}
 		shell.RenderInput(&format)
 
-		session, traceback := wireless.UpdateSSID(networkId,ssidNumber,format)
+		session, traceback := configure.UpdateSSID(networkId,ssidNumber,format)
 		shell.Display(session, traceback, "ssid", cmd.Flags())
 
 	},

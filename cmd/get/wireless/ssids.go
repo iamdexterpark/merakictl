@@ -1,7 +1,7 @@
 package wireless
 
 import (
-	"github.com/ddexterpark/merakictl/api/wireless"
+	"github.com/ddexterpark/merakictl/api/products/wireless/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
@@ -13,7 +13,7 @@ var ssids = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		networkId := cmd.Flag("network").Value.String()
-		ssids, traceback := wireless.GetSSIDS(networkId)
+		ssids, traceback := configure.GetSSIDS(networkId)
 		shell.Display(ssids, traceback, "ssids", cmd.Flags())
 	},
 }
@@ -27,7 +27,7 @@ var ssid = &cobra.Command{
 		networkId := cmd.Flag("network").Value.String()
 
 		ssidNumber := args[0]
-		ssid, traceback := wireless.GetSSID(networkId,ssidNumber)
+		ssid, traceback := configure.GetSSID(networkId,ssidNumber)
 		shell.Display(ssid, traceback, "ssid", cmd.Flags())
 	},
 }
