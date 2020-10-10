@@ -13,7 +13,7 @@
 - [ ] Devices
     - [ ] Configure
         - [ ] Management Interface
-            - [ ] Return The Management Interface Settings For A Device
+            - [x] Return The Management Interface Settings For A Device
             - [ ] Update The Management Interface Settings For A Device
         - [ ] Return A Single Device
         - [ ] Update The Attributes Of A Device

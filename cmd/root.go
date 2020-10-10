@@ -64,6 +64,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
 	rootCmd.PersistentFlags().StringP("org", "o", "", "The target organization")
 	rootCmd.PersistentFlags().StringP("network", "n", "", "The target Network")
+	rootCmd.PersistentFlags().StringP("device", "d", "", "The target device")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
 	rootCmd.PersistentFlags().BoolP("json", "j", false, "Export config to JSON")
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "Display HTTP Request/Response for traceback")
