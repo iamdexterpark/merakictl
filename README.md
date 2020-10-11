@@ -2,9 +2,9 @@
 A command line tool for interacting with the Meraki Dashboard API.
 
 ### Download Application
-This application is compiled into a single binary so that it is cross-platform. 
+This application can be compiled into a single binary so that it is cross-platform. 
 
-Link TBD...
+Currently, this tool is in its Alpha version.
 
 ### Compiling Application from source
 ```shell script
@@ -19,7 +19,8 @@ At minimum, to use this tool you will need to set an environmental variable for 
 There are also some optional env vars that you can set to customize your API calls:
 
 #### Required
-** MERAKI_API_TOKEN**
+
+**MERAKI_API_TOKEN**
 ```shell script
       Bash -
       export MERAKI_API_TOKEN=1234567890987654321
