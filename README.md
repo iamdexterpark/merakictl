@@ -93,8 +93,9 @@ Flag Type | Long | Short | Description |
 --- | --- | --- | ---
 | Global | **--input** | | Global flag for using a yaml file for passing config to the Dashboard API |
 | Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
-| Global | **--org** | -o | Global flag for Organizion id, needed for most api calls. |
-| Global | **--net** | -n | Global flag for Network id, needed for most device based api calls. |
+| Global | **--organization** | -o | Global flag for Organization id. |
+| Global | **--network** | -n | Global flag for Network id. |
+| Global | **--device** | -d | Global flag for Serial Number. |
 | Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
 
 ### Data Model
