@@ -67,3 +67,17 @@ func GetPiiRequest(networkId, requestId string) (PiiRequest, interface{}) {
 	return results, traceback
 }
 
+type SmDevicesForKey  struct {
+	N1234 []string `json:"N_1234"`
+}
+
+// Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier
+func GetSmDevicesForKey(networkId string) (SmDevicesForKey, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/pii/smDevicesForKey", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = SmDevicesForKey{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

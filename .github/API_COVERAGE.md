@@ -87,8 +87,8 @@
             - [ ] Submit A New Delete Or Restrict Processing PII Request
             - [x] Return A PII Request
             - [ ] Delete A Restrict Processing PII Request
-        - [ ] Sm Devices For Key
-            - [ ] Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details.
+        - [x] Sm Devices For Key
+            - [x] Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details.
         - [ ] Sm Owners For Key
             - [ ] Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier.
     - [ ] Settings
