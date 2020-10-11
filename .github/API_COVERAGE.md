@@ -92,7 +92,7 @@
         - [x] Sm Owners For Key
             - [x] Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier.
     - [ ] Settings
-        - [ ] Return The Settings For A Network
+        - [x] Return The Settings For A Network
         - [ ] Update The Settings For A Network
     - [ ] Snmp
         - [ ] Return The SNMP Settings For A Network
