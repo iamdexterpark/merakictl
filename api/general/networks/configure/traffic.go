@@ -26,3 +26,25 @@ func GetTrafficAnalysis(networkId string) (TrafficAnalysis, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type TrafficShaping struct {
+	ApplicationCategories []struct {
+		ID           string `json:"id"`
+		Name         string `json:"name"`
+		Applications []struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"applications"`
+	} `json:"applicationCategories"`
+}
+
+// Returns the application categories for traffic shaping rules.
+func GetTrafficShaping(networkId string) (TrafficShaping, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/applicationCategories", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = TrafficShaping{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
