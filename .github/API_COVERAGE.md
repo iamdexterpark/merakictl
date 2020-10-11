@@ -103,11 +103,11 @@
     - [ ] Traffic Analysis
         - [x] Return The Traffic Analysis Settings For A Network
         - [ ] Update The Traffic Analysis Settings For A Network
-    - [ ] Traffic Shaping
+    - [x] Traffic Shaping
         - [x] Application Categories
             - [x] Returns the application categories for traffic shaping rules.
-        - [ ] Dscp Tagging Options
-            - [ ] Returns the available DSCP tagging options for your traffic shaping rules.
+        - [x] Dscp Tagging Options
+            - [x] Returns the available DSCP tagging options for your traffic shaping rules.
     - [ ] Webhooks
         - [ ] Http Servers
             - [ ] List The HTTP Servers For A Network

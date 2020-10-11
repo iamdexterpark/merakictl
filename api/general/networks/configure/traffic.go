@@ -48,3 +48,20 @@ func GetTrafficShaping(networkId string) (TrafficShaping, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type TrafficShapingDSCP []struct {
+	DscpTagValue int    `json:"dscpTagValue"`
+	Description  string `json:"description"`
+}
+
+// Returns the available DSCP tagging options for your traffic shaping rules.
+func GetTrafficShapingDSCP(networkId string) (TrafficShapingDSCP, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/dscpTaggingOptions", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = TrafficShapingDSCP{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
