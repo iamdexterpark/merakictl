@@ -2,9 +2,7 @@
 A Golang SDK and command line tool for the Meraki Dashboard API.
 
 ### Download Application
-This SDK can be compiled into a cross-platform static binary. 
-
-Currently, we are in Alpha version.
+This SDK can be compiled into a cross-platform static binary. Currently, we are in Alpha version.
 
 ### Compiling Application from source
 ```shell script
