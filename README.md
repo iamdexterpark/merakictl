@@ -1,10 +1,10 @@
 # merakictl
-A command line tool for interacting with the Meraki Dashboard API.
+A Golang SDK and command line tool for the Meraki Dashboard API.
 
 ### Download Application
-This application can be compiled into a single binary so that it is cross-platform. 
+This SDK can be compiled into a cross-platform static binary. 
 
-Currently, this tool is in its Alpha version.
+Currently, we are in Alpha version.
 
 ### Compiling Application from source
 ```shell script
