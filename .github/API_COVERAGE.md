@@ -101,7 +101,7 @@
         - [x] List The Syslog Servers For A Network
         - [ ] Update The Syslog Servers For A Network
     - [ ] Traffic Analysis
-        - [ ] Return The Traffic Analysis Settings For A Network
+        - [x] Return The Traffic Analysis Settings For A Network
         - [ ] Update The Traffic Analysis Settings For A Network
     - [ ] Traffic Shaping
         - [ ] Application Categories
