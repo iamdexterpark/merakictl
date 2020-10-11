@@ -81,3 +81,18 @@ func GetSmDevicesForKey(networkId string) (SmDevicesForKey, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type SmOwnersForKey  struct {
+	N1234 []string `json:"N_1234"`
+}
+
+// Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier
+func GetSmOwnersForKey(networkId string) (SmOwnersForKey, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/pii/smOwnersForKey", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = SmOwnersForKey{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
