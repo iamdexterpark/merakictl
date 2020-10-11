@@ -26,7 +26,7 @@ var single = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		organization, traceback := organizations.GetOrganization(org)
 
 		shell.Display(organization, traceback, "organization", cmd.Flags())
@@ -39,7 +39,7 @@ var networks = &cobra.Command{
 	Short: "List the networks that the user has privileges on in an organization.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		networks, traceback := organizations.GetOrganizationNetworks(org, "",
 			"", "", "", "", "1000")
 		shell.Display(networks, traceback, "networks", cmd.Flags())
@@ -54,7 +54,7 @@ var devices = &cobra.Command{
 	Short: "List the devices in an organization.",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		devicestatus, traceback := organizations.GetOrganizationDevices(org)
 		shell.Display(devicestatus, traceback, "devices", cmd.Flags())
 	},
@@ -66,7 +66,7 @@ var actionbatchlist = &cobra.Command{
 	Short: "Return The List Of Action Batches In The Organization.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		organization, traceback := configure.GetActionBatchList(org)
 		shell.Display(organization, traceback, "actionbatchlist", cmd.Flags())
 
@@ -79,7 +79,7 @@ var admins = &cobra.Command{
 	Short: "Return The List Of Action Batches In The Organization.",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		organization, traceback := configure.GetAdmins(org)
 		shell.Display(organization, traceback, "admins", cmd.Flags())
 
@@ -92,7 +92,7 @@ var brandingPolicies = &cobra.Command{
 	Short: "",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		organization, traceback := configure.GetBrandingPolicies(org)
 		shell.Display(organization, traceback, "brandingPolicies", cmd.Flags())
 
@@ -105,7 +105,7 @@ var brandingPolicy= &cobra.Command{
 	Short: "",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		org := cmd.Flag("org").Value.String()
+		org := cmd.Flag("organization").Value.String()
 		brandingId := args[0]
 
 		organization, traceback := configure.GetBrandingPolicy(org,brandingId)

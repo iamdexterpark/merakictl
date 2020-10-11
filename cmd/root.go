@@ -62,7 +62,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
-	rootCmd.PersistentFlags().StringP("org", "o", "", "The target organization")
+	rootCmd.PersistentFlags().StringP("organization", "o", "", "The target organization")
 	rootCmd.PersistentFlags().StringP("network", "n", "", "The target Network")
 	rootCmd.PersistentFlags().StringP("device", "d", "", "The target device")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
