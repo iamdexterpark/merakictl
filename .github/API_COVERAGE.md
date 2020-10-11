@@ -98,7 +98,7 @@
         - [x] Return The SNMP Settings For A Network
         - [ ] Update The SNMP Settings For A Network
     - [ ] Syslog Servers
-        - [ ] List The Syslog Servers For A Network
+        - [x] List The Syslog Servers For A Network
         - [ ] Update The Syslog Servers For A Network
     - [ ] Traffic Analysis
         - [ ] Return The Traffic Analysis Settings For A Network
