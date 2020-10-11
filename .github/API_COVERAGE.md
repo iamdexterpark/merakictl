@@ -95,7 +95,7 @@
         - [x] Return The Settings For A Network
         - [ ] Update The Settings For A Network
     - [ ] Snmp
-        - [ ] Return The SNMP Settings For A Network
+        - [x] Return The SNMP Settings For A Network
         - [ ] Update The SNMP Settings For A Network
     - [ ] Syslog Servers
         - [ ] List The Syslog Servers For A Network
