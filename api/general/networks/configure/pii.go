@@ -29,3 +29,41 @@ func GetPiiKeys(networkId string) (PiiKeys, interface{}) {
 	return results, traceback
 }
 
+type PiiRequest struct {
+	ID               string `json:"id"`
+	OrganizationWide bool   `json:"organizationWide"`
+	NetworkID        string `json:"networkId"`
+	Type             string `json:"type"`
+	Mac              string `json:"mac"`
+	Datasets         string `json:"datasets"`
+	Status           string `json:"status"`
+	CreatedAt        int    `json:"createdAt"`
+	CompletedAt      int    `json:"completedAt"`
+}
+
+type PiiRequests []struct {
+	PiiRequest
+}
+
+// List The PII Requests For This Network Or Organization
+func GetPiiRequests(networkId string) (PiiRequests, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/pii/requests", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = PiiRequests{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return A PII Request
+func GetPiiRequest(networkId, requestId string) (PiiRequest, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/pii/requests/%s", api.BaseUrl(), networkId, requestId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = PiiRequest{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+

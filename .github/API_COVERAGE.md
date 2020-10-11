@@ -83,9 +83,9 @@
         - [x] Pii Keys
             - [x] List the keys required to access Personally Identifiable Information (PII) for a given identifier.
         - [ ] Requests
-            - [ ] List The PII Requests For This Network Or Organization
+            - [x] List The PII Requests For This Network Or Organization
             - [ ] Submit A New Delete Or Restrict Processing PII Request
-            - [ ] Return A PII Request
+            - [x] Return A PII Request
             - [ ] Delete A Restrict Processing PII Request
         - [ ] Sm Devices For Key
             - [ ] Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details.
