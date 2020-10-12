@@ -36,10 +36,20 @@ type Clients []struct {
 }
 
 // GetOrganizations - List the organizations that the user has privileges on
-func GetNetworkClients(networkId string) (Clients, interface{}) {
+func GetNetworkClients(networkId, t0, t1, timespan, perPage, startingAfter, endingBefore string) (Clients, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan", timespan)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
 
 	var results = Clients{}
 	user_agent.UnMarshalJSON(session.Body, &results)
