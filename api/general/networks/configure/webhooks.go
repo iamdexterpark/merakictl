@@ -39,3 +39,20 @@ func GetHTTPServer(networkId, httpServerId string) (HTTPServer, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type Webhook struct {
+	ID     string `json:"id"`
+	URL    string `json:"url"`
+	Status string `json:"status"`
+}
+
+// Return The Status Of A Webhook Test For A Network
+func GetWebhookStatus(networkId, webhookTestId string) (Webhook, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/webhookTests/%s", api.BaseUrl(), networkId, webhookTestId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = Webhook{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
