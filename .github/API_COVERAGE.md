@@ -169,7 +169,7 @@
     - [ ] Update A Branding Policy
     - [ ] Delete A Branding Policy
 - [ ] Config Templates
-    - [ ] List The Configuration Templates For This Organization
+    - [x] List The Configuration Templates For This Organization
     - [ ] Create A New Configuration Template
     - [ ] Update A Configuration Template
     - [ ] Remove A Configuration Template
