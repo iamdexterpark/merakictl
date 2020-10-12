@@ -21,10 +21,20 @@ type ClientNetworkTraffic []struct {
 }
 
 // Return the client's network traffic data over time
-func GetClientNetworkTraffic(networkId, clientId string) (ClientNetworkTraffic, interface{}) {
+func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
+	startingAfter, endingBefore string) (ClientNetworkTraffic, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/trafficHistory", api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("trafficHistory", trafficHistory)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = ClientNetworkTraffic{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
@@ -77,10 +87,20 @@ type Clients []struct {
 }
 
 // List The Clients That Have Used This Network In The Timespan
-func GetClients(networkId string) (Clients, interface{}) {
+func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore string) (Clients, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("timespan", timespan)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = Clients{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
