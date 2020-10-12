@@ -31,10 +31,22 @@ type ChannelUtilization struct {
 }
 
 // Get the channel utilization over each radio for all APs in a network.
-func GetChannelUtilization(networkId string) (ChannelUtilizations, interface{}) {
+func GetChannelUtilization(networkId, t0, t1, timespan, resolution, perPage, startingAfter, endingBefore string) (ChannelUtilizations, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/networkHealth/channelUtilization", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan", timespan)
+	parameters.Add("resolution", resolution)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = ChannelUtilizations{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
