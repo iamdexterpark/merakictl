@@ -141,8 +141,8 @@
             - [x] List the event type to human-readable description
     - [x] Events
         - [x] List The Events For The Network
-    - [ ] Splash Login Attempts
-        - [ ] List the splash login attempts for a network
+    - [x] Splash Login Attempts
+        - [x] List the splash login attempts for a network
     - [ ] Traffic
         - [ ] The traffic analysis data for this network.
 
