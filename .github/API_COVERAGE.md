@@ -187,6 +187,9 @@
     - [ ] Renew SM Seats Of A License This Will Extend The License Expiration Date Of Managed SM Devices Covered By This License
     - [x] Display A License
     - [ ] Update A License
+- [ ] Login Security 
+    - [x] Returns The Login Security Settings For An Organization
+    - [ ] Update The Login Security Settings For An Organization
 - [ ] Networks 
     - [ ] List The Networks That The User Has Privileges On In An Organization
     - [ ] Create A Network
