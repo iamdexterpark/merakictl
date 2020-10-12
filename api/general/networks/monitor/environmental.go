@@ -25,10 +25,23 @@ type EnvironmentalEvents struct {
 }
 
 // List the environmental events for the network
-func GetEnvironmentalEvents(networkId string) (EnvironmentalEvents, interface{}) {
+func GetEnvironmentalEvents(networkId, includedEventTypes, excludedEventTypes, sensorSerial,
+	gatewaySerial, perPage, startingAfter, endingBefore string) (EnvironmentalEvents, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/environmental/events", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("includedEventTypes", includedEventTypes)
+	parameters.Add("excludedEventTypes", excludedEventTypes)
+	parameters.Add("sensorSerial", sensorSerial)
+	parameters.Add("gatewaySerial", gatewaySerial)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = EnvironmentalEvents{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
