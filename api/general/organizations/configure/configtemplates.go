@@ -17,6 +17,7 @@ type ConfigurationTemplate struct {
 	TimeZone     string   `json:"timeZone"`
 }
 
+// List The Configuration Templates For This Organization
 func GetConfigurationTemplates(organizationId string) (ConfigurationTemplates, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates", api.BaseUrl(),
 		organizationId)
@@ -29,6 +30,7 @@ func GetConfigurationTemplates(organizationId string) (ConfigurationTemplates, i
 	return results, traceback
 }
 
+// Return a Configuration Template For This Organization
 func GetConfigurationTemplate(organizationId, configTemplateId string) (ConfigurationTemplate, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s", api.BaseUrl(),
 		organizationId, configTemplateId)

@@ -174,8 +174,8 @@
     - [ ] Update A Configuration Template
     - [ ] Remove A Configuration Template
     - [ ] Return A Single Configuration Template
-- [ ] Devices
-    - [ ] List the devices in an organization
+- [x] Devices
+    - [x] List the devices in an organization
 - [ ] Inventory Devices
     - [ ] Return The Device Inventory For An Organization
     - [ ] Return A Single Device From The Inventory Of An Organization
