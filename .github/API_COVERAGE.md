@@ -134,7 +134,7 @@
             - [x] Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending
         - [x] Usage History
             - [x] Return the client's daily usage history. Usage data is in kilobytes. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
-        - [ ] List The Clients That Have Used This Network In The Timespan
+        - [x] List The Clients That Have Used This Network In The Timespan
         - [ ] Return The Client Associated With The Given Identifier Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
     - [ ] Environmental
         - [ ] Events
