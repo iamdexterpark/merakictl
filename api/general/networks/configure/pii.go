@@ -19,10 +19,21 @@ type PiiKeys struct {
 }
 
 // List the keys required to access Personally Identifiable Information (PII) for a given identifier
-func GetPiiKeys(networkId string) (PiiKeys, interface{}) {
+func GetPiiKeys(networkId, username, email, mac, serial, imei, bluetoothMac string) (PiiKeys, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/piiKeys", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("username", username)
+	parameters.Add("email", email)
+	parameters.Add("mac", mac)
+	parameters.Add("serial", serial)
+	parameters.Add("imei", imei)
+	parameters.Add("bluetoothMac",bluetoothMac)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = PiiKeys{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
