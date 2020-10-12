@@ -180,12 +180,12 @@
     - [x] Return The Device Inventory For An Organization
     - [x] Return A Single Device From The Inventory Of An Organization
 - [ ] Licenses
-    - [ ] List The Licenses For An Organization
+    - [x] List The Licenses For An Organization
     - [ ] Assign SM Seats To A Network This Will Increase The Managed SM Device Limit Of The Network
     - [ ] Move Licenses To Another Organization This Will Also Move Any Devices That The Licenses Are Assigned To
     - [ ] Move SM Seats To Another Organization
     - [ ] Renew SM Seats Of A License This Will Extend The License Expiration Date Of Managed SM Devices Covered By This License
-    - [ ] Display A License
+    - [x] Display A License
     - [ ] Update A License
 - [ ] Networks 
     - [ ] List The Networks That The User Has Privileges On In An Organization
