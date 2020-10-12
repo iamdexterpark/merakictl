@@ -6,9 +6,16 @@ This SDK can be compiled into a cross-platform static binary. Currently, we are 
 
 ### Compiling Application from source
 ```shell script
+    # Linux/MacOS
     go build main.go
     mv main /usr/local/sbin/merakictl
     export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+
+    # Windows 64-bit
+    env GOOS=windows GOARCH=amd64 go build main.go
+    
+    # Windows 32-bit
+    env GOOS=windows GOARCH=386 go build main.go
 ```
     
 ### Environment Variables
