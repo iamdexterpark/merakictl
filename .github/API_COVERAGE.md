@@ -125,7 +125,7 @@
     - [ ] Split A Combined Network Into Individual Networks For Each Type Of Device
     - [ ] Unbind A Network From A Template
     
-- [ ] Monitor
+- [x] Monitor
     - [x] Bluetooth Clients
         - [x] List The Bluetooth Clients Seen By APs In This Network
         - [x] Return A Bluetooth Client Bluetooth Clients Can Be Identified By Their ID Or Their MAC
@@ -143,8 +143,8 @@
         - [x] List The Events For The Network
     - [x] Splash Login Attempts
         - [x] List the splash login attempts for a network
-    - [ ] Traffic
-        - [ ] The traffic analysis data for this network.
+    - [x] Traffic
+        - [x] The traffic analysis data for this network.
 
 
 ### Organizations
