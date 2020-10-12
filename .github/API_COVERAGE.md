@@ -139,8 +139,8 @@
     - [x] Environmental
         - [x] Events
             - [x] List the event type to human-readable description
-    - [ ] Events
-        - [ ] List The Events For The Network
+    - [x] Events
+        - [x] List The Events For The Network
     - [ ] Splash Login Attempts
         - [ ] List the splash login attempts for a network
     - [ ] Traffic
