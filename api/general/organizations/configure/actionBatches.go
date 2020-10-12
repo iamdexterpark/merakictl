@@ -32,10 +32,14 @@ type ActionBatch struct {
 }
 
 // Return The List Of Action Batches In The Organization
-func GetActionBatchList(organizationId string) (ActionBatchList, interface{}) {
+func GetActionBatchList(organizationId, status string) (ActionBatchList, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/actionBatches", api.BaseUrl(), organizationId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("status", status)
+	session.Request.URL.RawQuery = parameters.Encode()
 
 	var results = ActionBatchList{}
 	user_agent.UnMarshalJSON(session.Body, &results)
