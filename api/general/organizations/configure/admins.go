@@ -37,8 +37,8 @@ func GetAdmins(organizationId string) (Admin, interface{}) {
 
 	session := api.Session(baseurl, "GET", payload)
 
-	var admins = Admin{}
-	user_agent.UnMarshalJSON(session.Body, &admins)
+	var results = Admin{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return admins, traceback
+	return results, traceback
 }

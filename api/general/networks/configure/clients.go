@@ -18,10 +18,10 @@ func GetClientPolicy(networkId, clientId string) (ClientPolicy, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/policy", api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var clientpolicy = ClientPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &clientpolicy)
+	var results = ClientPolicy{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return clientpolicy, traceback
+	return results, traceback
 }
 
 type SplashAuthorization struct {
@@ -42,8 +42,8 @@ func GetSplashAuthorization(networkId, clientId string) (SplashAuthorization, in
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/splashAuthorizationStatus", api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var splashauthorization = SplashAuthorization{}
-	user_agent.UnMarshalJSON(session.Body, &splashauthorization)
+	var results = SplashAuthorization{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return splashauthorization, traceback
+	return results, traceback
 }

@@ -18,10 +18,10 @@ func GetBrandingPolicies(organizationId string) (BrandingPolicies, interface{}) 
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var policies = BrandingPolicies{}
-	user_agent.UnMarshalJSON(session.Body, &policies)
+	var results = BrandingPolicies{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return policies, traceback
+	return results, traceback
 }
 
 
@@ -55,12 +55,11 @@ type BrandingPolicy struct {
 func GetBrandingPolicy(organizationId, brandingPolicyId string) (BrandingPolicy, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities/%s", api.BaseUrl(),
 		organizationId, brandingPolicyId)
-	// https://api-mp.meraki.com/api/v1/organizations/:organizationId/brandingPolicies/:brandingPolicyId
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var policies = BrandingPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &policies)
+	var results = BrandingPolicy{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return policies, traceback
+	return results, traceback
 }
