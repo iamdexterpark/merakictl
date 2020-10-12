@@ -126,9 +126,9 @@
     - [ ] Unbind A Network From A Template
     
 - [ ] Monitor
-    - [ ] Bluetooth Clients
+    - [x] Bluetooth Clients
         - [x] List The Bluetooth Clients Seen By APs In This Network
-        - [ ] Return A Bluetooth Client Bluetooth Clients Can Be Identified By Their ID Or Their MAC
+        - [x] Return A Bluetooth Client Bluetooth Clients Can Be Identified By Their ID Or Their MAC
     - [ ] Clients
         - [ ] Traffic History
             - [ ] Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending
