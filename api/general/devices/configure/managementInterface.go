@@ -34,10 +34,10 @@ func GetManagementInterface(serial string) (ManagementInterface, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s/managementInterface", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var clients = ManagementInterface{}
-	user_agent.UnMarshalJSON(session.Body, &clients)
+	var results = ManagementInterface{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return clients, traceback
+	return results, traceback
 }
 
 type Device struct {
@@ -66,8 +66,8 @@ func GetSingleDevice(serial string) (Device, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var device = Device{}
-	user_agent.UnMarshalJSON(session.Body, &device)
+	var results = Device{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return device, traceback
+	return results, traceback
 }

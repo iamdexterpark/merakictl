@@ -127,7 +127,7 @@
     
 - [ ] Monitor
     - [ ] Bluetooth Clients
-        - [ ] List The Bluetooth Clients Seen By A Ps In This Network
+        - [x] List The Bluetooth Clients Seen By APs In This Network
         - [ ] Return A Bluetooth Client Bluetooth Clients Can Be Identified By Their ID Or Their MAC
     - [ ] Clients
         - [ ] Traffic History

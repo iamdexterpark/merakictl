@@ -8,8 +8,11 @@ import (
 )
 
 
-// Data Model
 type ActionBatchList []struct {
+	ActionBatch
+}
+
+type ActionBatch struct {
 	ID             string `json:"id"`
 	OrganizationID string `json:"organizationId"`
 	Confirmed      bool   `json:"confirmed"`
@@ -34,11 +37,21 @@ func GetActionBatchList(organizationId string) (ActionBatchList, interface{}) {
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var organizations = ActionBatchList{}
-	user_agent.UnMarshalJSON(session.Body, &organizations)
+	var results = ActionBatchList{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organizations, traceback
+	return results, traceback
 }
 
 
-// Return An Action Batch
+// Return A Single Action Batch
+func GetActionBatch(organizationId, actionBatchId string) (ActionBatch, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/actionBatches/%s", api.BaseUrl(), organizationId, actionBatchId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = ActionBatch{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

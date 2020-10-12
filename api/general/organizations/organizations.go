@@ -35,10 +35,10 @@ func GetOrganizations() (Organizations, interface{}) {
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var organizations = Organizations{}
-	user_agent.UnMarshalJSON(session.Body, &organizations)
+	var results = Organizations{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organizations, traceback
+	return results, traceback
 }
 
 // GetOrganization - Return a specific organization
@@ -47,10 +47,10 @@ func GetOrganization(organizationId string) (Organization, interface{}) {
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var organization = Organization{}
-	user_agent.UnMarshalJSON(session.Body, &organization)
+	var results = Organization{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organization, traceback
+	return results, traceback
 }
 
 // CreateOrganization - Create a new organization
@@ -62,10 +62,10 @@ func CreateOrganization( name string) (Organization, interface{}) {
 	payload := user_agent.MarshalJSON(data)
 	session := api.Session(baseurl, "POST", payload)
 
-	var organization = Organization{}
-	user_agent.UnMarshalJSON(session.Body, &organization)
+	var results = Organization{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organization, traceback
+	return results, traceback
 }
 
 // UpdateOrganization - Update an organization
@@ -78,10 +78,10 @@ func UpdateOrganization(organizationId, name string) (Organization, interface{})
 	payload := user_agent.MarshalJSON(data)
 	session := api.Session(baseurl, "PUT", payload)
 
-	var organization = Organization{}
-	user_agent.UnMarshalJSON(session.Body, &organization)
+	var results = Organization{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organization, traceback
+	return results, traceback
 }
 
 
@@ -92,28 +92,10 @@ func DeleteOrganization(organizationId string) (Organization, interface{}) {
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "DELETE", payload)
 
-	var organization = Organization{}
-	user_agent.UnMarshalJSON(session.Body, &organization)
+	var results = Organization{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organization, traceback
-/*
-	type delete = struct {}
-	var deleteResponse = delete{}
-	if session.StatusCode == 204 {
-		// Convert response body to string
-		fmt.Println("Deleted Org:", organizationId)
-		user_agent.UnMarshalJSON(session.Body, &deleteResponse)
-	} else if session.StatusCode == 404{
-		fmt.Println("Unable to find Org:", organizationId)
-	} else {
-		fmt.Println(session.StatusCode)
-		// Convert response body to string
-		bodyBytes, _ := ioutil.ReadAll(session.Body)
-		fmt.Println(string(bodyBytes))
-	}
-   return deleteResponse
- */
-
+	return results, traceback
 }
 
 // GetOrganizationNetworks - List the networks that the user has privileges on in an organization
@@ -122,8 +104,7 @@ func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType,
 	baseurl := fmt.Sprintf("%s/organizations/%s/networks", api.BaseUrl(), organizationId)
 	var payload io.ReadSeeker
 
-	// Data Structure for API Call
-	var organization = Organizations{}
+	var results = Organizations{}
 
 	session := api.Session(baseurl, "GET", payload)
 
@@ -138,9 +119,9 @@ func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType,
 	session.Request.URL.RawQuery = parameters.Encode()
 
 
-	user_agent.UnMarshalJSON(session.Body, &organization)
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return organization, traceback
+	return results, traceback
 }
 
 // Devices Data Model
@@ -160,8 +141,8 @@ func GetOrganizationDevices(organizationId string) (Devices, interface{}) {
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
-	var devicestatus = Devices{}
-	user_agent.UnMarshalJSON(session.Body, &devicestatus)
+	var results = Devices{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return devicestatus, traceback
+	return results, traceback
 }

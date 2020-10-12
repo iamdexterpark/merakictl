@@ -69,10 +69,10 @@ func GetlldpCdp(serial string) (lldpCdp, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s/lldpCdp", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
-	var lldpCdp = lldpCdp{}
-	user_agent.UnMarshalJSON(session.Body, &lldpCdp)
+	var results = lldpCdp{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return lldpCdp, traceback
+	return results, traceback
 }
 
 type UplinkLoss  []struct {
@@ -98,8 +98,8 @@ func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) (Upl
 	parameters.Add("ip", ip)
 	session.Request.URL.RawQuery = parameters.Encode()
 
-	var UplinkLoss = UplinkLoss{}
-	user_agent.UnMarshalJSON(session.Body, &UplinkLoss)
+	var results = UplinkLoss{}
+	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
-	return UplinkLoss, traceback
+	return results, traceback
 }
