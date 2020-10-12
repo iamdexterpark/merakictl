@@ -14,7 +14,8 @@ var clients = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
-		clients, traceback := configure.GetNetworkClients(net)
+		clients, traceback := configure.GetNetworkClients(net, "", "",
+			"", "", "", "")
 		shell.Display(clients, traceback, "clients", cmd.Flags())
 	},
 }

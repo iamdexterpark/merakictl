@@ -66,7 +66,7 @@ var actionbatchlist = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		organization, traceback := configure.GetActionBatchList(org)
+		organization, traceback := configure.GetActionBatchList(org, "")
 		shell.Display(organization, traceback, "actionbatchlist", cmd.Flags())
 
 	},
