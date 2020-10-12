@@ -118,7 +118,7 @@
         - [ ] Webhook Tests
             - [ ] Send A Test Webhook For A Network
             - [x] Return The Status Of A Webhook Test For A Network
-    - [ ] Return A Network
+    - [X] Return A Network
     - [ ] Update A Network
     - [ ] Delete A Network
     - [ ] Bind A Network To A Template
