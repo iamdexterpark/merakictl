@@ -196,11 +196,11 @@
     - [ ] Combine Multiple Networks Into A Single Network
 - [ ] Saml
     - [ ] ldps
-        - [ ] List The SAML Id Ps In Your Organization
-        - [ ] Create A SAML Id P For Your Organization
-        - [ ] Update A SAML Id P In Your Organization
-        - [ ] Get A SAML Id P From Your Organization
-        - [ ] Remove A SAML Id P In Your Organization
+        - [ ] List The SAML IdPs In Your Organization
+        - [ ] Create A SAML IdP For Your Organization
+        - [ ] Update A SAML IdP In Your Organization
+        - [ ] Get A SAML IdP From Your Organization
+        - [ ] Remove A SAML IdP In Your Organization
     - [ ] Returns The SAML SSO Enabled Settings For An Organization
     - [ ] Updates The SAML SSO Enabled Settings For An Organization
 - [ ] Saml Roles
