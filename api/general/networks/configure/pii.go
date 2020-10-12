@@ -83,10 +83,21 @@ type SmDevicesForKey  struct {
 }
 
 // Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier
-func GetSmDevicesForKey(networkId string) (SmDevicesForKey, interface{}) {
+func GetSmDevicesForKey(networkId, username, email, mac, serial, imei, bluetoothMac string) (SmDevicesForKey, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/smDevicesForKey", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("username", username)
+	parameters.Add("email", email)
+	parameters.Add("mac", mac)
+	parameters.Add("serial", serial)
+	parameters.Add("imei", imei)
+	parameters.Add("bluetoothMac",bluetoothMac)
+	session.Request.URL.RawQuery = parameters.Encode()
+
 	var results = SmDevicesForKey{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
@@ -98,10 +109,21 @@ type SmOwnersForKey  struct {
 }
 
 // Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier
-func GetSmOwnersForKey(networkId string) (SmOwnersForKey, interface{}) {
+func GetSmOwnersForKey(networkId, username, email, mac, serial, imei, bluetoothMac string) (SmOwnersForKey, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/smOwnersForKey", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("username", username)
+	parameters.Add("email", email)
+	parameters.Add("mac", mac)
+	parameters.Add("serial", serial)
+	parameters.Add("imei", imei)
+	parameters.Add("bluetoothMac",bluetoothMac)
+	session.Request.URL.RawQuery = parameters.Encode()
+	
 	var results = SmOwnersForKey{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
