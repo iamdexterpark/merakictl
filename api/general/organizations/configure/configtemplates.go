@@ -8,6 +8,9 @@ import (
 )
 
 type ConfigurationTemplates []struct {
+	ConfigurationTemplate
+}
+type ConfigurationTemplate struct {
 	ID           string   `json:"id"`
 	Name         string   `json:"name"`
 	ProductTypes []string `json:"productTypes"`
@@ -21,6 +24,18 @@ func GetConfigurationTemplates(organizationId string) (ConfigurationTemplates, i
 	session := api.Session(baseurl, "GET", payload)
 
 	var results = ConfigurationTemplates{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+func GetConfigurationTemplate(organizationId, configTemplateId string) (ConfigurationTemplate, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s", api.BaseUrl(),
+		organizationId, configTemplateId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = ConfigurationTemplate{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
