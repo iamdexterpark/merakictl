@@ -13,7 +13,7 @@ type BrandingPolicies struct {
 }
 
 // Return The Branding Policy IDs Of An Organization
-func GetBrandingPolicies(organizationId string) (BrandingPolicies, interface{}) {
+func GetBrandingPriority(organizationId string) (BrandingPolicies, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities", api.BaseUrl(), organizationId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
@@ -51,9 +51,22 @@ type BrandingPolicy struct {
 	} `json:"helpSettings"`
 }
 
+// Return The Branding Policies Of An Organization
+func GetBrandingPolicies(organizationId string) (BrandingPolicy, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies", api.BaseUrl(),
+		organizationId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = BrandingPolicy{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
 // Return The Branding Policy IDs Of An Organization
 func GetBrandingPolicy(organizationId, brandingPolicyId string) (BrandingPolicy, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities/%s", api.BaseUrl(),
+	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/%s", api.BaseUrl(),
 		organizationId, brandingPolicyId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)

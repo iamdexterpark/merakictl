@@ -1,7 +1,6 @@
 package organization
 
 import (
-	"github.com/ddexterpark/merakictl/api/general/organizations"
 	"github.com/ddexterpark/merakictl/api/general/organizations/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
@@ -14,7 +13,7 @@ var orgList = &cobra.Command{
 	Short: "List the organizations that the user has privileges on.",
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		organizations, traceback := organizations.GetOrganizations()
+		organizations, traceback := configure.GetOrganizations()
 		shell.Display(organizations, traceback, "organizations", cmd.Flags())
 	},
 }
@@ -27,7 +26,7 @@ var single = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		org := cmd.Flag("organization").Value.String()
-		organization, traceback := organizations.GetOrganization(org)
+		organization, traceback := configure.GetOrganization(org)
 
 		shell.Display(organization, traceback, "organization", cmd.Flags())
 	},
@@ -40,7 +39,7 @@ var networks = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		networks, traceback := organizations.GetOrganizationNetworks(org, "",
+		networks, traceback := configure.GetOrganizationNetworks(org, "",
 			"", "", "", "", "1000")
 		shell.Display(networks, traceback, "networks", cmd.Flags())
 
@@ -55,7 +54,7 @@ var devices = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		devicestatus, traceback := organizations.GetOrganizationDevices(org)
+		devicestatus, traceback := configure.GetOrganizationDevices(org)
 		shell.Display(devicestatus, traceback, "devices", cmd.Flags())
 	},
 }

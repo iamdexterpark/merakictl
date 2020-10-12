@@ -1,7 +1,7 @@
 package update
 
 import (
-	"github.com/ddexterpark/merakictl/api/general/organizations"
+	"github.com/ddexterpark/merakictl/api/general/organizations/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
@@ -16,7 +16,7 @@ var org = &cobra.Command{
 		org := cmd.Flag("organization").Value.String()
 		var name = args[0]
 
-		organization, traceback := organizations.UpdateOrganization(org, name)
+		organization, traceback := configure.UpdateOrganization(org, name)
 		shell.Display(organization, traceback, "organization", cmd.Flags())
 	},
 }

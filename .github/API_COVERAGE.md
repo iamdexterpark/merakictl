@@ -151,7 +151,7 @@
 - [ ] Action Batches
     - [ ] Create An Action Batch
     - [x] Return The List Of Action Batches In The Organization
-    - [ ] Return An Action Batch
+    - [x] Return An Action Batch
     - [ ] Delete An Action Batch
     - [ ] Update An Action Batch
 - [ ] Admins
@@ -163,9 +163,9 @@
     - [ ] Priorities
         - [x] Return The Branding Policy IDs Of An Organization In Priority Order I Ds Are Ordered In Ascending Order Of Priority I Ds Later In The Array Have Higher Priority
         - [ ] Update The Priority Ordering Of An Organizations Branding Policies
-    - [ ] List The Branding Policies Of An Organization
+    - [x] List The Branding Policies Of An Organization
     - [ ] Add A New Branding Policy To An Organization
-    - [ ] Return A Branding Policy
+    - [x] Return A Branding Policy
     - [ ] Update A Branding Policy
     - [ ] Delete A Branding Policy
 - [ ] Config Templates
