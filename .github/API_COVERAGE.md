@@ -110,9 +110,9 @@
             - [x] Returns the available DSCP tagging options for your traffic shaping rules.
     - [ ] Webhooks
         - [ ] Http Servers
-            - [ ] List The HTTP Servers For A Network
+            - [x] List The HTTP Servers For A Network
             - [ ] Add An HTTP Server To A Network
-            - [ ] Return An HTTP Server For A Network
+            - [x] Return An HTTP Server For A Network
             - [ ] Update An HTTP Server
             - [ ] Delete An HTTP Server From A Network
         - [ ] Webhook Tests
