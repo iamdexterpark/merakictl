@@ -1,0 +1,715 @@
+
+### Meraki Dashboard API Coverage -v1.2.0
+
+- [x] List the Organizations
+- [x] List the Networks in an Organization
+- [x] List the Devices in an Organization
+- [x] List the Clients in a Network
+
+
+## GENERAL
+
+### Devices
+- [ ] Configure
+    - [ ] Management Interface
+        - [x] Return The Management Interface Settings For A Device
+        - [ ] Update The Management Interface Settings For A Device
+    - [x] Return A Single Device
+    - [ ] Update The Attributes Of A Device
+- [ ] Live Tools
+    - [ ] Blink The LEDs On A Device
+    - [ ] Reboot A Device
+- [x] Monitor
+    - [x] Clients
+        - [x] List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
+    - [x] Lldp Cdp
+        - [x] List LLDP and CDP information for a device
+    - [x] Loss And Latency History
+        - [x] Get the uplink loss percentage and latency in milliseconds for a wired network device.
+      
+
+### Networks
+- [ ] Configure
+    - [ ] Alerts
+        - [ ] Settings
+            - [x] Return The Alert Configuration For This Network
+            - [ ] Update The Alert Configuration For This Network
+    - [ ] Clients
+        - [ ] Policy
+            - [x] Return The Policy Assigned To A Client On The Network Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
+            - [ ] Update The Policy Assigned To A Client On The Network Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
+        - [ ] Splash Authorization
+            - [x] Return The Splash Authorization For A Client For Each SSID Theyve Associated With Through Splash Only Enabled SSI Ds With Click Through Splash Enabled Will Be Included Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether
+            - [ ] Update A Clients Splash Authorization Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
+        - [ ] Provisions A Client With A Name And Policy Clients Can Be Provisioned Before They Associate To The Network
+    - [ ] Devices
+        - [x] List The Devices In A Network
+        - [ ] Claim Devices Into A Network
+        - [ ] Remove A Single Device
+    - [ ] Firmware Upgrades
+        - [x] Get Current Maintenance Window For A Network
+        - [ ] Update Current Maintenance Window For A Network
+    - [ ] Floor Plans
+        - [x] List The Floor Plans That Belong To Your Network
+        - [ ] Upload A Floor Plan
+        - [x] Find A Floor Plan By ID
+        - [ ] Update A Floor Plans Geolocation And Other Meta Data
+        - [ ] Destroy A Floor Plan
+    - [ ] Group Policies
+        - [x] List The Group Policies In A Network
+        - [ ] Create A Group Policy
+        - [X] Display A Group Policy
+        - [ ] Update A Group Policy
+        - [ ] Delete A Group Policy
+    - [ ] Meraki Auth Users
+        - [x] List The Splash Or RADIUS Users Configured Under Meraki Authentication For A Network
+        - [ ] Create A User Configured With Meraki Authentication For A Network Currently Supports 802 1 X And Splash Guest Users And Currently Organizations Have A 50 000 User Cap
+        - [x] Return The Meraki Auth Splash Or RADIUS User
+        - [ ] Delete A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Deleted
+        - [ ] Update A User Configured With Meraki Authentication Currently Only 802 1 X RADIUS Users Can Be Updated
+    - [ ] Mqtt Brokers
+        - [x] List The MQTT Brokers For This Network
+        - [ ] Add An MQTT Broker
+        - [x] Return An MQTT Broker
+        - [ ] Update An MQTT Broker
+        - [ ] Delete An MQTT Broker
+    - [ ] Netflow
+        - [x] Return The Net Flow Traffic Reporting Settings For A Network
+        - [ ] Update The Net Flow Traffic Reporting Settings For A Network
+    - [x] Network Health
+        - [x] Channel Utilization
+            - [x] Get the channel utilization over each radio for all APs in a network.
+    - [ ] Pii
+        - [x] Pii Keys
+            - [x] List the keys required to access Personally Identifiable Information (PII) for a given identifier.
+        - [ ] Requests
+            - [x] List The PII Requests For This Network Or Organization
+            - [ ] Submit A New Delete Or Restrict Processing PII Request
+            - [x] Return A PII Request
+            - [ ] Delete A Restrict Processing PII Request
+        - [x] Sm Devices For Key
+            - [x] Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details.
+        - [x] Sm Owners For Key
+            - [x] Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier.
+    - [ ] Settings
+        - [x] Return The Settings For A Network
+        - [ ] Update The Settings For A Network
+    - [ ] Snmp
+        - [x] Return The SNMP Settings For A Network
+        - [ ] Update The SNMP Settings For A Network
+    - [ ] Syslog Servers
+        - [x] List The Syslog Servers For A Network
+        - [ ] Update The Syslog Servers For A Network
+    - [ ] Traffic Analysis
+        - [x] Return The Traffic Analysis Settings For A Network
+        - [ ] Update The Traffic Analysis Settings For A Network
+    - [x] Traffic Shaping
+        - [x] Application Categories
+            - [x] Returns the application categories for traffic shaping rules.
+        - [x] Dscp Tagging Options
+            - [x] Returns the available DSCP tagging options for your traffic shaping rules.
+    - [ ] Webhooks
+        - [ ] Http Servers
+            - [x] List The HTTP Servers For A Network
+            - [ ] Add An HTTP Server To A Network
+            - [x] Return An HTTP Server For A Network
+            - [ ] Update An HTTP Server
+            - [ ] Delete An HTTP Server From A Network
+        - [ ] Webhook Tests
+            - [ ] Send A Test Webhook For A Network
+            - [x] Return The Status Of A Webhook Test For A Network
+    - [X] Return A Network
+    - [ ] Update A Network
+    - [ ] Delete A Network
+    - [ ] Bind A Network To A Template
+    - [ ] Split A Combined Network Into Individual Networks For Each Type Of Device
+    - [ ] Unbind A Network From A Template
+    
+- [x] Monitor
+    - [x] Bluetooth Clients
+        - [x] List The Bluetooth Clients Seen By APs In This Network
+        - [x] Return A Bluetooth Client Bluetooth Clients Can Be Identified By Their ID Or Their MAC
+    - [x] Clients
+        - [x] Traffic History
+            - [x] Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending
+        - [x] Usage History
+            - [x] Return the client's daily usage history. Usage data is in kilobytes. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+        - [x] List The Clients That Have Used This Network In The Timespan
+        - [x] Return The Client Associated With The Given Identifier Clients Can Be Identified By A Client Key Or Either The MAC Or IP Depending On Whether The Network Uses Track By IP
+    - [x] Environmental
+        - [x] Events
+            - [x] List the event type to human-readable description
+    - [x] Events
+        - [x] List The Events For The Network
+    - [x] Splash Login Attempts
+        - [x] List the splash login attempts for a network
+    - [x] Traffic
+        - [x] The traffic analysis data for this network.
+
+
+### Organizations
+- [ ] Action Batches
+    - [ ] Create An Action Batch
+    - [x] Return The List Of Action Batches In The Organization
+    - [x] Return An Action Batch
+    - [ ] Delete An Action Batch
+    - [ ] Update An Action Batch
+- [ ] Admins
+    - [x] List The Dashboard Administrators In This Organization
+    - [ ] Create A New Dashboard Administrator
+    - [ ] Update An Administrator
+    - [ ] Revoke All Access For A Dashboard Administrator Within This Organization
+- [ ] Branding Policy
+    - [ ] Priorities
+        - [x] Return The Branding Policy IDs Of An Organization In Priority Order I Ds Are Ordered In Ascending Order Of Priority I Ds Later In The Array Have Higher Priority
+        - [ ] Update The Priority Ordering Of An Organizations Branding Policies
+    - [x] List The Branding Policies Of An Organization
+    - [ ] Add A New Branding Policy To An Organization
+    - [x] Return A Branding Policy
+    - [ ] Update A Branding Policy
+    - [ ] Delete A Branding Policy
+- [ ] Config Templates
+    - [x] List The Configuration Templates For This Organization
+    - [ ] Create A New Configuration Template
+    - [ ] Update A Configuration Template
+    - [ ] Remove A Configuration Template
+    - [ ] Return A Single Configuration Template
+- [x] Devices
+    - [x] List the devices in an organization
+- [x] Inventory Devices
+    - [x] Return The Device Inventory For An Organization
+    - [x] Return A Single Device From The Inventory Of An Organization
+- [ ] Licenses
+    - [x] List The Licenses For An Organization
+    - [ ] Assign SM Seats To A Network This Will Increase The Managed SM Device Limit Of The Network
+    - [ ] Move Licenses To Another Organization This Will Also Move Any Devices That The Licenses Are Assigned To
+    - [ ] Move SM Seats To Another Organization
+    - [ ] Renew SM Seats Of A License This Will Extend The License Expiration Date Of Managed SM Devices Covered By This License
+    - [x] Display A License
+    - [ ] Update A License
+- [ ] Login Security 
+    - [x] Returns The Login Security Settings For An Organization
+    - [ ] Update The Login Security Settings For An Organization
+- [ ] Networks 
+    - [ ] List The Networks That The User Has Privileges On In An Organization
+    - [ ] Create A Network
+    - [ ] Combine Multiple Networks Into A Single Network
+- [ ] Saml
+    - [ ] ldps
+        - [ ] List The SAML IdPs In Your Organization
+        - [ ] Create A SAML IdP For Your Organization
+        - [ ] Update A SAML IdP In Your Organization
+        - [ ] Get A SAML IdP From Your Organization
+        - [ ] Remove A SAML IdP In Your Organization
+    - [ ] Returns The SAML SSO Enabled Settings For An Organization
+    - [ ] Updates The SAML SSO Enabled Settings For An Organization
+- [ ] Saml Roles
+    - [ ] List The SAML Roles For This Organization
+    - [ ] Create A SAML Role
+    - [ ] Return A SAML Role
+    - [ ] Update A SAML Role
+    - [ ] Remove A SAML Role
+- [ ] Snmp    
+    - [ ] Return The SNMP Settings For An Organization
+    - [ ] Update The SNMP Settings For An Organization
+- [ ] List The Organizations That The User Has Privileges On
+- [ ] Create A New Organization
+- [ ] Return An Organization
+- [ ] Update An Organization
+- [ ] Delete An Organization
+- [ ] Claim A List Of Devices Licenses And Or Orders Into An Organization When Claiming By Order All Devices And Licenses In The Order Will Be Claimed Licenses Will Be Added To The Organization And Devices Will Be Placed In The Organizations Inventory
+- [ ] Create A New Organization By Cloning The Addressed Organization
+
+- [ ] Monitor
+   - [ ] Api Requests
+       - [ ] Overview
+           - [ ] Return an aggregated overview of API requests data
+       - [ ] List The API Requests Made By An Organization
+   - [ ] Configuration Changes
+       - [ ] View the Change Log for your organization
+   - [ ] Devices
+       - [ ] Statuses
+           - [ ] List the status of every Meraki device in the organization
+       - [ ] Uplinks Loss And Latency
+           - [ ] Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
+   - [ ] Licenses
+       - [ ] Overview
+           - [ ] Return an overview of the license state for an organization
+   - [ ] Openapi Spec
+       - [ ] Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON
+   - [ ] Webhooks
+        - [ ] Return the log of webhook POSTs sent
+
+
+## PRODUCTS
+
+### Appliance
+- [ ] Configure
+    - [ ] Connectivity Monitoring Destinations
+        - [ ] Return The Connectivity Testing Destinations For An MX Network
+        - [ ] Update The Connectivity Testing Destinations For An MX Network
+    - [ ] Content Filtering
+        - [ ] Categories
+            - [ ] List all available content filtering categories for an MX network
+        - [ ] Return The Content Filtering Settings For An MX Network
+        - [ ] Update The Content Filtering Settings For An MX Network
+    - [ ] Firewall
+        - [ ] Cellular Firewall Rules
+            - [ ] Return The Cellular Firewall Rules For An MX Network
+            - [ ] Update The Cellular Firewall Rules Of An MX Network
+        - [ ] Firewalled Services
+            - [ ] List The Appliance Services And Their Accessibility Rules
+            - [ ] Return The Accessibility Settings Of The Given Service ICMP Web Or SNMP
+            - [ ] Updates The Accessibility Settings For The Given Service ICMP Web Or SNMP
+        - [ ] Inbound Firewall Rules
+            - [ ] Return The Inbound Firewall Rules For An MX Network
+            - [ ] Update The Inbound Firewall Rules Of An MX Network
+        - [ ] L3 Firewall Rules
+            - [ ] Return The L3 Firewall Rules For An MX Network
+            - [ ] Update The L3 Firewall Rules Of An MX Network
+        - [ ] L7 Firewall Rules
+            - [ ] Application Categories
+                - [ ] Return the L7 firewall application categories and their associated applications for an MX network
+            - [ ] List The MX L7 Firewall Rules For An MX Network
+            - [ ] Update The MX L7 Firewall Rules For An MX Network
+        - [ ] One To Many Nat Rules
+            - [ ] Return The 1 Many NAT Mapping Rules For An MX Network
+            - [ ] Set The 1 Many NAT Mapping Rules For An MX Network
+        - [ ] One To One Nat Rules
+            - [ ] Return The 1 1 NAT Mapping Rules For An MX Network
+            - [ ] Set The 1 1 NAT Mapping Rules For An MX Network
+        - [ ] Port Forwarding Rules
+            - [ ] Return The Port Forwarding Rules For An MX Network
+            - [ ] Update The Port Forwarding Rules For An MX Network
+    - [ ] Ports
+        - [ ] List Per Port VLAN Settings For All Ports Of A MX
+        - [ ] Return Per Port VLAN Settings For A Single MX Port
+        - [ ] Update The Per Port VLAN Settings For A Single MX Port
+    - [ ] Security
+        - [ ] Intrusion
+            - [ ] Returns All Supported Intrusion Settings For An MX Network
+            - [ ] Returns All Supported Intrusion Settings For An Organization
+            - [ ] Set The Supported Intrusion Settings For An MX Network
+            - [ ] Sets Supported Intrusion Settings For An Organization
+        - [ ] Malware
+            - [ ] Returns All Supported Malware Settings For An MX Network
+            - [ ] Set The Supported Malware Settings For An MX Network
+    - [ ] Settings
+        - [ ] Return the appliance settings for a network
+    - [ ] Single Lan
+        - [ ] Return Single LAN Configuration
+        - [ ] Update Single LAN Configuration
+    - [ ] Static Routes
+        - [ ] Add A Static Route For An MX Or Teleworker Network
+        - [ ] Delete A Static Route From An MX Or Teleworker Network
+        - [ ] List The Static Routes For An MX Or Teleworker Network
+        - [ ] Return A Static Route For An MX Or Teleworker Network
+        - [ ] Update A Static Route For An MX Or Teleworker Network
+    - [ ] Traffic Shaping
+        - [ ] Custom Performance Classes
+            - [ ] Add A Custom Performance Class For An MX Network
+            - [ ] Delete A Custom Performance Class From An MX Network
+            - [ ] List All Custom Performance Classes For An MX Network
+            - [ ] Return A Custom Performance Class For An MX Network
+            - [ ] Update A Custom Performance Class For An MX Network
+        - [ ] Rules
+            - [ ] Display The Traffic Shaping Settings Rules For An MX Network
+            - [ ] Update The Traffic Shaping Settings Rules For An MX Network
+        - [ ] Uplink Bandwidth
+            - [ ] Returns The Uplink Bandwidth Settings For Your MX Network
+            - [ ] Updates The Uplink Bandwidth Settings For Your MX Network
+        - [ ] Uplink Selection
+            - [ ] Show Uplink Selection Settings For An MX Network
+            - [ ] Update Uplink Selection Settings For An MX Network
+        - [ ] Display The Traffic Shaping Settings For An MX Network
+        - [ ] Update The Traffic Shaping Settings For An MX Network
+    - [ ] Vlans
+        - [ ] Settings
+            - [ ] Enable Disable VLA Ns For The Given Network
+            - [ ] Returns The Enabled Status Of VLANs For The Network
+        - [ ] Add A VLAN
+        - [ ] Delete A VLAN From A Network
+        - [ ] List The VLA Ns For An MX Network
+        - [ ] Return A VLAN
+        - [ ] Update A VLAN
+    - [ ] Vpn
+        - [ ] Site To Site Vpn
+            - [ ] Return The Site To Site VPN Settings Of A Network
+            - [ ] Update The Site To Site VPN Settings Of A Network
+        - [ ] Third Party VPN Peers
+            - [ ] Return The Third Party VPN Peers For An Organization
+            - [ ] Update The Third Party VPN Peers For An Organization
+        - [ ] Vpn Firewall Rules
+            - [ ] Return The Firewall Rules For An Organizations Site To Site VPN
+            - [ ] Update The Firewall Rules Of An Organizations Site To Site VPN
+    - [ ] Warm Spare
+        - [ ] Return MX Warm Spare Settings
+        - [ ] Swap MX Primary And Warm Spare Appliances
+        - [ ] Update MX Warm Spare Settings
+- [ ] Monitor
+    - [ ] Clients
+        - [ ] security
+            - [ ] events
+                - [ ] List the security events for a client
+    - [ ] Dhcp
+        - [ ] subnets
+            - [ ] Return the DHCP subnet information for an appliance
+    - [ ] Performance
+        - [ ] Return the performance score for a single MX
+    - [ ] Security
+        - [ ] events
+            - [ ] List The Security Events For A Network
+            - [ ] List The Security Events For An Organization
+    - [ ] Uplink
+        - [ ] statuses
+            - [ ] List the uplink status of every Meraki MX and Z series appliances in the organization
+    - [ ] Vpn
+        - [ ] Stats
+            - [ ] Show VPN history stat for networks in an organization
+        - [ ] Statuses
+            - [ ] Show VPN status for networks in an organization
+
+
+
+### Camera
+
+- [ ] Configure
+    - [ ] Quality And Retention
+        - [ ] Returns Quality And Retention Settings For The Given Camera
+        - [ ] Update Quality And Retention Settings For The Given Camera
+    - [ ] Quality Retention Profiles
+        - [ ] Creates New Quality Retention Profile For This Network
+        - [ ] Delete An Existing Quality Retention Profile For This Network
+        - [ ] List The Quality Retention Profiles For This Network
+        - [ ] Retrieve A Single Quality Retention Profile
+        - [ ] Update An Existing Quality Retention Profile For This Network
+    - [ ] Schedules
+        - [ ] Returns a list of all camera recording schedules.
+    - [ ] Sense
+        - [ ] Object Detection Models
+            - [ ] Returns the MV Sense object detection model list for the given camera
+        - [ ] Returns Sense Settings For A Given Camera
+        - [ ] Update Sense Settings For The Given Camera
+    - [ ] Video
+        - [ ] settings
+            - [ ] Returns Video Settings For The Given Camera
+            - [ ] Update Video Settings For The Given Camera
+    - [ ] Video Link
+        - [ ] Returns video link to the specified camera
+- [ ] Monitor
+    - [ ] Analytics
+        - [ ] Live
+            - [ ] Returns live state from camera of analytics zones
+        - [ ] Overview
+            - [ ] Returns an overview of aggregate analytics data for a timespan
+        - [ ] Recent
+            - [ ] Returns most recent record for analytics zones
+        - [ ] Zones
+            - [ ] History
+                - [ ] Return historical records for analytic zones
+            - [ ] Returns All Configured Analytic Zones For This Camera
+    - [ ] Generate A Snapshot Of What The Camera Sees At The Specified Time And Return A Link To That Image
+
+
+    
+### Cellular Gateway
+
+- [ ] configure
+    - [ ] Connectivity Monitoring Destinations
+        - [ ] Return The Connectivity Testing Destinations For An MG Network
+        - [ ] Update The Connectivity Testing Destinations For An MG Network
+    - [ ] Dhcp
+        - [ ] List Common DHCP Settings Of M Gs
+        - [ ] Update Common DHCP Settings Of M Gs
+    - [ ] Lan
+        - [ ] Show The LAN Settings Of A MG
+        - [ ] Update The LAN Settings For A Single MG
+    - [ ] Port Forwarding Rules
+        - [ ] Returns The Port Forwarding Rules For A Single MG
+        - [ ] Updates The Port Forwarding Rules For A Single MG
+    - [ ] Subnet Pool
+        - [ ] Return The Subnet Pool And Mask Configured For M Gs In The Network
+        - [ ] Update The Subnet Pool And Mask Configuration For M Gs In The Network
+    - [ ] Uplink
+        - [ ] Returns The Uplink Settings For Your MG Network
+        - [ ] Updates The Uplink Settings For Your MG Network
+
+
+
+### Switch
+
+- [ ] Configure
+    - [ ] Access Control Lists
+        - [ ] Return The Access Control Lists For A MS Network
+        - [ ] Update The Access Control Lists For A MS Network
+    - [ ] Access Policies
+        - [ ] Create An Access Policy For A Switch Network
+        - [ ] Delete An Access Policy For A Switch Network
+        - [ ] List The Access Policies For A Switch Network
+        - [ ] Return A Specific Access Policy For A Switch Network
+        - [ ] Update An Access Policy For A Switch Network
+    - [ ] Config Templates
+        - [ ] profiles
+            - [ ] Ports
+                - [ ] Return A Switch Profile Port
+                - [ ] Return All The Ports Of A Switch Profile
+                - [ ] Update A Switch Profile Port
+            - [ ] List The Switch Profiles For Your Switch Template Configuration
+    - [ ] Devices
+        - [ ] Clone port-level and some switch-level configuration settings from a source switch to one or more target switches
+    - [ ] Dhcp Server Policy
+        - [ ] Return The DHCP Server Policy
+        - [ ] Update The DHCP Server Policy
+    - [ ] Dscp To Cos Mappings
+        - [ ] Return The DSCP To Co S Mappings
+        - [ ] Update The DSCP To Co S Mappings
+    - [ ] Link Aggregations
+        - [ ] Create A Link Aggregation Group
+        - [ ] List Link Aggregation Groups
+        - [ ] Split A Link Aggregation Group Into Separate Ports
+        - [ ] Update A Link Aggregation Group
+    - [ ] Mtu
+        - [ ] Return The MTU Configuration
+        - [ ] Update The MTU Configuration
+    - [ ] Port Schedules
+        - [ ] Add A Switch Port Schedule
+        - [ ] Delete A Switch Port Schedule
+        - [ ] List Switch Port Schedules
+        - [ ] Update A Switch Port Schedule
+    - [ ] Ports
+        - [ ] List The Switch Ports For A Switch
+        - [ ] Return A Switch Port
+        - [ ] Update A Switch Port
+    - [ ] Qos Rules
+        - [ ] Order
+            - [ ] Return The Quality Of Service Rule I Ds By Order In Which They Will Be Processed By The Switch
+            - [ ] Update The Order In Which The Rules Should Be Processed By The Switch
+        - [ ] Add A Quality Of Service Rule
+        - [ ] Delete A Quality Of Service Rule
+        - [ ] List Quality Of Service Rules
+        - [ ] Return A Quality Of Service Rule
+        - [ ] Update A Quality Of Service Rule
+    - [ ] Routing
+        - [ ] Interfaces
+            - [ ] Dhcp
+                - [ ] Return A Layer 3 Interface DHCP Configuration For A Switch
+                - [ ] Update A Layer 3 Interface DHCP Configuration For A Switch
+            - [ ] Create A Layer 3 Interface For A Switch
+            - [ ] Delete A Layer 3 Interface From The Switch
+            - [ ] List Layer 3 Interfaces For A Switch
+            - [ ] Return A Layer 3 Interface For A Switch
+            - [ ] Update A Layer 3 Interface For A Switch
+        - [ ] Multicast
+            - [ ] Rendezvous Points
+            - [ ] Return Multicast Settings For A Network
+            - [ ] Update Multicast Settings For A Network
+        - [ ] Ospf
+            - [ ] Return Layer 3 OSPF Routing Configuration
+            - [ ] Update Layer 3 OSPF Routing Configuration
+        - [ ] Static Routes
+            - [ ] Create A Layer 3 Static Route For A Switch
+            - [ ] Delete A Layer 3 Static Route For A Switch
+            - [ ] List Layer 3 Static Routes For A Switch
+            - [ ] Return A Layer 3 Static Route For A Switch
+            - [ ] Update A Layer 3 Static Route For A Switch
+    - [ ] Settings
+        - [ ] Returns The Switch Network Settings
+        - [ ] Update Switch Network Settings
+    - [ ] Stacks
+        - [ ] Routing
+        - [ ] Add A Switch To A Stack
+        - [ ] Create A Stack
+        - [ ] Delete A Stack
+        - [ ] List The Switch Stacks In A Network
+        - [ ] Remove A Switch From A Stack
+        - [ ] Show A Switch Stack
+    - [ ] Storm Control
+        - [ ] Return The Storm Control Configuration For A Switch Network
+        - [ ] Update The Storm Control Configuration For A Switch Network
+    - [ ] Stp
+        - [ ] Returns STP Settings
+        - [ ] Updates STP Settings
+    - [ ] Warm Spare
+        - [ ] Return Warm Spare Configuration For A Switch
+        - [ ] Update Warm Spare Configuration For A Switch
+- [ ] Live Tools
+    - [ ] ports
+        - [ ] Cycle a set of switch ports
+- [ ] Monitor
+    - [ ] ports
+        - [ ] statuses
+            - [ ] Packets
+                - [ ] Return the packet counters for all the ports of a switch
+            - [ ] Return The Status For All The Ports Of A Switch
+
+
+
+
+### Wireless
+
+- [ ] Configure
+    - [ ] Alternate Management Interface
+        - [ ] Return Alternate Management Interface And Devices With IP Assigned
+        - [ ] Update Alternate Management Interface And Device Static IP
+    - [ ] Bluetooth
+        - [ ] settings
+            - [ ] Return The Bluetooth Settings For A Network A Href Https Documentation Meraki Com MR Bluetooth Bluetooth Low Energy BLE Bluetooth Settings A Must Be Enabled On The Network
+            - [ ] Return The Bluetooth Settings For A Wireless Device
+            - [ ] Update The Bluetooth Settings For A Network
+            - [ ] Update The Bluetooth Settings For A Wireless Device
+    - [ ] Radio
+        - [ ] settings
+            - [ ] Return The Radio Settings Of A Device
+            - [ ] Update The Radio Settings Of A Device
+    - [ ] Rf Profiles
+        - [ ] Creates New RF Profile For This Network
+        - [ ] Delete A RF Profile
+        - [ ] List The Non Basic RF Profiles For This Network
+        - [ ] Return A RF Profile
+        - [ ] Updates Specified RF Profile For This Network
+    - [ ] Settings
+        - [ ] Return The Wireless Settings For A Network
+        - [ ] Update The Wireless Settings For A Network
+    - [ ] Ssids
+        - [ ] Firewall
+            - [ ] L3 Firewall Rules
+                - [ ] Return The L3 Firewall Rules For An SSID On An MR Network
+                - [ ] Update The L3 Firewall Rules Of An SSID On An MR Network
+            - [ ] L7 Firewall Rules
+                - [ ] Return The L7 Firewall Rules For An SSID On An MR Network
+                - [ ] Update The L7 Firewall Rules Of An SSID On An MR Network
+        - [ ] Identity Psks
+            - [ ] Create An Identity PSK
+            - [ ] Delete An Identity PSK
+            - [ ] List All Identity PSKs In A Wireless Network
+            - [ ] Return An Identity PSK
+            - [ ] Update An Identity PSK
+        - [ ] Splash
+            - [ ] settings
+                - [ ] Display The Splash Page Settings For The Given SSID
+                - [ ] Modify The Splash Page Settings For The Given SSID
+        - [ ] Traffic Shaping
+            - [ ] rules
+                - [ ] Display The Traffic Shaping Settings For A SSID On An MR Network
+                - [ ] Update The Traffic Shaping Settings For An SSID On An MR Network
+        - [x] List The MR SSIDs In A Network
+        - [x] Return A Single MR SSID
+        - [x] Update The Attributes Of An MR SSID
+- [ ] Monitor
+    - [ ] Air Marshal
+        - [ ] List Air Marshal scan results from a network
+    - [ ] Channel Utilization History
+        - [ ] Return AP channel utilization over time for a device or network client
+    - [ ] Client Count History
+        - [ ] Return wireless client counts over time for a network, device, or network client
+    - [ ] Clients
+        - [ ] Connection Stats
+            - [ ] Aggregated Connectivity Info For A Given Client On This Network
+            - [ ] Aggregated Connectivity Info For This Network Grouped By Clients
+        - [ ] Connectivity Events
+            - [ ] List the wireless connectivity events for a client within a network in the timespan.
+        - [ ] Latency History
+            - [ ] Return the latency history for a client
+        - [ ] Latency Stats
+            - [ ] Aggregated Latency Info For A Given Client On This Network
+            - [ ] Aggregated Latency Info For This Network Grouped By Clients
+    - [ ] Connection Stats
+        - [ ] Aggregated Connectivity Info For A Given AP On This Network
+        - [ ] Aggregated Connectivity Info For This Network
+    - [ ] Data Rate History
+        - [ ] Return PHY data rates over time for a network, device, or network client
+    - [ ] Devices
+        - [ ] Connection Stats
+            - [ ] Aggregated connectivity info for this network, grouped by node
+        - [ ] Latency Stats
+            - [ ] Aggregated latency info for this network, grouped by node
+    - [ ] Failed Connections
+        - [ ] List of all failed client connection events on this network in a given time range
+    - [ ] Latency History
+        - [ ] Return average wireless latency over time for a network, device, or network client
+    - [ ] Latency Stats
+        - [ ] Aggregated Latency Info For A Given AP On This Network
+        - [ ] Aggregated Latency Info For This Network
+   - [ ] Mesh Statuses
+        - [ ] List wireless mesh statuses for repeaters
+    - [ ] Signal Quality History
+        - [ ] Return signal quality (SNR/RSSI) over time for a device or network client
+    - [ ] Status
+        - [ ] Return the SSID statuses of an access point
+    - [ ] Usage History
+        - [ ] Return AP usage over time for a device or network client
+
+
+### Sm
+
+- [ ] Configure
+    - [ ] Apns Cert
+        - [ ] Get the organization's APNS certificate
+    - [ ] Bypass Activation Lock Attempts
+        - [ ] Bypass Activation Lock Attempt
+        - [ ] Bypass Activation Lock Attempt Status
+    - [ ] Devices
+        - [ ] Certs
+            - [ ] List the certs on a device
+        - [ ] Device Profiles
+            - [ ] Get the profiles associated with a device
+        - [ ] Fields
+            - [ ] Modify the fields of a device
+        - [ ] Network Adapters
+            - [ ] List the network adapters of a device
+        - [ ] Restrictions
+            - [ ] List the restrictions on a device
+        - [ ] Security Centers
+            - [ ] List the security centers on a device
+        - [ ] Softwares
+            - [ ] Get a list of softwares associated with a device
+        - [ ] Wlan Lists
+            - [ ] List the saved SSID names on a device
+        - [ ] Add Delete Or Update The Tags Of A Set Of Devices
+        - [ ] Force Check In A Set Of Devices
+        - [ ] List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
+        - [ ] Lock A Set Of Devices
+        - [ ] Move A Set Of Devices To A New Network
+        - [ ] Refresh The Details Of A Device
+        - [ ] Unenroll A Device
+        - [ ] Wipe A Device
+    - [ ] Profiles
+        - [ ] List all profiles in a network
+    - [ ] Target Groups
+        - [ ] Add A Target Group
+        - [ ] Delete A Target Group From A Network
+        - [ ] List The Target Groups In This Network
+        - [ ] Return A Target Group
+        - [ ] Update A Target Group
+    - [ ] Users
+        - [ ] Device Profiles
+            - [ ] Get the profiles associated with a user
+        - [ ] Softwares
+            - [ ] Get a list of softwares associated with a user
+        - [ ] List The Owners In An SM Network With Various Specified Fields And Filters
+    - [ ] Vpp Accounts
+        - [ ] Get A Hash Containing The Unparsed Token Of The VPP Account With The Given ID
+        - [ ] List The VPP Accounts In The Organization
+- [ ] Monitor
+    - [ ] devices
+        - [ ] Cellular Usage History
+            - [ ] Return the client's daily cellular data usage history
+        - [ ] Connectivity
+            - [ ] Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
+        - [ ] Desktop Logs
+            - [ ] Return historical records of various Systems Manager network connection details for desktop devices.
+        - [ ] Device Command Logs
+            - [ ] Return historical records of commands sent to Systems Manager devices
+        - [ ] Performance History
+            - [ ] Return historical records of various Systems Manager client metrics for desktop devices.
+
+
+### Insight
+
+- [ ] configure
+    - [ ] monitoredMediaServers
+        - [ ] Add A Media Server To Be Monitored For This Organization
+        - [ ] Delete A Monitored Media Server From This Organization
+        - [ ] List The Monitored Media Servers For This Organization
+        - [ ] Return A Monitored Media Server For This Organization
+        - [ ] Update A Monitored Media Server For This Organization
