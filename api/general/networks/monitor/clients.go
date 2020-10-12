@@ -86,3 +86,42 @@ func GetClients(networkId string) (Clients, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type AssociatedClient struct {
+	ID                   string      `json:"id"`
+	Description          string      `json:"description"`
+	Mac                  string      `json:"mac"`
+	IP                   string      `json:"ip"`
+	User                 string      `json:"user"`
+	Vlan                 string      `json:"vlan"`
+	Switchport           interface{} `json:"switchport"`
+	IP6                  string      `json:"ip6"`
+	FirstSeen            int         `json:"firstSeen"`
+	LastSeen             int         `json:"lastSeen"`
+	Manufacturer         string      `json:"manufacturer"`
+	Os                   string      `json:"os"`
+	Ssid                 string      `json:"ssid"`
+	WirelessCapabilities string      `json:"wirelessCapabilities"`
+	SmInstalled          bool        `json:"smInstalled"`
+	RecentDeviceMac      string      `json:"recentDeviceMac"`
+	ClientVpnConnections []struct {
+		RemoteIP       string `json:"remoteIp"`
+		ConnectedAt    int    `json:"connectedAt"`
+		DisconnectedAt int    `json:"disconnectedAt"`
+	} `json:"clientVpnConnections"`
+	Lldp   [][]string  `json:"lldp"`
+	Cdp    interface{} `json:"cdp"`
+	Status string      `json:"status"`
+}
+
+// Return The Client Associated With The Given Identifier
+func GetAssociatedClient(networkId, clientId string) (AssociatedClient, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s", api.BaseUrl(), networkId, clientId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = AssociatedClient{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
