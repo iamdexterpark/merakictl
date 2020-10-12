@@ -176,9 +176,9 @@
     - [ ] Return A Single Configuration Template
 - [x] Devices
     - [x] List the devices in an organization
-- [ ] Inventory Devices
-    - [ ] Return The Device Inventory For An Organization
-    - [ ] Return A Single Device From The Inventory Of An Organization
+- [x] Inventory Devices
+    - [x] Return The Device Inventory For An Organization
+    - [x] Return A Single Device From The Inventory Of An Organization
 - [ ] Licenses
     - [ ] List The Licenses For An Organization
     - [ ] Assign SM Seats To A Network This Will Increase The Managed SM Device Limit Of The Network
