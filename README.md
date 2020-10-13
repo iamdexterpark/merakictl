@@ -165,7 +165,7 @@ peers:
 
 ### Disclaimer
 
-Meraki-ctl is an extremely Powerful tool. With the Dashboard rate-limit, you have a theoretical potential to make:
+Merakictl is an extremely Powerful tool. With the Dashboard rate-limit, you have a theoretical potential to make:
 
 
 Number of API Calls | 5 | 300 | 180,000 | 1,400,000 |
