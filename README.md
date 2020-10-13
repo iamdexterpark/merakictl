@@ -184,8 +184,10 @@ Create a production change plan. Implement every aspect of your plan in a test e
 - **Pre-checks**  Capture the state of the network before the change.
 - **Post-checks** Capture the state of the network after the change. 
 - **Backup Config** Copy the config so that you can re-apply it in the event of a rollback.
-- **Rollback Procedure** Do not take this step lightly, things go wrong.
+- **Rollback Procedure** Do not take this step lightly, things go wrong. 
+The worst possible position is to have a change fail and not have a tested, reliable rollback plan.
 - **Exponential Change Schedule** Don't do everything at once. Start with a single network, 
 monitor it, give it time to operate normally, then, if nothing is wrong schedule the next 5 networks, then 10, 25, 50, 100, etc..
 - **Failure threshold** What percentage of failed changes are acceptable in a batch of networks 
-before all scheduled changes are canceled? Typically, 5% is acceptable, anything over that needs a root cause analysis, and modification of your change plan. 
+before all scheduled changes are canceled? Typically, 1-5% is acceptable depending on your scale. 
+Anything over that needs a root cause analysis, and modification of your plan. 
