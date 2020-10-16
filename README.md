@@ -41,7 +41,7 @@ go get github.com/ddexterpark/merakictl
     env GOOS=windows GOARCH=386 go build main.go
 ```
     
-### Environment Variables
+## Environment Variables
 
 At minimum, to use this tool you will need to set an environmental variable for the API key. 
 There are also some optional env vars that you can set to customize your API calls:
@@ -75,7 +75,7 @@ Not all endpoints will work in v0.
     Default = 'v1'
 ```
     
-### Syntax
+## Syntax
 
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [flags]
