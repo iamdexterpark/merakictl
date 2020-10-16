@@ -4,12 +4,30 @@
 
 A Golang SDK and command line tool for the Meraki Dashboard API.
 
-### Download Application
-This SDK can be compiled into a cross-platform static binary. Currently, we are in Alpha version.
+## Download Merakictl 
+This SDK can be used as a CLI-based Application without any prior programming experience. 
+It compiles into a cross-platform (Linux/Mac/Win) static binary. 
 
-[Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+Currently, we are in Alpha version: [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
 
-### Compiling Application from source
+## Run From Source Code 
+
+#### Installation
+Install the [Go](http://golang.org) programming language.
+
+#### Set PATH
+```bash
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+#### Download Project
+
+```bash
+go get github.com/ddexterpark/merakictl
+```
+
+#### Compile CLI (Optional) 
 ```shell script
     # Linux/MacOS
     go build main.go
@@ -165,7 +183,7 @@ peers:
 
 ### Disclaimer
 
-Meraki-ctl is an extremely Powerful tool. With the Dashboard rate-limit, you have a theoretical potential to make:
+Merakictl is an extremely Powerful tool. With the Dashboard rate-limit, you have a theoretical potential to make:
 
 
 Number of API Calls | 5 | 300 | 180,000 | 1,400,000 |
@@ -184,8 +202,10 @@ Create a production change plan. Implement every aspect of your plan in a test e
 - **Pre-checks**  Capture the state of the network before the change.
 - **Post-checks** Capture the state of the network after the change. 
 - **Backup Config** Copy the config so that you can re-apply it in the event of a rollback.
-- **Rollback Procedure** Do not take this step lightly, things go wrong.
+- **Rollback Procedure** Do not take this step lightly, things go wrong. 
+The worst possible position is to have a change fail and not have a tested, reliable rollback plan.
 - **Exponential Change Schedule** Don't do everything at once. Start with a single network, 
 monitor it, give it time to operate normally, then, if nothing is wrong schedule the next 5 networks, then 10, 25, 50, 100, etc..
 - **Failure threshold** What percentage of failed changes are acceptable in a batch of networks 
-before all scheduled changes are canceled? Typically, 5% is acceptable, anything over that needs a root cause analysis, and modification of your change plan. 
+before all scheduled changes are canceled? Typically, 1-5% is acceptable depending on your scale. 
+Anything over that needs a root cause analysis, and modification of your plan. 
