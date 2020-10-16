@@ -4,12 +4,30 @@
 
 A Golang SDK and command line tool for the Meraki Dashboard API.
 
-### Download Application
-This SDK can be compiled into a cross-platform static binary. Currently, we are in Alpha version.
+## Download Merakictl 
+This SDK can be used as a CLI-based Application without any prior programming experience. 
+It compiles into a cross-platform (Linux/Mac/Win) static binary. 
 
-[Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+Currently, we are in Alpha version: [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
 
-### Compiling Application from source
+## Run From Source Code 
+
+#### Installation
+Install the [Go](http://golang.org) programming language.
+
+#### Set PATH
+```bash
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+#### Download Project
+
+```bash
+go get github.com/ddexterpark/merakictl
+```
+
+#### Compile CLI (Optional) 
 ```shell script
     # Linux/MacOS
     go build main.go
