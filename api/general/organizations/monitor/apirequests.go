@@ -58,7 +58,7 @@ type APIRequest struct {
 // Return an aggregated overview of API requests data
 func GetAPIRequests(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
 	adminId, path, method, responseCode, sourceIp  string ) (APIRequests, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests/overview", api.BaseUrl(), organizationId)
+	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests", api.BaseUrl(), organizationId)
 	var payload io.ReadSeeker
 	var results = APIRequests{}
 
