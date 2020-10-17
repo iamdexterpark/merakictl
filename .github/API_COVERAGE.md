@@ -235,8 +235,8 @@
    - [x] Licenses
        - [x] Overview
            - [x] Return an overview of the license state for an organization
-   - [ ] Openapi Spec
-       - [ ] Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON
+   - [x] Openapi Spec
+       - [x] Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON
    - [ ] Webhooks
         - [ ] Return the log of webhook POSTs sent
 
