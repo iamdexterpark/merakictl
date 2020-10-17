@@ -199,7 +199,7 @@
         - [x] List The SAML IdPs In Your Organization
         - [ ] Create A SAML IdP For Your Organization
         - [ ] Update A SAML IdP In Your Organization
-        - [ ] Get A SAML IdP From Your Organization
+        - [x] Get A SAML IdP From Your Organization
         - [ ] Remove A SAML IdP In Your Organization
     - [ ] Returns The SAML SSO Enabled Settings For An Organization
     - [ ] Updates The SAML SSO Enabled Settings For An Organization
