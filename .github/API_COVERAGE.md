@@ -245,8 +245,8 @@
 
 ### Appliance
 - [ ] Configure
-    - [ ] Connectivity Monitoring Destinations
-        - [ ] Return The Connectivity Testing Destinations For An MX Network
+    - [x] Connectivity Monitoring Destinations
+        - [x] Return The Connectivity Testing Destinations For An MX Network
         - [ ] Update The Connectivity Testing Destinations For An MX Network
     - [ ] Content Filtering
         - [ ] Categories
