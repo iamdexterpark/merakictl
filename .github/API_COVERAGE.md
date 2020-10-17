@@ -251,11 +251,11 @@
     - [ ] Content Filtering
         - [x] Categories
             - [x] List all available content filtering categories for an MX network
-        - [ ] Return The Content Filtering Settings For An MX Network
+        - [x] Return The Content Filtering Settings For An MX Network
         - [ ] Update The Content Filtering Settings For An MX Network
     - [ ] Firewall
         - [ ] Cellular Firewall Rules
-            - [ ] Return The Cellular Firewall Rules For An MX Network
+            - [x] Return The Cellular Firewall Rules For An MX Network
             - [ ] Update The Cellular Firewall Rules Of An MX Network
         - [ ] Firewalled Services
             - [ ] List The Appliance Services And Their Accessibility Rules
