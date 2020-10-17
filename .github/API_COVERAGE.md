@@ -232,9 +232,9 @@
            - [x] List the status of every Meraki device in the organization
        - [x] Uplinks Loss And Latency
            - [x] Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
-   - [ ] Licenses
-       - [ ] Overview
-           - [ ] Return an overview of the license state for an organization
+   - [x] Licenses
+       - [x] Overview
+           - [x] Return an overview of the license state for an organization
    - [ ] Openapi Spec
        - [ ] Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON
    - [ ] Webhooks
