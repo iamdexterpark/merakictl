@@ -30,3 +30,16 @@ func GetLDPS(organizationId string) (LDPS, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+// List a SAML IdP in your organization.
+func GetLDP(organizationId, ldpId string) (LDP, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idp/%s", api.BaseUrl(),
+		organizationId, ldpId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = LDP{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
