@@ -273,7 +273,7 @@
             - [x] List The MX L7 Firewall Rules For An MX Network
             - [ ] Update The MX L7 Firewall Rules For An MX Network
         - [ ] One To Many Nat Rules
-            - [ ] Return The 1 Many NAT Mapping Rules For An MX Network
+            - [x] Return The 1 Many NAT Mapping Rules For An MX Network
             - [ ] Set The 1 Many NAT Mapping Rules For An MX Network
         - [ ] One To One Nat Rules
             - [ ] Return The 1 1 NAT Mapping Rules For An MX Network
