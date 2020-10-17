@@ -91,3 +91,30 @@ func GetInboundFirewallRules(networkId string ) (InboundFirewallRules, interface
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type L3FirewallRules struct {
+	Rules []struct {
+		Comment       string `json:"comment"`
+		Policy        string `json:"policy"`
+		Protocol      string `json:"protocol"`
+		DestPort      int    `json:"destPort"`
+		DestCidr      string `json:"destCidr"`
+		SrcPort       string `json:"srcPort"`
+		SrcCidr       string `json:"srcCidr"`
+		SyslogEnabled bool   `json:"syslogEnabled"`
+	} `json:"rules"`
+}
+
+
+// Return the L3 firewall rules for an MX network
+func GetL3FirewallRules(networkId string ) (L3FirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l3FirewallRules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = L3FirewallRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
