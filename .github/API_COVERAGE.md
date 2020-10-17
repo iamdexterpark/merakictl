@@ -196,7 +196,7 @@
     - [ ] Combine Multiple Networks Into A Single Network
 - [ ] Saml
     - [ ] ldps
-        - [ ] List The SAML IdPs In Your Organization
+        - [x] List The SAML IdPs In Your Organization
         - [ ] Create A SAML IdP For Your Organization
         - [ ] Update A SAML IdP In Your Organization
         - [ ] Get A SAML IdP From Your Organization
