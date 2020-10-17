@@ -191,7 +191,7 @@
     - [x] Returns The Login Security Settings For An Organization
     - [ ] Update The Login Security Settings For An Organization
 - [ ] Networks 
-    - [ ] List The Networks That The User Has Privileges On In An Organization
+    - [x] List The Networks That The User Has Privileges On In An Organization
     - [ ] Create A Network
     - [ ] Combine Multiple Networks Into A Single Network
 - [ ] Saml
