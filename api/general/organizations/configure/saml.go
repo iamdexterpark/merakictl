@@ -43,3 +43,23 @@ func GetLDP(organizationId, ldpId string) (LDP, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type SAML struct {
+	Enabled bool `json:"enabled"`
+}
+
+
+// Returns the SAML SSO enabled settings for an organization.
+func GetSAML(organizationId string) (SAML, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/saml", api.BaseUrl(),
+		organizationId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = SAML{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+

@@ -201,7 +201,7 @@
         - [ ] Update A SAML IdP In Your Organization
         - [x] Get A SAML IdP From Your Organization
         - [ ] Remove A SAML IdP In Your Organization
-    - [ ] Returns The SAML SSO Enabled Settings For An Organization
+    - [x] Returns The SAML SSO Enabled Settings For An Organization
     - [ ] Updates The SAML SSO Enabled Settings For An Organization
 - [ ] Saml Roles
     - [ ] List The SAML Roles For This Organization
