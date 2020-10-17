@@ -249,8 +249,8 @@
         - [x] Return The Connectivity Testing Destinations For An MX Network
         - [ ] Update The Connectivity Testing Destinations For An MX Network
     - [ ] Content Filtering
-        - [ ] Categories
-            - [ ] List all available content filtering categories for an MX network
+        - [x] Categories
+            - [x] List all available content filtering categories for an MX network
         - [ ] Return The Content Filtering Settings For An MX Network
         - [ ] Update The Content Filtering Settings For An MX Network
     - [ ] Firewall
