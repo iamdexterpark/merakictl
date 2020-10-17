@@ -78,9 +78,7 @@ func GetAPIRequests(organizationId, t0, t1, timespan, perPage, startingAfter, en
 	parameters.Add("responseCode", responseCode)
 	parameters.Add("sourceIp", sourceIp)
 
-
 	session.Request.URL.RawQuery = parameters.Encode()
-
 
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)

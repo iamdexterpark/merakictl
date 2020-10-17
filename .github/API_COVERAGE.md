@@ -225,8 +225,8 @@
        - [x] Overview
            - [x] Return an aggregated overview of API requests data
        - [x] List The API Requests Made By An Organization
-   - [ ] Configuration Changes
-       - [ ] View the Change Log for your organization
+   - [x] Configuration Changes
+       - [x] View the Change Log for your organization
    - [ ] Devices
        - [ ] Statuses
            - [ ] List the status of every Meraki device in the organization
