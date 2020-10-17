@@ -212,11 +212,11 @@
 - [ ] Snmp    
     - x ] Return The SNMP Settings For An Organization
     - [ ] Update The SNMP Settings For An Organization
-- [ ] List The Organizations That The User Has Privileges On
-- [ ] Create A New Organization
-- [ ] Return An Organization
-- [ ] Update An Organization
-- [ ] Delete An Organization
+- [x] List The Organizations That The User Has Privileges On
+- [x] Create A New Organization
+- [x] Return An Organization
+- [x] Update An Organization
+- [x] Delete An Organization
 - [ ] Claim A List Of Devices Licenses And Or Orders Into An Organization When Claiming By Order All Devices And Licenses In The Order Will Be Claimed Licenses Will Be Added To The Organization And Devices Will Be Placed In The Organizations Inventory
 - [ ] Create A New Organization By Cloning The Addressed Organization
 

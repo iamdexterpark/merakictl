@@ -146,3 +146,4 @@ func GetOrganizationDevices(organizationId string) (Devices, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
