@@ -204,9 +204,9 @@
     - [x] Returns The SAML SSO Enabled Settings For An Organization
     - [ ] Updates The SAML SSO Enabled Settings For An Organization
 - [ ] Saml Roles
-    - [ ] List The SAML Roles For This Organization
+    - [x] List The SAML Roles For This Organization
     - [ ] Create A SAML Role
-    - [ ] Return A SAML Role
+    - [x] Return A SAML Role
     - [ ] Update A SAML Role
     - [ ] Remove A SAML Role
 - [ ] Snmp    
