@@ -227,11 +227,11 @@
        - [x] List The API Requests Made By An Organization
    - [x] Configuration Changes
        - [x] View the Change Log for your organization
-   - [ ] Devices
+   - [x] Devices
        - [x] Statuses
            - [x] List the status of every Meraki device in the organization
-       - [ ] Uplinks Loss And Latency
-           - [ ] Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
+       - [x] Uplinks Loss And Latency
+           - [x] Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
    - [ ] Licenses
        - [ ] Overview
            - [ ] Return an overview of the license state for an organization
