@@ -22,11 +22,22 @@ type Network struct {
 }
 
 // List the networks that the user has privileges on in an organization
-func GetNetworks(organizationId string) (Networks, interface{}) {
+func GetNetworks(organizationId, configTemplateId, tags, tagsFilterType, perPage,
+	startingAfter, endingBefore string) (Networks, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/networks", api.BaseUrl(),
 		organizationId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("configTemplateId", configTemplateId)
+	parameters.Add("tags", tags)
+	parameters.Add("tagsFilterType", tagsFilterType)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
 
 	var results = Networks{}
 	user_agent.UnMarshalJSON(session.Body, &results)
