@@ -228,8 +228,8 @@
    - [x] Configuration Changes
        - [x] View the Change Log for your organization
    - [ ] Devices
-       - [ ] Statuses
-           - [ ] List the status of every Meraki device in the organization
+       - [x] Statuses
+           - [x] List the status of every Meraki device in the organization
        - [ ] Uplinks Loss And Latency
            - [ ] Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
    - [ ] Licenses
