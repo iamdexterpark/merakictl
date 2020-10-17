@@ -222,8 +222,8 @@
 
 - [ ] Monitor
    - [ ] Api Requests
-       - [ ] Overview
-           - [ ] Return an aggregated overview of API requests data
+       - [x] Overview
+           - [x] Return an aggregated overview of API requests data
        - [ ] List The API Requests Made By An Organization
    - [ ] Configuration Changes
        - [ ] View the Change Log for your organization
