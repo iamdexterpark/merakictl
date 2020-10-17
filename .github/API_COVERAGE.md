@@ -210,7 +210,7 @@
     - [ ] Update A SAML Role
     - [ ] Remove A SAML Role
 - [ ] Snmp    
-    - [ ] Return The SNMP Settings For An Organization
+    - x ] Return The SNMP Settings For An Organization
     - [ ] Update The SNMP Settings For An Organization
 - [ ] List The Organizations That The User Has Privileges On
 - [ ] Create A New Organization
