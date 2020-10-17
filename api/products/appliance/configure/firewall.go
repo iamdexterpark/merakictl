@@ -142,4 +142,26 @@ func GetL7FirewallRules(networkId string ) (L7FirewallRules, interface{}) {
 	return results, traceback
 }
 
+type L7FirewallApplicationCategories struct {
+	ApplicationCategories []struct {
+		ID           string `json:"id"`
+		Name         string `json:"name"`
+		Applications []struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"applications"`
+	} `json:"applicationCategories"`
+}
 
+
+// Return the L7 firewall application categories and their associated applications for an MX network
+func GetL7FirewallApplicationCategories(networkId string ) (L7FirewallApplicationCategories, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules/applicationCategories", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = L7FirewallApplicationCategories{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
