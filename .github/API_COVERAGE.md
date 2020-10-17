@@ -210,7 +210,7 @@
     - [ ] Update A SAML Role
     - [ ] Remove A SAML Role
 - [ ] Snmp    
-    - x ] Return The SNMP Settings For An Organization
+    - [x] Return The SNMP Settings For An Organization
     - [ ] Update The SNMP Settings For An Organization
 - [x] List The Organizations That The User Has Privileges On
 - [x] Create A New Organization
@@ -221,10 +221,10 @@
 - [ ] Create A New Organization By Cloning The Addressed Organization
 
 - [ ] Monitor
-   - [ ] Api Requests
+   - [x] Api Requests
        - [x] Overview
            - [x] Return an aggregated overview of API requests data
-       - [ ] List The API Requests Made By An Organization
+       - [x] List The API Requests Made By An Organization
    - [ ] Configuration Changes
        - [ ] View the Change Log for your organization
    - [ ] Devices
