@@ -118,3 +118,28 @@ func GetL3FirewallRules(networkId string ) (L3FirewallRules, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type L7FirewallRules struct {
+	Rules []struct {
+		Policy string `json:"policy"`
+		Type   string `json:"type"`
+		Value  struct {
+			ID string `json:"id"`
+		} `json:"value"`
+	} `json:"rules"`
+}
+
+
+// List the MX L7 firewall rules for an MX network
+func GetL7FirewallRules(networkId string ) (L7FirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = L7FirewallRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+

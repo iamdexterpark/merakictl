@@ -265,12 +265,12 @@
             - [x] Return The Inbound Firewall Rules For An MX Network
             - [ ] Update The Inbound Firewall Rules Of An MX Network
         - [ ] L3 Firewall Rules
-            - [ ] Return The L3 Firewall Rules For An MX Network
+            - [x] Return The L3 Firewall Rules For An MX Network
             - [ ] Update The L3 Firewall Rules Of An MX Network
         - [ ] L7 Firewall Rules
-            - [ ] Application Categories
-                - [ ] Return the L7 firewall application categories and their associated applications for an MX network
-            - [ ] List The MX L7 Firewall Rules For An MX Network
+            - [x] Application Categories
+                - [x] Return the L7 firewall application categories and their associated applications for an MX network
+            - [x] List The MX L7 Firewall Rules For An MX Network
             - [ ] Update The MX L7 Firewall Rules For An MX Network
         - [ ] One To Many Nat Rules
             - [ ] Return The 1 Many NAT Mapping Rules For An MX Network
