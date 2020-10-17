@@ -258,8 +258,8 @@
             - [x] Return The Cellular Firewall Rules For An MX Network
             - [ ] Update The Cellular Firewall Rules Of An MX Network
         - [ ] Firewalled Services
-            - [ ] List The Appliance Services And Their Accessibility Rules
-            - [ ] Return The Accessibility Settings Of The Given Service ICMP Web Or SNMP
+            - [x] List The Appliance Services And Their Accessibility Rules
+            - [x] Return The Accessibility Settings Of The Given Service ICMP Web Or SNMP
             - [ ] Updates The Accessibility Settings For The Given Service ICMP Web Or SNMP
         - [ ] Inbound Firewall Rules
             - [ ] Return The Inbound Firewall Rules For An MX Network
