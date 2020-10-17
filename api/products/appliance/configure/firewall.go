@@ -65,3 +65,29 @@ func GetFirewalledService(networkId, serviceId string ) (FirewalledService, inte
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type InboundFirewallRules struct {
+	Rules []struct {
+		Comment       string `json:"comment"`
+		Policy        string `json:"policy"`
+		Protocol      string `json:"protocol"`
+		DestPort      int    `json:"destPort"`
+		DestCidr      string `json:"destCidr"`
+		SrcPort       string `json:"srcPort"`
+		SrcCidr       string `json:"srcCidr"`
+		SyslogEnabled bool   `json:"syslogEnabled"`
+	} `json:"rules"`
+	SyslogDefaultRule bool `json:"syslogDefaultRule"`
+}
+
+// Return the inbound firewall rules for an MX network
+func GetInboundFirewallRules(networkId string ) (InboundFirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/inboundFirewallRules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = InboundFirewallRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

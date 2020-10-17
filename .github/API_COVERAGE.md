@@ -262,7 +262,7 @@
             - [x] Return The Accessibility Settings Of The Given Service ICMP Web Or SNMP
             - [ ] Updates The Accessibility Settings For The Given Service ICMP Web Or SNMP
         - [ ] Inbound Firewall Rules
-            - [ ] Return The Inbound Firewall Rules For An MX Network
+            - [x] Return The Inbound Firewall Rules For An MX Network
             - [ ] Update The Inbound Firewall Rules Of An MX Network
         - [ ] L3 Firewall Rules
             - [ ] Return The L3 Firewall Rules For An MX Network
