@@ -380,8 +380,8 @@
     - [ ] Quality Retention Profiles
         - [ ] Creates New Quality Retention Profile For This Network
         - [ ] Delete An Existing Quality Retention Profile For This Network
-        - [ ] List The Quality Retention Profiles For This Network
-        - [ ] Retrieve A Single Quality Retention Profile
+        - [x] List The Quality Retention Profiles For This Network
+        - [x] Retrieve A Single Quality Retention Profile
         - [ ] Update An Existing Quality Retention Profile For This Network
     - [ ] Schedules
         - [ ] Returns a list of all camera recording schedules.
