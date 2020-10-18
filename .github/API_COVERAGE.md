@@ -346,7 +346,7 @@
         - [x] Return MX Warm Spare Settings
         - [ ] Swap MX Primary And Warm Spare Appliances
         - [ ] Update MX Warm Spare Settings
-- [ ] Monitor
+- [x] Monitor
     - [x] Clients
         - [x] security
             - [x] events
@@ -375,7 +375,7 @@
 
 - [ ] Configure
     - [ ] Quality And Retention
-        - [ ] Returns Quality And Retention Settings For The Given Camera
+        - [x] Returns Quality And Retention Settings For The Given Camera
         - [ ] Update Quality And Retention Settings For The Given Camera
     - [ ] Quality Retention Profiles
         - [ ] Creates New Quality Retention Profile For This Network
