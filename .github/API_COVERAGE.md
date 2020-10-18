@@ -360,9 +360,9 @@
         - [ ] events
             - [x] List The Security Events For A Network
             - [x] List The Security Events For An Organization
-    - [ ] Uplink
-        - [ ] statuses
-            - [ ] List the uplink status of every Meraki MX and Z series appliances in the organization
+    - [x] Uplink
+        - [x] statuses
+            - [x] List the uplink status of every Meraki MX and Z series appliances in the organization
     - [ ] Vpn
         - [ ] Stats
             - [ ] Show VPN history stat for networks in an organization
