@@ -47,3 +47,27 @@ func GetOrganizationIntrusionSettings(organizationId string ) (OrganizationIntru
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type MalwareSettings struct {
+	Mode        string `json:"mode"`
+	AllowedUrls []struct {
+		URL     string `json:"url"`
+		Comment string `json:"comment"`
+	} `json:"allowedUrls"`
+	AllowedFiles []struct {
+		Sha256  string `json:"sha256"`
+		Comment string `json:"comment"`
+	} `json:"allowedFiles"`
+}
+
+// Returns all supported malware settings for an MX network
+func GetMalwareSettings(networkId string ) (MalwareSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/security/malware", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = MalwareSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
