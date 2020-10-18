@@ -292,10 +292,10 @@
             - [ ] Set The Supported Intrusion Settings For An MX Network
             - [ ] Sets Supported Intrusion Settings For An Organization
         - [ ] Malware
-            - [ ] Returns All Supported Malware Settings For An MX Network
+            - [x] Returns All Supported Malware Settings For An MX Network
             - [ ] Set The Supported Malware Settings For An MX Network
-    - [ ] Settings
-        - [ ] Return the appliance settings for a network
+    - [x] Settings
+        - [x] Return the appliance settings for a network
     - [ ] Single Lan
         - [ ] Return Single LAN Configuration
         - [ ] Update Single LAN Configuration
