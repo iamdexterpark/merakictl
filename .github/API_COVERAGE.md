@@ -334,7 +334,7 @@
         - [ ] Update A VLAN
     - [ ] Vpn
         - [ ] Site To Site Vpn
-            - [ ] Return The Site To Site VPN Settings Of A Network
+            - [x] Return The Site To Site VPN Settings Of A Network
             - [ ] Update The Site To Site VPN Settings Of A Network
         - [ ] Third Party VPN Peers
             - [ ] Return The Third Party VPN Peers For An Organization
