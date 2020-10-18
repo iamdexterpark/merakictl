@@ -287,7 +287,7 @@
         - [ ] Update The Per Port VLAN Settings For A Single MX Port
     - [ ] Security
         - [ ] Intrusion
-            - [ ] Returns All Supported Intrusion Settings For An MX Network
+            - [x] Returns All Supported Intrusion Settings For An MX Network
             - [ ] Returns All Supported Intrusion Settings For An Organization
             - [ ] Set The Supported Intrusion Settings For An MX Network
             - [ ] Sets Supported Intrusion Settings For An Organization
