@@ -364,8 +364,8 @@
         - [x] statuses
             - [x] List the uplink status of every Meraki MX and Z series appliances in the organization
     - [ ] Vpn
-        - [ ] Stats
-            - [ ] Show VPN history stat for networks in an organization
+        - [x] Stats
+            - [x] Show VPN history stat for networks in an organization
         - [ ] Statuses
             - [ ] Show VPN status for networks in an organization
 
