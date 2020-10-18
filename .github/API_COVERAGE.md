@@ -297,7 +297,7 @@
     - [x] Settings
         - [x] Return the appliance settings for a network
     - [ ] Single Lan
-        - [ ] Return Single LAN Configuration
+        - [x] Return Single LAN Configuration
         - [ ] Update Single LAN Configuration
     - [ ] Static Routes
         - [ ] Add A Static Route For An MX Or Teleworker Network
