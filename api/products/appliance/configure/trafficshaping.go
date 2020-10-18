@@ -43,7 +43,7 @@ func GetPerformanceClass(networkId, customPerformanceClassId string ) (Performan
 }
 
 
-type TrafficShapingSettings struct {
+type TrafficShapingRules struct {
 	DefaultRulesEnabled bool `json:"defaultRulesEnabled"`
 	Rules               []struct {
 		Definitions []struct {
@@ -63,10 +63,10 @@ type TrafficShapingSettings struct {
 }
 
 // Display the traffic shaping settings rules for an MX network
-func GetTrafficShapingSettings(networkId string ) (TrafficShapingSettings, interface{}) {
+func GetTrafficShapingRules(networkId string ) (TrafficShapingRules, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/rules", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
-	var results = TrafficShapingSettings{}
+	var results = TrafficShapingRules{}
 
 	session := api.Session(baseurl, "GET", payload)
 	user_agent.UnMarshalJSON(session.Body, &results)
@@ -146,6 +146,25 @@ func GetUplinkSelectionSettings(networkId string ) (UplinkSelectionSettings, int
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkSelection", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	var results = UplinkSelectionSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+type TrafficShapingSettings struct {
+	GlobalBandwidthLimits struct {
+		LimitUp   int `json:"limitUp"`
+		LimitDown int `json:"limitDown"`
+	} `json:"globalBandwidthLimits"`
+}
+
+// Display the traffic shaping settings for an MX network
+func GetTrafficShapingSettings(networkId string ) (TrafficShapingSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = TrafficShapingSettings{}
 
 	session := api.Session(baseurl, "GET", payload)
 	user_agent.UnMarshalJSON(session.Body, &results)

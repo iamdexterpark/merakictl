@@ -321,7 +321,7 @@
         - [ ] Uplink Selection
             - [x] Show Uplink Selection Settings For An MX Network
             - [ ] Update Uplink Selection Settings For An MX Network
-        - [ ] Display The Traffic Shaping Settings For An MX Network
+        - [x] Display The Traffic Shaping Settings For An MX Network
         - [ ] Update The Traffic Shaping Settings For An MX Network
     - [ ] Vlans
         - [ ] Settings
