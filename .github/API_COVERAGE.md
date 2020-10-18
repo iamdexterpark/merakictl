@@ -337,7 +337,7 @@
             - [x] Return The Site To Site VPN Settings Of A Network
             - [ ] Update The Site To Site VPN Settings Of A Network
         - [ ] Third Party VPN Peers
-            - [ ] Return The Third Party VPN Peers For An Organization
+            - [x] Return The Third Party VPN Peers For An Organization
             - [ ] Update The Third Party VPN Peers For An Organization
         - [ ] Vpn Firewall Rules
             - [ ] Return The Firewall Rules For An Organizations Site To Site VPN
