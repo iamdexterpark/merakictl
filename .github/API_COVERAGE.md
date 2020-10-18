@@ -351,9 +351,9 @@
         - [x] security
             - [x] events
                 - [x] List the security events for a client
-    - [ ] Dhcp
-        - [ ] subnets
-            - [ ] Return the DHCP subnet information for an appliance
+    - [x] Dhcp
+        - [x] subnets
+            - [x] Return the DHCP subnet information for an appliance
     - [ ] Performance
         - [ ] Return the performance score for a single MX
     - [ ] Security
