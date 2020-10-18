@@ -102,3 +102,53 @@ func GetUplinkBandwidthSettings(networkId string ) (UplinkBandwidthSettings, int
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type UplinkSelectionSettings struct {
+	ActiveActiveAutoVpnEnabled  bool   `json:"activeActiveAutoVpnEnabled"`
+	DefaultUplink               string `json:"defaultUplink"`
+	LoadBalancingEnabled        bool   `json:"loadBalancingEnabled"`
+	WanTrafficUplinkPreferences []struct {
+		TrafficFilters []struct {
+			Type  string `json:"type"`
+			Value struct {
+				Protocol string `json:"protocol"`
+				Source   struct {
+					Port string `json:"port"`
+					Cidr string `json:"cidr"`
+				} `json:"source"`
+				Destination struct {
+					Port string `json:"port"`
+					Cidr string `json:"cidr"`
+				} `json:"destination"`
+			} `json:"value"`
+		} `json:"trafficFilters"`
+		PreferredUplink string `json:"preferredUplink"`
+	} `json:"wanTrafficUplinkPreferences"`
+	VpnTrafficUplinkPreferences []struct {
+		TrafficFilters []struct {
+			Type  string `json:"type"`
+			Value struct {
+				ID string `json:"id"`
+			} `json:"value"`
+		} `json:"trafficFilters"`
+		PreferredUplink   string `json:"preferredUplink"`
+		FailOverCriterion string `json:"failOverCriterion,omitempty"`
+		PerformanceClass  struct {
+			Type                     string `json:"type"`
+			CustomPerformanceClassID string `json:"customPerformanceClassId"`
+		} `json:"performanceClass,omitempty"`
+	} `json:"vpnTrafficUplinkPreferences"`
+}
+
+// Show uplink selection settings for an MX network
+func GetUplinkSelectionSettings(networkId string ) (UplinkSelectionSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkSelection", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = UplinkSelectionSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

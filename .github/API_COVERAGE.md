@@ -319,7 +319,7 @@
             - [x] Returns The Uplink Bandwidth Settings For Your MX Network
             - [ ] Updates The Uplink Bandwidth Settings For Your MX Network
         - [ ] Uplink Selection
-            - [ ] Show Uplink Selection Settings For An MX Network
+            - [x] Show Uplink Selection Settings For An MX Network
             - [ ] Update Uplink Selection Settings For An MX Network
         - [ ] Display The Traffic Shaping Settings For An MX Network
         - [ ] Update The Traffic Shaping Settings For An MX Network
