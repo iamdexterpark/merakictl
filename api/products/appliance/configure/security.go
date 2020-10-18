@@ -28,3 +28,22 @@ func GetMXIntrusionSettings(networkId string ) (MXIntrusionSettings, interface{}
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type OrganizationIntrusionSettings struct {
+	AllowedRules []struct {
+		RuleID  string `json:"ruleId"`
+		Message string `json:"message"`
+	} `json:"allowedRules"`
+}
+
+// Returns all supported intrusion settings for an organization
+func GetOrganizationIntrusionSettings(organizationId string ) (OrganizationIntrusionSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/security/intrusion", api.BaseUrl(), organizationId)
+	var payload io.ReadSeeker
+	var results = OrganizationIntrusionSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

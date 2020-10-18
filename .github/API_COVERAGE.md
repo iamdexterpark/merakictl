@@ -288,7 +288,7 @@
     - [ ] Security
         - [ ] Intrusion
             - [x] Returns All Supported Intrusion Settings For An MX Network
-            - [ ] Returns All Supported Intrusion Settings For An Organization
+            - [x] Returns All Supported Intrusion Settings For An Organization
             - [ ] Set The Supported Intrusion Settings For An MX Network
             - [ ] Sets Supported Intrusion Settings For An Organization
         - [ ] Malware
