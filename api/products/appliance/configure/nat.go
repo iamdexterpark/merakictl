@@ -33,3 +33,29 @@ func GetOneToManyNatRules(networkId string ) (OneToManyNatRules, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type OneToOneNatRules struct {
+	Rules []struct {
+		Name           string `json:"name"`
+		LanIP          string `json:"lanIp"`
+		PublicIP       string `json:"publicIp"`
+		Uplink         string `json:"uplink"`
+		AllowedInbound []struct {
+			Protocol         string   `json:"protocol"`
+			DestinationPorts []string `json:"destinationPorts"`
+			AllowedIps       []string `json:"allowedIps"`
+		} `json:"allowedInbound"`
+	} `json:"rules"`
+}
+
+// Return the 1:1 NAT mapping rules for an MX network
+func GetOneToOneNatRules(networkId string ) (OneToOneNatRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToOneNatRules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = OneToOneNatRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

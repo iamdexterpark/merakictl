@@ -276,7 +276,7 @@
             - [x] Return The 1 Many NAT Mapping Rules For An MX Network
             - [ ] Set The 1 Many NAT Mapping Rules For An MX Network
         - [ ] One To One Nat Rules
-            - [ ] Return The 1 1 NAT Mapping Rules For An MX Network
+            - [x] Return The 1 1 NAT Mapping Rules For An MX Network
             - [ ] Set The 1 1 NAT Mapping Rules For An MX Network
         - [ ] Port Forwarding Rules
             - [ ] Return The Port Forwarding Rules For An MX Network
