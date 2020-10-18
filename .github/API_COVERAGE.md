@@ -329,8 +329,8 @@
             - [x] Returns The Enabled Status Of VLANs For The Network
         - [ ] Add A VLAN
         - [ ] Delete A VLAN From A Network
-        - [ ] List The VLA Ns For An MX Network
-        - [ ] Return A VLAN
+        - [x] List The VLA Ns For An MX Network
+        - [x] Return A VLAN
         - [ ] Update A VLAN
     - [ ] Vpn
         - [ ] Site To Site Vpn
