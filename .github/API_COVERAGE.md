@@ -354,8 +354,8 @@
     - [x] Dhcp
         - [x] subnets
             - [x] Return the DHCP subnet information for an appliance
-    - [ ] Performance
-        - [ ] Return the performance score for a single MX
+    - [x] Performance
+        - [x] Return the performance score for a single MX
     - [ ] Security
         - [ ] events
             - [ ] List The Security Events For A Network
