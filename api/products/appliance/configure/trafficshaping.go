@@ -41,3 +41,35 @@ func GetPerformanceClass(networkId, customPerformanceClassId string ) (Performan
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type TrafficShapingSettings struct {
+	DefaultRulesEnabled bool `json:"defaultRulesEnabled"`
+	Rules               []struct {
+		Definitions []struct {
+			Type  string `json:"type"`
+			Value string `json:"value"`
+		} `json:"definitions"`
+		PerClientBandwidthLimits struct {
+			Settings        string `json:"settings"`
+			BandwidthLimits struct {
+				LimitUp   int `json:"limitUp"`
+				LimitDown int `json:"limitDown"`
+			} `json:"bandwidthLimits"`
+		} `json:"perClientBandwidthLimits"`
+		DscpTagValue interface{} `json:"dscpTagValue"`
+		Priority     string      `json:"priority"`
+	} `json:"rules"`
+}
+
+// Display the traffic shaping settings rules for an MX network
+func GetTrafficShapingSettings(networkId string ) (TrafficShapingSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/rules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = TrafficShapingSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

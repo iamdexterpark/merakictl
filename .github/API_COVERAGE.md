@@ -309,11 +309,11 @@
         - [ ] Custom Performance Classes
             - [ ] Add A Custom Performance Class For An MX Network
             - [ ] Delete A Custom Performance Class From An MX Network
-            - [ ] List All Custom Performance Classes For An MX Network
-            - [ ] Return A Custom Performance Class For An MX Network
+            - [x] List All Custom Performance Classes For An MX Network
+            - [x] Return A Custom Performance Class For An MX Network
             - [ ] Update A Custom Performance Class For An MX Network
         - [ ] Rules
-            - [ ] Display The Traffic Shaping Settings Rules For An MX Network
+            - [x] Display The Traffic Shaping Settings Rules For An MX Network
             - [ ] Update The Traffic Shaping Settings Rules For An MX Network
         - [ ] Uplink Bandwidth
             - [ ] Returns The Uplink Bandwidth Settings For Your MX Network
