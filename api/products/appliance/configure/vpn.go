@@ -67,3 +67,30 @@ func GetThirdPartyVPN(organizationId string ) (ThirdPartyVPN, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type FirewallRules struct {
+	Rules []struct {
+		Comment       string `json:"comment"`
+		Policy        string `json:"policy"`
+		Protocol      string `json:"protocol"`
+		DestPort      int    `json:"destPort"`
+		DestCidr      string `json:"destCidr"`
+		SrcPort       string `json:"srcPort"`
+		SrcCidr       string `json:"srcCidr"`
+		SyslogEnabled bool   `json:"syslogEnabled"`
+	} `json:"rules"`
+}
+
+// Return the firewall rules for an organization's site-to-site VPN
+func GetFirewallRules(organizationId string ) (FirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vpn/vpnFirewallRules", api.BaseUrl(), organizationId)
+	var payload io.ReadSeeker
+	var results = FirewallRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+

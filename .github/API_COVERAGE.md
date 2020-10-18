@@ -340,7 +340,7 @@
             - [x] Return The Third Party VPN Peers For An Organization
             - [ ] Update The Third Party VPN Peers For An Organization
         - [ ] Vpn Firewall Rules
-            - [ ] Return The Firewall Rules For An Organizations Site To Site VPN
+            - [x] Return The Firewall Rules For An Organizations Site To Site VPN
             - [ ] Update The Firewall Rules Of An Organizations Site To Site VPN
     - [ ] Warm Spare
         - [ ] Return MX Warm Spare Settings
