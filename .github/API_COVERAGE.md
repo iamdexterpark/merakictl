@@ -383,11 +383,11 @@
         - [x] List The Quality Retention Profiles For This Network
         - [x] Retrieve A Single Quality Retention Profile
         - [ ] Update An Existing Quality Retention Profile For This Network
-    - [ ] Schedules
-        - [ ] Returns a list of all camera recording schedules.
+    - [x] Schedules
+        - [x] Returns a list of all camera recording schedules.
     - [ ] Sense
-        - [ ] Object Detection Models
-            - [ ] Returns the MV Sense object detection model list for the given camera
+        - [x] Object Detection Models
+            - [x] Returns the MV Sense object detection model list for the given camera
         - [ ] Returns Sense Settings For A Given Camera
         - [ ] Update Sense Settings For The Given Camera
     - [ ] Video
