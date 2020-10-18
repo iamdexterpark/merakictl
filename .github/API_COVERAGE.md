@@ -316,7 +316,7 @@
             - [x] Display The Traffic Shaping Settings Rules For An MX Network
             - [ ] Update The Traffic Shaping Settings Rules For An MX Network
         - [ ] Uplink Bandwidth
-            - [ ] Returns The Uplink Bandwidth Settings For Your MX Network
+            - [x] Returns The Uplink Bandwidth Settings For Your MX Network
             - [ ] Updates The Uplink Bandwidth Settings For Your MX Network
         - [ ] Uplink Selection
             - [ ] Show Uplink Selection Settings For An MX Network

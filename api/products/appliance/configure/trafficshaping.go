@@ -73,3 +73,32 @@ func GetTrafficShapingSettings(networkId string ) (TrafficShapingSettings, inter
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type UplinkBandwidthSettings struct {
+	BandwidthLimits struct {
+		Wan1 struct {
+			LimitUp   int `json:"limitUp"`
+			LimitDown int `json:"limitDown"`
+		} `json:"wan1"`
+		Wan2 struct {
+			LimitUp   int `json:"limitUp"`
+			LimitDown int `json:"limitDown"`
+		} `json:"wan2"`
+		Cellular struct {
+			LimitUp   int `json:"limitUp"`
+			LimitDown int `json:"limitDown"`
+		} `json:"cellular"`
+	} `json:"bandwidthLimits"`
+}
+
+// Returns the uplink bandwidth settings for your MX network.
+func GetUplinkBandwidthSettings(networkId string ) (UplinkBandwidthSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkBandwidth", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = UplinkBandwidthSettings{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
