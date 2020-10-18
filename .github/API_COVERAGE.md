@@ -343,7 +343,7 @@
             - [x] Return The Firewall Rules For An Organizations Site To Site VPN
             - [ ] Update The Firewall Rules Of An Organizations Site To Site VPN
     - [ ] Warm Spare
-        - [ ] Return MX Warm Spare Settings
+        - [x] Return MX Warm Spare Settings
         - [ ] Swap MX Primary And Warm Spare Appliances
         - [ ] Update MX Warm Spare Settings
 - [ ] Monitor
