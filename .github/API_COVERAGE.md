@@ -302,8 +302,8 @@
     - [ ] Static Routes
         - [ ] Add A Static Route For An MX Or Teleworker Network
         - [ ] Delete A Static Route From An MX Or Teleworker Network
-        - [ ] List The Static Routes For An MX Or Teleworker Network
-        - [ ] Return A Static Route For An MX Or Teleworker Network
+        - [x] List The Static Routes For An MX Or Teleworker Network
+        - [x] Return A Static Route For An MX Or Teleworker Network
         - [ ] Update A Static Route For An MX Or Teleworker Network
     - [ ] Traffic Shaping
         - [ ] Custom Performance Classes
