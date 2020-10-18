@@ -279,11 +279,11 @@
             - [x] Return The 1 1 NAT Mapping Rules For An MX Network
             - [ ] Set The 1 1 NAT Mapping Rules For An MX Network
         - [ ] Port Forwarding Rules
-            - [ ] Return The Port Forwarding Rules For An MX Network
+            - [x] Return The Port Forwarding Rules For An MX Network
             - [ ] Update The Port Forwarding Rules For An MX Network
     - [ ] Ports
-        - [ ] List Per Port VLAN Settings For All Ports Of A MX
-        - [ ] Return Per Port VLAN Settings For A Single MX Port
+        - [x] List Per Port VLAN Settings For All Ports Of A MX
+        - [x] Return Per Port VLAN Settings For A Single MX Port
         - [ ] Update The Per Port VLAN Settings For A Single MX Port
     - [ ] Security
         - [ ] Intrusion

@@ -59,3 +59,28 @@ func GetOneToOneNatRules(networkId string ) (OneToOneNatRules, interface{}) {
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type PortForwardingRules struct {
+	Rules []struct {
+		LanIP      string   `json:"lanIp"`
+		AllowedIps []string `json:"allowedIps"`
+		Name       string   `json:"name"`
+		Protocol   string   `json:"protocol"`
+		PublicPort string   `json:"publicPort"`
+		LocalPort  string   `json:"localPort"`
+		Uplink     string   `json:"uplink"`
+	} `json:"rules"`
+}
+
+// Return the port forwarding rules for an MX network
+func GetPortForwardingRules(networkId string ) (PortForwardingRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/portForwardingRules", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	var results = PortForwardingRules{}
+
+	session := api.Session(baseurl, "GET", payload)
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
