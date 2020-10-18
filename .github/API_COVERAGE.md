@@ -347,10 +347,10 @@
         - [ ] Swap MX Primary And Warm Spare Appliances
         - [ ] Update MX Warm Spare Settings
 - [ ] Monitor
-    - [ ] Clients
-        - [ ] security
-            - [ ] events
-                - [ ] List the security events for a client
+    - [x] Clients
+        - [x] security
+            - [x] events
+                - [x] List the security events for a client
     - [ ] Dhcp
         - [ ] subnets
             - [ ] Return the DHCP subnet information for an appliance
