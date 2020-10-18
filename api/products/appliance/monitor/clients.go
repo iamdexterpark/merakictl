@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type SecurityEvents []struct {
+type ClientSecurityEvents []struct {
 	Ts              time.Time `json:"ts"`
 	EventType       string    `json:"eventType"`
 	ClientName      string    `json:"clientName,omitempty"`
@@ -38,7 +38,7 @@ type SecurityEvents []struct {
 // List the security events for a client.
 // Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
 func GetSecurityEvents(networkId, clientId, t0, t1, timespan, perPage, startingAfter, endingBefore,
-	sortOrder string) (SecurityEvents, interface{}) {
+	sortOrder string) (ClientSecurityEvents, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/clients/%s/security/events", api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
@@ -54,7 +54,7 @@ func GetSecurityEvents(networkId, clientId, t0, t1, timespan, perPage, startingA
 	parameters.Add("sortOrder", sortOrder)
 	session.Request.URL.RawQuery = parameters.Encode()
 
-	var results = SecurityEvents{}
+	var results = ClientSecurityEvents{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback

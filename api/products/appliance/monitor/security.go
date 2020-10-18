@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type NetworkSecurityEvents []struct {
+type SecurityEvents []struct {
 	Ts              time.Time `json:"ts"`
 	EventType       string    `json:"eventType"`
 	ClientName      string    `json:"clientName,omitempty"`
@@ -37,7 +37,7 @@ type NetworkSecurityEvents []struct {
 
 // List the security events for a network
 func GetNetworkSecurityEvents(networkId, t0, t1, timespan, perPage,
-	startingAfter, endingBefore, sortOrder string) (NetworkSecurityEvents, interface{}) {
+	startingAfter, endingBefore, sortOrder string) (SecurityEvents, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/security/events", api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
@@ -53,10 +53,33 @@ func GetNetworkSecurityEvents(networkId, t0, t1, timespan, perPage,
 	parameters.Add("sortOrder", sortOrder)
 	session.Request.URL.RawQuery = parameters.Encode()
 
-	var results = NetworkSecurityEvents{}
+	var results = SecurityEvents{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
 
+
 // List the security events for an organization
+func GetOrganizationSecurityEvents(organizationId, t0, t1, timespan, perPage,
+	startingAfter, endingBefore, sortOrder string) (SecurityEvents, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/security/events", api.BaseUrl(), organizationId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan", timespan)
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	parameters.Add("sortOrder", sortOrder)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = SecurityEvents{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
