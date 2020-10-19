@@ -647,7 +647,7 @@
         - [x] Get the organization's APNS certificate
     - [ ] Bypass Activation Lock Attempts
         - [ ] Bypass Activation Lock Attempt
-        - [ ] Bypass Activation Lock Attempt Status
+        - [x] Bypass Activation Lock Attempt Status
     - [ ] Devices
         - [ ] Certs
             - [ ] List the certs on a device
