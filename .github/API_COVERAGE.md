@@ -398,8 +398,8 @@
         - [x] Returns video link to the specified camera
 - [ ] Monitor
     - [ ] Analytics
-        - [ ] Live
-            - [ ] Returns live state from camera of analytics zones
+        - [x] Live
+            - [x] Returns live state from camera of analytics zones
         - [ ] Overview
             - [ ] Returns an overview of aggregate analytics data for a timespan
         - [ ] Recent
