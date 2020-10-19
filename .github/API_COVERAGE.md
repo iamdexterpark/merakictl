@@ -422,7 +422,7 @@
         - [x] List Common DHCP Settings Of M Gs
         - [ ] Update Common DHCP Settings Of M Gs
     - [ ] Lan
-        - [ ] Show The LAN Settings Of A MG
+        - [x] Show The LAN Settings Of A MG
         - [ ] Update The LAN Settings For A Single MG
     - [ ] Port Forwarding Rules
         - [ ] Returns The Port Forwarding Rules For A Single MG
