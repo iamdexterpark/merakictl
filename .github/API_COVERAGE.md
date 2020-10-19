@@ -655,8 +655,8 @@
             - [x] Get the profiles associated with a device
         - [ ] Fields
             - [ ] Modify the fields of a device
-        - [ ] Network Adapters
-            - [ ] List the network adapters of a device
+        - [x] Network Adapters
+            - [x] List the network adapters of a device
         - [ ] Restrictions
             - [ ] List the restrictions on a device
         - [ ] Security Centers

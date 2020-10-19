@@ -57,3 +57,27 @@ func GetDeviceProfiles(networkId, deviceId string) (DeviceProfiles, interface{})
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type NetworkAdapters []struct {
+	DhcpServer string `json:"dhcpServer"`
+	DNSServer  string `json:"dnsServer"`
+	Gateway    string `json:"gateway"`
+	ID         string `json:"id"`
+	IP         string `json:"ip"`
+	Mac        string `json:"mac"`
+	Name       string `json:"name"`
+	Subnet     string `json:"subnet"`
+}
+
+// List the network adapters of a device
+func GetNetworkAdapters(networkId, deviceId string) (NetworkAdapters, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/networkAdapters",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = NetworkAdapters{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
