@@ -659,8 +659,8 @@
             - [x] List the network adapters of a device
         - [x] Restrictions
             - [x] List the restrictions on a device
-        - [ ] Security Centers
-            - [ ] List the security centers on a device
+        - [x] Security Centers
+            - [x] List the security centers on a device
         - [ ] Softwares
             - [ ] Get a list of softwares associated with a device
         - [ ] Wlan Lists

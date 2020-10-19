@@ -104,3 +104,30 @@ func GetDeviceRestrictions(networkId, deviceId string) (DeviceRestrictions, inte
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type DeviceSecurityCenters []struct {
+	IsRooted             bool   `json:"isRooted"`
+	HasAntiVirus         bool   `json:"hasAntiVirus"`
+	AntiVirusName        string `json:"antiVirusName"`
+	IsFireWallEnabled    bool   `json:"isFireWallEnabled"`
+	HasFireWallInstalled bool   `json:"hasFireWallInstalled"`
+	FireWallName         string `json:"fireWallName"`
+	IsDiskEncrypted      bool   `json:"isDiskEncrypted"`
+	IsAutoLoginDisabled  bool   `json:"isAutoLoginDisabled"`
+	ID                   string `json:"id"`
+	RunningProcs         string `json:"runningProcs"`
+}
+
+// List the security centers on a device
+func GetDeviceSecurityCenters(networkId, deviceId string) (DeviceSecurityCenters, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/securityCenters",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = DeviceSecurityCenters{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
