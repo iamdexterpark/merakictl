@@ -22,3 +22,21 @@ func GetObjectDetectionModel(serial string) (ObjectDetectionModel, interface{}) 
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type SenseSettings struct {
+	SenseEnabled bool     `json:"senseEnabled"`
+	MqttBrokerID string   `json:"mqttBrokerId"`
+	MqttTopics   []string `json:"mqttTopics"`
+}
+
+// Returns sense settings for a given camera
+func GetSenseSettings(serial string) (SenseSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/sense", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = SenseSettings{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

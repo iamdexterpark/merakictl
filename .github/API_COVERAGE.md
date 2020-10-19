@@ -388,7 +388,7 @@
     - [ ] Sense
         - [x] Object Detection Models
             - [x] Returns the MV Sense object detection model list for the given camera
-        - [ ] Returns Sense Settings For A Given Camera
+        - [x] Returns Sense Settings For A Given Camera
         - [ ] Update Sense Settings For The Given Camera
     - [ ] Video
         - [ ] settings
