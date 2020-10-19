@@ -86,9 +86,36 @@ func GetAnalyticsZoneRecord(serial, objectType string) (AnalyticsZoneRecord, int
 	return results, traceback
 }
 
-
+type AnalyticsZoneHistoricalRecords []struct {
+	StartTs      time.Time `json:"startTs"`
+	EndTs        time.Time `json:"endTs"`
+	Entrances    int       `json:"entrances"`
+	AverageCount float64   `json:"averageCount"`
+}
 
 // Return historical records for analytic zones
+func GetAnalyticsZoneHistoricalRecords(serial, zoneId, t0, t1, timespan,
+	resolution, objectType string) (AnalyticsZoneHistoricalRecords, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/analytics/zones/%s", api.BaseUrl(), serial, zoneId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan",timespan)
+	parameters.Add("resolution", resolution)
+	parameters.Add("objectType", objectType)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = AnalyticsZoneHistoricalRecords{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+
 
 // Returns All Configured Analytic Zones For This Camera
 
