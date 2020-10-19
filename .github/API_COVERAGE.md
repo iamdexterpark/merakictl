@@ -649,8 +649,8 @@
         - [ ] Bypass Activation Lock Attempt
         - [x] Bypass Activation Lock Attempt Status
     - [ ] Devices
-        - [ ] Certs
-            - [ ] List the certs on a device
+        - [x] Certs
+            - [x] List the certs on a device
         - [ ] Device Profiles
             - [ ] Get the profiles associated with a device
         - [ ] Fields
