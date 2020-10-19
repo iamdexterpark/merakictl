@@ -416,7 +416,7 @@
 
 - [ ] configure
     - [ ] Connectivity Monitoring Destinations
-        - [ ] Return The Connectivity Testing Destinations For An MG Network
+        - [x] Return The Connectivity Testing Destinations For An MG Network
         - [ ] Update The Connectivity Testing Destinations For An MG Network
     - [ ] Dhcp
         - [ ] List Common DHCP Settings Of M Gs
