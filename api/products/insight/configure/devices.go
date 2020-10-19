@@ -172,3 +172,22 @@ func GetDeviceAssociatedSoftware(networkId, deviceId string) (DeviceAssociatedSo
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type DeviceSSIDNames []struct {
+	CreatedAt time.Time `json:"createdAt"`
+	ID        string    `json:"id"`
+	XML       string    `json:"xml"`
+}
+
+// List the saved SSID names on a device
+func GetDeviceSSIDNames(networkId, deviceId string) (DeviceSSIDNames, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/wlanLists",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = DeviceSSIDNames{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

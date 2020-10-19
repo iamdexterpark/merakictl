@@ -663,8 +663,8 @@
             - [x] List the security centers on a device
         - [x] Softwares
             - [x] Get a list of softwares associated with a device
-        - [ ] Wlan Lists
-            - [ ] List the saved SSID names on a device
+        - [x] Wlan Lists
+            - [x] List the saved SSID names on a device
         - [ ] Add Delete Or Update The Tags Of A Set Of Devices
         - [ ] Force Check In A Set Of Devices
         - [ ] List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
