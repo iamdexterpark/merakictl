@@ -428,7 +428,7 @@
         - [x] Returns The Port Forwarding Rules For A Single MG
         - [ ] Updates The Port Forwarding Rules For A Single MG
     - [ ] Subnet Pool
-        - [ ] Return The Subnet Pool And Mask Configured For M Gs In The Network
+        - [x] Return The Subnet Pool And Mask Configured For M Gs In The Network
         - [ ] Update The Subnet Pool And Mask Configuration For M Gs In The Network
     - [ ] Uplink
         - [ ] Returns The Uplink Settings For Your MG Network
