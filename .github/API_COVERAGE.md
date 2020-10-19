@@ -673,8 +673,8 @@
         - [ ] Refresh The Details Of A Device
         - [ ] Unenroll A Device
         - [ ] Wipe A Device
-    - [ ] Profiles
-        - [ ] List all profiles in a network
+    - [x] Profiles
+        - [x] List all profiles in a network
     - [ ] Target Groups
         - [ ] Add A Target Group
         - [ ] Delete A Target Group From A Network
