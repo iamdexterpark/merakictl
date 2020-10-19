@@ -392,7 +392,7 @@
         - [ ] Update Sense Settings For The Given Camera
     - [ ] Video
         - [ ] settings
-            - [ ] Returns Video Settings For The Given Camera
+            - [x] Returns Video Settings For The Given Camera
             - [ ] Update Video Settings For The Given Camera
     - [ ] Video Link
         - [ ] Returns video link to the specified camera
