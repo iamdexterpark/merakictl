@@ -419,7 +419,7 @@
         - [x] Return The Connectivity Testing Destinations For An MG Network
         - [ ] Update The Connectivity Testing Destinations For An MG Network
     - [ ] Dhcp
-        - [ ] List Common DHCP Settings Of M Gs
+        - [x] List Common DHCP Settings Of M Gs
         - [ ] Update Common DHCP Settings Of M Gs
     - [ ] Lan
         - [ ] Show The LAN Settings Of A MG
