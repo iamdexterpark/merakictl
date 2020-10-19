@@ -394,8 +394,8 @@
         - [ ] settings
             - [x] Returns Video Settings For The Given Camera
             - [ ] Update Video Settings For The Given Camera
-    - [ ] Video Link
-        - [ ] Returns video link to the specified camera
+    - [x] Video Link
+        - [x] Returns video link to the specified camera
 - [ ] Monitor
     - [ ] Analytics
         - [ ] Live
