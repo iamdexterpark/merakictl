@@ -32,3 +32,28 @@ func GetDeviceCerts(networkId, deviceId string) (DeviceCerts, interface{}) {
 	return results, traceback
 }
 
+
+type DeviceProfiles []struct {
+	DeviceID    string `json:"deviceId"`
+	ID          string `json:"id"`
+	IsEncrypted bool   `json:"isEncrypted"`
+	IsManaged   bool   `json:"isManaged"`
+	ProfileData struct {
+	} `json:"profileData"`
+	ProfileIdentifier string `json:"profileIdentifier"`
+	Name              string `json:"name"`
+	Version           string `json:"version"`
+}
+
+// Get the profiles associated with a device
+func GetDeviceProfiles(networkId, deviceId string) (DeviceProfiles, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/deviceProfiles",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = DeviceProfiles{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

@@ -651,8 +651,8 @@
     - [ ] Devices
         - [x] Certs
             - [x] List the certs on a device
-        - [ ] Device Profiles
-            - [ ] Get the profiles associated with a device
+        - [x] Device Profiles
+            - [x] Get the profiles associated with a device
         - [ ] Fields
             - [ ] Modify the fields of a device
         - [ ] Network Adapters
