@@ -19,7 +19,7 @@ type LiveState struct {
 
 // Returns live state from camera of analytics zones
 func GetLiveState(serial string) (LiveState, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/camera/video/settings", api.BaseUrl(), serial)
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/analytics/live", api.BaseUrl(), serial)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 	var results = LiveState{}
