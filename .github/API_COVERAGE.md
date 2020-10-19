@@ -425,7 +425,7 @@
         - [x] Show The LAN Settings Of A MG
         - [ ] Update The LAN Settings For A Single MG
     - [ ] Port Forwarding Rules
-        - [ ] Returns The Port Forwarding Rules For A Single MG
+        - [x] Returns The Port Forwarding Rules For A Single MG
         - [ ] Updates The Port Forwarding Rules For A Single MG
     - [ ] Subnet Pool
         - [ ] Return The Subnet Pool And Mask Configured For M Gs In The Network
