@@ -657,8 +657,8 @@
             - [ ] Modify the fields of a device
         - [x] Network Adapters
             - [x] List the network adapters of a device
-        - [ ] Restrictions
-            - [ ] List the restrictions on a device
+        - [x] Restrictions
+            - [x] List the restrictions on a device
         - [ ] Security Centers
             - [ ] List the security centers on a device
         - [ ] Softwares

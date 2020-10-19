@@ -81,3 +81,26 @@ func GetNetworkAdapters(networkId, deviceId string) (NetworkAdapters, interface{
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type DeviceRestrictions []struct {
+	Profile      string `json:"profile"`
+	Restrictions struct {
+		MyRestriction struct {
+			Value bool `json:"value"`
+		} `json:"myRestriction"`
+	} `json:"restrictions"`
+}
+
+// List the restrictions on a device
+func GetDeviceRestrictions(networkId, deviceId string) (DeviceRestrictions, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/restrictions",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = DeviceRestrictions{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
