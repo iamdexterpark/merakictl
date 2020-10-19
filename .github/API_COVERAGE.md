@@ -643,8 +643,8 @@
 ### Sm
 
 - [ ] Configure
-    - [ ] Apns Cert
-        - [ ] Get the organization's APNS certificate
+    - [x] Apns Cert
+        - [x] Get the organization's APNS certificate
     - [ ] Bypass Activation Lock Attempts
         - [ ] Bypass Activation Lock Attempt
         - [ ] Bypass Activation Lock Attempt Status
