@@ -57,9 +57,36 @@ func GetAggregateAnalytics(serial, t0, t1, timespan, objectType string) (Aggrega
 	return results, traceback
 }
 
+type AnalyticsZoneRecords []struct {
+	AnalyticsZoneRecord
+}
 
+type AnalyticsZoneRecord struct {
+	StartTs      time.Time `json:"startTs"`
+	EndTs        time.Time `json:"endTs"`
+	ZoneID       int       `json:"zoneId"`
+	Entrances    int       `json:"entrances"`
+	AverageCount float64   `json:"averageCount"`
+}
 
 // Returns most recent record for analytics zones
+func GetAnalyticsZoneRecord(serial, objectType string) (AnalyticsZoneRecord, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/analytics/recent", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("objectType", objectType)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = AnalyticsZoneRecord{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+
 
 // Return historical records for analytic zones
 

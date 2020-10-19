@@ -402,8 +402,8 @@
             - [x] Returns live state from camera of analytics zones
         - [x] Overview
             - [x] Returns an overview of aggregate analytics data for a timespan
-        - [ ] Recent
-            - [ ] Returns most recent record for analytics zones
+        - [x] Recent
+            - [x] Returns most recent record for analytics zones
         - [ ] Zones
             - [ ] History
                 - [ ] Return historical records for analytic zones
