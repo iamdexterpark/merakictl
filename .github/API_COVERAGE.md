@@ -661,8 +661,8 @@
             - [x] List the restrictions on a device
         - [x] Security Centers
             - [x] List the security centers on a device
-        - [ ] Softwares
-            - [ ] Get a list of softwares associated with a device
+        - [x] Softwares
+            - [x] Get a list of softwares associated with a device
         - [ ] Wlan Lists
             - [ ] List the saved SSID names on a device
         - [ ] Add Delete Or Update The Tags Of A Set Of Devices

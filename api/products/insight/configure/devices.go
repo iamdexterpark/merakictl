@@ -131,3 +131,44 @@ func GetDeviceSecurityCenters(networkId, deviceId string) (DeviceSecurityCenters
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+
+type DeviceAssociatedSoftware []struct {
+	AppID             string      `json:"appId"`
+	BundleSize        interface{} `json:"bundleSize"`
+	CreatedAt         time.Time   `json:"createdAt"`
+	DeviceID          string      `json:"deviceId"`
+	DynamicSize       interface{} `json:"dynamicSize"`
+	ID                string      `json:"id"`
+	Identifier        string      `json:"identifier"`
+	InstalledAt       time.Time   `json:"installedAt"`
+	ToInstall         interface{} `json:"toInstall"`
+	IosRedemptionCode interface{} `json:"iosRedemptionCode"`
+	IsManaged         bool        `json:"isManaged"`
+	ItunesID          interface{} `json:"itunesId"`
+	LicenseKey        interface{} `json:"licenseKey"`
+	Name              string      `json:"name"`
+	Path              string      `json:"path"`
+	RedemptionCode    interface{} `json:"redemptionCode"`
+	ShortVersion      interface{} `json:"shortVersion"`
+	Status            interface{} `json:"status"`
+	ToUninstall       bool        `json:"toUninstall"`
+	UninstalledAt     interface{} `json:"uninstalledAt"`
+	UpdatedAt         time.Time   `json:"updatedAt"`
+	Vendor            string      `json:"vendor"`
+	Version           string      `json:"version"`
+}
+
+
+// Get a list of softwares associated with a device
+func GetDeviceAssociatedSoftware(networkId, deviceId string) (DeviceAssociatedSoftware, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/softwares",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = DeviceAssociatedSoftware{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
