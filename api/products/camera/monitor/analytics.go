@@ -115,8 +115,25 @@ func GetAnalyticsZoneHistoricalRecords(serial, zoneId, t0, t1, timespan,
 	return results, traceback
 }
 
-
+type AnalyticZones []struct {
+	ID               string `json:"id"`
+	Type             string `json:"type"`
+	Label            string `json:"label"`
+	RegionOfInterest struct {
+		X0 string `json:"x0"`
+		Y0 string `json:"y0"`
+		X1 string `json:"x1"`
+		Y1 string `json:"y1"`
+	} `json:"regionOfInterest"`
+}
 
 // Returns All Configured Analytic Zones For This Camera
-
-// Generate A Snapshot Of What The Camera Sees At The Specified Time And Return A Link To That Image
+func GetAnalyticZones(serial string) (AnalyticZones, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/analytics/zones", api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+	var results = AnalyticZones{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

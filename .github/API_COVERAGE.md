@@ -407,7 +407,7 @@
         - [x] Zones
             - [x] History
                 - [x] Return historical records for analytic zones
-            - [ ] Returns All Configured Analytic Zones For This Camera
+            - [x] Returns All Configured Analytic Zones For This Camera
     - [ ] Generate A Snapshot Of What The Camera Sees At The Specified Time And Return A Link To That Image
 
 
