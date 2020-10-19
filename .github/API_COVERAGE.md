@@ -667,7 +667,7 @@
             - [x] List the saved SSID names on a device
         - [ ] Add Delete Or Update The Tags Of A Set Of Devices
         - [ ] Force Check In A Set Of Devices
-        - [ ] List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
+        - [x] List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
         - [ ] Lock A Set Of Devices
         - [ ] Move A Set Of Devices To A New Network
         - [ ] Refresh The Details Of A Device

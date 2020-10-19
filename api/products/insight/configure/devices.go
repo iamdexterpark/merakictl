@@ -191,3 +191,44 @@ func GetDeviceSSIDNames(networkId, deviceId string) (DeviceSSIDNames, interface{
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type SMEnrolledDevices struct {
+	ID           string   `json:"id"`
+	Name         string   `json:"name"`
+	Tags         []string `json:"tags"`
+	Ssid         string   `json:"ssid"`
+	WifiMac      string   `json:"wifiMac"`
+	OsName       string   `json:"osName"`
+	SystemModel  string   `json:"systemModel"`
+	UUID         string   `json:"uuid"`
+	SerialNumber string   `json:"serialNumber"`
+	Serial       string   `json:"serial"`
+	IP           string   `json:"ip"`
+	Notes        string   `json:"notes"`
+}
+
+
+// List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
+func GetSMEnrolledDevices(networkId, fields, wifiMacs, serials, ids, scope, perPage,
+	startingAfter, endingBefore string) (SMEnrolledDevices, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("fields", fields)
+	parameters.Add("wifiMacs", wifiMacs)
+	parameters.Add("serials", serials)
+	parameters.Add("ids", ids)
+	parameters.Add("scope", scope)
+	parameters.Add("perPage", perPage)
+	parameters.Add("startingAfter", startingAfter)
+	parameters.Add("endingBefore", endingBefore)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = SMEnrolledDevices{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
