@@ -710,6 +710,6 @@
     - [ ] monitoredMediaServers
         - [ ] Add A Media Server To Be Monitored For This Organization
         - [ ] Delete A Monitored Media Server From This Organization
-        - [ ] List The Monitored Media Servers For This Organization
-        - [ ] Return A Monitored Media Server For This Organization
+        - [x] List The Monitored Media Servers For This Organization
+        - [x] Return A Monitored Media Server For This Organization
         - [ ] Update A Monitored Media Server For This Organization
