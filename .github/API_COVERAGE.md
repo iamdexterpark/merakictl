@@ -678,8 +678,8 @@
     - [ ] Target Groups
         - [ ] Add A Target Group
         - [ ] Delete A Target Group From A Network
-        - [ ] List The Target Groups In This Network
-        - [ ] Return A Target Group
+        - [x] List The Target Groups In This Network
+        - [x] Return A Target Group
         - [ ] Update A Target Group
     - [ ] Users
         - [ ] Device Profiles
