@@ -682,8 +682,8 @@
         - [x] Return A Target Group
         - [ ] Update A Target Group
     - [ ] Users
-        - [ ] Device Profiles
-            - [ ] Get the profiles associated with a user
+        - [x] Device Profiles
+            - [x] Get the profiles associated with a user
         - [ ] Softwares
             - [ ] Get a list of softwares associated with a user
         - [ ] List The Owners In An SM Network With Various Specified Fields And Filters
