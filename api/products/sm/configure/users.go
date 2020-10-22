@@ -72,3 +72,39 @@ func GetUserAssociatedSoftware(networkId, userId string) (UserAssociatedSoftware
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type SMNetworkOwners []struct {
+	ID                     string        `json:"id"`
+	Email                  string        `json:"email"`
+	FullName               string        `json:"fullName"`
+	Username               string        `json:"username"`
+	HasPassword            bool          `json:"hasPassword"`
+	Tags                   []string      `json:"tags"`
+	AdGroups               []interface{} `json:"adGroups"`
+	AsmGroups              []interface{} `json:"asmGroups"`
+	IsExternal             bool          `json:"isExternal"`
+	DisplayName            string        `json:"displayName"`
+	HasIdentityCertificate bool          `json:"hasIdentityCertificate"`
+	UserThumbnail          string        `json:"userThumbnail"`
+}
+
+//  List The Owners In An SM Network With Various Specified Fields And Filters
+func GetSMNetworkOwners(networkId, ids, usernames, emails, scope string) (SMNetworkOwners, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/users",
+		api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("ids", ids)
+	parameters.Add("usernames", usernames)
+	parameters.Add("emails", emails)
+	parameters.Add("scope", scope)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = SMNetworkOwners{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

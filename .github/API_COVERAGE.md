@@ -681,12 +681,12 @@
         - [x] List The Target Groups In This Network
         - [x] Return A Target Group
         - [ ] Update A Target Group
-    - [ ] Users
+    - [x] Users
         - [x] Device Profiles
             - [x] Get the profiles associated with a user
         - [x] Softwares
             - [x] Get a list of softwares associated with a user
-        - [ ] List The Owners In An SM Network With Various Specified Fields And Filters
+        - [x] List The Owners In An SM Network With Various Specified Fields And Filters
     - [ ] Vpp Accounts
         - [ ] Get A Hash Containing The Unparsed Token Of The VPP Account With The Given ID
         - [ ] List The VPP Accounts In The Organization
