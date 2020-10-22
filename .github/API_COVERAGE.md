@@ -694,8 +694,8 @@
     - [ ] devices
         - [x] Cellular Usage History
             - [x] Return the client's daily cellular data usage history
-        - [ ] Connectivity
-            - [ ] Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
+        - [x] Connectivity
+            - [x] Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
         - [ ] Desktop Logs
             - [ ] Return historical records of various Systems Manager network connection details for desktop devices.
         - [ ] Device Command Logs
