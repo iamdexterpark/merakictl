@@ -1,6 +1,7 @@
 package organization
 
 import (
+	"github.com/ddexterpark/merakictl/api"
 	"github.com/ddexterpark/merakictl/api/general/organizations/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
@@ -39,7 +40,7 @@ var networks = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		networks, traceback := configure.GetOrganizationNetworks(org, "",
+		networks, traceback := api.GetOrganizationNetworks(org, "",
 			"", "", "", "", "1000")
 		shell.Display(networks, traceback, "networks", cmd.Flags())
 
@@ -54,7 +55,7 @@ var devices = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		devicestatus, traceback := configure.GetOrganizationDevices(org)
+		devicestatus, traceback := api.GetOrganizationDevices(org)
 		shell.Display(devicestatus, traceback, "devices", cmd.Flags())
 	},
 }

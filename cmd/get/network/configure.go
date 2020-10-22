@@ -1,6 +1,7 @@
 package network
 
 import (
+	"github.com/ddexterpark/merakictl/api"
 	"github.com/ddexterpark/merakictl/api/general/networks/configure"
 	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
@@ -14,7 +15,7 @@ var clients = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
-		clients, traceback := configure.GetNetworkClients(net, "", "",
+		clients, traceback := api.GetNetworkClients(net, "", "",
 			"", "", "", "")
 		shell.Display(clients, traceback, "clients", cmd.Flags())
 	},
