@@ -23,13 +23,12 @@
 - [x] Unmarshal JSON Data
 - [x] Marshal JSON Data
 - [x] Marshal YAML Data
-
+- [x] 100% Get Command API Coverage
 
 ### Backlog
 - [ ] Pagination Support
 - [ ] Meraki Tags Flag
 - [ ] Diff Flag (GET: compare config file against current API state)
 - [ ] Proxy Support (certificate path, server, port)
-- [ ] 100% Get Command API Coverage
 - [ ] Action Batches (Bulk Operations)
 - [ ] External Key Vault (Encourage users not to store creds in exported yaml/json config)
