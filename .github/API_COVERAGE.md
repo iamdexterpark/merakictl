@@ -687,9 +687,9 @@
         - [x] Softwares
             - [x] Get a list of softwares associated with a user
         - [x] List The Owners In An SM Network With Various Specified Fields And Filters
-    - [ ] Vpp Accounts
+    - [x] Vpp Accounts
         - [x] Get A Hash Containing The Unparsed Token Of The VPP Account With The Given ID
-        - [ ] List The VPP Accounts In The Organization
+        - [x] List The VPP Accounts In The Organization
 - [ ] Monitor
     - [ ] devices
         - [ ] Cellular Usage History
