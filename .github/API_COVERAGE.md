@@ -442,11 +442,11 @@
     - [ ] Access Control Lists
         - [x] Return The Access Control Lists For A MS Network
         - [ ] Update The Access Control Lists For A MS Network
-    - [ ] Access Policies
+    - x ] Access Policies
         - [ ] Create An Access Policy For A Switch Network
         - [ ] Delete An Access Policy For A Switch Network
-        - [ ] List The Access Policies For A Switch Network
-        - [ ] Return A Specific Access Policy For A Switch Network
+        - [x] List The Access Policies For A Switch Network
+        - [x] Return A Specific Access Policy For A Switch Network
         - [ ] Update An Access Policy For A Switch Network
     - [ ] Config Templates
         - [ ] profiles
