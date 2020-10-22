@@ -690,8 +690,8 @@
     - [x] Vpp Accounts
         - [x] Get A Hash Containing The Unparsed Token Of The VPP Account With The Given ID
         - [x] List The VPP Accounts In The Organization
-- [ ] Monitor
-    - [ ] devices
+- [x] Monitor
+    - [x] devices
         - [x] Cellular Usage History
             - [x] Return the client's daily cellular data usage history
         - [x] Connectivity
@@ -700,8 +700,8 @@
             - [x] Return historical records of various Systems Manager network connection details for desktop devices.
         - [x] Device Command Logs
             - [x] Return historical records of commands sent to Systems Manager devices
-        - [ ] Performance History
-            - [ ] Return historical records of various Systems Manager client metrics for desktop devices.
+        - [x] Performance History
+            - [x] Return historical records of various Systems Manager client metrics for desktop devices.
 
 
 ### Insight

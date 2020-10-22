@@ -125,6 +125,43 @@ func GetCommandHistoricalRecords(networkId, deviceId,
 	return results, traceback
 }
 
-// Return historical records of various Systems Manager client metrics for desktop devices.
 
+type ClientMetricsHistoricalRecords []struct {
+	CPUPercentUsed  float64 `json:"cpuPercentUsed"`
+	MemFree         int     `json:"memFree"`
+	MemWired        int     `json:"memWired"`
+	MemActive       int     `json:"memActive"`
+	MemInactive     int     `json:"memInactive"`
+	NetworkSent     int     `json:"networkSent"`
+	NetworkReceived int     `json:"networkReceived"`
+	SwapUsed        int     `json:"swapUsed"`
+	DiskUsage       struct {
+		C struct {
+			Used  int `json:"used"`
+			Space int `json:"space"`
+		} `json:"c"`
+	} `json:"diskUsage"`
+	Ts time.Time `json:"ts"`
+}
+
+// Return historical records of various Systems Manager client metrics for desktop devices.
+func GetClientMetricsHistoricalRecords(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) (ClientMetricsHistoricalRecords, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/performanceHistory",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("perPage", perPage)
+	parameters.Add("startingAfter", startingAfter)
+	parameters.Add("endingBefore", endingBefore )
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = ClientMetricsHistoricalRecords{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
 
