@@ -96,8 +96,34 @@ func GetDesktopDevicesHistoricalRecords(networkId, deviceId,
 	return results, traceback
 }
 
+type CommandHistoricalRecords []struct {
+	Action        string    `json:"action"`
+	Name          string    `json:"name"`
+	Details       string    `json:"details"`
+	DashboardUser string    `json:"dashboardUser"`
+	Ts            time.Time `json:"ts"`
+}
 
 // Return historical records of commands sent to Systems Manager devices
+func GetCommandHistoricalRecords(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) (CommandHistoricalRecords, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/deviceCommandLogs",
+		api.BaseUrl(), networkId, deviceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("perPage", perPage)
+	parameters.Add("startingAfter", startingAfter)
+	parameters.Add("endingBefore", endingBefore )
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = CommandHistoricalRecords{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
 
 // Return historical records of various Systems Manager client metrics for desktop devices.
 

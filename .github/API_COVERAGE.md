@@ -698,8 +698,8 @@
             - [x] Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
         - [x] Desktop Logs
             - [x] Return historical records of various Systems Manager network connection details for desktop devices.
-        - [ ] Device Command Logs
-            - [ ] Return historical records of commands sent to Systems Manager devices
+        - [x] Device Command Logs
+            - [x] Return historical records of commands sent to Systems Manager devices
         - [ ] Performance History
             - [ ] Return historical records of various Systems Manager client metrics for desktop devices.
 
