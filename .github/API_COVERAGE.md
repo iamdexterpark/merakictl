@@ -440,7 +440,7 @@
 
 - [ ] Configure
     - [ ] Access Control Lists
-        - [ ] Return The Access Control Lists For A MS Network
+        - [x] Return The Access Control Lists For A MS Network
         - [ ] Update The Access Control Lists For A MS Network
     - [ ] Access Policies
         - [ ] Create An Access Policy For A Switch Network
