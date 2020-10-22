@@ -458,7 +458,7 @@
     - [ ] Devices
         - [ ] Clone port-level and some switch-level configuration settings from a source switch to one or more target switches
     - [ ] Dhcp Server Policy
-        - [ ] Return The DHCP Server Policy
+        - [x] Return The DHCP Server Policy
         - [ ] Update The DHCP Server Policy
     - [ ] Dscp To Cos Mappings
         - [ ] Return The DSCP To Co S Mappings
