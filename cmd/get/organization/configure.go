@@ -55,7 +55,7 @@ var devices = &cobra.Command{
 	Long: ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		devicestatus, traceback := api.GetOrganizationDevices(org)
+		devicestatus, traceback := api.GetOrganizationDevices(org, "", "", "")
 		shell.Display(devicestatus, traceback, "devices", cmd.Flags())
 	},
 }

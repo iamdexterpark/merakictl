@@ -79,10 +79,18 @@ type Devices []struct {
 }
 
 // List the devices in an organization
-func GetOrganizationDevices(organizationId string) (Devices, interface{}) {
+func GetOrganizationDevices(organizationId, perPage, startingAfter,
+	configurationUpdatedAfter string) (Devices, interface{}) {
 	baseurl := fmt.Sprintf("%s/organizations/%s/devices", BaseUrl(), organizationId)
 	var payload io.ReadSeeker
 	session := Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("perPage",perPage)
+	parameters.Add("startingAfter",startingAfter)
+	parameters.Add("configurationUpdatedAfter", configurationUpdatedAfter)
+	session.Request.URL.RawQuery = parameters.Encode()
 
 	var results = Devices{}
 	user_agent.UnMarshalJSON(session.Body, &results)
