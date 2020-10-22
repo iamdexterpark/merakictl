@@ -55,4 +55,22 @@ func GetSwitchProfilePort(organizationId, configTemplateId, profileId, portId st
 	return results, traceback
 }
 
+type SwitchTemplateConfigProfiles []struct {
+	SwitchProfileID string `json:"switchProfileId"`
+	Name            string `json:"name"`
+	Model           string `json:"model"`
+}
+
 // List The Switch Profiles For Your Switch Template Configuration
+func GetSwitchTemplateConfigProfiles(organizationId,
+	configTemplateId string) (SwitchTemplateConfigProfiles, interface{}) {
+	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles",
+		api.BaseUrl(), organizationId, configTemplateId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = SwitchTemplateConfigProfiles{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
