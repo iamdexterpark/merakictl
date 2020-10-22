@@ -442,7 +442,7 @@
     - [ ] Access Control Lists
         - [x] Return The Access Control Lists For A MS Network
         - [ ] Update The Access Control Lists For A MS Network
-    - x ] Access Policies
+    - [ ] Access Policies
         - [ ] Create An Access Policy For A Switch Network
         - [ ] Delete An Access Policy For A Switch Network
         - [x] List The Access Policies For A Switch Network
@@ -451,10 +451,10 @@
     - [ ] Config Templates
         - [ ] profiles
             - [ ] Ports
-                - [ ] Return A Switch Profile Port
-                - [ ] Return All The Ports Of A Switch Profile
+                - [x] Return A Switch Profile Port
+                - [x] Return All The Ports Of A Switch Profile
                 - [ ] Update A Switch Profile Port
-            - [ ] List The Switch Profiles For Your Switch Template Configuration
+            - [x] List The Switch Profiles For Your Switch Template Configuration
     - [ ] Devices
         - [ ] Clone port-level and some switch-level configuration settings from a source switch to one or more target switches
     - [ ] Dhcp Server Policy
