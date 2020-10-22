@@ -23,9 +23,11 @@
 - [x] Unmarshal JSON Data
 - [x] Marshal JSON Data
 - [x] Marshal YAML Data
-- [x] 100% Get Command API Coverage
+
+- [ ] 100% Get Command API Coverage
 
 ### Backlog
+
 - [ ] Pagination Support
 - [ ] Meraki Tags Flag
 - [ ] Diff Flag (GET: compare config file against current API state)
