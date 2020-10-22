@@ -692,8 +692,8 @@
         - [x] List The VPP Accounts In The Organization
 - [ ] Monitor
     - [ ] devices
-        - [ ] Cellular Usage History
-            - [ ] Return the client's daily cellular data usage history
+        - [x] Cellular Usage History
+            - [x] Return the client's daily cellular data usage history
         - [ ] Connectivity
             - [ ] Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
         - [ ] Desktop Logs
