@@ -486,8 +486,8 @@
             - [ ] Update The Order In Which The Rules Should Be Processed By The Switch
         - [ ] Add A Quality Of Service Rule
         - [ ] Delete A Quality Of Service Rule
-        - [ ] List Quality Of Service Rules
-        - [ ] Return A Quality Of Service Rule
+        - [x] List Quality Of Service Rules
+        - [x] Return A Quality Of Service Rule
         - [ ] Update A Quality Of Service Rule
     - [ ] Routing
         - [ ] Interfaces
