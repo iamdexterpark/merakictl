@@ -496,8 +496,8 @@
                 - [ ] Update A Layer 3 Interface DHCP Configuration For A Switch
             - [ ] Create A Layer 3 Interface For A Switch
             - [ ] Delete A Layer 3 Interface From The Switch
-            - [ ] List Layer 3 Interfaces For A Switch
-            - [ ] Return A Layer 3 Interface For A Switch
+            - [x] List Layer 3 Interfaces For A Switch
+            - [x] Return A Layer 3 Interface For A Switch
             - [ ] Update A Layer 3 Interface For A Switch
         - [ ] Multicast
             - [ ] Rendezvous Points

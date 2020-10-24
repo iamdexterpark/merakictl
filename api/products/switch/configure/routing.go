@@ -44,3 +44,47 @@ func GetLayer3DHCPInterface(serial, interfaceId string) (Layer3DHCPInterface, in
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type Layer3Interfaces []struct {
+	Layer3Interface
+}
+type Layer3Interface struct {
+	InterfaceID      string `json:"interfaceId"`
+	Name             string `json:"name"`
+	Subnet           string `json:"subnet"`
+	InterfaceIP      string `json:"interfaceIp"`
+	MulticastRouting string `json:"multicastRouting"`
+	VlanID           int    `json:"vlanId"`
+	DefaultGateway   string `json:"defaultGateway"`
+	OspfSettings     struct {
+		Area             string `json:"area"`
+		Cost             int    `json:"cost"`
+		IsPassiveEnabled bool   `json:"isPassiveEnabled"`
+	} `json:"ospfSettings"`
+}
+
+// List Layer 3 Interfaces For A Switch
+func GetLayer3Interfaces(serial string) (Layer3Interfaces, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces",
+		api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = Layer3Interfaces{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return A Layer 3 Interface For A Switch
+func GetLayer3Interface(serial, interfaceId string) (Layer3Interface, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces/%s",
+		api.BaseUrl(), serial, interfaceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = Layer3Interface{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
