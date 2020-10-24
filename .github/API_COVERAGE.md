@@ -482,7 +482,7 @@
         - [ ] Update A Switch Port
     - [ ] Qos Rules
         - [ ] Order
-            - [ ] Return The Quality Of Service Rule I Ds By Order In Which They Will Be Processed By The Switch
+            - [x] Return The Quality Of Service Rule I Ds By Order In Which They Will Be Processed By The Switch
             - [ ] Update The Order In Which The Rules Should Be Processed By The Switch
         - [ ] Add A Quality Of Service Rule
         - [ ] Delete A Quality Of Service Rule
