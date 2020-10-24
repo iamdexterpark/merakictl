@@ -461,8 +461,8 @@
         - [x] Return The DHCP Server Policy
         - [ ] Update The DHCP Server Policy
     - [ ] Dscp To Cos Mappings
-        - [ ] Return The DSCP To Co S Mappings
-        - [ ] Update The DSCP To Co S Mappings
+        - [x] Return The DSCP To CoS Mappings
+        - [ ] Update The DSCP To CoS Mappings
     - [ ] Link Aggregations
         - [ ] Create A Link Aggregation Group
         - [ ] List Link Aggregation Groups
