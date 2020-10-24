@@ -469,7 +469,7 @@
         - [ ] Split A Link Aggregation Group Into Separate Ports
         - [ ] Update A Link Aggregation Group
     - [ ] Mtu
-        - [ ] Return The MTU Configuration
+        - [x] Return The MTU Configuration
         - [ ] Update The MTU Configuration
     - [ ] Port Schedules
         - [ ] Add A Switch Port Schedule
