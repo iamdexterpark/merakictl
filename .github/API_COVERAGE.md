@@ -465,7 +465,7 @@
         - [ ] Update The DSCP To CoS Mappings
     - [ ] Link Aggregations
         - [ ] Create A Link Aggregation Group
-        - [ ] List Link Aggregation Groups
+        - [x] List Link Aggregation Groups
         - [ ] Split A Link Aggregation Group Into Separate Ports
         - [ ] Update A Link Aggregation Group
     - [ ] Mtu
