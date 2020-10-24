@@ -477,8 +477,8 @@
         - [x] List Switch Port Schedules
         - [ ] Update A Switch Port Schedule
     - [ ] Ports
-        - [ ] List The Switch Ports For A Switch
-        - [ ] Return A Switch Port
+        - [x] List The Switch Ports For A Switch
+        - [x] Return A Switch Port
         - [ ] Update A Switch Port
     - [ ] Qos Rules
         - [ ] Order
