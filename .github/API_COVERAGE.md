@@ -474,7 +474,7 @@
     - [ ] Port Schedules
         - [ ] Add A Switch Port Schedule
         - [ ] Delete A Switch Port Schedule
-        - [ ] List Switch Port Schedules
+        - [x] List Switch Port Schedules
         - [ ] Update A Switch Port Schedule
     - [ ] Ports
         - [ ] List The Switch Ports For A Switch
