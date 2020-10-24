@@ -492,7 +492,7 @@
     - [ ] Routing
         - [ ] Interfaces
             - [ ] Dhcp
-                - [ ] Return A Layer 3 Interface DHCP Configuration For A Switch
+                - [x] Return A Layer 3 Interface DHCP Configuration For A Switch
                 - [ ] Update A Layer 3 Interface DHCP Configuration For A Switch
             - [ ] Create A Layer 3 Interface For A Switch
             - [ ] Delete A Layer 3 Interface From The Switch
