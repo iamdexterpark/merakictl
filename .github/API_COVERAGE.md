@@ -550,7 +550,7 @@
         - [x] Returns STP Settings
         - [ ] Updates STP Settings
     - [ ] Warm Spare
-        - [ ] Return Warm Spare Configuration For A Switch
+        - [x] Return Warm Spare Configuration For A Switch
         - [ ] Update Warm Spare Configuration For A Switch
 - [ ] Live Tools
     - [ ] ports
