@@ -555,12 +555,12 @@
 - [ ] Live Tools
     - [ ] ports
         - [ ] Cycle a set of switch ports
-- [ ] Monitor
-    - [ ] ports
-        - [ ] statuses
-            - [ ] Packets
+- [x] Monitor
+    - [x] ports
+        - [x] statuses
+            - [x] Packets
                 - [x] Return the packet counters for all the ports of a switch
-            - [ ] Return The Status For All The Ports Of A Switch
+            - [x] Return The Status For All The Ports Of A Switch
 
 
 
