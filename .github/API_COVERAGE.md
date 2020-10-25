@@ -534,8 +534,8 @@
             - [ ] Static Routes
                 - [ ] Create A Layer 3 Static Route For A Switch Stack
                 - [ ] Delete A Layer 3 Static Route For A Switch Stack
-                - [ ] List Layer 3 Static Routes For A Switch Stack
-                - [ ] Return A Layer 3 Static Route For A Switch Stack
+                - [x] List Layer 3 Static Routes For A Switch Stack
+                - [x] Return A Layer 3 Static Route For A Switch Stack
                 - [ ] Update A Layer 3 Static Route For A Switch Stack
         - [ ] Add A Switch To A Stack
         - [ ] Create A Stack

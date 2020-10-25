@@ -64,7 +64,7 @@ type StackLayer3Interface struct {
 }
 // List Layer 3 Interfaces For A Switch Stack
 func GetStackLayer3Interfaces(networkId, switchStackId string) (StackLayer3Interfaces, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/stacks/%s/routing/interfaces",
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks/%s/routing/interfaces",
 		api.BaseUrl(), networkId, switchStackId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
@@ -77,12 +77,56 @@ func GetStackLayer3Interfaces(networkId, switchStackId string) (StackLayer3Inter
 
 // Return A Layer 3 Interface From A Switch Stack
 func GetStackLayer3Interface(networkId, switchStackId, interfaceId string) (StackLayer3Interface, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/stacks/%s/routing/interfaces/%s",
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks/%s/routing/interfaces/%s",
 		api.BaseUrl(), networkId, switchStackId, interfaceId)
 	var payload io.ReadSeeker
 	session := api.Session(baseurl, "GET", payload)
 
 	var results = StackLayer3Interface{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+type StackStaticRoutes []struct {
+	StackStaticRoute
+}
+type StackStaticRoute struct {
+	InterfaceID      string `json:"interfaceId"`
+	Name             string `json:"name"`
+	Subnet           string `json:"subnet"`
+	InterfaceIP      string `json:"interfaceIp"`
+	MulticastRouting string `json:"multicastRouting"`
+	VlanID           int    `json:"vlanId"`
+	DefaultGateway   string `json:"defaultGateway"`
+	OspfSettings     struct {
+		Area             string `json:"area"`
+		Cost             int    `json:"cost"`
+		IsPassiveEnabled bool   `json:"isPassiveEnabled"`
+	} `json:"ospfSettings"`
+}
+
+// List Layer 3 Static Routes For A Switch Stack
+func GetStackStaticRoutes(networkId, switchStackId string) (StackStaticRoutes, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks/%srouting/interfaces",
+		api.BaseUrl(), networkId, switchStackId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = StackStaticRoutes{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return A Layer 3 Static Route For A Switch Stack
+func GetStackStaticRoute(networkId, switchStackId, interfaceId string) (StackStaticRoute, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks/%srouting/interfaces/%s",
+		api.BaseUrl(), networkId, switchStackId, interfaceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = StackStaticRoute{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
