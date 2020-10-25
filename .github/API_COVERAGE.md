@@ -573,8 +573,8 @@
         - [ ] Update Alternate Management Interface And Device Static IP
     - [ ] Bluetooth
         - [ ] settings
-            - [ ] Return The Bluetooth Settings For A Network A Href Https Documentation Meraki Com MR Bluetooth Bluetooth Low Energy BLE Bluetooth Settings A Must Be Enabled On The Network
-            - [ ] Return The Bluetooth Settings For A Wireless Device
+            - [x] Return The Bluetooth Settings For A Network A Href Https Documentation Meraki Com MR Bluetooth Bluetooth Low Energy BLE Bluetooth Settings A Must Be Enabled On The Network
+            - [x] Return The Bluetooth Settings For A Wireless Device
             - [ ] Update The Bluetooth Settings For A Network
             - [ ] Update The Bluetooth Settings For A Wireless Device
     - [ ] Radio
