@@ -522,6 +522,21 @@
         - [ ] Update Switch Network Settings
     - [ ] Stacks
         - [ ] Routing
+            - [ ] Interfaces
+                - [ ] Dhcp
+                    - [x] Return A Layer 3 Interface DHCP Configuration For A Switch Stack
+                    - [ ] Update A Layer 3 Interface DHCP Configuration For A Switch Stack
+                - [ ] Create A Layer 3 Interface For A Switch Stack
+                - [ ] Delete A Layer 3 Interface From A Switch Stack
+                - [ ] List Layer 3 Interfaces For A Switch Stack
+                - [ ] Return A Layer 3 Interface From A Switch Stack
+                - [ ] Update A Layer 3 Interface For A Switch Stack
+            - [ ] Static Routes
+                - [ ] Create A Layer 3 Static Route For A Switch Stack
+                - [ ] Delete A Layer 3 Static Route For A Switch Stack
+                - [ ] List Layer 3 Static Routes For A Switch Stack
+                - [ ] Return A Layer 3 Static Route For A Switch Stack
+                - [ ] Update A Layer 3 Static Route For A Switch Stack
         - [ ] Add A Switch To A Stack
         - [ ] Create A Stack
         - [ ] Delete A Stack
