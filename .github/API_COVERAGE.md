@@ -518,7 +518,7 @@
             - [x] Return A Layer 3 Static Route For A Switch
             - [ ] Update A Layer 3 Static Route For A Switch
     - [ ] Settings
-        - [ ] Returns The Switch Network Settings
+        - [x] Returns The Switch Network Settings
         - [ ] Update Switch Network Settings
     - [ ] Stacks
         - [ ] Routing
