@@ -28,4 +28,20 @@ func GetBluetoothNetworkSettings(networkId string) (BluetoothNetworkSettings, in
 	return results, traceback
 }
 
+type BluetoothDeviceSettings struct {
+	UUID  string `json:"uuid"`
+	Major int    `json:"major"`
+	Minor int    `json:"minor"`
+}
 // Return The Bluetooth Settings For A Wireless Device
+func GetBluetoothDeviceSettings(serial string) (BluetoothDeviceSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/devices/%s/wireless/bluetooth/settings",
+		api.BaseUrl(), serial)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = BluetoothDeviceSettings{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
