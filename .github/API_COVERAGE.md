@@ -501,8 +501,13 @@
             - [ ] Update A Layer 3 Interface For A Switch
         - [ ] Multicast
             - [ ] Rendezvous Points
-            - [ ] Return Multicast Settings For A Network
-            - [ ] Update Multicast Settings For A Network
+                - [ ] Create a multicast rendezvous point
+                - [ ] Delete A Multicast Rendezvous Point
+                - [x] List Multicast Rendezvous Points
+                - [x] Return A Multicast Rendezvous Point
+                - [ ] Update A Multicast Rendezvous Point
+                - [ ] Return Multicast Settings For A Network
+                - [ ] Update Multicast Settings For A Network
         - [ ] Ospf
             - [ ] Return Layer 3 OSPF Routing Configuration
             - [ ] Update Layer 3 OSPF Routing Configuration

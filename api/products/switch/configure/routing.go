@@ -88,3 +88,45 @@ func GetLayer3Interface(serial, interfaceId string) (Layer3Interface, interface{
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type MulticastRendezvousPoints [][]struct {
+	MulticastRendezvousPoint
+}
+
+
+	type MulticastRendezvousPoint []struct {
+	RendezvousPointID string `json:"rendezvousPointId"`
+	Serial            string `json:"serial,omitempty"`
+	InterfaceName     string `json:"interfaceName,omitempty"`
+	InterfaceIP       string `json:"interfaceIp"`
+	MulticastGroup    string `json:"multicastGroup"`
+	SwitchStackID     string `json:"switchStackId,omitempty"`
+}
+
+// List Multicast Rendezvous Points
+func GetMulticastRendezvousPoints(networkId string) (MulticastRendezvousPoints, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints",
+		api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = MulticastRendezvousPoints{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return A Multicast Rendezvous Point
+func GetMulticastRendezvousPoint(networkId, rendezvousPointId string) (MulticastRendezvousPoint, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints/%s",
+		api.BaseUrl(), networkId, rendezvousPointId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = MulticastRendezvousPoint{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return Multicast Settings For A Network
