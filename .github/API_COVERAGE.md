@@ -514,8 +514,8 @@
         - [ ] Static Routes
             - [ ] Create A Layer 3 Static Route For A Switch
             - [ ] Delete A Layer 3 Static Route For A Switch
-            - [ ] List Layer 3 Static Routes For A Switch
-            - [ ] Return A Layer 3 Static Route For A Switch
+            - [x] List Layer 3 Static Routes For A Switch
+            - [x] Return A Layer 3 Static Route For A Switch
             - [ ] Update A Layer 3 Static Route For A Switch
     - [ ] Settings
         - [ ] Returns The Switch Network Settings
