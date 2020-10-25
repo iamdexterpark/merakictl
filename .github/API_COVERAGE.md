@@ -588,7 +588,7 @@
         - [x] Return A RF Profile
         - [ ] Updates Specified RF Profile For This Network
     - [ ] Settings
-        - [ ] Return The Wireless Settings For A Network
+        - [x] Return The Wireless Settings For A Network
         - [ ] Update The Wireless Settings For A Network
     - [ ] Ssids
         - [ ] Firewall
