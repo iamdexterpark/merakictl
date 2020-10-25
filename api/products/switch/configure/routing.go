@@ -129,4 +129,28 @@ func GetMulticastRendezvousPoint(networkId, rendezvousPointId string) (Multicast
 	return results, traceback
 }
 
+type MulticastSettings struct {
+	DefaultSettings struct {
+		IgmpSnoopingEnabled                 bool `json:"igmpSnoopingEnabled"`
+		FloodUnknownMulticastTrafficEnabled bool `json:"floodUnknownMulticastTrafficEnabled"`
+	} `json:"defaultSettings"`
+	Overrides []struct {
+		Switches                            []string `json:"switches,omitempty"`
+		IgmpSnoopingEnabled                 bool     `json:"igmpSnoopingEnabled"`
+		FloodUnknownMulticastTrafficEnabled bool     `json:"floodUnknownMulticastTrafficEnabled"`
+		Stacks                              []string `json:"stacks,omitempty"`
+	} `json:"overrides"`
+}
+
 // Return Multicast Settings For A Network
+func GetMulticastSettings(networkId string) (MulticastSettings, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast",
+		api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = MulticastSettings{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
