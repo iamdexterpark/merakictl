@@ -540,7 +540,7 @@
         - [ ] Add A Switch To A Stack
         - [ ] Create A Stack
         - [ ] Delete A Stack
-        - [ ] List The Switch Stacks In A Network
+        - [x] List The Switch Stacks In A Network
         - [ ] Remove A Switch From A Stack
         - [ ] Show A Switch Stack
     - [ ] Storm Control

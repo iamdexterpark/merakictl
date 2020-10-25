@@ -131,3 +131,38 @@ func GetStackStaticRoute(networkId, switchStackId, interfaceId string) (StackSta
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type SwitchStacks []struct {
+	SwitchStack
+}
+type SwitchStack struct {
+	ID      string   `json:"id"`
+	Name    string   `json:"name"`
+	Serials []string `json:"serials"`
+}
+
+// List The Switch Stacks In A Network
+func GetSwitchStacks(networkId string) (SwitchStacks, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks",
+		api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = SwitchStacks{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Show A Switch Stack
+func GetSwitchStack(networkId, switchStackId string) (SwitchStack, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/stacks/%s",
+		api.BaseUrl(), networkId, switchStackId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = SwitchStack{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
