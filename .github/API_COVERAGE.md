@@ -579,7 +579,7 @@
             - [ ] Update The Bluetooth Settings For A Wireless Device
     - [ ] Radio
         - [ ] settings
-            - [ ] Return The Radio Settings Of A Device
+            - [x] Return The Radio Settings Of A Device
             - [ ] Update The Radio Settings Of A Device
     - [ ] Rf Profiles
         - [ ] Creates New RF Profile For This Network
