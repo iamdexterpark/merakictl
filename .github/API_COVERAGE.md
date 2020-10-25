@@ -559,7 +559,7 @@
     - [ ] ports
         - [ ] statuses
             - [ ] Packets
-                - [ ] Return the packet counters for all the ports of a switch
+                - [x] Return the packet counters for all the ports of a switch
             - [ ] Return The Status For All The Ports Of A Switch
 
 
