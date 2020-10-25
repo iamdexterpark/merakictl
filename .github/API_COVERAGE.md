@@ -506,10 +506,10 @@
                 - [x] List Multicast Rendezvous Points
                 - [x] Return A Multicast Rendezvous Point
                 - [ ] Update A Multicast Rendezvous Point
-                - [ ] Return Multicast Settings For A Network
+                - [x] Return Multicast Settings For A Network
                 - [ ] Update Multicast Settings For A Network
         - [ ] Ospf
-            - [ ] Return Layer 3 OSPF Routing Configuration
+            - [x] Return Layer 3 OSPF Routing Configuration
             - [ ] Update Layer 3 OSPF Routing Configuration
         - [ ] Static Routes
             - [ ] Create A Layer 3 Static Route For A Switch
