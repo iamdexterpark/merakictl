@@ -44,3 +44,46 @@ func GetInterfaceDHCPConfiguration(networkId, switchStackId, interfaceId string)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
+
+type StackLayer3Interfaces []struct {
+	StackLayer3Interface
+}
+type StackLayer3Interface struct {
+	InterfaceID      string `json:"interfaceId"`
+	Name             string `json:"name"`
+	Subnet           string `json:"subnet"`
+	InterfaceIP      string `json:"interfaceIp"`
+	MulticastRouting string `json:"multicastRouting"`
+	VlanID           int    `json:"vlanId"`
+	DefaultGateway   string `json:"defaultGateway"`
+	OspfSettings     struct {
+		Area             string `json:"area"`
+		Cost             int    `json:"cost"`
+		IsPassiveEnabled bool   `json:"isPassiveEnabled"`
+	} `json:"ospfSettings"`
+}
+// List Layer 3 Interfaces For A Switch Stack
+func GetStackLayer3Interfaces(networkId, switchStackId string) (StackLayer3Interfaces, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/stacks/%s/routing/interfaces",
+		api.BaseUrl(), networkId, switchStackId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = StackLayer3Interfaces{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
+
+// Return A Layer 3 Interface From A Switch Stack
+func GetStackLayer3Interface(networkId, switchStackId, interfaceId string) (StackLayer3Interface, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/stacks/%s/routing/interfaces/%s",
+		api.BaseUrl(), networkId, switchStackId, interfaceId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var results = StackLayer3Interface{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}
