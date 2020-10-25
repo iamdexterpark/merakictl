@@ -544,10 +544,10 @@
         - [ ] Remove A Switch From A Stack
         - [ ] Show A Switch Stack
     - [ ] Storm Control
-        - [ ] Return The Storm Control Configuration For A Switch Network
+        - [x] Return The Storm Control Configuration For A Switch Network
         - [ ] Update The Storm Control Configuration For A Switch Network
     - [ ] Stp
-        - [ ] Returns STP Settings
+        - [x] Returns STP Settings
         - [ ] Updates STP Settings
     - [ ] Warm Spare
         - [ ] Return Warm Spare Configuration For A Switch

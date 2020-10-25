@@ -135,6 +135,7 @@ func GetStackStaticRoute(networkId, switchStackId, interfaceId string) (StackSta
 type SwitchStacks []struct {
 	SwitchStack
 }
+
 type SwitchStack struct {
 	ID      string   `json:"id"`
 	Name    string   `json:"name"`
