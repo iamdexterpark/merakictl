@@ -584,8 +584,8 @@
     - [ ] Rf Profiles
         - [ ] Creates New RF Profile For This Network
         - [ ] Delete A RF Profile
-        - [ ] List The Non Basic RF Profiles For This Network
-        - [ ] Return A RF Profile
+        - [x] List The Non Basic RF Profiles For This Network
+        - [x] Return A RF Profile
         - [ ] Updates Specified RF Profile For This Network
     - [ ] Settings
         - [ ] Return The Wireless Settings For A Network
