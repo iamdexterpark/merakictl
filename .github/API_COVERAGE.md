@@ -622,10 +622,10 @@
         - [x] Return AP channel utilization over time for a device or network client
     - [x] Client Count History
         - [x] Return wireless client counts over time for a network, device, or network client
-    - [ ] Clients
-        - [ ] Connection Stats
+    - [x] Clients
+        - [x] Connection Stats
             - [x] Aggregated Connectivity Info For A Given Client On This Network
-            - [ ] Aggregated Connectivity Info For This Network Grouped By Clients
+            - [x] Aggregated Connectivity Info For This Network Grouped By Clients
         - [ ] Connectivity Events
             - [ ] List the wireless connectivity events for a client within a network in the timespan.
         - [ ] Latency History
