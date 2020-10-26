@@ -617,7 +617,7 @@
         - [x] Update The Attributes Of An MR SSID
 - [ ] Monitor
     - [ ] Air Marshal
-        - [ ] List Air Marshal scan results from a network
+        - [x] List Air Marshal scan results from a network
     - [ ] Channel Utilization History
         - [ ] Return AP channel utilization over time for a device or network client
     - [ ] Client Count History
