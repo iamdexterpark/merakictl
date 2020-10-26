@@ -596,7 +596,7 @@
                 - [x] Return The L3 Firewall Rules For An SSID On An MR Network
                 - [ ] Update The L3 Firewall Rules Of An SSID On An MR Network
             - [ ] L7 Firewall Rules
-                - [ ] Return The L7 Firewall Rules For An SSID On An MR Network
+                - [x] Return The L7 Firewall Rules For An SSID On An MR Network
                 - [ ] Update The L7 Firewall Rules Of An SSID On An MR Network
         - [ ] Identity Psks
             - [ ] Create An Identity PSK

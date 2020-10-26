@@ -31,6 +31,29 @@ func GetL3FirewallRules(networkId, number string) (L3FirewallRules, interface{})
 	return ssid, traceback
 }
 
+type L7FirewallRules struct {
+	Rules []struct {
+		Policy string `json:"policy"`
+		Type   string `json:"type"`
+		Value  struct {
+			ID   string `json:"id"`
+			Name string `json:"name"`
+		} `json:"value"`
+	} `json:"rules"`
+}
+
+// Return The L7 Firewall Rules For An SSID On An MR Network
+func GetL7FirewallRules(networkId, number string) (L7FirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/firewall/l7FirewallRules",
+		api.BaseUrl(), networkId, number)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var ssid L7FirewallRules
+	user_agent.UnMarshalJSON(session.Body, &ssid)
+	traceback := user_agent.TraceBack(session)
+	return ssid, traceback
+}
 
 
 
