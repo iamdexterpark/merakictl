@@ -610,7 +610,7 @@
                 - [ ] Modify The Splash Page Settings For The Given SSID
         - [ ] Traffic Shaping
             - [ ] rules
-                - [ ] Display The Traffic Shaping Settings For A SSID On An MR Network
+                - [x] Display The Traffic Shaping Settings For A SSID On An MR Network
                 - [ ] Update The Traffic Shaping Settings For An SSID On An MR Network
         - [x] List The MR SSIDs In A Network
         - [x] Return A Single MR SSID
