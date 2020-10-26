@@ -619,7 +619,7 @@
     - [ ] Air Marshal
         - [x] List Air Marshal scan results from a network
     - [ ] Channel Utilization History
-        - [ ] Return AP channel utilization over time for a device or network client
+        - [x] Return AP channel utilization over time for a device or network client
     - [ ] Client Count History
         - [ ] Return wireless client counts over time for a network, device, or network client
     - [ ] Clients
