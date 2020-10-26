@@ -624,7 +624,7 @@
         - [x] Return wireless client counts over time for a network, device, or network client
     - [ ] Clients
         - [ ] Connection Stats
-            - [ ] Aggregated Connectivity Info For A Given Client On This Network
+            - [x] Aggregated Connectivity Info For A Given Client On This Network
             - [ ] Aggregated Connectivity Info For This Network Grouped By Clients
         - [ ] Connectivity Events
             - [ ] List the wireless connectivity events for a client within a network in the timespan.
