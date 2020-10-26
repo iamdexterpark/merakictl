@@ -616,12 +616,12 @@
         - [x] Return A Single MR SSID
         - [x] Update The Attributes Of An MR SSID
 - [ ] Monitor
-    - [ ] Air Marshal
+    - [x] Air Marshal
         - [x] List Air Marshal scan results from a network
-    - [ ] Channel Utilization History
+    - [x] Channel Utilization History
         - [x] Return AP channel utilization over time for a device or network client
-    - [ ] Client Count History
-        - [ ] Return wireless client counts over time for a network, device, or network client
+    - [x] Client Count History
+        - [x] Return wireless client counts over time for a network, device, or network client
     - [ ] Clients
         - [ ] Connection Stats
             - [ ] Aggregated Connectivity Info For A Given Client On This Network
