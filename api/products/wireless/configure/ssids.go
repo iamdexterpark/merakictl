@@ -7,7 +7,33 @@ import (
 	"io"
 )
 
-//SSID
+
+type L3FirewallRules struct {
+	Rules []struct {
+		Comment  string `json:"comment"`
+		Policy   string `json:"policy"`
+		Protocol string `json:"protocol"`
+		DestPort int    `json:"destPort"`
+		DestCidr string `json:"destCidr"`
+	} `json:"rules"`
+}
+
+// Return The L3 Firewall Rules For An SSID On An MR Network
+func GetL3FirewallRules(networkId, number string) (L3FirewallRules, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/firewall/l3FirewallRules",
+		api.BaseUrl(), networkId, number)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	var ssid L3FirewallRules
+	user_agent.UnMarshalJSON(session.Body, &ssid)
+	traceback := user_agent.TraceBack(session)
+	return ssid, traceback
+}
+
+
+
+
 type SSID struct {
 	Number              int    `json:"number"`
 	Name                string `json:"name"`
@@ -44,7 +70,7 @@ type SSID struct {
 	MandatoryDhcpEnabled            bool     `json:"mandatoryDhcpEnabled"`
 }
 
-// SSIDS Data Model
+
 type SSIDS []struct {
 	SSID
 }
