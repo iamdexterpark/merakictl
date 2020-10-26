@@ -601,8 +601,8 @@
         - [ ] Identity Psks
             - [ ] Create An Identity PSK
             - [ ] Delete An Identity PSK
-            - [ ] List All Identity PSKs In A Wireless Network
-            - [ ] Return An Identity PSK
+            - [x] List All Identity PSKs In A Wireless Network
+            - [x] Return An Identity PSK
             - [ ] Update An Identity PSK
         - [ ] Splash
             - [ ] settings
