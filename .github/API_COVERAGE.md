@@ -606,7 +606,7 @@
             - [ ] Update An Identity PSK
         - [ ] Splash
             - [ ] settings
-                - [ ] Display The Splash Page Settings For The Given SSID
+                - [x] Display The Splash Page Settings For The Given SSID
                 - [ ] Modify The Splash Page Settings For The Given SSID
         - [ ] Traffic Shaping
             - [ ] rules
