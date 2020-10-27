@@ -622,7 +622,7 @@
         - [x] Return AP channel utilization over time for a device or network client
     - [x] Client Count History
         - [x] Return wireless client counts over time for a network, device, or network client
-    - [ ] Clients
+    - [x] Clients
         - [x] Connection Stats
             - [x] Aggregated Connectivity Info For A Given Client On This Network
             - [x] Aggregated Connectivity Info For This Network Grouped By Clients
@@ -634,8 +634,8 @@
             - [x] Aggregated Latency Info For A Given Client On This Network
             - [x] Aggregated Latency Info For This Network Grouped By Clients
     - [ ] Connection Stats
-        - [ ] Aggregated Connectivity Info For A Given AP On This Network
-        - [ ] Aggregated Connectivity Info For This Network
+        - [x] Aggregated Connectivity Info For A Given AP On This Network
+        - [x] Aggregated Connectivity Info For This Network
     - [ ] Data Rate History
         - [ ] Return PHY data rates over time for a network, device, or network client
     - [ ] Devices
