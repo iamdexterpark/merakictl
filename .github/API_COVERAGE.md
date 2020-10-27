@@ -643,10 +643,10 @@
             - [x] Aggregated connectivity info for this network, grouped by node
         - [x] Latency Stats
             - [x] Aggregated latency info for this network, grouped by node
-    - [ ] Failed Connections
+    - [x] Failed Connections
         - [x] List of all failed client connection events on this network in a given time range
-    - [ ] Latency History
-        - [ ] Return average wireless latency over time for a network, device, or network client
+    - [x] Latency History
+        - [x] Return average wireless latency over time for a network, device, or network client
     - [ ] Latency Stats
         - [ ] Aggregated Latency Info For A Given AP On This Network
         - [ ] Aggregated Latency Info For This Network
