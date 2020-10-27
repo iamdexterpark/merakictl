@@ -654,8 +654,8 @@
         - [x] List wireless mesh statuses for repeaters
     - [x] Signal Quality History
         - [x] Return signal quality (SNR/RSSI) over time for a device or network client
-    - [ ] Status
-        - [ ] Return the SSID statuses of an access point
+    - [x] Status
+        - [x] Return the SSID statuses of an access point
     - [ ] Usage History
         - [ ] Return AP usage over time for a device or network client
 
