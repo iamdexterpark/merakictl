@@ -638,11 +638,11 @@
         - [x] Aggregated Connectivity Info For This Network
     - [x] Data Rate History
         - [x] Return PHY data rates over time for a network, device, or network client
-    - [ ] Devices
+    - [x] Devices
         - [x] Connection Stats
             - [x] Aggregated connectivity info for this network, grouped by node
-        - [ ] Latency Stats
-            - [ ] Aggregated latency info for this network, grouped by node
+        - [x] Latency Stats
+            - [x] Aggregated latency info for this network, grouped by node
     - [ ] Failed Connections
         - [ ] List of all failed client connection events on this network in a given time range
     - [ ] Latency History
