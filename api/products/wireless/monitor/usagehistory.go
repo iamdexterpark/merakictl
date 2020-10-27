@@ -1,0 +1,45 @@
+package monitor
+
+import (
+	"fmt"
+	"github.com/ddexterpark/merakictl/api"
+	user_agent "github.com/ddexterpark/merakictl/user-agent"
+	"io"
+	"time"
+)
+
+type APUsageHistory []struct {
+	StartTs      time.Time `json:"startTs"`
+	EndTs        time.Time `json:"endTs"`
+	TotalKbps    int       `json:"totalKbps"`
+	SentKbps     int       `json:"sentKbps"`
+	ReceivedKbps int       `json:"receivedKbps"`
+}
+
+// Return AP usage over time for a device or network client
+func GetAPUsageHistory(networkId, t0, t1, timespan,
+	resolution, autoResolution, clientId, deviceSerial, apTag,
+	band, ssid string) (APUsageHistory, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/usageHistory", api.BaseUrl(), networkId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan", timespan)
+	parameters.Add("resolution", resolution)
+	parameters.Add("autoResolution", autoResolution)
+	parameters.Add("clientId", clientId)
+	parameters.Add("deviceSerial", deviceSerial)
+	parameters.Add("apTag", apTag)
+	parameters.Add("band", band)
+	parameters.Add("ssid", ssid)
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = APUsageHistory{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

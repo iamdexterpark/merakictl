@@ -615,7 +615,7 @@
         - [x] List The MR SSIDs In A Network
         - [x] Return A Single MR SSID
         - [x] Update The Attributes Of An MR SSID
-- [ ] Monitor
+- [x] Monitor
     - [x] Air Marshal
         - [x] List Air Marshal scan results from a network
     - [x] Channel Utilization History
@@ -656,8 +656,8 @@
         - [x] Return signal quality (SNR/RSSI) over time for a device or network client
     - [x] Status
         - [x] Return the SSID statuses of an access point
-    - [ ] Usage History
-        - [ ] Return AP usage over time for a device or network client
+    - [x] Usage History
+        - [x] Return AP usage over time for a device or network client
 
 
 ### Sm
