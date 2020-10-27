@@ -24,11 +24,14 @@
 - [x] Marshal JSON Data
 - [x] Marshal YAML Data
 
-- [ ] 100% Get Command API Coverage
+### Beta Release 2021 Q1 (NOV)
+- [x] 100% Get Command API Coverage
+- [x] 100% Get Command CLI Coverage
+- [ ] Pagination Support
+- [ ] verbose debug flag
+- [ ] Claim Assets into Org
 
 ### Backlog
-
-- [ ] Pagination Support
 - [ ] Meraki Tags Flag
 - [ ] Diff Flag (GET: compare config file against current API state)
 - [ ] Proxy Support (certificate path, server, port)
