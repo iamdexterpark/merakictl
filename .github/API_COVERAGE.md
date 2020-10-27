@@ -633,11 +633,11 @@
         - [x] Latency Stats
             - [x] Aggregated Latency Info For A Given Client On This Network
             - [x] Aggregated Latency Info For This Network Grouped By Clients
-    - [ ] Connection Stats
+    - [x] Connection Stats
         - [x] Aggregated Connectivity Info For A Given AP On This Network
         - [x] Aggregated Connectivity Info For This Network
-    - [ ] Data Rate History
-        - [ ] Return PHY data rates over time for a network, device, or network client
+    - [x] Data Rate History
+        - [x] Return PHY data rates over time for a network, device, or network client
     - [ ] Devices
         - [ ] Connection Stats
             - [ ] Aggregated connectivity info for this network, grouped by node

@@ -53,7 +53,7 @@ type AggregatedConnectivityPerNetwork struct {
 
 // Aggregated Connectivity Info For This Network
 func GetAggregatedConnectivityPerNetwork(networkId, t0, t1, timespan,
-	band, ssid, vlan, apTag, fields string) (AggregatedConnectivityPerNetwork, interface{}) {
+	band, ssid, vlan, apTag string) (AggregatedConnectivityPerNetwork, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/connectionStats",
 		api.BaseUrl(), networkId)
 	var payload io.ReadSeeker
