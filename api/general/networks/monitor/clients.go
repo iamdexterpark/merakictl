@@ -55,7 +55,7 @@ type AggregatedConnectivityClients struct {
 
 // Aggregated Connectivity Info For This Network Grouped By Clients
 func GetAggregatedConnectivityClients(networkId, clientId, t0, t1, timespan,
-	band, ssid, vlan, apTag string) (AggregatedConnectivityClients , interface{}) {
+	band, ssid, vlan, apTag string) (AggregatedConnectivityClients, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clients/%s/connectionStats",
 		api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
@@ -73,7 +73,7 @@ func GetAggregatedConnectivityClients(networkId, clientId, t0, t1, timespan,
 
 	session.Request.URL.RawQuery = parameters.Encode()
 
-	var results = AggregatedConnectivityClients {}
+	var results = AggregatedConnectivityClients{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
@@ -126,4 +126,92 @@ func GetWirelessConnectivityEvents(networkId, clientId, perPage, startingAfter,
 	return results, traceback
 }
 
+type ClientLatencyHistory []struct {
+	T0                    int `json:"t0"`
+	T1                    int `json:"t1"`
+	LatencyBinsByCategory struct {
+		BackgroundTraffic struct {
+			Zero5   int `json:"0.5"`
+			One1    int `json:"1.1"`
+			Two1    int `json:"2.1"`
+			Four1   int `json:"4.1"`
+			Eight1  int `json:"8.1"`
+			One61   int `json:"16.1"`
+			Three21 int `json:"32.1"`
+			Six41   int `json:"64.1"`
+			One281  int `json:"128.1"`
+			Two561  int `json:"256.1"`
+			Five121 int `json:"512.1"`
+			One0241 int `json:"1024.1"`
+			Two0481 int `json:"2048.1"`
+		} `json:"backgroundTraffic"`
+		BestEffortTraffic struct {
+			Zero5   int `json:"0.5"`
+			One1    int `json:"1.1"`
+			Two1    int `json:"2.1"`
+			Four1   int `json:"4.1"`
+			Eight1  int `json:"8.1"`
+			One61   int `json:"16.1"`
+			Three21 int `json:"32.1"`
+			Six41   int `json:"64.1"`
+			One281  int `json:"128.1"`
+			Two561  int `json:"256.1"`
+			Five121 int `json:"512.1"`
+			One0241 int `json:"1024.1"`
+			Two0481 int `json:"2048.1"`
+		} `json:"bestEffortTraffic"`
+		VideoTraffic struct {
+			Zero5   int `json:"0.5"`
+			One1    int `json:"1.1"`
+			Two1    int `json:"2.1"`
+			Four1   int `json:"4.1"`
+			Eight1  int `json:"8.1"`
+			One61   int `json:"16.1"`
+			Three21 int `json:"32.1"`
+			Six41   int `json:"64.1"`
+			One281  int `json:"128.1"`
+			Two561  int `json:"256.1"`
+			Five121 int `json:"512.1"`
+			One0241 int `json:"1024.1"`
+			Two0481 int `json:"2048.1"`
+		} `json:"videoTraffic"`
+		VoiceTraffic struct {
+			Zero5   int `json:"0.5"`
+			One1    int `json:"1.1"`
+			Two1    int `json:"2.1"`
+			Four1   int `json:"4.1"`
+			Eight1  int `json:"8.1"`
+			One61   int `json:"16.1"`
+			Three21 int `json:"32.1"`
+			Six41   int `json:"64.1"`
+			One281  int `json:"128.1"`
+			Two561  int `json:"256.1"`
+			Five121 int `json:"512.1"`
+			One0241 int `json:"1024.1"`
+			Two0481 int `json:"2048.1"`
+		} `json:"voiceTraffic"`
+	} `json:"latencyBinsByCategory"`
+}
+
 // Return the latency history for a client
+func GetClientLatencyHistory(networkId, clientId, t0, t1, timespan,
+	resolution string) (ClientLatencyHistory, interface{}) {
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clients/%s/latencyHistory",
+		api.BaseUrl(), networkId, clientId)
+	var payload io.ReadSeeker
+	session := api.Session(baseurl, "GET", payload)
+
+	// Parameters for Request URL
+	parameters := session.Request.URL.Query()
+	parameters.Add("t0", t0)
+	parameters.Add("t1", t1)
+	parameters.Add("timespan", timespan)
+	parameters.Add("resolution", resolution)
+
+	session.Request.URL.RawQuery = parameters.Encode()
+
+	var results = ClientLatencyHistory{}
+	user_agent.UnMarshalJSON(session.Body, &results)
+	traceback := user_agent.TraceBack(session)
+	return results, traceback
+}

@@ -628,8 +628,8 @@
             - [x] Aggregated Connectivity Info For This Network Grouped By Clients
         - [x] Connectivity Events
             - [x] List the wireless connectivity events for a client within a network in the timespan
-        - [ ] Latency History
-            - [ ] Return the latency history for a client
+        - [x] Latency History
+            - [x] Return the latency history for a client
         - [ ] Latency Stats
             - [ ] Aggregated Latency Info For A Given Client On This Network
             - [ ] Aggregated Latency Info For This Network Grouped By Clients
