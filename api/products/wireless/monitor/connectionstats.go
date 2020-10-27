@@ -75,4 +75,3 @@ func GetAggregatedConnectivityPerNetwork(networkId, t0, t1, timespan,
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
 }
-// Return PHY data rates over time for a network, device, or network client
