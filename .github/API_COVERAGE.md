@@ -652,8 +652,8 @@
         - [x] Aggregated Latency Info For This Network
    - [x] Mesh Statuses
         - [x] List wireless mesh statuses for repeaters
-    - [ ] Signal Quality History
-        - [ ] Return signal quality (SNR/RSSI) over time for a device or network client
+    - [x] Signal Quality History
+        - [x] Return signal quality (SNR/RSSI) over time for a device or network client
     - [ ] Status
         - [ ] Return the SSID statuses of an access point
     - [ ] Usage History
