@@ -7,7 +7,7 @@ import (
 	"io"
 )
 
-type AggregatedConnectivityNetwork struct {
+type AggregatedConnectivityInfo struct {
 	Mac             string `json:"mac"`
 	ConnectionStats struct {
 		Assoc   int `json:"assoc"`
@@ -19,8 +19,8 @@ type AggregatedConnectivityNetwork struct {
 }
 
 // Aggregated Connectivity Info For A Given Client On This Network
-func GetAggregatedConnectivity(devices, serial, t0, t1, timespan,
-	band, ssid, vlan, apTag string) (AggregatedConnectivityNetwork, interface{}) {
+func GetAggregatedConnectivityInfo(devices, serial, t0, t1, timespan,
+	band, ssid, vlan, apTag string) (AggregatedConnectivityInfo, interface{}) {
 	baseurl := fmt.Sprintf("%s/devices/%s/wireless/clients/%s/connectionStats",
 		api.BaseUrl(), devices, serial)
 	var payload io.ReadSeeker
@@ -38,7 +38,7 @@ func GetAggregatedConnectivity(devices, serial, t0, t1, timespan,
 
 	session.Request.URL.RawQuery = parameters.Encode()
 
-	var results = AggregatedConnectivityNetwork{}
+	var results = AggregatedConnectivityInfo{}
 	user_agent.UnMarshalJSON(session.Body, &results)
 	traceback := user_agent.TraceBack(session)
 	return results, traceback
