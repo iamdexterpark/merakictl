@@ -98,7 +98,7 @@ type WirelessConnectivityEvents []struct {
 // List the wireless connectivity events for a client within a network in the timespan
 func GetWirelessConnectivityEvents(networkId, clientId, perPage, startingAfter,
 	endingBefore, t0, t1, timespan, types, includedSeverities, band, ssidNumber,
-	deviceSerial string) (WirelessConnectivityEvents , interface{}) {
+	deviceSerial string) (WirelessConnectivityEvents, interface{}) {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clients/%s/connectivityEvents",
 		api.BaseUrl(), networkId, clientId)
 	var payload io.ReadSeeker
