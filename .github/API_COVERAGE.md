@@ -647,9 +647,9 @@
         - [x] List of all failed client connection events on this network in a given time range
     - [x] Latency History
         - [x] Return average wireless latency over time for a network, device, or network client
-    - [ ] Latency Stats
-        - [ ] Aggregated Latency Info For A Given AP On This Network
-        - [ ] Aggregated Latency Info For This Network
+    - [x] Latency Stats
+        - [x] Aggregated Latency Info For A Given AP On This Network
+        - [x] Aggregated Latency Info For This Network
    - [ ] Mesh Statuses
         - [ ] List wireless mesh statuses for repeaters
     - [ ] Signal Quality History
