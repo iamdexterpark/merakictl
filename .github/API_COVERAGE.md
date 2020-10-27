@@ -644,7 +644,7 @@
         - [x] Latency Stats
             - [x] Aggregated latency info for this network, grouped by node
     - [ ] Failed Connections
-        - [ ] List of all failed client connection events on this network in a given time range
+        - [x] List of all failed client connection events on this network in a given time range
     - [ ] Latency History
         - [ ] Return average wireless latency over time for a network, device, or network client
     - [ ] Latency Stats
