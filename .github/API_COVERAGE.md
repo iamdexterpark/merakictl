@@ -650,8 +650,8 @@
     - [x] Latency Stats
         - [x] Aggregated Latency Info For A Given AP On This Network
         - [x] Aggregated Latency Info For This Network
-   - [ ] Mesh Statuses
-        - [ ] List wireless mesh statuses for repeaters
+   - [x] Mesh Statuses
+        - [x] List wireless mesh statuses for repeaters
     - [ ] Signal Quality History
         - [ ] Return signal quality (SNR/RSSI) over time for a device or network client
     - [ ] Status
