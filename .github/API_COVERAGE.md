@@ -630,9 +630,9 @@
             - [x] List the wireless connectivity events for a client within a network in the timespan
         - [x] Latency History
             - [x] Return the latency history for a client
-        - [ ] Latency Stats
-            - [ ] Aggregated Latency Info For A Given Client On This Network
-            - [ ] Aggregated Latency Info For This Network Grouped By Clients
+        - [x] Latency Stats
+            - [x] Aggregated Latency Info For A Given Client On This Network
+            - [x] Aggregated Latency Info For This Network Grouped By Clients
     - [ ] Connection Stats
         - [ ] Aggregated Connectivity Info For A Given AP On This Network
         - [ ] Aggregated Connectivity Info For This Network
