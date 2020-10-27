@@ -639,8 +639,8 @@
     - [x] Data Rate History
         - [x] Return PHY data rates over time for a network, device, or network client
     - [ ] Devices
-        - [ ] Connection Stats
-            - [ ] Aggregated connectivity info for this network, grouped by node
+        - [x] Connection Stats
+            - [x] Aggregated connectivity info for this network, grouped by node
         - [ ] Latency Stats
             - [ ] Aggregated latency info for this network, grouped by node
     - [ ] Failed Connections
