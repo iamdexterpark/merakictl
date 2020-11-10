@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-
 // Data Model
 type Admin []struct {
 	ID                   string    `json:"id"`

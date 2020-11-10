@@ -8,11 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
 var orgList = &cobra.Command{
 	Use:   "list",
 	Short: "List the organizations that the user has privileges on.",
-	Long: pretty.Sprint(api.Organizations{}),
+	Long:  pretty.Sprint(api.Organizations{}),
 	Run: func(cmd *cobra.Command, args []string) {
 		metadata := configure.GetOrganizations()
 		shell.Display(metadata, "organizations", cmd.Flags())
@@ -22,7 +21,7 @@ var orgList = &cobra.Command{
 var single = &cobra.Command{
 	Use:   "single",
 	Short: "List a specific organization that the user has privileges on.",
-	Long: pretty.Sprint(api.Organization{}),
+	Long:  pretty.Sprint(api.Organization{}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		org := cmd.Flag("organization").Value.String()
@@ -41,24 +40,21 @@ var networks = &cobra.Command{
 		metadata := api.GetOrganizationNetworks(org, "",
 			"", "", "", "", "10")
 
-
 		shell.Display(metadata, "networks", cmd.Flags())
 
 	},
 }
 
-
 var devices = &cobra.Command{
 	Use:   "devices",
 	Short: "List the devices in an organization.",
-	Long: pretty.Sprint(api.Devices{}),
+	Long:  pretty.Sprint(api.Devices{}),
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
 		metadata := api.GetOrganizationDevices(org, "10", "", "")
 		shell.Display(metadata, "devices", cmd.Flags())
 	},
 }
-
 
 var actionbatchlist = &cobra.Command{
 	Use:   "ablist",
@@ -84,7 +80,6 @@ var admins = &cobra.Command{
 	},
 }
 
-
 var brandingPolicies = &cobra.Command{
 	Use:   "brandingPolicies",
 	Short: "",
@@ -97,8 +92,7 @@ var brandingPolicies = &cobra.Command{
 	},
 }
 
-
-var brandingPolicy= &cobra.Command{
+var brandingPolicy = &cobra.Command{
 	Use:   "brandingPolicy",
 	Short: "",
 	Long:  pretty.Sprint(configure.BrandingPolicy{}),
@@ -106,9 +100,8 @@ var brandingPolicy= &cobra.Command{
 		org := cmd.Flag("organization").Value.String()
 		brandingId := args[0]
 
-		metadata := configure.GetBrandingPolicy(org,brandingId)
+		metadata := configure.GetBrandingPolicy(org, brandingId)
 		shell.Display(metadata, "brandingPolicy", cmd.Flags())
 
 	},
 }
-

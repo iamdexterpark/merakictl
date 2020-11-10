@@ -1,4 +1,5 @@
 package user_agent
+
 /*
 Modified version of Link: https://github.com/peterhellberg/link
 Special thanks to peterhellberg.
@@ -10,14 +11,13 @@ import (
 	"strings"
 )
 
-
 var (
 	commaRegexp      = regexp.MustCompile(`,\s{0,}`)
 	equalRegexp      = regexp.MustCompile(` *= *`)
 	linkRegexp       = regexp.MustCompile(`<(.+)>`)
 	semiRegexp       = regexp.MustCompile(`; +`)
-	URIRegexp       = regexp.MustCompile(`[?*]+`)
-	parametersRegexp       = regexp.MustCompile(`[&*]+`)
+	URIRegexp        = regexp.MustCompile(`[?*]+`)
+	parametersRegexp = regexp.MustCompile(`[&*]+`)
 )
 
 // LinkedList returned by Parse, contains multiple links indexed by "rel"
@@ -25,11 +25,11 @@ type LinkedList []Link //map[string]*Link
 
 // Link contains a Link item with URI, Rel, and other non-URI components in Extra.
 type Link struct {
-	URI   string
-	Rel   string
-	PerPage string // The number of entries to be returned in the page (the current request)
+	URI           string
+	Rel           string
+	PerPage       string // The number of entries to be returned in the page (the current request)
 	StartingAfter string // A token used by our server to indicate the starting "identifier" of the page
-	EndingBefore string // A token used by our server to indicate the ending "identifier" of the page
+	EndingBefore  string // A token used by our server to indicate the ending "identifier" of the page
 }
 
 // String returns the URI
@@ -63,7 +63,6 @@ func ParseHeader(h http.Header) LinkedList {
 	return nil
 }
 
-
 // Parse parses the provided string into a LinkedList
 func Parse(s string) LinkedList {
 
@@ -71,7 +70,6 @@ func Parse(s string) LinkedList {
 	if s == "" {
 		return nil
 	}
-
 
 	// Parse LinkList Header to extract an array of url+rel
 	separatedLinks := SeparateLinks(s)
@@ -88,8 +86,7 @@ func Parse(s string) LinkedList {
 	return LinkedList
 }
 
-
-func SeparateLinks(s string) []string{
+func SeparateLinks(s string) []string {
 
 	// Empty list to append links
 	var links []string
@@ -100,7 +97,6 @@ func SeparateLinks(s string) []string{
 	}
 	return links
 }
-
 
 func ParseLink(s string) Link {
 
@@ -118,29 +114,24 @@ func ParseLink(s string) Link {
 	// get formatted parameters
 	params := ParseLinkParameters(formattedURL[0][1])
 
-
 	// get rel key-value pair
 	rel := equalRegexp.Split(parseURI[1], -1)
 
-
 	link := Link{
-		URI:                 params["uri"],
-		Rel:                 rel[1],
-		PerPage:            params["perPage"],
-		StartingAfter: 		params["startingAfter"],
-		EndingBefore:  		 params["endingBefore"],
-
+		URI:           params["uri"],
+		Rel:           rel[1],
+		PerPage:       params["perPage"],
+		StartingAfter: params["startingAfter"],
+		EndingBefore:  params["endingBefore"],
 	}
 
 	return link
 }
 
-
 func ParseLinkParameters(s string) map[string]string {
 
 	// split the base url from the parameters
 	splitParameters := URIRegexp.Split(s, -1)
-
 
 	// parameters = perPage=1000&startingAfter=L_0
 	parameters := splitParameters[1]
@@ -153,7 +144,7 @@ func ParseLinkParameters(s string) map[string]string {
 	var startingAfter string
 	var endingBefore string
 
-	for _,  param := range parameterList {
+	for _, param := range parameterList {
 
 		formattedParam := equalRegexp.Split(param, -1)
 		switch formattedParam[0] {
@@ -167,13 +158,12 @@ func ParseLinkParameters(s string) map[string]string {
 
 	}
 
-
 	// return parsed link data
 	var parsedLink = map[string]string{
-		"uri": splitParameters[0],
-		"perPage": perPage,
+		"uri":           splitParameters[0],
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	return parsedLink
 

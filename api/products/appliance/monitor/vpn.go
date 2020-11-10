@@ -73,7 +73,6 @@ type VPNStatus []struct {
 	} `json:"thirdPartyVpnPeers"`
 }
 
-
 // Show VPN history stat for networks in an organization
 func GetVPNHistory(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
 	networkIds string) []api.Results {
@@ -83,14 +82,13 @@ func GetVPNHistory(organizationId, t0, t1, timespan, perPage, startingAfter, end
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"networkIds": networkIds}
-
+		"endingBefore":  endingBefore,
+		"networkIds":    networkIds}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -108,11 +106,10 @@ func GetVPNStatus(organizationId, perPage, startingAfter, endingBefore,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"networkIds": networkIds}
-
+		"endingBefore":  endingBefore,
+		"networkIds":    networkIds}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

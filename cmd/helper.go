@@ -43,6 +43,3 @@ func currentdir() (cwd string) {
 
 	return cwd
 }
-
-
-

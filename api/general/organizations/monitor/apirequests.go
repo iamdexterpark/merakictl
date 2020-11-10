@@ -34,16 +34,15 @@ type APIRequest struct {
 }
 
 // Return an aggregated overview of API requests data
-func GetAPIRequestsOverview(organizationId, t0, t1, timespan string ) []api.Results {
+func GetAPIRequestsOverview(organizationId, t0, t1, timespan string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests/overview", api.BaseUrl(), organizationId)
 	var datamodel = APIRequestsOverview{}
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan}
-
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -54,23 +53,23 @@ func GetAPIRequestsOverview(organizationId, t0, t1, timespan string ) []api.Resu
 
 // Return an aggregated overview of API requests data
 func GetAPIRequests(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
-	adminId, path, method, responseCode, sourceIp  string )[]api.Results {
+	adminId, path, method, responseCode, sourceIp string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests", api.BaseUrl(), organizationId)
 	var datamodel = APIRequests{}
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"adminId": adminId,
-		"path": path,
-		"method": method,
-		"responseCode": responseCode,
-		"sourceIp": sourceIp,
+		"endingBefore":  endingBefore,
+		"adminId":       adminId,
+		"path":          path,
+		"method":        method,
+		"responseCode":  responseCode,
+		"sourceIp":      sourceIp,
 	}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)

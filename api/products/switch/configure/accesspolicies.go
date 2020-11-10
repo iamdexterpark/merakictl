@@ -39,7 +39,7 @@ type AccessPolicy struct {
 func GetAccessPolicies(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/accessPolicies",
 		api.BaseUrl(), networkId)
- 	var datamodel = AccessPolicies{}
+	var datamodel = AccessPolicies{}
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)

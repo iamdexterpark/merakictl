@@ -6,7 +6,7 @@ import (
 	"log"
 )
 
-type DHCPSettings  struct {
+type DHCPSettings struct {
 	DhcpLeaseTime        string   `json:"dhcpLeaseTime"`
 	DNSNameservers       string   `json:"dnsNameservers"`
 	DNSCustomNameservers []string `json:"dnsCustomNameservers"`

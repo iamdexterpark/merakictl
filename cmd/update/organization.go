@@ -10,7 +10,7 @@ import (
 var org = &cobra.Command{
 	Use:   "org",
 	Short: "",
-	Long: `update org {NAME} -o {ORG_ID}`,
+	Long:  `update org {NAME} -o {ORG_ID}`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		org := cmd.Flag("organization").Value.String()

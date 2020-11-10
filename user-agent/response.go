@@ -34,10 +34,9 @@ func Status200(resp *http.Response) bool {
 	return false
 }
 
-
 func Status300(resp *http.Response) bool {
 	if resp.StatusCode == 302 {
-		log.Println(resp,"Redirect. You were redirected.")
+		log.Println(resp, "Redirect. You were redirected.")
 		return true
 	} else if resp.StatusCode == 308 {
 		log.Println(resp, "Permanent Redirect. Try using the Mega-Proxy in your base URL: api-mp.meraki.com")
@@ -47,8 +46,6 @@ func Status300(resp *http.Response) bool {
 		return true
 	}
 }
-
-
 
 func Status400(resp *http.Response) bool {
 	if resp.StatusCode == 400 {
@@ -73,4 +70,4 @@ func Status400(resp *http.Response) bool {
 func Status500(resp *http.Response) bool {
 	log.Println("External Server Error.")
 	return true
-	}
+}

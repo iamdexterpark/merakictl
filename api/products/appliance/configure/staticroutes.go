@@ -30,7 +30,7 @@ type StaticRoute struct {
 }
 
 // List the static routes for an MX or teleworker network
-func GetStaticRoutes(networkId string ) []api.Results {
+func GetStaticRoutes(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/staticRoutes", api.BaseUrl(), networkId)
 	var datamodel = StaticRoutes{}
 
@@ -41,9 +41,8 @@ func GetStaticRoutes(networkId string ) []api.Results {
 	return sessions
 }
 
-
 // Return a static route for an MX or teleworker network
-func GetStaticRoute(networkId, staticRouteId string ) []api.Results {
+func GetStaticRoute(networkId, staticRouteId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/staticRoutes/%s", api.BaseUrl(), networkId, staticRouteId)
 	var datamodel = StaticRoutes{}
 

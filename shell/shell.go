@@ -13,7 +13,6 @@ import (
 	"log"
 )
 
-
 // displayYaml - Formats an interface into a YAML byte array
 func displayYaml(input interface{}) []byte {
 	var output, err = yaml.Marshal(&input)
@@ -60,7 +59,7 @@ func ExportToFile(input []byte, name, format string) {
 }
 
 // TestDisplay
-func Display(metadatas []api.Results, name string, flags  *pflag.FlagSet) {
+func Display(metadatas []api.Results, name string, flags *pflag.FlagSet) {
 	var results []byte
 	var format string
 	verbose, _ := flags.GetBool("verbose")
@@ -100,7 +99,7 @@ func RenderInput(input interface{}) interface{} {
 
 	// If a config file is found, read it in.
 	err := viper.ReadInConfig()
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
 	}
 
@@ -121,6 +120,5 @@ func RenderVerboseOutput(metadata api.Results) {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 
 }

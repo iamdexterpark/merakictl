@@ -19,7 +19,7 @@ type UserProfiles []struct {
 	Version           string `json:"version"`
 }
 
-type UserAssociatedSoftware[]struct {
+type UserAssociatedSoftware []struct {
 	AppID             string      `json:"appId"`
 	BundleSize        interface{} `json:"bundleSize"`
 	CreatedAt         time.Time   `json:"createdAt"`
@@ -92,10 +92,10 @@ func GetSMNetworkOwners(networkId, ids, usernames, emails, scope string) []api.R
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"ids": ids,
+		"ids":       ids,
 		"usernames": usernames,
-		"emails": emails,
-		"scope": scope}
+		"emails":    emails,
+		"scope":     scope}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

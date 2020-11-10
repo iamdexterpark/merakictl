@@ -28,13 +28,11 @@ type TrafficShaping struct {
 	} `json:"applicationCategories"`
 }
 
-
 // TrafficShapingDSCP - Returns the available DSCP tagging options for your traffic shaping rules.
 type TrafficShapingDSCP []struct {
 	DscpTagValue int    `json:"dscpTagValue"`
 	Description  string `json:"description"`
 }
-
 
 // GetTrafficAnalysis - Return The Traffic Analysis Settings For A Network
 func GetTrafficAnalysis(networkId string) []api.Results {
@@ -47,7 +45,6 @@ func GetTrafficAnalysis(networkId string) []api.Results {
 	return sessions
 }
 
-
 // GetTrafficShaping - Returns the application categories for traffic shaping rules.
 func GetTrafficShaping(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/applicationCategories", api.BaseUrl(), networkId)
@@ -58,7 +55,6 @@ func GetTrafficShaping(networkId string) []api.Results {
 	}
 	return sessions
 }
-
 
 // GetTrafficShapingDSCP - Returns the available DSCP tagging options for your traffic shaping rules.
 func GetTrafficShapingDSCP(networkId string) []api.Results {

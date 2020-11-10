@@ -24,4 +24,3 @@ func GetWirelessSettings(networkId string) []api.Results {
 	}
 	return sessions
 }
-

@@ -61,7 +61,6 @@ type UplinkLoss []struct {
 	LatencyMs   int       `json:"latencyMs"`
 }
 
-
 // GetDeviceClients - Return A Devices Clients
 func GetDeviceClients(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/clients", api.BaseUrl(), serial)
@@ -74,7 +73,6 @@ func GetDeviceClients(serial string) []api.Results {
 
 	return sessions
 }
-
 
 // GetlldpCdp - List LLDP and CDP information for a device
 func GetlldpCdp(serial string) []api.Results {
@@ -89,7 +87,6 @@ func GetlldpCdp(serial string) []api.Results {
 	return sessions
 }
 
-
 // GetlldpCdp - Get the uplink loss percentage and latency in milliseconds for a wired network device.
 func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/lossAndLatencyHistory", api.BaseUrl(), serial)
@@ -97,12 +94,12 @@ func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) []ap
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
+		"t0":         t0,
+		"t1":         t1,
+		"timespan":   timespan,
 		"resolution": resolution,
-		"uplink": uplink,
-		"ip": ip,
+		"uplink":     uplink,
+		"ip":         ip,
 	}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)

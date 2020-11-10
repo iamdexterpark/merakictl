@@ -27,13 +27,13 @@ func GetFailedClientConnections(networkId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan,
-		"band": band,
-		"ssid": ssid,
-		"vlan": vlan,
-		"apTag": apTag}
+		"band":     band,
+		"ssid":     ssid,
+		"vlan":     vlan,
+		"apTag":    apTag}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

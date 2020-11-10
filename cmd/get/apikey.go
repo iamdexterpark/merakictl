@@ -10,9 +10,9 @@ import (
 var apikey = &cobra.Command{
 	Use:   "apikey",
 	Short: "",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("API KEY is : %s \n",api.Token())
+		fmt.Printf("API KEY is : %s \n", api.Token())
 
 	},
 }

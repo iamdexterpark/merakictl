@@ -45,7 +45,7 @@ type VLAN struct {
 }
 
 // Returns the enabled status of VLANs for the network
-func GetVLANStatus(networkId string ) []api.Results {
+func GetVLANStatus(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/settings", api.BaseUrl(), networkId)
 	var datamodel = VLANStatus{}
 
@@ -57,7 +57,7 @@ func GetVLANStatus(networkId string ) []api.Results {
 }
 
 // List the VLANs for an MX network
-func GetVLANs(networkId string ) []api.Results {
+func GetVLANs(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/", api.BaseUrl(), networkId)
 	var datamodel = VLANStatus{}
 
@@ -69,7 +69,7 @@ func GetVLANs(networkId string ) []api.Results {
 }
 
 // List a VLAN for an MX network
-func GetVLAN(networkId, vlanId string ) []api.Results {
+func GetVLAN(networkId, vlanId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/%s", api.BaseUrl(), networkId, vlanId)
 	var datamodel = VLANStatus{}
 

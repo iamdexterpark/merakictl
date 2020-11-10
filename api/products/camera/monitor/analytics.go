@@ -73,9 +73,9 @@ func GetAggregateAnalytics(serial, t0, t1, timespan, objectType string) []api.Re
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
+		"t0":         t0,
+		"t1":         t1,
+		"timespan":   timespan,
 		"objectType": objectType}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -109,9 +109,9 @@ func GetAnalyticsZoneHistoricalRecords(serial, zoneId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
+		"t0":         t0,
+		"t1":         t1,
+		"timespan":   timespan,
 		"resolution": resolution,
 		"objectType": objectType}
 

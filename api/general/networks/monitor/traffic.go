@@ -25,11 +25,11 @@ func GetTrafficAnalysis(networkId, t0, timespan, deviceType string) []api.Result
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"timespan": timespan,
+		"t0":         t0,
+		"timespan":   timespan,
 		"deviceType": deviceType}
 
-		sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
 		log.Fatal(err)
 	}

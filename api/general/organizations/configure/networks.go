@@ -29,12 +29,11 @@ func GetNetworks(organizationId, configTemplateId, tags, tagsFilterType, perPage
 	// Parameters for Request URL
 	var parameters = map[string]string{
 		"configTemplateId": configTemplateId,
-		"tags": tags,
-		"tagsFilterType": tagsFilterType,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
-
+		"tags":             tags,
+		"tagsFilterType":   tagsFilterType,
+		"perPage":          perPage,
+		"startingAfter":    startingAfter,
+		"endingBefore":     endingBefore}
 
 	var datamodel = Networks{}
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)

@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 // ManagementInterface - Return The Management Interface Settings For A Device
 type ManagementInterface struct {
 	DdnsHostnames struct {
@@ -52,13 +51,12 @@ type Device struct {
 	FloorPlanID string `json:"floorPlanId"`
 }
 
-
 // GetManagementInterface - Return The Management Interface Settings For A Device
 func GetManagementInterface(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/managementInterface", api.BaseUrl(), serial)
 	var datamodel = ManagementInterface{}
 
-		sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -67,14 +65,12 @@ func GetManagementInterface(serial string) []api.Results {
 
 }
 
-
-
 // GetSingleDevice - Return A Single Device
 func GetSingleDevice(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s", api.BaseUrl(), serial)
 	var datamodel = Device{}
 
-		sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)
 	}

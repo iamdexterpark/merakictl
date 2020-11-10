@@ -11,7 +11,7 @@ import (
 var clients = &cobra.Command{
 	Use:   "clients",
 	Short: "List the clients that have used this network in the timespan.",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
@@ -25,7 +25,7 @@ var clients = &cobra.Command{
 var alertconfig = &cobra.Command{
 	Use:   "alertconfig",
 	Short: "Return The Alert Configuration For This Network.",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
@@ -33,4 +33,3 @@ var alertconfig = &cobra.Command{
 		shell.Display(metadata, "clients", cmd.Flags())
 	},
 }
-

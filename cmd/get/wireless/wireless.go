@@ -6,7 +6,7 @@ import "github.com/spf13/cobra"
 var MRCmd = &cobra.Command{
 	Use:   "mr",
 	Short: "",
-	Long: "List of available wifi specific API calls exposed via CLI.",
+	Long:  "List of available wifi specific API calls exposed via CLI.",
 }
 
 // init - Entrypoint for OrgCmd sub-commands.

@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-
 type ChannelUtilizations []struct {
 	ChannelUtilization
 }
@@ -39,14 +38,13 @@ func GetChannelUtilization(networkId, t0, t1, timespan, resolution, perPage, sta
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"resolution": resolution,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"resolution":    resolution,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
-
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -55,4 +53,3 @@ func GetChannelUtilization(networkId, t0, t1, timespan, resolution, perPage, sta
 	return sessions
 
 }
-

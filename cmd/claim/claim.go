@@ -6,9 +6,8 @@ import "github.com/spf13/cobra"
 var ClaimCmd = &cobra.Command{
 	Use:   "claim",
 	Short: "",
-	Long: "Claim assets and licenses to Meraki Dashboard.",
+	Long:  "Claim assets and licenses to Meraki Dashboard.",
 }
 
 func init() {
 }
-

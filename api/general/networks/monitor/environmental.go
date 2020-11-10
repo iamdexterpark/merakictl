@@ -33,11 +33,11 @@ func GetEnvironmentalEvents(networkId, includedEventTypes, excludedEventTypes, s
 	var parameters = map[string]string{
 		"includedEventTypes": includedEventTypes,
 		"excludedEventTypes": excludedEventTypes,
-		"sensorSerial": sensorSerial,
-		"gatewaySerial": gatewaySerial,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"sensorSerial":       sensorSerial,
+		"gatewaySerial":      gatewaySerial,
+		"perPage":            perPage,
+		"startingAfter":      startingAfter,
+		"endingBefore":       endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

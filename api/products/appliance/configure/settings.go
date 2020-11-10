@@ -11,7 +11,7 @@ type ApplianceSettings struct {
 }
 
 // Return the appliance settings for a network
-func GetApplianceSettings(networkId string ) []api.Results {
+func GetApplianceSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/settings", api.BaseUrl(), networkId)
 	var datamodel = ApplianceSettings{}
 

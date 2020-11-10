@@ -11,17 +11,17 @@ type ContentFilteringCategories struct {
 }
 
 type ContentFilteringSettings struct {
-AllowedURLPatterns   []string `json:"allowedUrlPatterns"`
-BlockedURLPatterns   []string `json:"blockedUrlPatterns"`
-BlockedURLCategories []struct {
-ID   string `json:"id"`
-Name string `json:"name"`
-} `json:"blockedUrlCategories"`
-URLCategoryListSize string `json:"urlCategoryListSize"`
+	AllowedURLPatterns   []string `json:"allowedUrlPatterns"`
+	BlockedURLPatterns   []string `json:"blockedUrlPatterns"`
+	BlockedURLCategories []struct {
+		ID   string `json:"id"`
+		Name string `json:"name"`
+	} `json:"blockedUrlCategories"`
+	URLCategoryListSize string `json:"urlCategoryListSize"`
 }
 
 // List all available content filtering categories for an MX network
-func GetContentFilteringCategories(networkId string ) []api.Results {
+func GetContentFilteringCategories(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/contentFiltering/categories", api.BaseUrl(), networkId)
 	var datamodel = ContentFilteringCategories{}
 
@@ -33,7 +33,7 @@ func GetContentFilteringCategories(networkId string ) []api.Results {
 }
 
 // Return the content filtering settings for an MX network
-func GetContentFilteringSettings(networkId string ) []api.Results {
+func GetContentFilteringSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/contentFiltering", api.BaseUrl(), networkId)
 	var datamodel = ContentFilteringSettings{}
 
@@ -43,4 +43,3 @@ func GetContentFilteringSettings(networkId string ) []api.Results {
 	}
 	return sessions
 }
-

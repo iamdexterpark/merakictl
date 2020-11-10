@@ -1,4 +1,5 @@
 package user_agent
+
 /*
 Modified version of Link: https://github.com/peterhellberg/link
 Special thanks to peterhellberg.

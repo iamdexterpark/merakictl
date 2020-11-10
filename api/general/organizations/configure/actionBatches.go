@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 type ActionBatchList []struct {
 	ActionBatch
 }
@@ -44,7 +43,6 @@ func GetActionBatchList(organizationId, status string) []api.Results {
 	}
 	return sessions
 }
-
 
 // Return A Single Action Batch
 func GetActionBatch(organizationId, actionBatchId string) []api.Results {

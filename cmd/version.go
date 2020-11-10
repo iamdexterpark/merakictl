@@ -9,7 +9,7 @@ import (
 var version = &cobra.Command{
 	Use:   "version",
 	Short: "",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Merakictl Alpha Version")
 

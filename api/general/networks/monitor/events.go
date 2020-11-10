@@ -44,20 +44,20 @@ func GetEvents(networkId, productType, includedEventTypes, excludedEventTypes,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"productType": productType,
+		"productType":        productType,
 		"includedEventTypes": includedEventTypes,
 		"excludedEventTypes": excludedEventTypes,
-		"deviceMac": deviceMac,
-		"deviceSerial": deviceSerial,
-		"deviceName": deviceName,
-		"clientIp": clientIp,
-		"clientMac": clientMac,
-		"clientName": clientName,
-		"smDeviceMac": smDeviceMac,
-		"smDeviceName": smDeviceName,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"deviceMac":          deviceMac,
+		"deviceSerial":       deviceSerial,
+		"deviceName":         deviceName,
+		"clientIp":           clientIp,
+		"clientMac":          clientMac,
+		"clientName":         clientName,
+		"smDeviceMac":        smDeviceMac,
+		"smDeviceName":       smDeviceName,
+		"perPage":            perPage,
+		"startingAfter":      startingAfter,
+		"endingBefore":       endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

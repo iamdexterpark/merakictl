@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/merakictl/api"
 	"log"
 )
+
 type SAMLRoles []struct {
 	SAMLRole
 }

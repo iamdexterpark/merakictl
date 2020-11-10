@@ -86,9 +86,9 @@ func GetHistoricalConnectivityData(networkId, deviceId,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
 		log.Fatal(err)
@@ -105,9 +105,9 @@ func GetDesktopDevicesHistoricalRecords(networkId, deviceId,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -125,9 +125,9 @@ func GetCommandHistoricalRecords(networkId, deviceId,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -145,9 +145,9 @@ func GetClientMetricsHistoricalRecords(networkId, deviceId,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -155,4 +155,3 @@ func GetClientMetricsHistoricalRecords(networkId, deviceId,
 	}
 	return sessions
 }
-

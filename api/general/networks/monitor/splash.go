@@ -26,10 +26,9 @@ func GetSplashLoginAttempts(networkId, splashLoginAttempts, ssidNumber, loginIde
 	// Parameters for Request URL
 	var parameters = map[string]string{
 		"splashLoginAttempts": splashLoginAttempts,
-		"ssidNumber": ssidNumber,
-		"loginIdentifier": loginIdentifier,
-		"timespan": timespan}
-
+		"ssidNumber":          ssidNumber,
+		"loginIdentifier":     loginIdentifier,
+		"timespan":            timespan}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

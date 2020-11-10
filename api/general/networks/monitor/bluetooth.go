@@ -33,12 +33,12 @@ func GetBluetoothClients(networkId, t0, t1, timespan, perPage, startingAfter, en
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
+		"t0":                         t0,
+		"t1":                         t1,
+		"timespan":                   timespan,
+		"perPage":                    perPage,
+		"startingAfter":              startingAfter,
+		"endingBefore":               endingBefore,
 		"includeConnectivityHistory": includeConnectivityHistory,
 	}
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -49,13 +49,13 @@ func GetBluetoothClients(networkId, t0, t1, timespan, perPage, startingAfter, en
 }
 
 // GetBluetoothClient - List A Bluetooth Client Seen By APs In This Network
-func GetBluetoothClient (networkId, bluetoothClientId, includeConnectivityHistory, connectivityHistoryTimespan string) []api.Results {
+func GetBluetoothClient(networkId, bluetoothClientId, includeConnectivityHistory, connectivityHistoryTimespan string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/bluetoothClients/%s", api.BaseUrl(), networkId, bluetoothClientId)
 	var datamodel = BluetoothClient{}
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"includeConnectivityHistory": includeConnectivityHistory,
+		"includeConnectivityHistory":  includeConnectivityHistory,
 		"connectivityHistoryTimespan": connectivityHistoryTimespan}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -65,4 +65,3 @@ func GetBluetoothClient (networkId, bluetoothClientId, includeConnectivityHistor
 
 	return sessions
 }
-

@@ -115,13 +115,13 @@ func GetAggregatedConnectivityInfo(devices, serial, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan,
-		"band": band,
-		"ssid": ssid,
-		"vlan": vlan,
-		"apTag": apTag}
+		"band":     band,
+		"ssid":     ssid,
+		"vlan":     vlan,
+		"apTag":    apTag}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -139,13 +139,13 @@ func GetAggregatedConnectivityClients(networkId, clientId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan,
-		"band": band,
-		"ssid": ssid,
-		"vlan": vlan,
-		"apTag": apTag}
+		"band":     band,
+		"ssid":     ssid,
+		"vlan":     vlan,
+		"apTag":    apTag}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -164,17 +164,17 @@ func GetWirelessConnectivityEvents(networkId, clientId, perPage, startingAfter,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"types": types,
+		"perPage":            perPage,
+		"startingAfter":      startingAfter,
+		"endingBefore":       endingBefore,
+		"t0":                 t0,
+		"t1":                 t1,
+		"timespan":           timespan,
+		"types":              types,
 		"includedSeverities": includedSeverities,
-		"band": band,
-		"ssidNumber": ssidNumber,
-		"deviceSerial": deviceSerial}
+		"band":               band,
+		"ssidNumber":         ssidNumber,
+		"deviceSerial":       deviceSerial}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -190,12 +190,11 @@ func GetClientLatencyHistory(networkId, clientId, t0, t1, timespan,
 		api.BaseUrl(), networkId, clientId)
 	var datamodel = ClientLatencyHistory{}
 
-
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
+		"t0":         t0,
+		"t1":         t1,
+		"timespan":   timespan,
 		"resolution": resolution}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -214,14 +213,14 @@ func GetAggregatedLatencies(networkId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan,
-		"band": band,
-		"ssid": ssid,
-		"vlan": vlan,
-		"apTag": apTag,
-		"fields": fields}
+		"band":     band,
+		"ssid":     ssid,
+		"vlan":     vlan,
+		"apTag":    apTag,
+		"fields":   fields}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -239,15 +238,14 @@ func GetAggregatedLatency(networkId, clientId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
+		"t0":       t0,
+		"t1":       t1,
 		"timespan": timespan,
-		"band": band,
-		"ssid": ssid,
-		"vlan": vlan,
-		"apTag": apTag,
-		"fields": fields}
-
+		"band":     band,
+		"ssid":     ssid,
+		"vlan":     vlan,
+		"apTag":    apTag,
+		"fields":   fields}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -255,4 +253,3 @@ func GetAggregatedLatency(networkId, clientId, t0, t1, timespan,
 	}
 	return sessions
 }
-

@@ -27,7 +27,7 @@ var ssid = &cobra.Command{
 		networkId := cmd.Flag("network").Value.String()
 
 		ssidNumber := args[0]
-		metadata:= configure.GetSSID(networkId,ssidNumber)
+		metadata := configure.GetSSID(networkId, ssidNumber)
 		shell.Display(metadata, "ssid", cmd.Flags())
 	},
 }

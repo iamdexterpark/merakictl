@@ -36,8 +36,6 @@ func GetClientPolicy(networkId, clientId string) []api.Results {
 	return sessions
 }
 
-
-
 // Return The Splash Authorization For A Client For Each SSID They've Associated With Through Splash
 func GetSplashAuthorization(networkId, clientId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/splashAuthorizationStatus", api.BaseUrl(), networkId, clientId)

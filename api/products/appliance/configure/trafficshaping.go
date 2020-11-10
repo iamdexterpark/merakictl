@@ -98,7 +98,7 @@ type TrafficShapingSettings struct {
 }
 
 // List all custom performance classes for an MX network
-func GetPerformanceClasses(networkId string ) []api.Results {
+func GetPerformanceClasses(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses", api.BaseUrl(), networkId)
 	var datamodel = PerformanceClasses{}
 
@@ -110,7 +110,7 @@ func GetPerformanceClasses(networkId string ) []api.Results {
 }
 
 // Return a custom performance class for an MX network
-func GetPerformanceClass(networkId, customPerformanceClassId string ) []api.Results {
+func GetPerformanceClass(networkId, customPerformanceClassId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses/%s", api.BaseUrl(), networkId, customPerformanceClassId)
 	var datamodel = PerformanceClass{}
 
@@ -122,7 +122,7 @@ func GetPerformanceClass(networkId, customPerformanceClassId string ) []api.Resu
 }
 
 // Display the traffic shaping settings rules for an MX network
-func GetTrafficShapingRules(networkId string ) []api.Results {
+func GetTrafficShapingRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/rules", api.BaseUrl(), networkId)
 	var datamodel = TrafficShapingRules{}
 
@@ -134,7 +134,7 @@ func GetTrafficShapingRules(networkId string ) []api.Results {
 }
 
 // Returns the uplink bandwidth settings for your MX network.
-func GetUplinkBandwidthSettings(networkId string )[]api.Results {
+func GetUplinkBandwidthSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkBandwidth", api.BaseUrl(), networkId)
 	var datamodel = UplinkBandwidthSettings{}
 
@@ -146,7 +146,7 @@ func GetUplinkBandwidthSettings(networkId string )[]api.Results {
 }
 
 // Show uplink selection settings for an MX network
-func GetUplinkSelectionSettings(networkId string ) []api.Results {
+func GetUplinkSelectionSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkSelection", api.BaseUrl(), networkId)
 	var datamodel = UplinkSelectionSettings{}
 
@@ -158,7 +158,7 @@ func GetUplinkSelectionSettings(networkId string ) []api.Results {
 }
 
 // Display the traffic shaping settings for an MX network
-func GetTrafficShapingSettings(networkId string ) []api.Results {
+func GetTrafficShapingSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping", api.BaseUrl(), networkId)
 	var datamodel = TrafficShapingSettings{}
 

@@ -1,4 +1,5 @@
 package user_agent
+
 /*
 Special thanks to Nitish Kumar: https://medium.com/@nitishkr88/http-retries-in-go-e622e51d249f
 */
@@ -13,19 +14,17 @@ import (
 	"time"
 )
 
-
-
 // MerakiClient creates a new Client with default settings
 func MerakiClient() *Client {
 	return &Client{
-		HTTPClient:    cleanhttp.DefaultClient(),
-		MaxRetry:      MaxRetryPolicy,
-		CheckForRetry: RetryPolicy,
-		Backoff:       BackoffPolicy,
+		HTTPClient:          cleanhttp.DefaultClient(),
+		MaxRetry:            MaxRetryPolicy,
+		CheckForRetry:       RetryPolicy,
+		Backoff:             BackoffPolicy,
 		CheckForDeprecation: DeprecationPolicy,
-		CheckForSunSet: SunSetPolicy,
-		CheckForPagination: PaginationPolicy,
-		HTTPResponsePolicy: HTTPResponseHandler,
+		CheckForSunSet:      SunSetPolicy,
+		CheckForPagination:  PaginationPolicy,
+		HTTPResponsePolicy:  HTTPResponseHandler,
 	}
 }
 
@@ -36,7 +35,6 @@ type Request struct {
 	// Embed an HTTP request directly.
 	*http.Request
 }
-
 
 // NewRequest creates a new wrapped request.
 func NewRequest(method, url string, body io.ReadSeeker) (*Request, error) {
@@ -54,7 +52,6 @@ func NewRequest(method, url string, body io.ReadSeeker) (*Request, error) {
 	}
 	return &Request{body, httpReq}, nil
 }
-
 
 // Do wraps calling an HTTP method with retries
 func (c *Client) Do(req *Request) (*http.Response, error) {
@@ -169,7 +166,7 @@ func (c *Client) drainBody(body io.ReadCloser) {
 }
 
 // Get is a convenience helper for doing simple GET requests.
-func (c *Client) Get(url,  apiversion, apitoken string) (*http.Response, error) {
+func (c *Client) Get(url, apiversion, apitoken string) (*http.Response, error) {
 	req, err := NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err

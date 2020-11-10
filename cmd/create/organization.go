@@ -10,7 +10,7 @@ import (
 var org = &cobra.Command{
 	Use:   "org",
 	Short: "",
-	Long: `create org {NAME}`,
+	Long:  `create org {NAME}`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var name = args[0]
 		metadata := configure.CreateOrganization(name)

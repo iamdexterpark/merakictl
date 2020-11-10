@@ -15,7 +15,7 @@ type License struct {
 }
 
 // Return an overview of the license state for an organization
-func GetLicenseOverview(organizationId string ) []api.Results {
+func GetLicenseOverview(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/licenses/overview", api.BaseUrl(), organizationId)
 	var datamodel = License{}
 

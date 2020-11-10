@@ -10,7 +10,7 @@ import (
 // Client is used to make HTTP requests
 type Client struct {
 	HTTPClient *http.Client // Internal HTTP client
-	MaxRetry 	 int 		   // Maximum number of retries
+	MaxRetry   int          // Maximum number of retries
 
 	// CheckForRetry specifies the policy for handling retries, and is called
 	// after each request
@@ -32,10 +32,8 @@ type Client struct {
 	HTTPResponsePolicy HTTPResponsePolicy
 
 	// RedirectPolicy
-	
+
 }
-
-
 
 // CheckForRetry
 type CheckForRetry func(resp *http.Response, err error) (bool, error)
@@ -51,8 +49,6 @@ func RetryPolicy(resp *http.Response, err error) (bool, error) {
 	}
 	return false, nil
 }
-
-
 
 var (
 	// Default Retry Configuration
@@ -72,7 +68,6 @@ func BackoffPolicy(resp *http.Response) time.Duration {
 	sleep := time.Duration(retryAfter)
 	return sleep
 }
-
 
 // A "Deprecation" response header informing you that this is no longer
 // the preferred version. It will remain operational and supported,

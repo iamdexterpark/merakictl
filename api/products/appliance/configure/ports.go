@@ -19,7 +19,7 @@ type PortVLANSetting struct {
 }
 
 // List per-port VLAN settings for all ports of a MX.
-func GetPortVLANSettings(networkId string ) []api.Results {
+func GetPortVLANSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/ports", api.BaseUrl(), networkId)
 	var datamodel = PortVLANSettings{}
 
@@ -30,9 +30,8 @@ func GetPortVLANSettings(networkId string ) []api.Results {
 	return sessions
 }
 
-
 // Return per-port VLAN settings for a single MX port.
-func GetPortVLANSetting(networkId, portId string ) []api.Results {
+func GetPortVLANSetting(networkId, portId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/ports/%s", api.BaseUrl(), networkId, portId)
 	var datamodel = PortVLANSetting{}
 

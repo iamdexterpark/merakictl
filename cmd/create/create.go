@@ -8,7 +8,7 @@ import (
 var CreateCmd = &cobra.Command{
 	Use:   "create",
 	Short: "",
-	Long: "Base for all HTTP POST Calls to Meraki Dashboard.",
+	Long:  "Base for all HTTP POST Calls to Meraki Dashboard.",
 }
 
 func init() {

@@ -12,7 +12,7 @@ type PerformanceScore struct {
 
 // Return the performance score for a single MX. Only primary MX devices supported.
 // If no data is available, a 204 error code is returned.
-func GetPerformanceScore(serial string ) []api.Results {
+func GetPerformanceScore(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/appliance/performance", api.BaseUrl(), serial)
 	var datamodel = PerformanceScore{}
 

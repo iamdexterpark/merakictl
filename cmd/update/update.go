@@ -9,11 +9,10 @@ import (
 var UpdateCmd = &cobra.Command{
 	Use:   "update",
 	Short: "Updates configurations.",
-	Long: "Base for all HTTP PUT Calls to Meraki Dashboard.",
+	Long:  "Base for all HTTP PUT Calls to Meraki Dashboard.",
 }
 
 func init() {
 	UpdateCmd.AddCommand(org)
 	UpdateCmd.AddCommand(wireless.MRCmd)
 }
-

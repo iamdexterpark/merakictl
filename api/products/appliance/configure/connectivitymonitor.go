@@ -15,7 +15,7 @@ type ConnectivityMonitoringDestinations struct {
 }
 
 // Return the connectivity testing destinations for an MX network
-func GetConnectivityMonitoringDestinations(networkId string ) []api.Results {
+func GetConnectivityMonitoringDestinations(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/connectivityMonitoringDestinations", api.BaseUrl(), networkId)
 	var datamodel = ConnectivityMonitoringDestinations{}
 

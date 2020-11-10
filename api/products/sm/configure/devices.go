@@ -117,7 +117,7 @@ func GetDeviceCerts(networkId, deviceId string) []api.Results {
 }
 
 // Get the profiles associated with a device
-func GetDeviceProfiles(networkId, deviceId string)[]api.Results {
+func GetDeviceProfiles(networkId, deviceId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/deviceProfiles",
 		api.BaseUrl(), networkId, deviceId)
 	var datamodel = DeviceProfiles{}
@@ -204,15 +204,14 @@ func GetSMEnrolledDevices(networkId, fields, wifiMacs, serials, ids, scope, perP
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"fields": fields,
-		"wifiMacs": wifiMacs,
-		"serials": serials,
-		"ids": ids,
-		"scope": scope,
-		"perPage": perPage,
+		"fields":        fields,
+		"wifiMacs":      wifiMacs,
+		"serials":       serials,
+		"ids":           ids,
+		"scope":         scope,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
-
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

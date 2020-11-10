@@ -43,14 +43,13 @@ func GetSecurityEvents(networkId, clientId, t0, t1, timespan, perPage, startingA
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"sortOrder": sortOrder}
-
+		"endingBefore":  endingBefore,
+		"sortOrder":     sortOrder}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

@@ -26,7 +26,6 @@ type DeviceStatus struct {
 }
 
 type LossLatencyList []struct {
-
 }
 type LossLatency []struct {
 	NetworkID  string `json:"networkId"`
@@ -41,16 +40,15 @@ type LossLatency []struct {
 }
 
 // List the status of every Meraki device in the organization
-func GetDeviceStatus(organizationId, perPage, startingAfter, endingBefore string ) []api.Results {
+func GetDeviceStatus(organizationId, perPage, startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/devices/statuses", api.BaseUrl(), organizationId)
 	var datamodel = DeviceStatuses{}
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
-
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -59,19 +57,18 @@ func GetDeviceStatus(organizationId, perPage, startingAfter, endingBefore string
 	return sessions
 }
 
-
 // Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago
-func GetLossLatency(organizationId, t0, t1, timespan, uplink, ip  string ) []api.Results {
+func GetLossLatency(organizationId, t0, t1, timespan, uplink, ip string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/devices/uplinksLossAndLatency", api.BaseUrl(), organizationId)
 	var datamodel = APIRequests{}
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1":   t1,
-		"timespan":          timespan,
-		"uplink":    uplink,
-		"ip":     ip}
+		"t0":       t0,
+		"t1":       t1,
+		"timespan": timespan,
+		"uplink":   uplink,
+		"ip":       ip}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

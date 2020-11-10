@@ -22,7 +22,7 @@ type WarmSpare struct {
 }
 
 // Return MX warm spare settings
-func GetWarmSpare(networkId string ) []api.Results {
+func GetWarmSpare(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/warmSpare", api.BaseUrl(), networkId)
 	var datamodel = FirewallRules{}
 

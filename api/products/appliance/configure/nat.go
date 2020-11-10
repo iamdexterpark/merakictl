@@ -21,7 +21,6 @@ type OneToManyNatRules struct {
 	} `json:"rules"`
 }
 
-
 type OneToOneNatRules struct {
 	Rules []struct {
 		Name           string `json:"name"`
@@ -49,7 +48,7 @@ type PortForwardingRules struct {
 }
 
 // Return the 1:Many NAT mapping rules for an MX network
-func GetOneToManyNatRules(networkId string ) []api.Results {
+func GetOneToManyNatRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToManyNatRules", api.BaseUrl(), networkId)
 	var datamodel = OneToManyNatRules{}
 
@@ -61,7 +60,7 @@ func GetOneToManyNatRules(networkId string ) []api.Results {
 }
 
 // Return the 1:1 NAT mapping rules for an MX network
-func GetOneToOneNatRules(networkId string ) []api.Results {
+func GetOneToOneNatRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToOneNatRules", api.BaseUrl(), networkId)
 	var datamodel = OneToOneNatRules{}
 
@@ -73,7 +72,7 @@ func GetOneToOneNatRules(networkId string ) []api.Results {
 }
 
 // Return the port forwarding rules for an MX network
-func GetPortForwardingRules(networkId string )[]api.Results {
+func GetPortForwardingRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/portForwardingRules", api.BaseUrl(), networkId)
 	var datamodel = PortForwardingRules{}
 

@@ -58,7 +58,6 @@ func MarshalJSON(data interface{}) *strings.Reader {
 	return payload
 }
 
-
 type HttpPacket struct {
 	Status     string // e.g. "200 OK"
 	StatusCode int    // e.g. 200
@@ -67,8 +66,8 @@ type HttpPacket struct {
 	ProtoMinor int    // e.g. 0
 
 	// response headers
-	Header http.Header    // response body
-	Body io.ReadCloser    // request that was sent to obtain the response
+	Header  http.Header   // response body
+	Body    io.ReadCloser // request that was sent to obtain the response
 	Request *http.Request
 }
 
@@ -83,11 +82,10 @@ func TraceBack(resp *http.Response) interface{} {
 		ProtoMajor: resp.ProtoMajor,
 		ProtoMinor: resp.ProtoMinor,
 
-		Header: resp.Header,
-		Body: resp.Body,
+		Header:  resp.Header,
+		Body:    resp.Body,
 		Request: resp.Request,
 	}
-
 
 	return traceback
 }

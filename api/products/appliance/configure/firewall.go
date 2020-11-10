@@ -65,7 +65,6 @@ type L7FirewallRules struct {
 	} `json:"rules"`
 }
 
-
 type L7FirewallApplicationCategories struct {
 	ApplicationCategories []struct {
 		ID           string `json:"id"`
@@ -78,7 +77,7 @@ type L7FirewallApplicationCategories struct {
 }
 
 // Return the cellular firewall rules for an MX network
-func GetCellularFirewallRules(networkId string )[]api.Results {
+func GetCellularFirewallRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/cellularFirewallRules", api.BaseUrl(), networkId)
 	var datamodel = CellularFirewallRules{}
 
@@ -89,11 +88,8 @@ func GetCellularFirewallRules(networkId string )[]api.Results {
 	return sessions
 }
 
-
-
-
 // List the appliance services and their accessibility rules
-func GetFirewalledServices(networkId string ) []api.Results {
+func GetFirewalledServices(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices", api.BaseUrl(), networkId)
 	var datamodel = FirewalledServices{}
 
@@ -105,7 +101,7 @@ func GetFirewalledServices(networkId string ) []api.Results {
 }
 
 // List the appliance services and their accessibility rules
-func GetFirewalledService(networkId, serviceId string ) []api.Results {
+func GetFirewalledService(networkId, serviceId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices/%s", api.BaseUrl(), networkId, serviceId)
 	var datamodel = FirewalledService{}
 
@@ -117,7 +113,7 @@ func GetFirewalledService(networkId, serviceId string ) []api.Results {
 }
 
 // Return the inbound firewall rules for an MX network
-func GetInboundFirewallRules(networkId string ) []api.Results {
+func GetInboundFirewallRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/inboundFirewallRules", api.BaseUrl(), networkId)
 	var datamodel = InboundFirewallRules{}
 
@@ -129,7 +125,7 @@ func GetInboundFirewallRules(networkId string ) []api.Results {
 }
 
 // Return the L3 firewall rules for an MX network
-func GetL3FirewallRules(networkId string ) []api.Results {
+func GetL3FirewallRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l3FirewallRules", api.BaseUrl(), networkId)
 	var datamodel = L3FirewallRules{}
 
@@ -140,9 +136,8 @@ func GetL3FirewallRules(networkId string ) []api.Results {
 	return sessions
 }
 
-
 // List the MX L7 firewall rules for an MX network
-func GetL7FirewallRules(networkId string ) []api.Results {
+func GetL7FirewallRules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules", api.BaseUrl(), networkId)
 	var datamodel = L7FirewallRules{}
 
@@ -154,7 +149,7 @@ func GetL7FirewallRules(networkId string ) []api.Results {
 }
 
 // Return the L7 firewall application categories and their associated applications for an MX network
-func GetL7FirewallApplicationCategories(networkId string ) []api.Results {
+func GetL7FirewallApplicationCategories(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules/applicationCategories", api.BaseUrl(), networkId)
 	var datamodel = L7FirewallApplicationCategories{}
 

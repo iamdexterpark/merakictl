@@ -9,7 +9,6 @@ import (
 	"net/http"
 )
 
-
 // Meraki API token
 func Token() string {
 	viper.AutomaticEnv()
@@ -30,8 +29,6 @@ func APIversion() string {
 	return apiversion
 }
 
-
-
 // Meraki Shard Url
 func BaseUrl() string {
 	viper.AutomaticEnv()
@@ -47,25 +44,23 @@ type ResponseData struct {
 	Pagination []user_agent.Link
 }
 
-
-
 // request of API Call
 type Request struct {
-	method string
-	baseurl string
-	parameters string
-	payload io.ReadSeeker
+	method              string
+	baseurl             string
+	parameters          string
+	payload             io.ReadSeeker
 	DashboardAPIVersion string
 }
 
 // HTTP Protocol
 type Response struct {
-	Status     string // e.g. "200 OK"
-	StatusCode int    // e.g. 200
-	Proto      string // e.g. "HTTP/1.0"
-	ProtoMajor int    // e.g. 1
-	ProtoMinor int    // e.g. 0
-	Header http.Header    // response headers
+	Status     string      // e.g. "200 OK"
+	StatusCode int         // e.g. 200
+	Proto      string      // e.g. "HTTP/1.0"
+	ProtoMajor int         // e.g. 1
+	ProtoMinor int         // e.g. 0
+	Header     http.Header // response headers
 	// Body  io.ReadCloser  // response body includes entire cert chain...
 }
 
@@ -74,13 +69,12 @@ type Results struct {
 	Request
 	Response
 	Pagination []user_agent.Link
-	Payload interface{}
+	Payload    interface{}
 }
-
 
 // TestSession initializes a communication channel with the Meraki Dashboard API
 func Session(baseurl string, method string, payload io.ReadSeeker,
-	parameter  map[string]string, datamodel interface{}) (Results, error) {
+	parameter map[string]string, datamodel interface{}) (Results, error) {
 	restSession := user_agent.MerakiClient()
 
 	// response variable
@@ -89,7 +83,6 @@ func Session(baseurl string, method string, payload io.ReadSeeker,
 
 	// Determine HTTP Method
 	switch method {
-
 
 	// Get-based API Calls
 	case "GET":
@@ -100,21 +93,21 @@ func Session(baseurl string, method string, payload io.ReadSeeker,
 
 	// Create-based API Calls
 	case "POST":
-		session, err =  restSession.Post(baseurl, APIversion(), Token(), payload)
+		session, err = restSession.Post(baseurl, APIversion(), Token(), payload)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 	// Update-based API Calls
 	case "PUT":
-		session, err =  restSession.Put(baseurl, APIversion(), Token(), payload)
+		session, err = restSession.Put(baseurl, APIversion(), Token(), payload)
 		if err != nil {
 			log.Fatal(err)
 		}
 
 	// Delete-based API Calls
 	case "DELETE":
-		session, err =  restSession.Delete(baseurl, APIversion(), Token())
+		session, err = restSession.Delete(baseurl, APIversion(), Token())
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -134,12 +127,11 @@ func Session(baseurl string, method string, payload io.ReadSeeker,
 	// marshal data into model
 	user_agent.UnMarshalJSON(session.Body, &datamodel)
 
-
 	dashboardRequest := Request{
-		method: method,
-		baseurl:     baseurl,
-		parameters: session.Request.URL.RawQuery,
-		payload: payload,
+		method:              method,
+		baseurl:             baseurl,
+		parameters:          session.Request.URL.RawQuery,
+		payload:             payload,
 		DashboardAPIVersion: APIversion(),
 	}
 
@@ -155,17 +147,14 @@ func Session(baseurl string, method string, payload io.ReadSeeker,
 
 	metadata := Results{
 
-		Request: dashboardRequest,
-		Response: dashboardResponse,
+		Request:    dashboardRequest,
+		Response:   dashboardResponse,
 		Pagination: user_agent.ParseHeader(session.Header),
-		Payload: datamodel,
-
+		Payload:    datamodel,
 	}
-
 
 	return metadata, err
 }
-
 
 func Sessions(baseurl string, method string, payload io.ReadSeeker,
 	parameters map[string]string, datamodel interface{}) ([]Results, error) {
@@ -191,7 +180,6 @@ func Sessions(baseurl string, method string, payload io.ReadSeeker,
 			}
 			sessions = append(sessions, paginatedSession)
 		}
-
 
 	}
 	return sessions, err

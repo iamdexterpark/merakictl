@@ -36,7 +36,6 @@ func TestRetryHeader(t *testing.T) {
 	}
 }
 
-
 func TestRetryPolicyTrue(t *testing.T) {
 
 	OrgClient := MerakiClient()
@@ -84,9 +83,9 @@ func TestBackoffPolicyTrue(t *testing.T) {
 	before := time.Now()
 	wait := OrgClient.Backoff(Orgcall)
 	time.Sleep(wait * time.Second)
-	after:= time.Now()
+	after := time.Now()
 
-	if after.After(before.Add(time.Second * 1)) && after.Before(before.Add(time.Second * 3)){
+	if after.After(before.Add(time.Second*1)) && after.Before(before.Add(time.Second*3)) {
 		t.Log()
 	} else {
 		println(before.String())
@@ -95,7 +94,6 @@ func TestBackoffPolicyTrue(t *testing.T) {
 		t.Errorf("[ERR] request failed:  %v", err)
 	}
 }
-
 
 func TestBackoffPolicyFalse(t *testing.T) {
 	// w.Header().Add("Retry-After", "1")
@@ -122,16 +120,15 @@ func TestBackoffPolicyFalse(t *testing.T) {
 	before := time.Now()
 	wait := OrgClient.Backoff(Orgcall)
 	time.Sleep(wait * time.Second)
-	after:= time.Now()
+	after := time.Now()
 
-	if after.After(before.Add(time.Second * 1)) && after.Before(before.Add(time.Second * 2)){
+	if after.After(before.Add(time.Second*1)) && after.Before(before.Add(time.Second*2)) {
 		println(before.String())
 		println(after.String())
 		println(wait)
 		t.Errorf("[ERR] request failed:  %v", err)
 	} else {
 		t.Log()
-
 
 	}
 }

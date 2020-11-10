@@ -38,9 +38,9 @@ func GetUplinkStatus(organizationId, perPage, startingAfter, endingBefore string
 	var datamodel = UplinkStatus{}
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"perPage": perPage,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

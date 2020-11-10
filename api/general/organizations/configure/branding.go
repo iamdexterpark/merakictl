@@ -49,7 +49,6 @@ func GetBrandingPriority(organizationId string) []api.Results {
 	return sessions
 }
 
-
 // Return The Branding Policies Of An Organization
 func GetBrandingPolicies(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies", api.BaseUrl(),

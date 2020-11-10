@@ -21,7 +21,6 @@ type SAML struct {
 	Enabled bool `json:"enabled"`
 }
 
-
 // List the SAML IdPs in your organization.
 func GetLDPS(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idps", api.BaseUrl(),
@@ -47,8 +46,6 @@ func GetLDP(organizationId, ldpId string) []api.Results {
 	return sessions
 }
 
-
-
 // Returns the SAML SSO enabled settings for an organization.
 func GetSAML(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/saml", api.BaseUrl(),
@@ -61,5 +58,3 @@ func GetSAML(organizationId string) []api.Results {
 	}
 	return sessions
 }
-
-

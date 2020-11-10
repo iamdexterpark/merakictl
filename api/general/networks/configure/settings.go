@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 // NetworkSettings - Return The Settings For A Network
 type NetworkSettings struct {
 	LocalStatusPageEnabled  bool `json:"localStatusPageEnabled"`

@@ -15,7 +15,6 @@ type SNMP struct {
 	} `json:"users"`
 }
 
-
 // GetSNMP - Return The SNMP Settings For A Network
 func GetSNMP(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/snmp", api.BaseUrl(), networkId)

@@ -17,7 +17,7 @@ type MonitoredMediaServer struct {
 }
 
 // List The Monitored Media Servers For This Organization
-func GetMonitoredMediaServers(organizationId string ) []api.Results {
+func GetMonitoredMediaServers(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/insight/monitoredMediaServers", api.BaseUrl(), organizationId)
 	var datamodel = MonitoredMediaServers{}
 
@@ -29,7 +29,7 @@ func GetMonitoredMediaServers(organizationId string ) []api.Results {
 }
 
 // Return A Monitored Media Server For This Organization
-func GetMonitoredMediaServer(organizationId, monitoredMediaServerId string ) []api.Results {
+func GetMonitoredMediaServer(organizationId, monitoredMediaServerId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/insight/monitoredMediaServers/%s", api.BaseUrl(),
 		organizationId, monitoredMediaServerId)
 	var datamodel = MonitoredMediaServer{}

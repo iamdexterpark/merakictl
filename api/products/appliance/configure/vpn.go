@@ -56,7 +56,7 @@ type FirewallRules struct {
 }
 
 // Return the site-to-site VPN settings of a network.
-func GetSiteToSiteVPN(networkId string ) []api.Results {
+func GetSiteToSiteVPN(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/vpn/siteToSiteVpn", api.BaseUrl(), networkId)
 	var datamodel = SiteToSiteVPN{}
 
@@ -68,7 +68,7 @@ func GetSiteToSiteVPN(networkId string ) []api.Results {
 }
 
 // Return the third party VPN peers for an organization
-func GetThirdPartyVPN(organizationId string ) []api.Results {
+func GetThirdPartyVPN(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vpn/thirdPartyVPNPeers", api.BaseUrl(), organizationId)
 	var datamodel = ThirdPartyVPN{}
 
@@ -80,7 +80,7 @@ func GetThirdPartyVPN(organizationId string ) []api.Results {
 }
 
 // Return the firewall rules for an organization's site-to-site VPN
-func GetFirewallRules(organizationId string ) []api.Results {
+func GetFirewallRules(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vpn/vpnFirewallRules", api.BaseUrl(), organizationId)
 	var datamodel = FirewallRules{}
 
@@ -90,4 +90,3 @@ func GetFirewallRules(organizationId string ) []api.Results {
 	}
 	return sessions
 }
-

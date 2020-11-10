@@ -36,7 +36,7 @@ type MalwareSettings struct {
 }
 
 // Returns all supported intrusion settings for an MX network
-func GetMXIntrusionSettings(networkId string ) []api.Results {
+func GetMXIntrusionSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/security/intrusion", api.BaseUrl(), networkId)
 	var datamodel = MXIntrusionSettings{}
 
@@ -48,7 +48,7 @@ func GetMXIntrusionSettings(networkId string ) []api.Results {
 }
 
 // Returns all supported intrusion settings for an organization
-func GetOrganizationIntrusionSettings(organizationId string ) []api.Results {
+func GetOrganizationIntrusionSettings(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/security/intrusion", api.BaseUrl(), organizationId)
 	var datamodel = OrganizationIntrusionSettings{}
 
@@ -60,7 +60,7 @@ func GetOrganizationIntrusionSettings(organizationId string ) []api.Results {
 }
 
 // Returns all supported malware settings for an MX network
-func GetMalwareSettings(networkId string ) []api.Results {
+func GetMalwareSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/security/malware", api.BaseUrl(), networkId)
 	var datamodel = MalwareSettings{}
 

@@ -33,14 +33,13 @@ type PiiRequests []struct {
 	PiiRequest
 }
 
-type SmDevicesForKey  struct {
+type SmDevicesForKey struct {
 	N1234 []string `json:"N_1234"`
 }
 
-type SmOwnersForKey  struct {
+type SmOwnersForKey struct {
 	N1234 []string `json:"N_1234"`
 }
-
 
 // List the keys required to access Personally Identifiable Information (PII) for a given identifier
 func GetPiiKeys(networkId, username, email, mac, serial, imei, bluetoothMac string) []api.Results {
@@ -49,11 +48,11 @@ func GetPiiKeys(networkId, username, email, mac, serial, imei, bluetoothMac stri
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"username": username,
-		"email": email,
-		"mac": mac,
-		"serial": serial,
-		"imei": imei,
+		"username":     username,
+		"email":        email,
+		"mac":          mac,
+		"serial":       serial,
+		"imei":         imei,
 		"bluetoothMac": bluetoothMac}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -62,7 +61,6 @@ func GetPiiKeys(networkId, username, email, mac, serial, imei, bluetoothMac stri
 	}
 	return sessions
 }
-
 
 // List The PII Requests For This Network Or Organization
 func GetPiiRequests(networkId string) []api.Results {
@@ -75,7 +73,6 @@ func GetPiiRequests(networkId string) []api.Results {
 	return sessions
 }
 
-
 // Return A PII Request
 func GetPiiRequest(networkId, requestId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/requests/%s", api.BaseUrl(), networkId, requestId)
@@ -87,7 +84,6 @@ func GetPiiRequest(networkId, requestId string) []api.Results {
 	return sessions
 }
 
-
 // Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier
 func GetSmDevicesForKey(networkId, username, email, mac, serial, imei, bluetoothMac string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/smDevicesForKey", api.BaseUrl(), networkId)
@@ -95,11 +91,11 @@ func GetSmDevicesForKey(networkId, username, email, mac, serial, imei, bluetooth
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"username": username,
-		"email": email,
-		"mac": mac,
-		"serial": serial,
-		"imei": imei,
+		"username":     username,
+		"email":        email,
+		"mac":          mac,
+		"serial":       serial,
+		"imei":         imei,
 		"bluetoothMac": bluetoothMac}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
@@ -109,7 +105,6 @@ func GetSmDevicesForKey(networkId, username, email, mac, serial, imei, bluetooth
 	return sessions
 }
 
-
 // Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier
 func GetSmOwnersForKey(networkId, username, email, mac, serial, imei, bluetoothMac string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/pii/smOwnersForKey", api.BaseUrl(), networkId)
@@ -117,11 +112,11 @@ func GetSmOwnersForKey(networkId, username, email, mac, serial, imei, bluetoothM
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"username": username,
-		"email": email,
-		"mac": mac,
-		"serial": serial,
-		"imei": imei,
+		"username":     username,
+		"email":        email,
+		"mac":          mac,
+		"serial":       serial,
+		"imei":         imei,
 		"bluetoothMac": bluetoothMac}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)

@@ -6,6 +6,7 @@ import (
 	"log"
 	"time"
 )
+
 type MerakiAuthUsers []struct {
 	MerakiAuthUser
 }

@@ -15,11 +15,10 @@ type DHCPServerPolicy struct {
 func GetDHCPServerPolicy(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/dhcpServerPolicy",
 		api.BaseUrl(), networkId)
-	var datamodel = DHCPServerPolicy {}
+	var datamodel = DHCPServerPolicy{}
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)
 	}
 	return sessions
 }
-

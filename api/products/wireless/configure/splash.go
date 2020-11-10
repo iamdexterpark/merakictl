@@ -37,4 +37,3 @@ func GetSplashPageSettings(networkId, number string) []api.Results {
 	}
 	return sessions
 }
-

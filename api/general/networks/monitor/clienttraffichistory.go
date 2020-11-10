@@ -56,7 +56,6 @@ type Clients []struct {
 	GroupPolicy8021X   string      `json:"groupPolicy8021x"`
 }
 
-
 // AssociatedClient - Return The Client Associated With The Given Identifier
 type AssociatedClient struct {
 	ID                   string      `json:"id"`
@@ -85,7 +84,6 @@ type AssociatedClient struct {
 	Status string      `json:"status"`
 }
 
-
 // Return the client's network traffic data over time
 func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
 	startingAfter, endingBefore string) []api.Results {
@@ -95,9 +93,9 @@ func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
 	// Parameters for Request URL
 	var parameters = map[string]string{
 		"trafficHistory": trafficHistory,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"perPage":        perPage,
+		"startingAfter":  startingAfter,
+		"endingBefore":   endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -106,7 +104,6 @@ func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
 
 	return sessions
 }
-
 
 // Return the client's daily usage history
 func GetClientUsageHistory(networkId, clientId string) []api.Results {
@@ -120,8 +117,6 @@ func GetClientUsageHistory(networkId, clientId string) []api.Results {
 	return sessions
 }
 
-
-
 // List The Clients That Have Used This Network In The Timespan
 func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients", api.BaseUrl(), networkId)
@@ -129,11 +124,11 @@ func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore st
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -142,7 +137,6 @@ func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore st
 
 	return sessions
 }
-
 
 // Return The Client Associated With The Given Identifier
 func GetAssociatedClient(networkId, clientId string) []api.Results {

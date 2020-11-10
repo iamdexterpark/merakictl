@@ -18,7 +18,7 @@ type SenseSettings struct {
 }
 
 // Returns the MV Sense object detection model list for the given camera
-func GetObjectDetectionModel(serial string) []api.Results{
+func GetObjectDetectionModel(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/camera/sense/objectDetectionModels", api.BaseUrl(), serial)
 	var datamodel = ObjectDetectionModel{}
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)

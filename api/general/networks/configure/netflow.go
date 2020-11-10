@@ -22,4 +22,3 @@ func GetNetFlow(networkId string) []api.Results {
 	}
 	return sessions
 }
-

@@ -19,8 +19,6 @@ type Organizations []struct {
 	Organization
 }
 
-
-
 // GetOrganizations - List the organizations that the user has privileges on
 func GetOrganizations() []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations", api.BaseUrl())
@@ -33,9 +31,8 @@ func GetOrganizations() []api.Results {
 	return sessions
 }
 
-
 // CreateOrganization - Create a new organization
-func CreateOrganization( name string) []api.Results {
+func CreateOrganization(name string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations", api.BaseUrl())
 	data := Organization{
 		Name: name,
@@ -50,7 +47,6 @@ func CreateOrganization( name string) []api.Results {
 	return sessions
 }
 
-
 // GetOrganization - Return a specific organization
 func GetOrganization(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s", api.BaseUrl(), organizationId)
@@ -62,7 +58,6 @@ func GetOrganization(organizationId string) []api.Results {
 	}
 	return sessions
 }
-
 
 // UpdateOrganization - Update an organization
 func UpdateOrganization(organizationId, name string) []api.Results {
@@ -81,7 +76,6 @@ func UpdateOrganization(organizationId, name string) []api.Results {
 	return sessions
 }
 
-
 // DeleteOrganization - Delete an organization
 func DeleteOrganization(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s", api.BaseUrl(), organizationId)
@@ -96,4 +90,3 @@ func DeleteOrganization(organizationId string) []api.Results {
 // Claim A List Of Devices Licenses And Or Orders Into An Organization
 
 // Create A New Organization By Cloning The Addressed Organization
-

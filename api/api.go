@@ -38,6 +38,7 @@ type Devices []struct {
 	PublicIP  string `json:"publicIp"`
 	NetworkID string `json:"networkId"`
 }
+
 // Clients - List the clients that have used this network in the timespan
 type Clients []struct {
 	Usage struct {
@@ -79,7 +80,6 @@ func GetOrganizations() []Results {
 	return sessions
 }
 
-
 // GetOrganizationNetworks - List the networks that the user has privileges on in an organization
 func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType, startingAfter,
 	endingBefore, tags, perPage string) []Results {
@@ -89,11 +89,11 @@ func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType, s
 	// Parameters for Request URL
 	var parameters = map[string]string{
 		"configTemplateId": configTemplateId,
-		"tags": tags,
-		"tagsFilterType": tagsFilterType,
-		"perPage": perPage,
-		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"tags":             tags,
+		"tagsFilterType":   tagsFilterType,
+		"perPage":          perPage,
+		"startingAfter":    startingAfter,
+		"endingBefore":     endingBefore}
 
 	sessions, err := Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -102,7 +102,6 @@ func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType, s
 
 	return sessions
 }
-
 
 // GetOrganizationDevices - List the devices in an organization
 func GetOrganizationDevices(organizationId, perPage, startingAfter,
@@ -113,8 +112,8 @@ func GetOrganizationDevices(organizationId, perPage, startingAfter,
 	// Parameters for Request URL
 	var parameters = map[string]string{
 		"configurationUpdatedAfter": configurationUpdatedAfter,
-		"perPage": perPage,
-		"startingAfter": startingAfter}
+		"perPage":                   perPage,
+		"startingAfter":             startingAfter}
 
 	sessions, err := Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -124,7 +123,6 @@ func GetOrganizationDevices(organizationId, perPage, startingAfter,
 	return sessions
 }
 
-
 // GetNetworkClients - List the Clients in a Network
 func GetNetworkClients(networkId, t0, t1, timespan,
 	perPage, startingAfter, endingBefore string) []Results {
@@ -133,12 +131,12 @@ func GetNetworkClients(networkId, t0, t1, timespan,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore}
+		"endingBefore":  endingBefore}
 
 	sessions, err := Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

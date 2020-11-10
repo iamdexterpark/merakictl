@@ -7,7 +7,6 @@ import (
 	"log"
 )
 
-
 type L3FirewallRules struct {
 	Rules []struct {
 		Comment  string `json:"comment"`
@@ -39,8 +38,8 @@ type SSID struct {
 	EncryptionMode      string `json:"encryptionMode"`
 	WpaEncryptionMode   string `json:"wpaEncryptionMode"`
 	RadiusServers       []struct {
-		Host string `json:"host"`
-		Port int    `json:"port"`
+		Host   string `json:"host"`
+		Port   int    `json:"port"`
 		Secret string `json:"secret"`
 	} `json:"radiusServers"`
 	RadiusAccountingEnabled         bool     `json:"radiusAccountingEnabled"`
@@ -104,10 +103,9 @@ func GetSSIDS(networkId string) []api.Results {
 	return sessions
 }
 
-
 // Return A Single MR SSID
 func GetSSID(networkId, ssidNumber string) []api.Results {
-	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s", api.BaseUrl(), networkId,ssidNumber)
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s", api.BaseUrl(), networkId, ssidNumber)
 	var datamodel SSID
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
@@ -118,7 +116,7 @@ func GetSSID(networkId, ssidNumber string) []api.Results {
 
 // Update A Single MR SSID
 func UpdateSSID(networkId, ssidNumber string, data interface{}) []api.Results {
-	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s", api.BaseUrl(), networkId,ssidNumber)
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s", api.BaseUrl(), networkId, ssidNumber)
 
 	payload := user_agent.MarshalJSON(data)
 	var datamodel SSID

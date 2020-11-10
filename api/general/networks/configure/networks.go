@@ -6,7 +6,6 @@ import (
 	"log"
 )
 
-
 // Network - Return A Network
 type Network struct {
 	ID               string   `json:"id"`

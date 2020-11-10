@@ -14,7 +14,7 @@ type DHCP []struct {
 }
 
 // Return the DHCP subnet information for an appliance
-func GetDHCP(serial string ) []api.Results {
+func GetDHCP(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/appliance/dhcp/subnets", api.BaseUrl(), serial)
 	var datamodel = DHCP{}
 

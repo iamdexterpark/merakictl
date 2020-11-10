@@ -12,7 +12,7 @@ type LANConfiguration struct {
 }
 
 // Return single LAN configuration
-func GetLANConfiguration(networkId string ) []api.Results {
+func GetLANConfiguration(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/singleLan", api.BaseUrl(), networkId)
 	var datamodel = LANConfiguration{}
 

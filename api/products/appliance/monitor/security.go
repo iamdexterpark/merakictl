@@ -42,14 +42,13 @@ func GetNetworkSecurityEvents(networkId, t0, t1, timespan, perPage,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"sortOrder": sortOrder}
-
+		"endingBefore":  endingBefore,
+		"sortOrder":     sortOrder}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {
@@ -57,7 +56,6 @@ func GetNetworkSecurityEvents(networkId, t0, t1, timespan, perPage,
 	}
 	return sessions
 }
-
 
 // List the security events for an organization
 func GetOrganizationSecurityEvents(organizationId, t0, t1, timespan, perPage,
@@ -67,14 +65,13 @@ func GetOrganizationSecurityEvents(organizationId, t0, t1, timespan, perPage,
 
 	// Parameters for Request URL
 	var parameters = map[string]string{
-		"t0": t0,
-		"t1": t1,
-		"timespan": timespan,
-		"perPage": perPage,
+		"t0":            t0,
+		"t1":            t1,
+		"timespan":      timespan,
+		"perPage":       perPage,
 		"startingAfter": startingAfter,
-		"endingBefore": endingBefore,
-		"sortOrder": sortOrder}
-
+		"endingBefore":  endingBefore,
+		"sortOrder":     sortOrder}
 
 	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
 	if err != nil {

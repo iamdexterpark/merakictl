@@ -10,7 +10,7 @@ import (
 var clients = &cobra.Command{
 	Use:   "clients",
 	Short: "Return A Devices Clients.",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
@@ -19,13 +19,11 @@ var clients = &cobra.Command{
 	},
 }
 
-
-
 // lldpCdp - List LLDP and CDP information for a device
 var lldpCdp = &cobra.Command{
 	Use:   "lldpCdp",
 	Short: "List LLDP and CDP information for a device.",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
@@ -38,7 +36,7 @@ var lldpCdp = &cobra.Command{
 var uplink = &cobra.Command{
 	Use:   "uplink",
 	Short: "Get the uplink loss percentage and latency in milliseconds for a wired network device.",
-	Long: ``,
+	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()

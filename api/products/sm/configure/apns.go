@@ -11,7 +11,7 @@ type APNSCertificate struct {
 }
 
 // Get the organization's APNS certificate
-func GetAPNSCertificate(organizationId string ) []api.Results {
+func GetAPNSCertificate(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/sm/apnsCert", api.BaseUrl(), organizationId)
 	var datamodel = APNSCertificate{}
 
@@ -21,4 +21,3 @@ func GetAPNSCertificate(organizationId string ) []api.Results {
 	}
 	return sessions
 }
-

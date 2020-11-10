@@ -8,7 +8,7 @@ import (
 var DeleteCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "",
-	Long: "Base for all HTTP DEL Calls to Meraki Dashboard.",
+	Long:  "Base for all HTTP DEL Calls to Meraki Dashboard.",
 }
 
 func init() {

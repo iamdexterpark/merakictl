@@ -43,7 +43,7 @@ func GetSwitchPorts(serial string) []api.Results {
 }
 
 // Return a Switch Port
-func GetSwitchPort(serial, portId string) []api.Results{
+func GetSwitchPort(serial, portId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/switch/ports/%s",
 		api.BaseUrl(), serial, portId)
 	var datamodel = SwitchPort{}

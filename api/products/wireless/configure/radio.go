@@ -21,7 +21,7 @@ type RadioSettings struct {
 }
 
 // Return The Radio Settings Of A Device
-func GetRadioSettings(serial string) []api.Results{
+func GetRadioSettings(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/wireless/radio/settings",
 		api.BaseUrl(), serial)
 	var datamodel = RadioSettings{}

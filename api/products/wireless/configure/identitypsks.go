@@ -28,12 +28,11 @@ func GetIdentityPSKs(networkId, number string) []api.Results {
 	return sessions
 }
 
-
 // Return An Identity PSK
 func GetIdentityPSK(networkId, number, identityPskId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/identityPsks/%s",
 		api.BaseUrl(), networkId, number, identityPskId)
-    var datamodel IdentityPSK
+	var datamodel IdentityPSK
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)

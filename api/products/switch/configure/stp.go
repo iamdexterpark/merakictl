@@ -19,7 +19,7 @@ type STPSettings struct {
 func GetSTPSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/stp",
 		api.BaseUrl(), networkId)
-	var datamodel = STPSettings {}
+	var datamodel = STPSettings{}
 	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
 	if err != nil {
 		log.Fatal(err)
