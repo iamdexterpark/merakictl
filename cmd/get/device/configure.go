@@ -15,8 +15,8 @@ var management = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
-		managementInterface, traceback := configure.GetManagementInterface(serial)
-		shell.Display(managementInterface, traceback, "ManagementInterface", cmd.Flags())
+		metadata := configure.GetManagementInterface(serial)
+		shell.Display(metadata, "ManagementInterface", cmd.Flags())
 	},
 }
 
@@ -28,7 +28,7 @@ var device = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
-		device, traceback := configure.GetSingleDevice(serial)
-		shell.Display(device, traceback, "device", cmd.Flags())
+		metadata := configure.GetSingleDevice(serial)
+		shell.Display(metadata, "device", cmd.Flags())
 	},
 }

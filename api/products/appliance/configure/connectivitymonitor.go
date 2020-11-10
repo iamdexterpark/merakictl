@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type ConnectivityMonitoringDestinations struct {
@@ -16,13 +15,13 @@ type ConnectivityMonitoringDestinations struct {
 }
 
 // Return the connectivity testing destinations for an MX network
-func GetConnectivityMonitoringDestinations(networkId string ) (ConnectivityMonitoringDestinations, interface{}) {
+func GetConnectivityMonitoringDestinations(networkId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/connectivityMonitoringDestinations", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = ConnectivityMonitoringDestinations{}
+	var datamodel = ConnectivityMonitoringDestinations{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

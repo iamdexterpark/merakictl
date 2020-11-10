@@ -3,13 +3,15 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
+// BluetoothClients - List The Bluetooth Clients Seen By APs In This Network
 type BluetoothClients []struct {
 	BluetoothClient
 }
+
+// BluetoothClient - List A Bluetooth Client Seen By APs In This Network
 type BluetoothClient struct {
 	ID              string   `json:"id"`
 	Mac             string   `json:"mac"`
@@ -24,44 +26,43 @@ type BluetoothClient struct {
 	Tags            []string `json:"tags"`
 }
 
-// List The Bluetooth Clients Seen By APs In This Network
-func GetBluetoothClients(networkId, t0, t1, timespan, perPage, startingAfter, endingBefore, includeConnectivityHistory string) (BluetoothClients, interface{}) {
+// GetBluetoothClients - List The Bluetooth Clients Seen By APs In This Network
+func GetBluetoothClients(networkId, t0, t1, timespan, perPage, startingAfter, endingBefore, includeConnectivityHistory string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/bluetoothClients", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = BluetoothClients{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("includeConnectivityHistory", includeConnectivityHistory)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = BluetoothClients{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"includeConnectivityHistory": includeConnectivityHistory,
+	}
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
-// List A Bluetooth Client Seen By APs In This Network
-func GetBluetoothClient (networkId, bluetoothClientId, includeConnectivityHistory, connectivityHistoryTimespan string) (BluetoothClient, interface{}) {
+// GetBluetoothClient - List A Bluetooth Client Seen By APs In This Network
+func GetBluetoothClient (networkId, bluetoothClientId, includeConnectivityHistory, connectivityHistoryTimespan string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/bluetoothClients/%s", api.BaseUrl(), networkId, bluetoothClientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = BluetoothClient{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("includeConnectivityHistory", includeConnectivityHistory)
-	parameters.Add("connectivityHistoryTimespan", connectivityHistoryTimespan)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"includeConnectivityHistory": includeConnectivityHistory,
+		"connectivityHistoryTimespan": connectivityHistoryTimespan}
 
-	var results = BluetoothClient{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }
 

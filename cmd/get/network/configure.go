@@ -15,9 +15,9 @@ var clients = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
-		clients, traceback := api.GetNetworkClients(net, "", "",
+		metadata := api.GetNetworkClients(net, "", "",
 			"", "", "", "")
-		shell.Display(clients, traceback, "clients", cmd.Flags())
+		shell.Display(metadata, "clients", cmd.Flags())
 	},
 }
 
@@ -29,8 +29,8 @@ var alertconfig = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
-		alertconfig, traceback := configure.GetNetworkAlertConfig(net)
-		shell.Display(alertconfig, traceback, "clients", cmd.Flags())
+		metadata := configure.GetNetworkAlertConfig(net)
+		shell.Display(metadata, "clients", cmd.Flags())
 	},
 }
 

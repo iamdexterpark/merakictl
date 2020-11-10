@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 type MerakiAuthUsers []struct {
@@ -26,23 +25,23 @@ type MerakiAuthUser struct {
 }
 
 // List The Users Configured Under Meraki Authentication For A Network Splash Guest Or RADIUS Users For A Wireless Network Or Client VPN Users For A Wired Network
-func GetMerakiAuthUsers(networkId string) (MerakiAuthUsers, interface{}) {
+func GetMerakiAuthUsers(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/merakiAuthUsers", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = MerakiAuthUsers{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = MerakiAuthUsers{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return The Meraki Auth Splash Guest RADIUS Or Client VPN User
-func GetMerakiAuthUser(networkId, merakiAuthUserId string) (MerakiAuthUser, interface{}) {
+func GetMerakiAuthUser(networkId, merakiAuthUserId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/merakiAuthUsers/%s", api.BaseUrl(), networkId, merakiAuthUserId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = MerakiAuthUser{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = MerakiAuthUser{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

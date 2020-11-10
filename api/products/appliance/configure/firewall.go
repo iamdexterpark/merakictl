@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type CellularFirewallRules struct {
@@ -20,19 +19,6 @@ type CellularFirewallRules struct {
 	} `json:"rules"`
 }
 
-// Return the cellular firewall rules for an MX network
-func GetCellularFirewallRules(networkId string ) (CellularFirewallRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/cellularFirewallRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = CellularFirewallRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type FirewalledServices []struct {
 	FirewalledService
 }
@@ -40,30 +26,6 @@ type FirewalledService struct {
 	Service    string   `json:"service"`
 	Access     string   `json:"access"`
 	AllowedIps []string `json:"allowedIps"`
-}
-
-// List the appliance services and their accessibility rules
-func GetFirewalledServices(networkId string ) (FirewalledServices, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = FirewalledServices{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// List the appliance services and their accessibility rules
-func GetFirewalledService(networkId, serviceId string ) (FirewalledService, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices/%s", api.BaseUrl(), networkId, serviceId)
-	var payload io.ReadSeeker
-	var results = FirewalledService{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type InboundFirewallRules struct {
@@ -80,19 +42,6 @@ type InboundFirewallRules struct {
 	SyslogDefaultRule bool `json:"syslogDefaultRule"`
 }
 
-// Return the inbound firewall rules for an MX network
-func GetInboundFirewallRules(networkId string ) (InboundFirewallRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/inboundFirewallRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = InboundFirewallRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type L3FirewallRules struct {
 	Rules []struct {
 		Comment       string `json:"comment"`
@@ -106,19 +55,6 @@ type L3FirewallRules struct {
 	} `json:"rules"`
 }
 
-
-// Return the L3 firewall rules for an MX network
-func GetL3FirewallRules(networkId string ) (L3FirewallRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l3FirewallRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = L3FirewallRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type L7FirewallRules struct {
 	Rules []struct {
 		Policy string `json:"policy"`
@@ -129,18 +65,6 @@ type L7FirewallRules struct {
 	} `json:"rules"`
 }
 
-
-// List the MX L7 firewall rules for an MX network
-func GetL7FirewallRules(networkId string ) (L7FirewallRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = L7FirewallRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
 
 type L7FirewallApplicationCategories struct {
 	ApplicationCategories []struct {
@@ -153,15 +77,90 @@ type L7FirewallApplicationCategories struct {
 	} `json:"applicationCategories"`
 }
 
+// Return the cellular firewall rules for an MX network
+func GetCellularFirewallRules(networkId string )[]api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/cellularFirewallRules", api.BaseUrl(), networkId)
+	var datamodel = CellularFirewallRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+
+
+// List the appliance services and their accessibility rules
+func GetFirewalledServices(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices", api.BaseUrl(), networkId)
+	var datamodel = FirewalledServices{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List the appliance services and their accessibility rules
+func GetFirewalledService(networkId, serviceId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/firewalledServices/%s", api.BaseUrl(), networkId, serviceId)
+	var datamodel = FirewalledService{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return the inbound firewall rules for an MX network
+func GetInboundFirewallRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/inboundFirewallRules", api.BaseUrl(), networkId)
+	var datamodel = InboundFirewallRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return the L3 firewall rules for an MX network
+func GetL3FirewallRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l3FirewallRules", api.BaseUrl(), networkId)
+	var datamodel = L3FirewallRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+// List the MX L7 firewall rules for an MX network
+func GetL7FirewallRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules", api.BaseUrl(), networkId)
+	var datamodel = L7FirewallRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
 
 // Return the L7 firewall application categories and their associated applications for an MX network
-func GetL7FirewallApplicationCategories(networkId string ) (L7FirewallApplicationCategories, interface{}) {
+func GetL7FirewallApplicationCategories(networkId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/l7FirewallRules/applicationCategories", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = L7FirewallApplicationCategories{}
+	var datamodel = L7FirewallApplicationCategories{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

@@ -3,10 +3,11 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
+
+// ManagementInterface - Return The Management Interface Settings For A Device
 type ManagementInterface struct {
 	DdnsHostnames struct {
 		ActiveDdnsHostname string `json:"activeDdnsHostname"`
@@ -29,17 +30,7 @@ type ManagementInterface struct {
 	} `json:"wan2"`
 }
 
-// GetManagementInterface - Return The Management Interface Settings For A Device
-func GetManagementInterface(serial string) (ManagementInterface, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/managementInterface", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = ManagementInterface{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
+// Device - Return A Single Device
 type Device struct {
 	Name           string   `json:"name"`
 	Lat            float64  `json:"lat"`
@@ -61,13 +52,33 @@ type Device struct {
 	FloorPlanID string `json:"floorPlanId"`
 }
 
+
+// GetManagementInterface - Return The Management Interface Settings For A Device
+func GetManagementInterface(serial string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/managementInterface", api.BaseUrl(), serial)
+	var datamodel = ManagementInterface{}
+
+		sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+
+}
+
+
+
 // GetSingleDevice - Return A Single Device
-func GetSingleDevice(serial string) (Device, interface{}) {
+func GetSingleDevice(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = Device{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Device{}
+
+		sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+
 }

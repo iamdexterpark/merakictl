@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -24,26 +23,23 @@ type Log struct {
 
 // Return the log of webhook POSTs sent
 func GetWebHookLogs(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
-	url  string ) (WebHookLogs, interface{}) {
+	url  string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/webhooks/logs", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = WebHookLogs{}
-
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = WebHookLogs{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan",timespan)
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("url", url)
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"url": url}
 
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

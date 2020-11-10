@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SwitchPorts []struct {
@@ -32,27 +31,25 @@ type SwitchPort struct {
 }
 
 // List The Switch Ports For A Switch
-func GetSwitchPorts(serial string) (SwitchPorts, interface{}) {
+func GetSwitchPorts(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/switch/ports",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchPorts{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SwitchPorts{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return a Switch Port
-func GetSwitchPort(serial, portId string) (SwitchPort, interface{}) {
+func GetSwitchPort(serial, portId string) []api.Results{
 	baseurl := fmt.Sprintf("%s/devices/%s/switch/ports/%s",
 		api.BaseUrl(), serial, portId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchPort{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SwitchPort{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

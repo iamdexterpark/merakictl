@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -37,49 +36,49 @@ type SecurityEvents []struct {
 
 // List the security events for a network
 func GetNetworkSecurityEvents(networkId, t0, t1, timespan, perPage,
-	startingAfter, endingBefore, sortOrder string) (SecurityEvents, interface{}) {
+	startingAfter, endingBefore, sortOrder string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/security/events", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = SecurityEvents{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("sortOrder", sortOrder)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"sortOrder": sortOrder}
 
-	var results = SecurityEvents{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 
 // List the security events for an organization
 func GetOrganizationSecurityEvents(organizationId, t0, t1, timespan, perPage,
-	startingAfter, endingBefore, sortOrder string) (SecurityEvents, interface{}) {
+	startingAfter, endingBefore, sortOrder string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/security/events", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = SecurityEvents{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("sortOrder", sortOrder)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"sortOrder": sortOrder}
 
-	var results = SecurityEvents{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

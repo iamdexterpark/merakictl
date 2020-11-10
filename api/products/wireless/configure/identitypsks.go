@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type IdentityPSKs []struct {
@@ -18,28 +17,26 @@ type IdentityPSK struct {
 }
 
 // List All Identity PSKs In A Wireless Network
-func GetIdentityPSKs(networkId, number string) (IdentityPSKs, interface{}) {
+func GetIdentityPSKs(networkId, number string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/identityPsks",
 		api.BaseUrl(), networkId, number)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var ssid IdentityPSKs
-	user_agent.UnMarshalJSON(session.Body, &ssid)
-	traceback := user_agent.TraceBack(session)
-	return ssid, traceback
+	var datamodel IdentityPSKs
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 
 // Return An Identity PSK
-func GetIdentityPSK(networkId, number, identityPskId string) (IdentityPSK, interface{}) {
+func GetIdentityPSK(networkId, number, identityPskId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/identityPsks/%s",
 		api.BaseUrl(), networkId, number, identityPskId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var ssid IdentityPSK
-	user_agent.UnMarshalJSON(session.Body, &ssid)
-	traceback := user_agent.TraceBack(session)
-	return ssid, traceback
+    var datamodel IdentityPSK
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

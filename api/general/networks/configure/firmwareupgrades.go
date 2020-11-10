@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type MaintenanceWindow struct {
@@ -15,12 +14,12 @@ type MaintenanceWindow struct {
 }
 
 // Get Current Maintenance Window For A Network
-func GetMaintenanceWindow(networkId string) (MaintenanceWindow, interface{}) {
+func GetMaintenanceWindow(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/firmwareUpgrades", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var maint = MaintenanceWindow{}
-	user_agent.UnMarshalJSON(session.Body, &maint)
-	traceback := user_agent.TraceBack(session)
-	return maint, traceback
+	var datamodel = MaintenanceWindow{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

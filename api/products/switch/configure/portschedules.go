@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SwitchPortSchedules []struct {
@@ -51,14 +50,13 @@ type SwitchPortSchedules []struct {
 }
 
 // List Switch Port Schedules
-func GetSwitchPortSchedules(networkId string) (SwitchPortSchedules, interface{}) {
+func GetSwitchPortSchedules(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/portSchedules",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchPortSchedules{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SwitchPortSchedules{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

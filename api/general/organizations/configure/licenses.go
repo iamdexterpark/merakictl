@@ -3,14 +3,14 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
 type Licenses []struct {
 	License
 }
+
 type License struct {
 	ID                        string      `json:"id"`
 	LicenseType               string      `json:"licenseType"`
@@ -35,27 +35,27 @@ type License struct {
 }
 
 // List The Licenses For An Organization
-func GetLicenses(organizationId string) (Licenses, interface{}) {
+func GetLicenses(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/licenses", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = Licenses{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Licenses{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // List A Single License For An Organization
-func GetLicense(organizationId, licenseId string) (License, interface{}) {
+func GetLicense(organizationId, licenseId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/licenses/%s", api.BaseUrl(),
 		organizationId, licenseId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = License{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = License{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

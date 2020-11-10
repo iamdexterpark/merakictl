@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SNMP struct {
@@ -18,14 +17,13 @@ type SNMP struct {
 }
 
 // Return the SNMP settings for an organization
-func GetSNMP(organizationId string) (SNMP, interface{}) {
+func GetSNMP(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/snmp", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SNMP{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SNMP{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

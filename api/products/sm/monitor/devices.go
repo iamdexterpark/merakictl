@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -14,44 +13,9 @@ type ClientCellularData []struct {
 	Ts       time.Time `json:"ts"`
 }
 
-// Return the client's daily cellular data usage history
-func GetClientCellularData(networkId, deviceId string) (ClientCellularData, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/cellularUsageHistory",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = ClientCellularData{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type HistoricalConnectivityData []struct {
 	FirstSeenAt time.Time `json:"firstSeenAt"`
 	LastSeenAt  time.Time `json:"lastSeenAt"`
-}
-
-// Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
-func GetHistoricalConnectivityData(networkId, deviceId,
-	perPage, startingAfter, endingBefore string) (HistoricalConnectivityData, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/connectivity",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore )
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = HistoricalConnectivityData{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type DesktopDevicesHistoricalRecords []struct {
@@ -75,27 +39,6 @@ type DesktopDevicesHistoricalRecords []struct {
 	Ts            time.Time `json:"ts"`
 }
 
-// Return historical records of various Systems Manager network connection details for desktop devices.
-func GetDesktopDevicesHistoricalRecords(networkId, deviceId,
-	perPage, startingAfter, endingBefore string) (DesktopDevicesHistoricalRecords, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/desktopLogs",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore )
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = DesktopDevicesHistoricalRecords{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type CommandHistoricalRecords []struct {
 	Action        string    `json:"action"`
 	Name          string    `json:"name"`
@@ -103,28 +46,6 @@ type CommandHistoricalRecords []struct {
 	DashboardUser string    `json:"dashboardUser"`
 	Ts            time.Time `json:"ts"`
 }
-
-// Return historical records of commands sent to Systems Manager devices
-func GetCommandHistoricalRecords(networkId, deviceId,
-	perPage, startingAfter, endingBefore string) (CommandHistoricalRecords, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/deviceCommandLogs",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore )
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = CommandHistoricalRecords{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type ClientMetricsHistoricalRecords []struct {
 	CPUPercentUsed  float64 `json:"cpuPercentUsed"`
@@ -144,24 +65,94 @@ type ClientMetricsHistoricalRecords []struct {
 	Ts time.Time `json:"ts"`
 }
 
-// Return historical records of various Systems Manager client metrics for desktop devices.
-func GetClientMetricsHistoricalRecords(networkId, deviceId,
-	perPage, startingAfter, endingBefore string) (ClientMetricsHistoricalRecords, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/performanceHistory",
+// Return the client's daily cellular data usage history
+func GetClientCellularData(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/cellularUsageHistory",
 		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = ClientCellularData{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Returns historical connectivity data (whether a device is regularly checking in to Dashboard).
+func GetHistoricalConnectivityData(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/connectivity",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = HistoricalConnectivityData{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore )
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
 
-	var results = ClientMetricsHistoricalRecords{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+// Return historical records of various Systems Manager network connection details for desktop devices.
+func GetDesktopDevicesHistoricalRecords(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/desktopLogs",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = DesktopDevicesHistoricalRecords{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return historical records of commands sent to Systems Manager devices
+func GetCommandHistoricalRecords(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/deviceCommandLogs",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = CommandHistoricalRecords{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return historical records of various Systems Manager client metrics for desktop devices.
+func GetClientMetricsHistoricalRecords(networkId, deviceId,
+	perPage, startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm//devices/%s/performanceHistory",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = ClientMetricsHistoricalRecords{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 

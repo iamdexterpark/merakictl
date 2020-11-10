@@ -13,7 +13,7 @@ var org = &cobra.Command{
 	Long: `remove org -o {ORG_ID}`,
 	Run: func(cmd *cobra.Command, args []string) {
 		org := cmd.Flag("organization").Value.String()
-		organization, traceback := configure.DeleteOrganization(org)
-		shell.Display(organization, traceback, "organization", cmd.Flags())
+		metadata := configure.DeleteOrganization(org)
+		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }

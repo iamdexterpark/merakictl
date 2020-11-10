@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type StaticRoutes []struct {
@@ -31,26 +30,26 @@ type StaticRoute struct {
 }
 
 // List the static routes for an MX or teleworker network
-func GetStaticRoutes(networkId string ) (StaticRoutes, interface{}) {
+func GetStaticRoutes(networkId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/staticRoutes", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = StaticRoutes{}
+	var datamodel = StaticRoutes{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 
 // Return a static route for an MX or teleworker network
-func GetStaticRoute(networkId, staticRouteId string ) (StaticRoutes, interface{}) {
+func GetStaticRoute(networkId, staticRouteId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/staticRoutes/%s", api.BaseUrl(), networkId, staticRouteId)
-	var payload io.ReadSeeker
-	var results = StaticRoutes{}
+	var datamodel = StaticRoutes{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

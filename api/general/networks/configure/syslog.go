@@ -3,10 +3,10 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
+// SyslogServers - List The Syslog Servers For A Network
 type SyslogServers struct {
 	Servers []struct {
 		Host  string   `json:"host"`
@@ -15,14 +15,13 @@ type SyslogServers struct {
 	} `json:"servers"`
 }
 
-
-// List The Syslog Servers For A Network
-func GetSyslogServers(networkId string) (SyslogServers, interface{}) {
+// GetSyslogServers - List The Syslog Servers For A Network
+func GetSyslogServers(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/syslogServers", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = SyslogServers{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SyslogServers{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

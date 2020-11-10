@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type Layer3DHCPInterface struct {
@@ -32,19 +31,6 @@ type Layer3DHCPInterface struct {
 	} `json:"fixedIpAssignments"`
 }
 
-// Return A Layer 3 Interface DHCP Configuration For A Switch
-func GetLayer3DHCPInterface(serial, interfaceId string) (Layer3DHCPInterface, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces/%s/dhcp",
-		api.BaseUrl(), serial, interfaceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = Layer3DHCPInterface{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type Layer3Interfaces []struct {
 	Layer3Interface
 }
@@ -63,70 +49,17 @@ type Layer3Interface struct {
 	} `json:"ospfSettings"`
 }
 
-// List Layer 3 Interfaces For A Switch
-func GetLayer3Interfaces(serial string) (Layer3Interfaces, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces",
-		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = Layer3Interfaces{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// Return A Layer 3 Interface For A Switch
-func GetLayer3Interface(serial, interfaceId string) (Layer3Interface, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces/%s",
-		api.BaseUrl(), serial, interfaceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = Layer3Interface{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type MulticastRendezvousPoints [][]struct {
 	MulticastRendezvousPoint
 }
 
-
-	type MulticastRendezvousPoint []struct {
+type MulticastRendezvousPoint []struct {
 	RendezvousPointID string `json:"rendezvousPointId"`
 	Serial            string `json:"serial,omitempty"`
 	InterfaceName     string `json:"interfaceName,omitempty"`
 	InterfaceIP       string `json:"interfaceIp"`
 	MulticastGroup    string `json:"multicastGroup"`
 	SwitchStackID     string `json:"switchStackId,omitempty"`
-}
-
-// List Multicast Rendezvous Points
-func GetMulticastRendezvousPoints(networkId string) (MulticastRendezvousPoints, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints",
-		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = MulticastRendezvousPoints{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// Return A Multicast Rendezvous Point
-func GetMulticastRendezvousPoint(networkId, rendezvousPointId string) (MulticastRendezvousPoint, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints/%s",
-		api.BaseUrl(), networkId, rendezvousPointId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = MulticastRendezvousPoint{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type MulticastSettings struct {
@@ -142,15 +75,74 @@ type MulticastSettings struct {
 	} `json:"overrides"`
 }
 
+// Return A Layer 3 Interface DHCP Configuration For A Switch
+func GetLayer3DHCPInterface(serial, interfaceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces/%s/dhcp",
+		api.BaseUrl(), serial, interfaceId)
+	var datamodel = Layer3DHCPInterface{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List Layer 3 Interfaces For A Switch
+func GetLayer3Interfaces(serial string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces",
+		api.BaseUrl(), serial)
+	var datamodel = Layer3Interfaces{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return A Layer 3 Interface For A Switch
+func GetLayer3Interface(serial, interfaceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/switch/routing/interfaces/%s",
+		api.BaseUrl(), serial, interfaceId)
+	var datamodel = Layer3Interface{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List Multicast Rendezvous Points
+func GetMulticastRendezvousPoints(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints",
+		api.BaseUrl(), networkId)
+	var datamodel = MulticastRendezvousPoints{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return A Multicast Rendezvous Point
+func GetMulticastRendezvousPoint(networkId, rendezvousPointId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast/rendezvousPoints/%s",
+		api.BaseUrl(), networkId, rendezvousPointId)
+	var datamodel = MulticastRendezvousPoint{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
 // Return Multicast Settings For A Network
-func GetMulticastSettings(networkId string) (MulticastSettings, interface{}) {
+func GetMulticastSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/multicast",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = MulticastSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = MulticastSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

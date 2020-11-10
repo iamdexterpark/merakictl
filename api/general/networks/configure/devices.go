@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 type Devices []struct {
 	Device
@@ -31,12 +30,12 @@ type Device struct {
 }
 
 // GetNetworkDevices - List The Devices In A Network
-func GetNetworkDevices(networkId string) (Devices, interface{}) {
+func GetNetworkDevices(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/devices", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var devices = Devices{}
-	user_agent.UnMarshalJSON(session.Body, &devices)
-	traceback := user_agent.TraceBack(session)
-	return devices, traceback
+	var datamodel = Devices{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

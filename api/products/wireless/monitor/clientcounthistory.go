@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -17,28 +16,27 @@ type WirelessClientCount []struct {
 // Return wireless client counts over time for a network, device, or network client
 func GetWirelessClientCount(networkId, t0, t1, timespan,
 	resolution, autoResolution, clientId, deviceSerial, apTag,
-	band, ssid string) (WirelessClientCount, interface{}) {
+	band, ssid string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clientCountHistory",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = WirelessClientCount{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("resolution", resolution)
-	parameters.Add("autoResolution", autoResolution)
-	parameters.Add("clientId", clientId)
-	parameters.Add("deviceSerial", deviceSerial)
-	parameters.Add("apTag", apTag)
-	parameters.Add("band", band)
-	parameters.Add("ssid", ssid)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"resolution": resolution,
+		"autoResolution": autoResolution,
+		"clientId": clientId,
+		"deviceSerial": deviceSerial,
+		"apTag": apTag,
+		"band": band,
+		"ssid": ssid}
 
-	var results = WirelessClientCount{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

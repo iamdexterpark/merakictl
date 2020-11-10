@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type OneToManyNatRules struct {
@@ -22,17 +21,6 @@ type OneToManyNatRules struct {
 	} `json:"rules"`
 }
 
-// Return the 1:Many NAT mapping rules for an MX network
-func GetOneToManyNatRules(networkId string ) (OneToManyNatRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToManyNatRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = OneToManyNatRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
 
 type OneToOneNatRules struct {
 	Rules []struct {
@@ -48,19 +36,6 @@ type OneToOneNatRules struct {
 	} `json:"rules"`
 }
 
-// Return the 1:1 NAT mapping rules for an MX network
-func GetOneToOneNatRules(networkId string ) (OneToOneNatRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToOneNatRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = OneToOneNatRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type PortForwardingRules struct {
 	Rules []struct {
 		LanIP      string   `json:"lanIp"`
@@ -73,14 +48,38 @@ type PortForwardingRules struct {
 	} `json:"rules"`
 }
 
-// Return the port forwarding rules for an MX network
-func GetPortForwardingRules(networkId string ) (PortForwardingRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/portForwardingRules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = PortForwardingRules{}
+// Return the 1:Many NAT mapping rules for an MX network
+func GetOneToManyNatRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToManyNatRules", api.BaseUrl(), networkId)
+	var datamodel = OneToManyNatRules{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return the 1:1 NAT mapping rules for an MX network
+func GetOneToOneNatRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/oneToOneNatRules", api.BaseUrl(), networkId)
+	var datamodel = OneToOneNatRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return the port forwarding rules for an MX network
+func GetPortForwardingRules(networkId string )[]api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/firewall/portForwardingRules", api.BaseUrl(), networkId)
+	var datamodel = PortForwardingRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

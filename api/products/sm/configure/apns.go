@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type APNSCertificate struct {
@@ -12,15 +11,14 @@ type APNSCertificate struct {
 }
 
 // Get the organization's APNS certificate
-func GetAPNSCertificate(organizationId string ) (APNSCertificate, interface{}) {
+func GetAPNSCertificate(organizationId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/sm/apnsCert", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = APNSCertificate{}
+	var datamodel = APNSCertificate{}
 
-	session := api.Session(baseurl, "GET", payload)
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 

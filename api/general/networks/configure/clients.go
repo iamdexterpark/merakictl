@@ -3,25 +3,13 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type ClientPolicy struct {
 	Mac           string `json:"mac"`
 	DevicePolicy  string `json:"devicePolicy"`
 	GroupPolicyID string `json:"groupPolicyId"`
-}
-
-// GetClientPolicy -  Return The Policy Assigned To A Client On The Network
-func GetClientPolicy(networkId, clientId string) (ClientPolicy, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/policy", api.BaseUrl(), networkId, clientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = ClientPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type SplashAuthorization struct {
@@ -37,13 +25,26 @@ type SplashAuthorization struct {
 	} `json:"ssids"`
 }
 
+// GetClientPolicy -  Return The Policy Assigned To A Client On The Network
+func GetClientPolicy(networkId, clientId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/policy", api.BaseUrl(), networkId, clientId)
+	var datamodel = ClientPolicy{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+
 // Return The Splash Authorization For A Client For Each SSID They've Associated With Through Splash
-func GetSplashAuthorization(networkId, clientId string) (SplashAuthorization, interface{}) {
+func GetSplashAuthorization(networkId, clientId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/splashAuthorizationStatus", api.BaseUrl(), networkId, clientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = SplashAuthorization{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SplashAuthorization{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

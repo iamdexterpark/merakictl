@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type AccessPolicies []struct {
@@ -37,27 +36,25 @@ type AccessPolicy struct {
 }
 
 // List The Access Policies For A Switch Network
-func GetAccessPolicies(networkId string) (AccessPolicies, interface{}) {
+func GetAccessPolicies(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/accessPolicies",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = AccessPolicies{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+ 	var datamodel = AccessPolicies{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return A Specific Access Policy For A Switch Network
-func GetAccessPolicy(networkId, accessPolicyNumber string) (AccessPolicies, interface{}) {
+func GetAccessPolicy(networkId, accessPolicyNumber string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/accessPolicies/%s",
 		api.BaseUrl(), networkId, accessPolicyNumber)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = AccessPolicies{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = AccessPolicies{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

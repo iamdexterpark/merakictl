@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type OpenAPI struct {
@@ -36,14 +35,13 @@ type OpenAPI struct {
 }
 
 // Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON
-func GetOpenAPI(organizationId string ) (OpenAPI, interface{}) {
+func GetOpenAPI(organizationId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/openapiSpec", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = OpenAPI{}
+	var datamodel = OpenAPI{}
 
-	session := api.Session(baseurl, "GET", payload)
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

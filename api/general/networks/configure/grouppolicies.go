@@ -3,13 +3,13 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type GroupPolicies []struct {
 	GroupPolicy
 }
+
 type GroupPolicy struct {
 	Name          string `json:"name"`
 	GroupPolicyID string `json:"groupPolicyId"`
@@ -121,23 +121,23 @@ type GroupPolicy struct {
 }
 
 // List The Group Policies In A Network
-func GetGroupPolicies(networkId string) (GroupPolicies, interface{}) {
+func GetGroupPolicies(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/groupPolicies", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = GroupPolicies{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = GroupPolicies{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Display A Group Policy
-func GetGroupPolicy(networkId, groupPolicyId string) (GroupPolicy, interface{}) {
+func GetGroupPolicy(networkId, groupPolicyId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/groupPolicies/%s", api.BaseUrl(), networkId, groupPolicyId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = GroupPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = GroupPolicy{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

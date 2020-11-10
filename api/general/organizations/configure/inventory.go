@@ -3,14 +3,14 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
 type DeviceInventory []struct {
 	Inventory
 }
+
 type Inventory struct {
 	Mac                   string    `json:"mac"`
 	Serial                string    `json:"serial"`
@@ -23,27 +23,27 @@ type Inventory struct {
 }
 
 // Return The Device Inventory For An Organization
-func GetDeviceInventory(organizationId string) (DeviceInventory, interface{}) {
+func GetDeviceInventory(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/inventoryDevices", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = DeviceInventory{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = DeviceInventory{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return A Single Device From The Inventory Of An Organization
-func GetSingleDeviceInventory(organizationId string) (Inventory, interface{}) {
+func GetSingleDeviceInventory(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/inventoryDevices", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = Inventory{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Inventory{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

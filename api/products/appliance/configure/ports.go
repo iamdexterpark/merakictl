@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type PortVLANSettings []struct {
@@ -20,26 +19,26 @@ type PortVLANSetting struct {
 }
 
 // List per-port VLAN settings for all ports of a MX.
-func GetPortVLANSettings(networkId string ) (PortVLANSettings, interface{}) {
+func GetPortVLANSettings(networkId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/ports", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = PortVLANSettings{}
+	var datamodel = PortVLANSettings{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 
 // Return per-port VLAN settings for a single MX port.
-func GetPortVLANSetting(networkId, portId string ) (PortVLANSetting, interface{}) {
+func GetPortVLANSetting(networkId, portId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/ports/%s", api.BaseUrl(), networkId, portId)
-	var payload io.ReadSeeker
-	var results = PortVLANSetting{}
+	var datamodel = PortVLANSetting{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

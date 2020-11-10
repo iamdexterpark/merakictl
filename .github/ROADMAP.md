@@ -26,10 +26,10 @@
 
 ### Beta Release 2021 Q1 (NOV)
 - [x] 100% Get Command API Coverage
-- [x] 100% Get Command CLI Coverage
-- [ ] Pagination Support
-- [ ] verbose debug flag
+- [x] Pagination Support
+- [x] verbose debug flag
 - [ ] Claim Assets into Org
+- [ ] 100% Get Command CLI Coverage
 
 ### Backlog
 - [ ] Meraki Tags Flag

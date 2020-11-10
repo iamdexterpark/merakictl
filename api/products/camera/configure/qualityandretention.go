@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type QualityAndRetention struct {
@@ -18,12 +17,12 @@ type QualityAndRetention struct {
 }
 
 // Returns quality and retention settings for the given camera
-func GetQualityAndRetention(serial string) (QualityAndRetention, interface{}) {
+func GetQualityAndRetention(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/camera/qualityAndRetention", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = QualityAndRetention{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = QualityAndRetention{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

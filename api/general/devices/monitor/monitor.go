@@ -3,11 +3,11 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
+// DeviceClients - Return A Devices Clients
 type DeviceClients []struct {
 	Usage struct {
 		Sent int `json:"sent"`
@@ -24,18 +24,7 @@ type DeviceClients []struct {
 	DhcpHostname string      `json:"dhcpHostname"`
 }
 
-// GetDeviceClients - Return A Devices Clients
-func GetDeviceClients(serial string) (DeviceClients, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/clients", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var device = DeviceClients{}
-	user_agent.UnMarshalJSON(session.Body, &device)
-	traceback := user_agent.TraceBack(session)
-	return device, traceback
-}
-
-
+// lldpCdp - List LLDP and CDP information for a device
 type lldpCdp struct {
 	SourceMac string `json:"sourceMac"`
 	Ports     struct {
@@ -64,42 +53,63 @@ type lldpCdp struct {
 	} `json:"ports"`
 }
 
-// GetlldpCdp - List LLDP and CDP information for a device
-func GetlldpCdp(serial string) (lldpCdp, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/lldpCdp", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = lldpCdp{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-type UplinkLoss  []struct {
+// UplinkLoss -  Get the uplink loss percentage and latency in milliseconds for a wired network device.
+type UplinkLoss []struct {
 	StartTime   time.Time `json:"startTime"`
 	EndTime     time.Time `json:"endTime"`
 	LossPercent int       `json:"lossPercent"`
 	LatencyMs   int       `json:"latencyMs"`
 }
 
+
+// GetDeviceClients - Return A Devices Clients
+func GetDeviceClients(serial string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/clients", api.BaseUrl(), serial)
+	var datamodel = DeviceClients{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
+
+// GetlldpCdp - List LLDP and CDP information for a device
+func GetlldpCdp(serial string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/lldpCdp", api.BaseUrl(), serial)
+	var datamodel = lldpCdp{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
+
 // GetlldpCdp - Get the uplink loss percentage and latency in milliseconds for a wired network device.
-func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) (UplinkLoss, interface{}) {
+func GetUplinkLoss(serial, t0, t1, timespan, resolution, uplink, ip string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/lossAndLatencyHistory", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = UplinkLoss{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan",timespan)
-	parameters.Add("resolution", resolution)
-	parameters.Add("uplink", uplink)
-	parameters.Add("ip", ip)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"resolution": resolution,
+		"uplink": uplink,
+		"ip": ip,
+	}
 
-	var results = UplinkLoss{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+
 }

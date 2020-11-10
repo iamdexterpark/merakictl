@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type AlternateManagementInterface struct {
@@ -22,14 +21,13 @@ type AlternateManagementInterface struct {
 }
 
 // Return Alternate Management Interface And Devices With IP Assigned
-func GetAlternateManagementInterface(networkId string) (AlternateManagementInterface, interface{}) {
+func GetAlternateManagementInterface(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/alternateManagementInterface",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = AlternateManagementInterface{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = AlternateManagementInterface{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

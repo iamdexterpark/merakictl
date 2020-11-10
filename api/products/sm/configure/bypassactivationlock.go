@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type BypassActivationLock struct {
@@ -22,14 +21,14 @@ type BypassActivationLock struct {
 }
 
 // Bypass Activation Lock Attempt Status
-func GetBypassActivationLockStatus(networkId, attemptId string) (BypassActivationLock, interface{}) {
+func GetBypassActivationLockStatus(networkId, attemptId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/sm/bypassActivationLockAttempts/%s",
 		api.BaseUrl(), networkId, attemptId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = BypassActivationLock{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = BypassActivationLock{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

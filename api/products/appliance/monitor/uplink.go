@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -33,20 +32,19 @@ type UplinkStatus []struct {
 }
 
 // List the uplink status of every Meraki MX and Z series appliances in the organization
-func GetUplinkStatus(organizationId, perPage, startingAfter, endingBefore string) (UplinkStatus, interface{}) {
+func GetUplinkStatus(organizationId, perPage, startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/uplink/statuses", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
+	var datamodel = UplinkStatus{}
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
 
-	var results = UplinkStatus{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

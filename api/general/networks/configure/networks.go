@@ -3,12 +3,11 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 
-
+// Network - Return A Network
 type Network struct {
 	ID               string   `json:"id"`
 	OrganizationID   string   `json:"organizationId"`
@@ -19,14 +18,13 @@ type Network struct {
 	EnrollmentString string   `json:"enrollmentString"`
 }
 
-// Return A Network
-func GetNetwork(networkId string) (Network, interface{}) {
+// GetNetwork - Return A Network
+func GetNetwork(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = Network{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Network{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

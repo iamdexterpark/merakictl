@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type MonitoredMediaServers []struct {
@@ -18,28 +17,26 @@ type MonitoredMediaServer struct {
 }
 
 // List The Monitored Media Servers For This Organization
-func GetMonitoredMediaServers(organizationId string ) (MonitoredMediaServers, interface{}) {
+func GetMonitoredMediaServers(organizationId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/insight/monitoredMediaServers", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = MonitoredMediaServers{}
+	var datamodel = MonitoredMediaServers{}
 
-	session := api.Session(baseurl, "GET", payload)
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return A Monitored Media Server For This Organization
-func GetMonitoredMediaServer(organizationId, monitoredMediaServerId string ) (MonitoredMediaServer, interface{}) {
+func GetMonitoredMediaServer(organizationId, monitoredMediaServerId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/insight/monitoredMediaServers/%s", api.BaseUrl(),
 		organizationId, monitoredMediaServerId)
-	var payload io.ReadSeeker
-	var results = MonitoredMediaServer{}
+	var datamodel = MonitoredMediaServer{}
 
-	session := api.Session(baseurl, "GET", payload)
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

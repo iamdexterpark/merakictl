@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type TrafficShapingSettings struct {
@@ -28,14 +27,13 @@ type TrafficShapingSettings struct {
 }
 
 // Display The Traffic Shaping Settings For A SSID On An MR Network
-func GetTrafficShapingSettings(networkId, number string) (TrafficShapingSettings, interface{}) {
+func GetTrafficShapingSettings(networkId, number string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/trafficShaping/rules",
 		api.BaseUrl(), networkId, number)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var ssid TrafficShapingSettings
-	user_agent.UnMarshalJSON(session.Body, &ssid)
-	traceback := user_agent.TraceBack(session)
-	return ssid, traceback
+	var datamodel TrafficShapingSettings
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

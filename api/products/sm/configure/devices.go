@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -19,20 +18,6 @@ type DeviceCerts []struct {
 	ID             string    `json:"id"`
 }
 
-// List the certs on a device
-func GetDeviceCerts(networkId, deviceId string) (DeviceCerts, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/certs",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceCerts{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type DeviceProfiles []struct {
 	DeviceID    string `json:"deviceId"`
 	ID          string `json:"id"`
@@ -43,19 +28,6 @@ type DeviceProfiles []struct {
 	ProfileIdentifier string `json:"profileIdentifier"`
 	Name              string `json:"name"`
 	Version           string `json:"version"`
-}
-
-// Get the profiles associated with a device
-func GetDeviceProfiles(networkId, deviceId string) (DeviceProfiles, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/deviceProfiles",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceProfiles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type NetworkAdapters []struct {
@@ -69,20 +41,6 @@ type NetworkAdapters []struct {
 	Subnet     string `json:"subnet"`
 }
 
-// List the network adapters of a device
-func GetNetworkAdapters(networkId, deviceId string) (NetworkAdapters, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/networkAdapters",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = NetworkAdapters{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type DeviceRestrictions []struct {
 	Profile      string `json:"profile"`
 	Restrictions struct {
@@ -91,20 +49,6 @@ type DeviceRestrictions []struct {
 		} `json:"myRestriction"`
 	} `json:"restrictions"`
 }
-
-// List the restrictions on a device
-func GetDeviceRestrictions(networkId, deviceId string) (DeviceRestrictions, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/restrictions",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceRestrictions{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type DeviceSecurityCenters []struct {
 	IsRooted             bool   `json:"isRooted"`
@@ -118,20 +62,6 @@ type DeviceSecurityCenters []struct {
 	ID                   string `json:"id"`
 	RunningProcs         string `json:"runningProcs"`
 }
-
-// List the security centers on a device
-func GetDeviceSecurityCenters(networkId, deviceId string) (DeviceSecurityCenters, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/securityCenters",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceSecurityCenters{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type DeviceAssociatedSoftware []struct {
 	AppID             string      `json:"appId"`
@@ -159,39 +89,6 @@ type DeviceAssociatedSoftware []struct {
 	Version           string      `json:"version"`
 }
 
-
-// Get a list of softwares associated with a device
-func GetDeviceAssociatedSoftware(networkId, deviceId string) (DeviceAssociatedSoftware, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/softwares",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceAssociatedSoftware{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-type DeviceSSIDNames []struct {
-	CreatedAt time.Time `json:"createdAt"`
-	ID        string    `json:"id"`
-	XML       string    `json:"xml"`
-}
-
-// List the saved SSID names on a device
-func GetDeviceSSIDNames(networkId, deviceId string) (DeviceSSIDNames, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/wlanLists",
-		api.BaseUrl(), networkId, deviceId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DeviceSSIDNames{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type SMEnrolledDevices struct {
 	ID           string   `json:"id"`
 	Name         string   `json:"name"`
@@ -207,28 +104,119 @@ type SMEnrolledDevices struct {
 	Notes        string   `json:"notes"`
 }
 
+// List the certs on a device
+func GetDeviceCerts(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/certs",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = DeviceCerts{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Get the profiles associated with a device
+func GetDeviceProfiles(networkId, deviceId string)[]api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/deviceProfiles",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = DeviceProfiles{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List the network adapters of a device
+func GetNetworkAdapters(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/networkAdapters",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = NetworkAdapters{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List the restrictions on a device
+func GetDeviceRestrictions(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/restrictions",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = DeviceRestrictions{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List the security centers on a device
+func GetDeviceSecurityCenters(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/securityCenters",
+		api.BaseUrl(), networkId, deviceId)
+	var datamodel = DeviceSecurityCenters{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Get a list of softwares associated with a device
+func GetDeviceAssociatedSoftware(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/softwares",
+		api.BaseUrl(), networkId, deviceId)
+
+	var datamodel = DeviceAssociatedSoftware{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+type DeviceSSIDNames []struct {
+	CreatedAt time.Time `json:"createdAt"`
+	ID        string    `json:"id"`
+	XML       string    `json:"xml"`
+}
+
+// List the saved SSID names on a device
+func GetDeviceSSIDNames(networkId, deviceId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices/%s/wlanLists",
+		api.BaseUrl(), networkId, deviceId)
+
+	var datamodel = DeviceSSIDNames{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
 
 // List The Devices Enrolled In An SM Network With Various Specified Fields And Filters
 func GetSMEnrolledDevices(networkId, fields, wifiMacs, serials, ids, scope, perPage,
-	startingAfter, endingBefore string) (SMEnrolledDevices, interface{}) {
+	startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/sm/devices", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = SMEnrolledDevices{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("fields", fields)
-	parameters.Add("wifiMacs", wifiMacs)
-	parameters.Add("serials", serials)
-	parameters.Add("ids", ids)
-	parameters.Add("scope", scope)
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"fields": fields,
+		"wifiMacs": wifiMacs,
+		"serials": serials,
+		"ids": ids,
+		"scope": scope,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
 
-	var results = SMEnrolledDevices{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

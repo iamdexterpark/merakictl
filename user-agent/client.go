@@ -72,7 +72,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		// Check to see if the API version is Deprecated
 		checkDeprecation, checkErr := c.CheckForDeprecation(resp, err)
 		if err != nil {
-			log.Fatal("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
+			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
 			// Not Deprecated
 		}
@@ -83,7 +83,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		// Check to see if the API version is SunSet
 		checkSunSet, checkErr := c.CheckForSunSet(resp, err)
 		if err != nil {
-			log.Fatal("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
+			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
 			// Not SunSet
 		}
@@ -94,7 +94,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		// CheckForPagination
 		checkPagination, checkErr := c.CheckForPagination(resp, err)
 		if err != nil {
-			log.Fatal("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
+			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
 			// Not Paginated
 		}
@@ -105,7 +105,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		// HTTPResponseHandler
 		checkHttpOK, checkHttpErr := c.HTTPResponsePolicy(resp, err)
 		if err != nil {
-			log.Fatal("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
+			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
 			// Nothing to DO
 		}
@@ -124,7 +124,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		checkOK, checkErr := c.CheckForRetry(resp, err)
 
 		if err != nil {
-			log.Fatal("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
+			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
 			// Call this here to maintain the behavior of logging all requests, etc
 			// even if the CheckForRetry signals to stop.
@@ -164,7 +164,7 @@ func (c *Client) drainBody(body io.ReadCloser) {
 	var respReadLimit int64
 	_, err := io.Copy(ioutil.Discard, io.LimitReader(body, respReadLimit))
 	if err != nil {
-		log.Fatal("[ERR] error reading response body: %v", err)
+		log.Fatalf("[ERR] error reading response body: %v", err)
 	}
 }
 

@@ -3,11 +3,11 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
+// ClientNetworkTraffic - Return the client's network traffic data over time
 type ClientNetworkTraffic []struct {
 	Ts            time.Time `json:"ts"`
 	Application   string    `json:"application"`
@@ -20,44 +20,14 @@ type ClientNetworkTraffic []struct {
 	ActiveSeconds int       `json:"activeSeconds"`
 }
 
-// Return the client's network traffic data over time
-func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
-	startingAfter, endingBefore string) (ClientNetworkTraffic, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/trafficHistory", api.BaseUrl(), networkId, clientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("trafficHistory", trafficHistory)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = ClientNetworkTraffic{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
+// ClientUsageHistory - Return the client's daily usage history
 type ClientUsageHistory []struct {
 	Sent     int       `json:"sent"`
 	Received int       `json:"received"`
 	Ts       time.Time `json:"ts"`
 }
 
-// Return the client's daily usage history
-func GetClientUsageHistory(networkId, clientId string) (ClientUsageHistory, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/usageHistory", api.BaseUrl(), networkId, clientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = ClientUsageHistory{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
+// Clients - List The Clients That Have Used This Network In The Timespan
 type Clients []struct {
 	Usage struct {
 		Sent int `json:"sent"`
@@ -86,28 +56,8 @@ type Clients []struct {
 	GroupPolicy8021X   string      `json:"groupPolicy8021x"`
 }
 
-// List The Clients That Have Used This Network In The Timespan
-func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore string) (Clients, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/clients", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("timespan", timespan)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = Clients{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
+// AssociatedClient - Return The Client Associated With The Given Identifier
 type AssociatedClient struct {
 	ID                   string      `json:"id"`
 	Description          string      `json:"description"`
@@ -135,13 +85,74 @@ type AssociatedClient struct {
 	Status string      `json:"status"`
 }
 
+
+// Return the client's network traffic data over time
+func GetClientNetworkTraffic(networkId, clientId, trafficHistory, perPage,
+	startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/trafficHistory", api.BaseUrl(), networkId, clientId)
+	var datamodel = ClientNetworkTraffic{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"trafficHistory": trafficHistory,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
+
+// Return the client's daily usage history
+func GetClientUsageHistory(networkId, clientId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s/usageHistory", api.BaseUrl(), networkId, clientId)
+	var datamodel = ClientUsageHistory{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+
+// List The Clients That Have Used This Network In The Timespan
+func GetClients(networkId, t0, timespan, perPage, startingAfter, endingBefore string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/clients", api.BaseUrl(), networkId)
+	var datamodel = Clients{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"t0": t0,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
+
 // Return The Client Associated With The Given Identifier
-func GetAssociatedClient(networkId, clientId string) (AssociatedClient, interface{}) {
+func GetAssociatedClient(networkId, clientId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/clients/%s", api.BaseUrl(), networkId, clientId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = AssociatedClient{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = AssociatedClient{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }

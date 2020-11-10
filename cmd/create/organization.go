@@ -13,7 +13,7 @@ var org = &cobra.Command{
 	Long: `create org {NAME}`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var name = args[0]
-		organization, traceback := configure.CreateOrganization(name)
-		shell.Display(organization, traceback, "organization", cmd.Flags())
+		metadata := configure.CreateOrganization(name)
+		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }

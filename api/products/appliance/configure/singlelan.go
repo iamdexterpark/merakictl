@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type LANConfiguration struct {
@@ -13,13 +12,13 @@ type LANConfiguration struct {
 }
 
 // Return single LAN configuration
-func GetLANConfiguration(networkId string ) (LANConfiguration, interface{}) {
+func GetLANConfiguration(networkId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/singleLan", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = LANConfiguration{}
+	var datamodel = LANConfiguration{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

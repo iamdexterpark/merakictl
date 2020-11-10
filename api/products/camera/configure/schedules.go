@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type CameraRecordingSchedules []struct {
@@ -13,12 +12,12 @@ type CameraRecordingSchedules []struct {
 }
 
 // Returns a list of all camera recording schedules
-func GetCameraRecordingSchedules(serial string) (CameraRecordingSchedules, interface{}) {
+func GetCameraRecordingSchedules(serial string) []api.Results{
 	baseurl := fmt.Sprintf("%s/devices/%s/camera/schedules", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = CameraRecordingSchedules{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = CameraRecordingSchedules{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

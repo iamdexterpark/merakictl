@@ -16,7 +16,7 @@ var org = &cobra.Command{
 		org := cmd.Flag("organization").Value.String()
 		var name = args[0]
 
-		organization, traceback := configure.UpdateOrganization(org, name)
-		shell.Display(organization, traceback, "organization", cmd.Flags())
+		metadata := configure.UpdateOrganization(org, name)
+		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }

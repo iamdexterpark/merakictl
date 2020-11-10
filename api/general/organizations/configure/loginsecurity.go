@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type LoginSecurity struct {
@@ -24,14 +23,14 @@ type LoginSecurity struct {
 
 
 // Returns The Login Security Settings For An Organization
-func GetLoginSecurity(organizationId string) (LoginSecurity, interface{}) {
+func GetLoginSecurity(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/licenses", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = LoginSecurity{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = LoginSecurity{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

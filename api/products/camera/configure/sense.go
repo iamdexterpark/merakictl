@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type ObjectDetectionModel []struct {
@@ -12,31 +11,30 @@ type ObjectDetectionModel []struct {
 	Description string `json:"description"`
 }
 
-// Returns the MV Sense object detection model list for the given camera
-func GetObjectDetectionModel(serial string) (ObjectDetectionModel, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/camera/sense/objectDetectionModels", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = ObjectDetectionModel{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type SenseSettings struct {
 	SenseEnabled bool     `json:"senseEnabled"`
 	MqttBrokerID string   `json:"mqttBrokerId"`
 	MqttTopics   []string `json:"mqttTopics"`
 }
 
+// Returns the MV Sense object detection model list for the given camera
+func GetObjectDetectionModel(serial string) []api.Results{
+	baseurl := fmt.Sprintf("%s/devices/%s/camera/sense/objectDetectionModels", api.BaseUrl(), serial)
+	var datamodel = ObjectDetectionModel{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
 // Returns sense settings for a given camera
-func GetSenseSettings(serial string) (SenseSettings, interface{}) {
+func GetSenseSettings(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/camera/sense", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = SenseSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SenseSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

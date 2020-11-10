@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type License struct {
@@ -16,14 +15,13 @@ type License struct {
 }
 
 // Return an overview of the license state for an organization
-func GetLicenseOverview(organizationId string ) (License, interface{}) {
+func GetLicenseOverview(organizationId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/licenses/overview", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = License{}
+	var datamodel = License{}
 
-	session := api.Session(baseurl, "GET", payload)
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

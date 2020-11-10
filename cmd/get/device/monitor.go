@@ -14,8 +14,8 @@ var clients = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
-		deviceClients, traceback := monitor.GetDeviceClients(serial)
-		shell.Display(deviceClients, traceback, "deviceClients", cmd.Flags())
+		metadata := monitor.GetDeviceClients(serial)
+		shell.Display(metadata, "deviceClients", cmd.Flags())
 	},
 }
 
@@ -29,8 +29,8 @@ var lldpCdp = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
-		lldpCdp, traceback := monitor.GetlldpCdp(serial)
-		shell.Display(lldpCdp, traceback, "lldpCdp", cmd.Flags())
+		metadata := monitor.GetlldpCdp(serial)
+		shell.Display(metadata, "lldpCdp", cmd.Flags())
 	},
 }
 
@@ -42,8 +42,8 @@ var uplink = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		serial := cmd.Flag("device").Value.String()
-		uplink, traceback := monitor.GetUplinkLoss(serial, args[0], args[1],
+		metadata := monitor.GetUplinkLoss(serial, args[0], args[1],
 			args[2], args[3], args[4], args[5])
-		shell.Display(uplink, traceback, "uplinkLoss", cmd.Flags())
+		shell.Display(metadata, "uplinkLoss", cmd.Flags())
 	},
 }

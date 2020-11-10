@@ -3,24 +3,11 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type VLANStatus struct {
 	VlansEnabled bool `json:"vlansEnabled"`
-}
-
-// Returns the enabled status of VLANs for the network
-func GetVLANStatus(networkId string ) (VLANStatus, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/settings", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = VLANStatus{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type VLANs []struct {
@@ -57,26 +44,38 @@ type VLAN struct {
 	} `json:"dhcpOptions"`
 }
 
-// List the VLANs for an MX network
-func GetVLANs(networkId string ) (VLANStatus, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = VLANStatus{}
+// Returns the enabled status of VLANs for the network
+func GetVLANStatus(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/settings", api.BaseUrl(), networkId)
+	var datamodel = VLANStatus{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List the VLANs for an MX network
+func GetVLANs(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/", api.BaseUrl(), networkId)
+	var datamodel = VLANStatus{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // List a VLAN for an MX network
-func GetVLAN(networkId, vlanId string ) (VLANStatus, interface{}) {
+func GetVLAN(networkId, vlanId string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/appliance/vlans/%s", api.BaseUrl(), networkId, vlanId)
-	var payload io.ReadSeeker
-	var results = VLANStatus{}
+	var datamodel = VLANStatus{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

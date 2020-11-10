@@ -3,11 +3,11 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
+// Events - List the events for the network
 type Events struct {
 	Message     interface{} `json:"message"`
 	PageStartAt time.Time   `json:"pageStartAt"`
@@ -38,31 +38,31 @@ type Events struct {
 // List the events for the network
 func GetEvents(networkId, productType, includedEventTypes, excludedEventTypes,
 	deviceMac, deviceSerial, deviceName, clientIp, clientMac, clientName,
-	smDeviceMac, smDeviceName, perPage, startingAfter, endingBefore string) (Events, interface{}) {
+	smDeviceMac, smDeviceName, perPage, startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/events", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = Events{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("productType", productType)
-	parameters.Add("includedEventTypes", includedEventTypes)
-	parameters.Add("excludedEventTypes", excludedEventTypes)
-	parameters.Add("deviceMac", deviceMac)
-	parameters.Add("deviceSerial", deviceSerial)
-	parameters.Add("deviceName", deviceName)
-	parameters.Add("clientIp", clientIp)
-	parameters.Add("clientMac", clientMac)
-	parameters.Add("clientName", clientName)
-	parameters.Add("smDeviceMac", smDeviceMac)
-	parameters.Add("smDeviceName", smDeviceName)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"productType": productType,
+		"includedEventTypes": includedEventTypes,
+		"excludedEventTypes": excludedEventTypes,
+		"deviceMac": deviceMac,
+		"deviceSerial": deviceSerial,
+		"deviceName": deviceName,
+		"clientIp": clientIp,
+		"clientMac": clientMac,
+		"clientName": clientName,
+		"smDeviceMac": smDeviceMac,
+		"smDeviceName": smDeviceName,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
 
-	var results = Events{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }

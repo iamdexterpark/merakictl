@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type OSPFRouting struct {
@@ -24,14 +23,13 @@ type OSPFRouting struct {
 }
 
 // Return Layer 3 OSPF Routing Configuration
-func GetOSPFRouting(networkId string) (OSPFRouting, interface{}) {
+func GetOSPFRouting(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/routing/ospf",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = OSPFRouting{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = OSPFRouting{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

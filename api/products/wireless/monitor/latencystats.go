@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type AggregatedLatencyPerAP struct {
@@ -34,32 +33,6 @@ type AggregatedLatencyPerAP struct {
 	} `json:"latencyStats"`
 }
 
-// Aggregated Latency Info For A Given AP On This Network
-func GetAggregatedLatencyPerAP(serial, t0, t1, timespan,
-	band, ssid, vlan, apTag, fields string) (AggregatedLatencyPerAP, interface{}) {
-	baseurl := fmt.Sprintf("%s/devices/%s/wireless/clients/latencyStats",
-		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("band", band)
-	parameters.Add("ssid", ssid)
-	parameters.Add("vlan", vlan)
-	parameters.Add("apTag", apTag)
-	parameters.Add("fields", fields)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = AggregatedLatencyPerAP{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type AggregatedLatencyPerNetwork struct {
 	BackgroundTraffic struct {
 		RawDistribution struct {
@@ -84,28 +57,52 @@ type AggregatedLatencyPerNetwork struct {
 	VoiceTraffic      string `json:"voiceTraffic"`
 }
 
-// Aggregated Latency Info For This Network
-func GetAggregatedLatencyPerNetwork(networkId, t0, t1, timespan,
-	band, ssid, vlan, apTag, fields string) (AggregatedLatencyPerNetwork, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clients/latencyStats",
-		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+// Aggregated Latency Info For A Given AP On This Network
+func GetAggregatedLatencyPerAP(serial, t0, t1, timespan,
+	band, ssid, vlan, apTag, fields string) []api.Results {
+	baseurl := fmt.Sprintf("%s/devices/%s/wireless/clients/latencyStats",
+		api.BaseUrl(), serial)
+	var datamodel = AggregatedLatencyPerAP{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("band", band)
-	parameters.Add("ssid", ssid)
-	parameters.Add("vlan", vlan)
-	parameters.Add("apTag", apTag)
-	parameters.Add("fields", fields)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"band": band,
+		"ssid": ssid,
+		"vlan": vlan,
+		"apTag": apTag,
+		"fields": fields}
 
-	var results = AggregatedLatencyPerNetwork{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Aggregated Latency Info For This Network
+func GetAggregatedLatencyPerNetwork(networkId, t0, t1, timespan,
+	band, ssid, vlan, apTag, fields string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/wireless/clients/latencyStats",
+		api.BaseUrl(), networkId)
+	var datamodel = AggregatedLatencyPerNetwork{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"band": band,
+		"ssid": ssid,
+		"vlan": vlan,
+		"apTag": apTag,
+		"fields": fields}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

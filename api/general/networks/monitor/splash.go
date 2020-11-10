@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -20,21 +19,22 @@ type SplashLogin []struct {
 }
 
 // List the splash login attempts for a network
-func GetSplashLoginAttempts(networkId, splashLoginAttempts, ssidNumber, loginIdentifier, timespan string) (SplashLogin, interface{}) {
+func GetSplashLoginAttempts(networkId, splashLoginAttempts, ssidNumber, loginIdentifier, timespan string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/splashLoginAttempts", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	datamodel := SplashLogin{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("splashLoginAttempts", splashLoginAttempts)
-	parameters.Add("ssidNumber", ssidNumber)
-	parameters.Add("loginIdentifier", loginIdentifier)
-	parameters.Add("timespan", timespan)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"splashLoginAttempts": splashLoginAttempts,
+		"ssidNumber": ssidNumber,
+		"loginIdentifier": loginIdentifier,
+		"timespan": timespan}
 
-	var results = SplashLogin{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }

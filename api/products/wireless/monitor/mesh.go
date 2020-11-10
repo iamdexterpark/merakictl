@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type MeshStatuses struct {
@@ -18,21 +17,20 @@ type MeshStatuses struct {
 }
 
 // List wireless mesh statuses for repeaters
-func GetMeshStatuses(networkId, perPage, startingAfter, endingBefore string) (MeshStatuses, interface{}) {
+func GetMeshStatuses(networkId, perPage, startingAfter, endingBefore string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/meshStatuses",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = MeshStatuses{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
 
-	var results = MeshStatuses{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

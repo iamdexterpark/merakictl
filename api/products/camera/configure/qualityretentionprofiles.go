@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 type QualityRetentionProfiles []struct {
 	QualityRetentionProfile
@@ -41,24 +40,26 @@ type QualityRetentionProfile struct {
 }
 
 // List the quality retention profiles for this network
-func GetQualityRetentionProfiles(networkId string) (QualityRetentionProfiles, interface{}) {
+func GetQualityRetentionProfiles(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/camera/qualityRetentionProfiles", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = QualityRetentionProfiles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = QualityRetentionProfiles{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Retrieve a single quality retention profile
-func GetQualityRetentionProfile(networkId, qualityRetentionProfileId string) (QualityRetentionProfile, interface{}) {
+func GetQualityRetentionProfile(networkId, qualityRetentionProfileId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/camera/qualityRetentionProfiles/%s", api.BaseUrl(),
 		networkId, qualityRetentionProfileId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = QualityRetentionProfile{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = QualityRetentionProfile{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

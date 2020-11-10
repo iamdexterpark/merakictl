@@ -13,8 +13,8 @@ var ssids = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		networkId := cmd.Flag("network").Value.String()
-		ssids, traceback := configure.GetSSIDS(networkId)
-		shell.Display(ssids, traceback, "ssids", cmd.Flags())
+		metadata := configure.GetSSIDS(networkId)
+		shell.Display(metadata, "ssids", cmd.Flags())
 	},
 }
 
@@ -27,7 +27,7 @@ var ssid = &cobra.Command{
 		networkId := cmd.Flag("network").Value.String()
 
 		ssidNumber := args[0]
-		ssid, traceback := configure.GetSSID(networkId,ssidNumber)
-		shell.Display(ssid, traceback, "ssid", cmd.Flags())
+		metadata:= configure.GetSSID(networkId,ssidNumber)
+		shell.Display(metadata, "ssid", cmd.Flags())
 	},
 }

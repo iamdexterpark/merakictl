@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -17,27 +16,6 @@ type APIRequestsOverview struct {
 		Num404 int `json:"404"`
 		Num429 int `json:"429"`
 	} `json:"responseCodeCounts"`
-}
-
-// Return an aggregated overview of API requests data
-func GetAPIRequestsOverview(organizationId, t0, t1, timespan string ) (APIRequestsOverview, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests/overview", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = APIRequestsOverview{}
-
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan",timespan)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
 }
 
 type APIRequests []struct {
@@ -56,31 +34,48 @@ type APIRequest struct {
 }
 
 // Return an aggregated overview of API requests data
-func GetAPIRequests(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
-	adminId, path, method, responseCode, sourceIp  string ) (APIRequests, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	var results = APIRequests{}
-
-	session := api.Session(baseurl, "GET", payload)
+func GetAPIRequestsOverview(organizationId, t0, t1, timespan string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests/overview", api.BaseUrl(), organizationId)
+	var datamodel = APIRequestsOverview{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan",timespan)
-	parameters.Add("perPage", perPage)
-	parameters.Add("startingAfter", startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("adminId", adminId)
-	parameters.Add("path", path)
-	parameters.Add("method", method)
-	parameters.Add("responseCode", responseCode)
-	parameters.Add("sourceIp", sourceIp)
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan}
 
-	session.Request.URL.RawQuery = parameters.Encode()
 
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return an aggregated overview of API requests data
+func GetAPIRequests(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
+	adminId, path, method, responseCode, sourceIp  string )[]api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/apiRequests", api.BaseUrl(), organizationId)
+	var datamodel = APIRequests{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"adminId": adminId,
+		"path": path,
+		"method": method,
+		"responseCode": responseCode,
+		"sourceIp": sourceIp,
+	}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

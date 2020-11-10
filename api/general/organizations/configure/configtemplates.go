@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type ConfigurationTemplates []struct {
@@ -18,27 +17,27 @@ type ConfigurationTemplate struct {
 }
 
 // List The Configuration Templates For This Organization
-func GetConfigurationTemplates(organizationId string) (ConfigurationTemplates, interface{}) {
+func GetConfigurationTemplates(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = ConfigurationTemplates{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = ConfigurationTemplates{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return a Configuration Template For This Organization
-func GetConfigurationTemplate(organizationId, configTemplateId string) (ConfigurationTemplate, interface{}) {
+func GetConfigurationTemplate(organizationId, configTemplateId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s", api.BaseUrl(),
 		organizationId, configTemplateId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = ConfigurationTemplate{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = ConfigurationTemplate{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

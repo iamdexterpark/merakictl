@@ -3,10 +3,10 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
+// TrafficAnalysis - Return The Traffic Analysis Settings For A Network
 type TrafficAnalysis struct {
 	Mode                string `json:"mode"`
 	CustomPieChartItems []struct {
@@ -16,17 +16,7 @@ type TrafficAnalysis struct {
 	} `json:"customPieChartItems"`
 }
 
-// Return The Traffic Analysis Settings For A Network
-func GetTrafficAnalysis(networkId string) (TrafficAnalysis, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/trafficAnalysis", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = TrafficAnalysis{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
+// TrafficShaping - Returns the application categories for traffic shaping rules.
 type TrafficShaping struct {
 	ApplicationCategories []struct {
 		ID           string `json:"id"`
@@ -38,30 +28,45 @@ type TrafficShaping struct {
 	} `json:"applicationCategories"`
 }
 
-// Returns the application categories for traffic shaping rules.
-func GetTrafficShaping(networkId string) (TrafficShaping, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/applicationCategories", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = TrafficShaping{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
 
-
+// TrafficShapingDSCP - Returns the available DSCP tagging options for your traffic shaping rules.
 type TrafficShapingDSCP []struct {
 	DscpTagValue int    `json:"dscpTagValue"`
 	Description  string `json:"description"`
 }
 
-// Returns the available DSCP tagging options for your traffic shaping rules.
-func GetTrafficShapingDSCP(networkId string) (TrafficShapingDSCP, interface{}) {
+
+// GetTrafficAnalysis - Return The Traffic Analysis Settings For A Network
+func GetTrafficAnalysis(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/trafficAnalysis", api.BaseUrl(), networkId)
+	var datamodel = TrafficAnalysis{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+// GetTrafficShaping - Returns the application categories for traffic shaping rules.
+func GetTrafficShaping(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/applicationCategories", api.BaseUrl(), networkId)
+	var datamodel = TrafficShaping{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+// GetTrafficShapingDSCP - Returns the available DSCP tagging options for your traffic shaping rules.
+func GetTrafficShapingDSCP(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/trafficShaping/dscpTaggingOptions", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = TrafficShapingDSCP{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = TrafficShapingDSCP{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

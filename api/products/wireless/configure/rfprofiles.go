@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type RFProfiles []struct {
@@ -40,32 +39,30 @@ type RFProfile struct {
 }
 
 // List The Non Basic RF Profiles For This Network
-func GetRFProfiles(networkId, includeTemplateProfiles string) (RFProfiles, interface{}) {
+func GetRFProfiles(networkId, includeTemplateProfiles string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/rfProfiles",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = RFProfiles{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("includeTemplateProfiles", includeTemplateProfiles)
+	var parameters = map[string]string{
+		"includeTemplateProfiles": includeTemplateProfiles}
 
-	var results = RFProfiles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
-
 // Return A RF Profile
-func GetRFProfile(networkId, rfProfileId string) (RFProfile, interface{}) {
+func GetRFProfile(networkId, rfProfileId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/rfProfiles/%s",
 		api.BaseUrl(), networkId, rfProfileId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = RFProfile{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = RFProfile{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

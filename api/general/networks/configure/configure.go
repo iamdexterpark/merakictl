@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type AlertConfig struct {
@@ -28,12 +27,13 @@ type AlertConfig struct {
 }
 
 // GetNetworkAlertConfig - Return The Alert Configuration For This Network
-func GetNetworkAlertConfig(networkId string) (AlertConfig, interface{}) {
+func GetNetworkAlertConfig(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/alerts/settings", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var alertconfig = AlertConfig{}
-	user_agent.UnMarshalJSON(session.Body, &alertconfig)
-	traceback := user_agent.TraceBack(session)
-	return alertconfig, traceback
+
+	var datamodel = AlertConfig{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

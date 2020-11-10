@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type PortForwardingRules struct {
@@ -21,13 +20,13 @@ type PortForwardingRules struct {
 }
 
 // Returns the port forwarding rules for a single MG
-func GetPortForwardingRules(serial string) (PortForwardingRules, interface{}) {
+func GetPortForwardingRules(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/cellularGateway/portForwardingRules",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = PortForwardingRules{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = PortForwardingRules{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

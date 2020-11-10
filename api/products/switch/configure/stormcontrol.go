@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type StormControl struct {
@@ -14,14 +13,13 @@ type StormControl struct {
 }
 
 // Return The Storm Control Configuration For A Switch Network
-func GetStormControl(networkId string) (StormControl, interface{}) {
+func GetStormControl(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/stormControl",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = StormControl{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = StormControl{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

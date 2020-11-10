@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type TrafficAnalysis []struct {
@@ -20,20 +19,20 @@ type TrafficAnalysis []struct {
 }
 
 // Return the traffic analysis data for this network
-func GetTrafficAnalysis(networkId, t0, timespan, deviceType string) (TrafficAnalysis, interface{}) {
+func GetTrafficAnalysis(networkId, t0, timespan, deviceType string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/traffic", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = TrafficAnalysis{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("timespan", timespan)
-	parameters.Add("deviceType", deviceType)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"timespan": timespan,
+		"deviceType": deviceType}
 
-	var results = TrafficAnalysis{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+		sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }

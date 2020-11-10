@@ -3,27 +3,13 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 // Data Structure
 type BrandingPolicies struct {
 	BrandingPolicyIds []string `json:"brandingPolicyIds"`
 }
-
-// Return The Branding Policy IDs Of An Organization
-func GetBrandingPriority(organizationId string) (BrandingPolicies, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = BrandingPolicies{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type BrandingPolicy struct {
 	BrandingPolicyID string `json:"brandingPolicyId"`
@@ -51,28 +37,41 @@ type BrandingPolicy struct {
 	} `json:"helpSettings"`
 }
 
+// Return The Branding Policy IDs Of An Organization
+func GetBrandingPriority(organizationId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities", api.BaseUrl(), organizationId)
+
+	var datamodel = BrandingPolicies{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
 // Return The Branding Policies Of An Organization
-func GetBrandingPolicies(organizationId string) (BrandingPolicy, interface{}) {
+func GetBrandingPolicies(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = BrandingPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = BrandingPolicy{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 // Return The Branding Policy IDs Of An Organization
-func GetBrandingPolicy(organizationId, brandingPolicyId string) (BrandingPolicy, interface{}) {
+func GetBrandingPolicy(organizationId, brandingPolicyId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/%s", api.BaseUrl(),
 		organizationId, brandingPolicyId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = BrandingPolicy{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = BrandingPolicy{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type PacketCounters []struct {
@@ -21,26 +20,6 @@ type PacketCounters []struct {
 		} `json:"ratePerSec"`
 	} `json:"packets"`
 }
-
-// Return the packet counters for all the ports of a switch
-func GetPacketCounters(serial, t0, timespan string) (PacketCounters, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/ports/statuses/packets",
-		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("timespan",timespan)
-
-	session.Request.URL.RawQuery = parameters.Encode()
-	var results = PacketCounters{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type PortsStatus []struct {
 	PortID    string   `json:"portId"`
@@ -87,21 +66,39 @@ type PortsStatus []struct {
 	} `json:"trafficInKbps"`
 }
 
-// Return The Status For All The Ports Of A Switch
-func GetPortsStatus(serial, t0, timespan string) (PortsStatus, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/ports/statuses",
+// Return the packet counters for all the ports of a switch
+func GetPacketCounters(serial, t0, timespan string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/ports/statuses/packets",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+
+	var datamodel = PacketCounters{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("timespan",timespan)
+	var parameters = map[string]string{
+		"t0": t0,
+		"timespan": timespan}
 
-	session.Request.URL.RawQuery = parameters.Encode()
-	var results = PortsStatus{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return The Status For All The Ports Of A Switch
+func GetPortsStatus(serial, t0, timespan string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/ports/statuses",
+		api.BaseUrl(), serial)
+	var datamodel = PortsStatus{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"t0": t0,
+		"timespan": timespan}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

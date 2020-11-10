@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type LDPS []struct {
@@ -18,48 +17,49 @@ type LDP struct {
 	SloLogoutURL            string `json:"sloLogoutUrl"`
 }
 
-// List the SAML IdPs in your organization.
-func GetLDPS(organizationId string) (LDPS, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idps", api.BaseUrl(),
-		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = LDPS{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// List a SAML IdP in your organization.
-func GetLDP(organizationId, ldpId string) (LDP, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idp/%s", api.BaseUrl(),
-		organizationId, ldpId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = LDP{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type SAML struct {
 	Enabled bool `json:"enabled"`
 }
 
 
+// List the SAML IdPs in your organization.
+func GetLDPS(organizationId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idps", api.BaseUrl(),
+		organizationId)
+	var datamodel = LDPS{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// List a SAML IdP in your organization.
+func GetLDP(organizationId, ldpId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/saml/idp/%s", api.BaseUrl(),
+		organizationId, ldpId)
+
+	var datamodel = LDP{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+
 // Returns the SAML SSO enabled settings for an organization.
-func GetSAML(organizationId string) (SAML, interface{}) {
+func GetSAML(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/saml", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = SAML{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SAML{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 

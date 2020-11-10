@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type DHCP []struct {
@@ -15,13 +14,13 @@ type DHCP []struct {
 }
 
 // Return the DHCP subnet information for an appliance
-func GetDHCP(serial string ) (DHCP, interface{}) {
+func GetDHCP(serial string ) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/appliance/dhcp/subnets", api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	var results = DHCP{}
+	var datamodel = DHCP{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

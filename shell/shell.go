@@ -3,6 +3,8 @@ package shell
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/ddexterpark/merakictl/api"
+	"github.com/kr/pretty"
 	"github.com/pkg/errors"
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
@@ -22,7 +24,7 @@ func displayYaml(input interface{}) []byte {
 }
 
 // displayJSON - Formats an interface into a JSON byte array
-func displayJSON(input interface{}) []byte {
+func DisplayJSON(input interface{}) []byte {
 	var output, err = json.MarshalIndent(&input, "", " ")
 	if err != nil {
 		log.Fatalf("error: %v", err)
@@ -35,14 +37,12 @@ func Console(format string, input interface{}) []byte {
 	switch {
 	// Determine if JSON Flag Set
 	case format == "json":
-		results := displayJSON(input)
-		fmt.Printf(string(results))
+		results := DisplayJSON(input)
 		return results
 
 	// Determine if YAML Flag Set
 	case format == "yaml":
 		results := displayYaml(input)
-		fmt.Printf(string(results))
 		return results
 
 	// Default If unable to determine Output
@@ -59,7 +59,8 @@ func ExportToFile(input []byte, name, format string) {
 	return
 }
 
-func Display(payload, traceback interface{}, name string, flags  *pflag.FlagSet) {
+// TestDisplay
+func Display(metadatas []api.Results, name string, flags  *pflag.FlagSet) {
 	var results []byte
 	var format string
 	verbose, _ := flags.GetBool("verbose")
@@ -68,19 +69,32 @@ func Display(payload, traceback interface{}, name string, flags  *pflag.FlagSet)
 
 	if jsonflag {
 		format = "json"
-		results = Console(format, payload)
 	} else {
 		format = "yaml"
-		results = Console(format, payload)
 	}
-	if verbose {
-		fmt.Println(traceback)
-	}
-	if export {
-			ExportToFile(results, name, format)
-	}
-}
 
+	// Concatenate []byte for single display
+	for _, metadata := range metadatas {
+		display := Console(format, metadata.Payload)
+		results = append(results, display...)
+	} // end for loop
+
+	// Print Results to console
+	pretty.Println(string(results))
+
+	// return complete data to console
+	if export {
+		ExportToFile(results, name, format)
+	}
+
+	// Display Verbose HTTP Information
+	if verbose {
+		for _, metadata := range metadatas {
+			RenderVerboseOutput(metadata)
+		} // end for loop
+	}
+
+}
 
 func RenderInput(input interface{}) interface{} {
 
@@ -95,4 +109,18 @@ func RenderInput(input interface{}) interface{} {
 		log.Fatal(errors.Wrap(err, "unmarshal config file"))
 	}
 	return input
+}
+
+func RenderVerboseOutput(metadata api.Results) {
+	_, err := pretty.Println(metadata.Request)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = pretty.Println(metadata.Response)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+
 }

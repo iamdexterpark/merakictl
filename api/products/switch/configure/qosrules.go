@@ -3,27 +3,12 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type QoSRuleIds struct {
 	RuleIds []string `json:"ruleIds"`
 }
-
-// Return the quality of service rule IDs by order in which they will be processed by the switch
-func GetQoSRuleIds(networkId string) (QoSRuleIds, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/qosRules/order",
-		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = QoSRuleIds{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type QoSRules []struct {
 	QoSRule
@@ -40,30 +25,38 @@ type QoSRule struct {
 	Dscp         int         `json:"dscp"`
 }
 
-
-// List Quality Of Service Rules
-func GetQoSRules(networkId string) (QoSRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/switch/qosRules",
+// Return the quality of service rule IDs by order in which they will be processed by the switch
+func GetQoSRuleIds(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/qosRules/order",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = QoSRules{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = QoSRuleIds{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
+// List Quality Of Service Rules
+func GetQoSRules(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/switch/qosRules",
+		api.BaseUrl(), networkId)
+	var datamodel = QoSRules{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
 
 // Return a Quality Of Service Rule
-func GetQoSRule(networkId, qosRuleId string) (QoSRule, interface{}) {
+func GetQoSRule(networkId, qosRuleId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/qosRules/%s",
 		api.BaseUrl(), networkId, qosRuleId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = QoSRule{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = QoSRule{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

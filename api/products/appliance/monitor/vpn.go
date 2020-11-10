@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type VPNHistory []struct {
@@ -48,31 +47,6 @@ type VPNHistory []struct {
 	} `json:"merakiVpnPeers"`
 }
 
-// Show VPN history stat for networks in an organization
-func GetVPNHistory(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
-	networkIds string) (VPNHistory, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/vpn/stats", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("t1", t1)
-	parameters.Add("timespan", timespan)
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("networkIds", networkIds)
-	session.Request.URL.RawQuery = parameters.Encode()
-
-	var results = VPNHistory{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
 type VPNStatus []struct {
 	NetworkID    string `json:"networkId"`
 	NetworkName  string `json:"networkName"`
@@ -99,23 +73,50 @@ type VPNStatus []struct {
 	} `json:"thirdPartyVpnPeers"`
 }
 
-// Show VPN status for networks in an organization
-func GetVPNStatus(organizationId, perPage, startingAfter, endingBefore,
-	networkIds string) (VPNStatus, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/vpn/statuses", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+
+// Show VPN history stat for networks in an organization
+func GetVPNHistory(organizationId, t0, t1, timespan, perPage, startingAfter, endingBefore,
+	networkIds string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/vpn/stats", api.BaseUrl(), organizationId)
+
+	var datamodel = VPNHistory{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("perPage",perPage)
-	parameters.Add("startingAfter",startingAfter)
-	parameters.Add("endingBefore", endingBefore)
-	parameters.Add("networkIds", networkIds)
-	session.Request.URL.RawQuery = parameters.Encode()
+	var parameters = map[string]string{
+		"t0": t0,
+		"t1": t1,
+		"timespan": timespan,
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"networkIds": networkIds}
 
-	var results = VPNStatus{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Show VPN status for networks in an organization
+func GetVPNStatus(organizationId, perPage, startingAfter, endingBefore,
+	networkIds string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/appliance/vpn/statuses", api.BaseUrl(), organizationId)
+
+	var datamodel = VPNStatus{}
+
+	// Parameters for Request URL
+	var parameters = map[string]string{
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore,
+		"networkIds": networkIds}
+
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

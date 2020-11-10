@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type HTTPServers []struct {
@@ -18,41 +17,44 @@ type HTTPServer struct {
 	SharedSecret string `json:"sharedSecret"`
 }
 
-// List The HTTP Servers For A Network
-func GetHTTPServers(networkId string) (HTTPServers, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/httpServers", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = HTTPServers{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// Return An HTTP Server For A Network
-func GetHTTPServer(networkId, httpServerId string) (HTTPServer, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/httpServers/%s", api.BaseUrl(), networkId, httpServerId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = HTTPServer{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type Webhook struct {
 	ID     string `json:"id"`
 	URL    string `json:"url"`
 	Status string `json:"status"`
 }
 
+// List The HTTP Servers For A Network
+func GetHTTPServers(networkId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/httpServers", api.BaseUrl(), networkId)
+	var datamodel = HTTPServers{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
+// Return An HTTP Server For A Network
+func GetHTTPServer(networkId, httpServerId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/httpServers/%s", api.BaseUrl(), networkId, httpServerId)
+	var datamodel HTTPServer
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
+}
+
 // Return The Status Of A Webhook Test For A Network
-func GetWebhookStatus(networkId, webhookTestId string) (Webhook, interface{}) {
+func GetWebhookStatus(networkId, webhookTestId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/webhooks/webhookTests/%s", api.BaseUrl(), networkId, webhookTestId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = Webhook{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Webhook{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return sessions
 }

@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type AirMarshalScanResults []struct {
@@ -26,20 +25,19 @@ type AirMarshalScanResults []struct {
 }
 
 // List Air Marshal scan results from a network
-func GetAirMarshalScanResults(serial, t0, timespan string) (AirMarshalScanResults, interface{}) {
+func GetAirMarshalScanResults(serial, t0, timespan string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/airMarshal",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
+	var datamodel = AirMarshalScanResults{}
 
 	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("t0", t0)
-	parameters.Add("timespan",timespan)
+	var parameters = map[string]string{
+		"t0": t0,
+		"timespan": timespan}
 
-	session.Request.URL.RawQuery = parameters.Encode()
-	var results = AirMarshalScanResults{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

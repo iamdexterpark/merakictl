@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type RadioSettings struct {
@@ -22,14 +21,13 @@ type RadioSettings struct {
 }
 
 // Return The Radio Settings Of A Device
-func GetRadioSettings(serial string) (RadioSettings, interface{}) {
+func GetRadioSettings(serial string) []api.Results{
 	baseurl := fmt.Sprintf("%s/devices/%s/wireless/radio/settings",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = RadioSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = RadioSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

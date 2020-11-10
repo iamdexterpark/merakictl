@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type DHCPServerPolicy struct {
@@ -13,15 +12,14 @@ type DHCPServerPolicy struct {
 }
 
 // Return The DHCP Server Policy
-func GetDHCPServerPolicy(networkId string) (DHCPServerPolicy , interface{}) {
+func GetDHCPServerPolicy(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/dhcpServerPolicy",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DHCPServerPolicy {}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = DHCPServerPolicy {}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 

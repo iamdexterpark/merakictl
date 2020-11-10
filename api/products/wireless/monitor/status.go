@@ -3,8 +3,7 @@ package monitor
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SSIDStatuses struct {
@@ -23,14 +22,13 @@ type SSIDStatuses struct {
 }
 
 // Return the SSID statuses of an access point
-func GetSSIDStatuses(serial string) (SSIDStatuses, interface{}) {
+func GetSSIDStatuses(serial string) []api.Results {
 	baseurl := fmt.Sprintf("%s/devices/%s/wireless/status",
 		api.BaseUrl(), serial)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SSIDStatuses{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SSIDStatuses{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

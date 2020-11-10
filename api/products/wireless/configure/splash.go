@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SplashPageSettings struct {
@@ -28,15 +27,14 @@ type SplashPageSettings struct {
 }
 
 // Display The Splash Page Settings For The Given SSID
-func GetSplashPageSettings(networkId, number string) (SplashPageSettings, interface{}) {
+func GetSplashPageSettings(networkId, number string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/ssids/%s/splash/settings",
 		api.BaseUrl(), networkId, number)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var ssid SplashPageSettings
-	user_agent.UnMarshalJSON(session.Body, &ssid)
-	traceback := user_agent.TraceBack(session)
-	return ssid, traceback
+	var datamodel SplashPageSettings
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 

@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type DSCPCOSMapping struct {
@@ -16,14 +15,13 @@ type DSCPCOSMapping struct {
 }
 
 // Return The DSCP To CoS Mappings
-func GetDSCPCOSMapping(networkId string) (DSCPCOSMapping, interface{}) {
+func GetDSCPCOSMapping(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/dscpToCosMappings",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = DSCPCOSMapping{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = DSCPCOSMapping{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

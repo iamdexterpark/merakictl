@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SwitchProfilePorts struct {
@@ -28,49 +27,48 @@ type SwitchProfilePorts struct {
 	StormControlEnabled     bool     `json:"stormControlEnabled"`
 }
 
-// Return All The Ports Of A Switch Profile
-func GetSwitchProfilePorts(organizationId, configTemplateId, profileId string) (SwitchProfilePorts, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles/%s/ports",
-		api.BaseUrl(), organizationId, configTemplateId, profileId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchProfilePorts{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-
-// Return A Switch Profile Port
-func GetSwitchProfilePort(organizationId, configTemplateId, profileId, portId string) (SwitchProfilePorts, interface{}) {
-	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles/%s/ports/%s",
-		api.BaseUrl(), organizationId, configTemplateId, profileId, portId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchProfilePorts{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type SwitchTemplateConfigProfiles []struct {
 	SwitchProfileID string `json:"switchProfileId"`
 	Name            string `json:"name"`
 	Model           string `json:"model"`
 }
 
+
+// Return All The Ports Of A Switch Profile
+func GetSwitchProfilePorts(organizationId, configTemplateId, profileId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles/%s/ports",
+		api.BaseUrl(), organizationId, configTemplateId, profileId)
+	var datamodel = SwitchProfilePorts{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
+// Return A Switch Profile Port
+func GetSwitchProfilePort(organizationId, configTemplateId, profileId, portId string) []api.Results {
+	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles/%s/ports/%s",
+		api.BaseUrl(), organizationId, configTemplateId, profileId, portId)
+	var datamodel = SwitchProfilePorts{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+
 // List The Switch Profiles For Your Switch Template Configuration
 func GetSwitchTemplateConfigProfiles(organizationId,
-	configTemplateId string) (SwitchTemplateConfigProfiles, interface{}) {
+	configTemplateId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/configTemplates/%s/switch/profiles",
 		api.BaseUrl(), organizationId, configTemplateId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchTemplateConfigProfiles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SwitchTemplateConfigProfiles{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

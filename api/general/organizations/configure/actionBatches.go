@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 
@@ -32,30 +31,29 @@ type ActionBatch struct {
 }
 
 // Return The List Of Action Batches In The Organization
-func GetActionBatchList(organizationId, status string) (ActionBatchList, interface{}) {
+func GetActionBatchList(organizationId, status string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/actionBatches", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	// Parameters for Request URL
-	parameters := session.Request.URL.Query()
-	parameters.Add("status", status)
-	session.Request.URL.RawQuery = parameters.Encode()
 
-	var results = ActionBatchList{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	// Parameters for Request URL
+	var parameters = map[string]string{"status": status}
+
+	var datamodel = ActionBatchList{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, parameters, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
 
 // Return A Single Action Batch
-func GetActionBatch(organizationId, actionBatchId string) (ActionBatch, interface{}) {
+func GetActionBatch(organizationId, actionBatchId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/actionBatches/%s", api.BaseUrl(), organizationId, actionBatchId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
 
-	var results = ActionBatch{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = ActionBatch{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type SwitchNetworkSettings struct {
@@ -17,14 +16,13 @@ type SwitchNetworkSettings struct {
 }
 
 // Returns The Switch Network Settings
-func GetSwitchNetworkSettings(networkId string) (SwitchNetworkSettings, interface{}) {
+func GetSwitchNetworkSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/switch/settings",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SwitchNetworkSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SwitchNetworkSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

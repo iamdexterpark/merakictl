@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 	"time"
 )
 
@@ -31,14 +30,13 @@ type Admin []struct {
 }
 
 // List The Dashboard Administrators In This Organization
-func GetAdmins(organizationId string) (Admin, interface{}) {
+func GetAdmins(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/admins", api.BaseUrl(), organizationId)
-	var payload io.ReadSeeker
 
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = Admin{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = Admin{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

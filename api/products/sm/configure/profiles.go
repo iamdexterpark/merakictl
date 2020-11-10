@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type NetworkProfiles []struct {
@@ -17,14 +16,13 @@ type NetworkProfiles []struct {
 }
 
 // List all profiles in a network
-func GetNetworkProfiles(networkId string) (NetworkProfiles, interface{}) {
+func GetNetworkProfiles(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/sm/profiles",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = NetworkProfiles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = NetworkProfiles{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

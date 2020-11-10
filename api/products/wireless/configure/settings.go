@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type WirelessSettings struct {
@@ -15,15 +14,14 @@ type WirelessSettings struct {
 }
 
 // Return The Wireless Settings For A Network
-func GetWirelessSettings(networkId string) (WirelessSettings, interface{}) {
+func GetWirelessSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/wireless/settings",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = WirelessSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = WirelessSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 

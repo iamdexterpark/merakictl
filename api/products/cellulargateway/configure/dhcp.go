@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type DHCPSettings  struct {
@@ -14,13 +13,13 @@ type DHCPSettings  struct {
 }
 
 // List common DHCP settings of MGs
-func GetDHCPSettings(networkId string) (DHCPSettings, interface{}) {
+func GetDHCPSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/cellularGateway/dhcp",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = DHCPSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = DHCPSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

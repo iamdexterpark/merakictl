@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type PerformanceClasses []struct {
@@ -17,31 +16,6 @@ type PerformanceClass struct {
 	MaxJitter                int    `json:"maxJitter"`
 	MaxLossPercentage        int    `json:"maxLossPercentage"`
 }
-
-// List all custom performance classes for an MX network
-func GetPerformanceClasses(networkId string ) (PerformanceClasses, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = PerformanceClasses{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
-// Return a custom performance class for an MX network
-func GetPerformanceClass(networkId, customPerformanceClassId string ) (PerformanceClass, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses/%s", api.BaseUrl(), networkId, customPerformanceClassId)
-	var payload io.ReadSeeker
-	var results = PerformanceClass{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type TrafficShapingRules struct {
 	DefaultRulesEnabled bool `json:"defaultRulesEnabled"`
@@ -62,18 +36,6 @@ type TrafficShapingRules struct {
 	} `json:"rules"`
 }
 
-// Display the traffic shaping settings rules for an MX network
-func GetTrafficShapingRules(networkId string ) (TrafficShapingRules, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/rules", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = TrafficShapingRules{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type UplinkBandwidthSettings struct {
 	BandwidthLimits struct {
 		Wan1 struct {
@@ -90,19 +52,6 @@ type UplinkBandwidthSettings struct {
 		} `json:"cellular"`
 	} `json:"bandwidthLimits"`
 }
-
-// Returns the uplink bandwidth settings for your MX network.
-func GetUplinkBandwidthSettings(networkId string ) (UplinkBandwidthSettings, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkBandwidth", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = UplinkBandwidthSettings{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 
 type UplinkSelectionSettings struct {
 	ActiveActiveAutoVpnEnabled  bool   `json:"activeActiveAutoVpnEnabled"`
@@ -141,18 +90,6 @@ type UplinkSelectionSettings struct {
 	} `json:"vpnTrafficUplinkPreferences"`
 }
 
-// Show uplink selection settings for an MX network
-func GetUplinkSelectionSettings(networkId string ) (UplinkSelectionSettings, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkSelection", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = UplinkSelectionSettings{}
-
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
-}
-
 type TrafficShapingSettings struct {
 	GlobalBandwidthLimits struct {
 		LimitUp   int `json:"limitUp"`
@@ -160,14 +97,74 @@ type TrafficShapingSettings struct {
 	} `json:"globalBandwidthLimits"`
 }
 
-// Display the traffic shaping settings for an MX network
-func GetTrafficShapingSettings(networkId string ) (TrafficShapingSettings, interface{}) {
-	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	var results = TrafficShapingSettings{}
+// List all custom performance classes for an MX network
+func GetPerformanceClasses(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses", api.BaseUrl(), networkId)
+	var datamodel = PerformanceClasses{}
 
-	session := api.Session(baseurl, "GET", payload)
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Return a custom performance class for an MX network
+func GetPerformanceClass(networkId, customPerformanceClassId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/customPerformanceClasses/%s", api.BaseUrl(), networkId, customPerformanceClassId)
+	var datamodel = PerformanceClass{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Display the traffic shaping settings rules for an MX network
+func GetTrafficShapingRules(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/rules", api.BaseUrl(), networkId)
+	var datamodel = TrafficShapingRules{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Returns the uplink bandwidth settings for your MX network.
+func GetUplinkBandwidthSettings(networkId string )[]api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkBandwidth", api.BaseUrl(), networkId)
+	var datamodel = UplinkBandwidthSettings{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Show uplink selection settings for an MX network
+func GetUplinkSelectionSettings(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping/uplinkSelection", api.BaseUrl(), networkId)
+	var datamodel = UplinkSelectionSettings{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
+}
+
+// Display the traffic shaping settings for an MX network
+func GetTrafficShapingSettings(networkId string ) []api.Results {
+	baseurl := fmt.Sprintf("%s/networks/%s/appliance/trafficShaping", api.BaseUrl(), networkId)
+	var datamodel = TrafficShapingSettings{}
+
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

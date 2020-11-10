@@ -3,12 +3,12 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 type FloorPlans []struct {
 	FloorPlan
 }
+
 type FloorPlan struct {
 	FloorPlanID       string `json:"floorPlanId"`
 	ImageURL          string `json:"imageUrl"`
@@ -60,24 +60,24 @@ type FloorPlan struct {
 	} `json:"topRightCorner"`
 }
 
-// List The Floor Plans That Belong To Your Network
-func GetFloorPlans(networkId string) (FloorPlans, interface{}) {
+// GetFloorPlans - List The Floor Plans That Belong To Your Network
+func GetFloorPlans(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/floorPlans", api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var floorplan = FloorPlans{}
-	user_agent.UnMarshalJSON(session.Body, &floorplan)
-	traceback := user_agent.TraceBack(session)
-	return floorplan, traceback
+	var datamodel = FloorPlans{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
-// List The Floor Plans That Belong To Your Network
-func GetFloorPlan(networkId, floorPlanId string) (FloorPlan, interface{}) {
+// GetFloorPlan - List The Floor Plans That Belong To Your Network
+func GetFloorPlan(networkId, floorPlanId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/floorPlans/%s", api.BaseUrl(), networkId, floorPlanId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var floorplan = FloorPlan{}
-	user_agent.UnMarshalJSON(session.Body, &floorplan)
-	traceback := user_agent.TraceBack(session)
-	return floorplan, traceback
+	var datamodel = FloorPlan{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

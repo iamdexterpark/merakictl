@@ -13,40 +13,40 @@ import (
 
 var (
 	commaRegexp      = regexp.MustCompile(`,\s{0,}`)
-	valueCommaRegexp = regexp.MustCompile(`([^"]),`)
 	equalRegexp      = regexp.MustCompile(` *= *`)
-	keyRegexp        = regexp.MustCompile(`[a-z*]+`)
-	linkRegexp       = regexp.MustCompile(`<(.+)>;`)
+	linkRegexp       = regexp.MustCompile(`<(.+)>`)
 	semiRegexp       = regexp.MustCompile(`; +`)
-	valRegexp        = regexp.MustCompile(`"+([^"]+)"+`)
+	URIRegexp       = regexp.MustCompile(`[?*]+`)
+	parametersRegexp       = regexp.MustCompile(`[&*]+`)
 )
 
-// Group returned by Parse, contains multiple links indexed by "rel"
-type Group map[string]*Link
+// LinkedList returned by Parse, contains multiple links indexed by "rel"
+type LinkedList []Link //map[string]*Link
 
 // Link contains a Link item with URI, Rel, and other non-URI components in Extra.
 type Link struct {
 	URI   string
 	Rel   string
-	Extra map[string]string
+	PerPage string // The number of entries to be returned in the page (the current request)
+	StartingAfter string // A token used by our server to indicate the starting "identifier" of the page
+	EndingBefore string // A token used by our server to indicate the ending "identifier" of the page
 }
 
 // String returns the URI
-func (l *Link) String() string {
-	return l.URI
+func (link *Link) String() string {
+	return link.URI
 }
 
-// ParseRequest parses the provided *http.Request into a Group
-func ParseRequest(req *http.Request) Group {
+// ParseRequest parses the provided *http.Request into a LinkedList
+func ParseRequest(req *http.Request) LinkedList {
 	if req == nil {
 		return nil
 	}
-
 	return ParseHeader(req.Header)
 }
 
-// ParseResponse parses the provided *http.Response into a Group
-func ParseResponse(resp *http.Response) Group {
+// ParseResponse parses the provided *http.Response into a LinkedList
+func ParseResponse(resp *http.Response) LinkedList {
 	if resp == nil {
 		return nil
 	}
@@ -54,8 +54,8 @@ func ParseResponse(resp *http.Response) Group {
 	return ParseHeader(resp.Header)
 }
 
-// ParseHeader retrieves the Link header from the provided http.Header and parses it into a Group
-func ParseHeader(h http.Header) Group {
+// ParseHeader retrieves the Link header from the provided http.Header and parses it into a LinkedList
+func ParseHeader(h http.Header) LinkedList {
 	if headers, found := h["Link"]; found {
 		return Parse(strings.Join(headers, ", "))
 	}
@@ -63,73 +63,118 @@ func ParseHeader(h http.Header) Group {
 	return nil
 }
 
-// Parse parses the provided string into a Group
-func Parse(s string) Group {
+
+// Parse parses the provided string into a LinkedList
+func Parse(s string) LinkedList {
+
+	// s is a comma separated list of link+rel value
 	if s == "" {
 		return nil
 	}
 
-	group := Group{}
 
-	for _, l := range commaRegexp.Split(s, -1) {
-		// s is the whole string unmodified
-		// l is the string split by commas
+	// Parse LinkList Header to extract an array of url+rel
+	separatedLinks := SeparateLinks(s)
 
+	// Store Links found in Header
+	var LinkedList = LinkedList{}
 
-		// linkMatches is a nested array with two versions of the url
-		// linkMatches[0] is the url with <>;
-		// linkMatches[1] is the url without <>;
-		linkMatches := linkRegexp.FindAllStringSubmatch(l, -1)
+	// Parse each link and return
+	for _, link := range separatedLinks {
+		LinkedList = append(LinkedList, ParseLink(link))
 
-		if len(linkMatches) == 0 {
-			return nil
-		}
-
-		// pieces takes the double array of linkMatches and extracts the inner array so we can access the values
-		pieces := linkMatches[0]
-
-
-		// pieces[1] is the url with <>;
-		link := &Link{URI: pieces[1], Extra: map[string]string{}}
-
-		// extra takes l and splits it by semicolon
-		for _, extra := range semiRegexp.Split(l, -1) {
-
-			// vals is the splits by the = equal sign
-			vals := equalRegexp.Split(extra, -1)
-
-
-			// vals[0] is the rel
-			// vals[1] is the value of rel
-
-
-			// key is the rel
-			key := keyRegexp.FindString(vals[0])
-
-
-			val := vals[1]
-
-			if key == "rel" {
-				vals := strings.Split(val, " ")
-				rels := []string{vals[0]}
-
-				if len(vals) > 1 {
-					for _, v := range vals[1:] {
-						if !strings.HasPrefix(v, "http") {
-							rels = append(rels, v)
-						}
-					}
-				}
-
-				rel := strings.Join(rels, " ")
-
-				link.Rel = rel
-				group[rel] = link
-			} else {
-				link.Extra[key] = val
-			}
-		}
 	}
 
-	return group
+	return LinkedList
+}
+
+
+func SeparateLinks(s string) []string{
+
+	// Empty list to append links
+	var links []string
+
+	// splitting on commas so that we get a single link+rel to parse
+	for _, parsedLink := range commaRegexp.Split(s, -1) {
+		links = append(links, parsedLink)
+	}
+	return links
+}
+
+
+func ParseLink(s string) Link {
+
+	// Split the url from the rel
+	parseURI := semiRegexp.Split(s, -1)
+
+	// parseURI[1] = rel=first
+	if len(parseURI) == 0 {
+		return Link{}
+	}
+
+	// strip <> from url
+	formattedURL := linkRegexp.FindAllStringSubmatch(parseURI[0], -1)
+
+	// get formatted parameters
+	params := ParseLinkParameters(formattedURL[0][1])
+
+
+	// get rel key-value pair
+	rel := equalRegexp.Split(parseURI[1], -1)
+
+
+	link := Link{
+		URI:                 params["uri"],
+		Rel:                 rel[1],
+		PerPage:            params["perPage"],
+		StartingAfter: 		params["startingAfter"],
+		EndingBefore:  		 params["endingBefore"],
+
+	}
+
+	return link
+}
+
+
+func ParseLinkParameters(s string) map[string]string {
+
+	// split the base url from the parameters
+	splitParameters := URIRegexp.Split(s, -1)
+
+
+	// parameters = perPage=1000&startingAfter=L_0
+	parameters := splitParameters[1]
+
+	// split parameters into a key-value list
+	parameterList := parametersRegexp.Split(parameters, -1)
+
+	// sort parameters into key-value struct
+	var perPage string
+	var startingAfter string
+	var endingBefore string
+
+	for _,  param := range parameterList {
+
+		formattedParam := equalRegexp.Split(param, -1)
+		switch formattedParam[0] {
+		case "perPage":
+			perPage = formattedParam[1]
+		case "startingAfter":
+			startingAfter = formattedParam[1]
+		case "endingBefore":
+			endingBefore = formattedParam[1]
+		}
+
+	}
+
+
+	// return parsed link data
+	var parsedLink = map[string]string{
+		"uri": splitParameters[0],
+		"perPage": perPage,
+		"startingAfter": startingAfter,
+		"endingBefore": endingBefore}
+
+	return parsedLink
+
 }

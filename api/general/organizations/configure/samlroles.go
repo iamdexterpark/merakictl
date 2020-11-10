@@ -3,12 +3,12 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 type SAMLRoles []struct {
 	SAMLRole
 }
+
 type SAMLRole struct {
 	ID        string `json:"id"`
 	Role      string `json:"role"`
@@ -24,26 +24,24 @@ type SAMLRole struct {
 }
 
 // List the SAML roles for this organization
-func GetSAMLRoles(organizationId string) (SAMLRoles, interface{}) {
+func GetSAMLRoles(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/samlRoles", api.BaseUrl(),
 		organizationId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SAMLRoles{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SAMLRoles{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
 
-func GetSAMLRole(organizationId, samlRoleId string) (SAMLRole, interface{}) {
+func GetSAMLRole(organizationId, samlRoleId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/samlRoles/%s", api.BaseUrl(),
 		organizationId, samlRoleId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-
-	var results = SAMLRole{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = SAMLRole{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }

@@ -3,8 +3,7 @@ package configure
 import (
 	"fmt"
 	"github.com/ddexterpark/merakictl/api"
-	user_agent "github.com/ddexterpark/merakictl/user-agent"
-	"io"
+	"log"
 )
 
 type UplinkSettings struct {
@@ -15,13 +14,13 @@ type UplinkSettings struct {
 }
 
 // Returns The Uplink Settings For Your MG Network
-func GetUplinkSettings(networkId string) (UplinkSettings, interface{}) {
+func GetUplinkSettings(networkId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/networks/%s/cellularGateway/uplink",
 		api.BaseUrl(), networkId)
-	var payload io.ReadSeeker
-	session := api.Session(baseurl, "GET", payload)
-	var results = UplinkSettings{}
-	user_agent.UnMarshalJSON(session.Body, &results)
-	traceback := user_agent.TraceBack(session)
-	return results, traceback
+	var datamodel = UplinkSettings{}
+	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return sessions
 }
