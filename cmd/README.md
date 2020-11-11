@@ -160,3 +160,55 @@ All Device level API calls.
  GET  | clients | merakictl get device clients -d {deviceId} | {{t0}} {{timespan}} | List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
  GET  | lldpcdp | merakictl get device lldpcdp -d {deviceId} | | List LLDP and CDP information for a device.
  GET  | uplinkloss | merakictl get device uplinkloss -d {deviceId} | {{t0}} {{t1}} {{timespan}} {{resolution}} {{uplink}} {{ip}} | Get the uplink loss percentage and latency in milliseconds for a wired network device.
+ 
+ 
+ 
+ ##### MX Appliance 
+ 
+ All Device level API calls. 
+ 
+  HTTP | Operation | Syntax | Filters | Description |
+ ----- | --------- | ------ | ----------- | ----------- |
+ GET  | connectivitymonitoringdestinations | merakictl get mx connectivitymonitoringdestinations -n {networkId} | | Return the connectivity testing destinations for an MX network.
+ GET  | contentfilteringcategories | merakictl get mx contentfilteringcategories -n {networkId} | | List all available content filtering categories for an MX network.
+ GET  | contentfiltering | merakictl get mx contentfiltering -n {networkId} | | Return the content filtering settings for an MX network.
+ GET  | cellularfirewallrules | merakictl get mx cellularfirewallrules -n {networkId} | | Return the cellular firewall rules for an MX network.
+ GET  | firewalledservices | merakictl get mx firewalledservices -n {networkId} | | List the appliance services and their accessibility rules.
+ GET  | firewalledservice | merakictl get mx firewalledservice {service} -n {networkId} | | Return the accessibility settings of the given service ('ICMP', 'web', or 'SNMP').
+ GET  | inboundfirewallrules | merakictl get mx inboundfirewallrules -n {networkId} | | Return the inbound firewall rules for an MX network.
+ GET  | l3firewallrules | merakictl get mx l3firewallrules -n {networkId} | | Return the L3 firewall rules for an MX network.
+ GET  | l7applicationcategories | merakictl get mx l7applicationcategories -n {networkId} | | Return the L7 firewall application categories and their associated applications for an MX network.
+ GET  | l7firewallrules | merakictl get mx l7firewallrules -n {networkId} | | List the MX L7 firewall rules for an MX network.
+ GET  | onetomanynatrules | merakictl get mx onetomanynatrules -n {networkId} | | Return the 1:Many NAT mapping rules for an MX network.
+ GET  | onetoonenatrules | merakictl get mx onetoonenatrules -n {networkId} | | Return the 1:1 NAT mapping rules for an MX network.
+ GET  | portforwardingrules | merakictl get mx portforwardingrules -n {networkId} | | Return the port forwarding rules for an MX network.
+ GET  | ports | merakictl get mx ports -n {networkId} | | List per-port VLAN settings for all ports of a MX.
+ GET  | port | merakictl get mx port {portId} -n {networkId} | | Return per-port VLAN settings for a single MX port.
+ GET  | networkintrusion | merakictl get mx networkintrusion -n {networkId} | | Returns all supported intrusion settings for an MX network.
+ GET  | organizationintrusion | merakictl get mx organizationintrusion -o {organizationId} | | Returns all supported intrusion settings for an organization.
+ GET  | malware | merakictl get mx malware -n {networkId} | | Returns all supported malware settings for an MX network.
+ GET  | settings | merakictl get mx settings -n {networkId} | | Return the appliance settings for a network.
+ GET  | singlelan | merakictl get mx singlelan -n {networkId} | | Return single LAN configuration.
+ GET  | staticroutes | merakictl get mx staticroutes -n {networkId} | | List the static routes for an MX or teleworker network.
+ GET  | staticroute | merakictl get mx staticroute {staticRouteId} -n {networkId} | | Return a static route for an MX or teleworker network.
+ GET  | customperformanceclasses | merakictl get mx customperformanceclasses -n {networkId} | | List all custom performance classes for an MX network.
+ GET  | customperformanceclass | merakictl get mx customperformanceclass {customPerformanceClassId} -n {networkId} | | Return a custom performance class for an MX network.
+ GET  | trafficshapingrules | merakictl get mx trafficshapingrules -n {networkId} | | Display the traffic shaping settings rules for an MX network.
+ GET  | uplinkbandwidth | merakictl get mx uplinkbandwidth -n {networkId} | | Returns the uplink bandwidth settings for your MX network..
+ GET  | uplinkselection | merakictl get mx uplinkselection -n {networkId} | | Show uplink selection settings for an MX network.
+ GET  | trafficshaping | merakictl get mx trafficshaping -n {networkId} | | Display the traffic shaping settings for an MX network.
+ GET  | vlanssettings | merakictl get mx vlanssettings -n {networkId} | | Returns the enabled status of VLANs for the network.
+ GET  | vlans | merakictl get mx vlans -n {networkId} | | List the VLANs for an MX network.
+ GET  | vlan | merakictl get mx vlan {vlanId} -n {networkId} | | Return a VLAN.
+ GET  | sitetositevpn | merakictl get mx sitetositevpn -n {networkId} | | Return the site-to-site VPN settings of a network. Only valid for MX networks.
+ GET  | thirdpartyvpnpeers | merakictl get mx thirdpartyvpnpeers -o {organizationId} | | Return the third party VPN peers for an organization.
+ GET  | vpnfirewallrules | merakictl get mx vpnfirewallrules -o {organizationId} | | Return the firewall rules for an organization's site-to-site VPN.
+ GET  | warmspare | merakictl get mx warmspare -n {networkId} | | Return MX warm spare settings.
+ GET  | securityevents | merakictl get mx securityevents {clientId} -n {networkId} | {{t0}} {{t1}} {{timespan}} {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{sortOrder}} | List the security events for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+ GET  | dhcpsubnets | merakictl get mx dhcpsubnets -d {deviceId} | | Return the DHCP subnet information for an appliance.
+ GET  | performance | merakictl get mx performance -d {deviceId} | | Return the performance score for a single MX. Only primary MX devices supported. If no data is available, a 204 error code is returned.
+ GET  | networksecurityevents | merakictl get mx networksecurityevents -n {networkId} | {{t0}} {{t1}} {{timespan}} {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{sortOrder}} | List the security events for a network.
+ GET  | organizationsecurityevents | merakictl get mx organizationsecurityevents -o {organizationId} | {{t0}} {{t1}} {{timespan}} {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{sortOrder}} | List the security events for an organization.
+ GET  | uplinkstatuses | merakictl get mx uplinkstatuses -o {organizationId} | {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} | List the uplink status of every Meraki MX and Z series appliances in the organization.
+ GET  | vpnstats | merakictl get mx vpnstats -o {organizationId} | {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{networkIds}} {{t0}} {{t1}} {{timespan}} | Show VPN history stat for networks in an organization.
+ GET  | vpnstatuses | merakictl get mx vpnstatuses -o {organizationId} | {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{networkIds}} | Show VPN status for networks in an organization.
