@@ -36,6 +36,7 @@ func GetSAMLRoles(organizationId string) []api.Results {
 	return sessions
 }
 
+// List a single SAML role for this organization
 func GetSAMLRole(organizationId, samlRoleId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/samlRoles/%s", api.BaseUrl(),
 		organizationId, samlRoleId)

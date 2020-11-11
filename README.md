@@ -2,7 +2,8 @@
 # merakictl
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/ddexterpark/merakictl)
 
-A Golang SDK and command line tool for the Meraki Dashboard API.
+A Community developed Golang SDK and command line tool for the Meraki Dashboard API. 
+For a Vendor supported API interface please see the wonderful: [Meraki Dashboard API Python Library](https://github.com/meraki/dashboard-api-python)
 
 ## Download Merakictl 
 This SDK can be used as a CLI-based Application without any prior programming experience. 
@@ -55,7 +56,7 @@ There are also some optional env vars that you can set to customize your API cal
       echo $MERAKI_API_TOKEN 
       
       PowerShell -
-            setx MERAKI_API_TOKEN "234567890987654321"
+            setx MERAKI_API_TOKEN "1234567890987654321"
             echo %MERAKI_API_TOKEN%
 ```
 #### Optional
@@ -78,21 +79,20 @@ Not all endpoints will work in v0.
 ## Syntax
 
 ```shell script
-    merakictl [COMMAND] [SUBCOMMAND] [flags]
+    merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
 ```
 
  
 #### [COMMAND]
  
-Operation	| Syntax | Description |
+Operation | Syntax | Description |
 --- | --- | ---
-| **claim** | merakictl claim [SUBCOMMAND] [ | Claim orders, licences, serial numbers into dashboard. |
-| **create** | merakictl create [COMMAND] [TARGET] [SUBCOMMAND] [flags] | Creates (POST) new resources. |
-| **get** | merakictl get [COMMAND] [TARGET] [SUBCOMMAND] [flags]| Operation for displaying (GET) api resources. |
-| **update** | merakictl update [COMMAND] [TARGET] [SUBCOMMAND] [flags]| Updates (PUT) targeted resources. |
-| **remove** | merakictl remove [COMMAND] [TARGET] [SUBCOMMAND] [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. |
+| **claim** | merakictl claim [order/serial/licence] [TARGET] | Claim orders, licences, serial numbers into dashboard. |
+| **create** | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags] | Creates (POST) new resources. |
+| **get** | merakictl get [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. |
+| **update** | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Updates (PUT) targeted resources. |
+| **remove** | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. |
 | **version** | merakictl version | Displays the version and associate release information of Merakictl. |
-
 
 #### [SUBCOMMAND]
 
