@@ -32,6 +32,7 @@
 - [ ] 100% Get Command CLI Coverage
 
 ### Backlog
+- [ ] org/net/device flags use exact match to obfuscate Ids with the actual names
 - [ ] Meraki Tags Flag
 - [ ] Diff Flag (GET: compare config file against current API state)
 - [ ] Proxy Support (certificate path, server, port)
