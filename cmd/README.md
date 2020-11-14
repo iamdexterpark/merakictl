@@ -36,20 +36,60 @@ Flag Type | Long | Short | Description |
 --- | --- | --- | ---
 | Global | **--input** | | Global flag for using a yaml file for passing config to the Dashboard API |
 | Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
-| Global | **--organization** | -o | Global flag for Organization id. |
-| Global | **--network** | -n | Global flag for Network id. |
+| Global | **--diff** | | Global flag for diffing a yaml/json file with config in the Dashboard API |
 | Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
-
+| Global | **--organization** | -o | Global flag for matching a string against Organization ids. |
+| Global | **--network** | -n | Global flag for matching a string against Network ids. |
+| Global | **--hostname** | -h | Global flag for matching a string against Network ids. |
 
  #### Common Filters
 
-Filters are HTTP parameters that shape our API queries. The filters below, while not exhaustive, are most commonly used. 
+Filters are HTTP parameters that shape our API queries. The filters below... 
 
 Filter | Example | Description |
  --- | --- | --- 
 t0 | |  The beginning of the timespan for the data. The maximum lookback period is 90 days from today.
 t1 | |  The end of the timespan for the data. t1 can be a maximum of 31 days after t0.
 timespan | |  The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.
+resolution | |  
+autoResolution | |  
+deviceSerial | |  
+uplink | |  
+ip | |  
+search | |  
+configTemplateId | |  
+tags | |  
+usedState | |  
+tagsFilterType | |  
+username | |
+email | |  
+mac | |  
+serial | |  
+imei | |  
+bluetoothMac | |  
+includeConnectivityHistory | |  
+connectivityHistoryTimespan | |  
+includedEventTypes[] | |  
+excludedEventTypes[] | |  
+sensorSerial | |
+gatewaySerial | |  
+ssidNumber | |
+loginIdentifier | |  
+deviceType | |  
+sortOrder | |  
+networkIds | |  
+objectType | |  
+clientId | |  
+apTag | |  
+band | |  
+ssid | |  
+vlan | |  
+fields | |  
+wifiMacs | |
+serials | |  
+ids | |  
+scope | |  
+withDetails | |  
 perPage | | The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.
 startingAfter | | A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
 endingBefore | | A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
