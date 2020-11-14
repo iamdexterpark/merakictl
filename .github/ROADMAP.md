@@ -15,7 +15,7 @@
 - [x] Authorization
 - [x] Exponential Backoff Policy
 - [x] Connection Reuse Policy
-- [x] Meraki API V0 Support
+- [x] Meraki API V0 Support (Partial)
 - [x] Meraki API V1 Support
 - [x] Deprecation Policy
 - [x] Sunset Policy
