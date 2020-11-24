@@ -2,7 +2,7 @@
 
  
   
-#### Commands
+## Root Commands
  
 Command | Syntax | Description |
 --- | --- | ---
@@ -14,7 +14,7 @@ Command | Syntax | Description |
 | **version** | merakictl version | Displays the version and associate release information of Merakictl. |
 
 
-#### Subcommands
+## Subcommands
  
 Subcommand | Abbreviated | Description |
 --- | --- | --- |
@@ -30,7 +30,7 @@ Subcommand | Abbreviated | Description |
 | **insight** | |  End-to-end visibility into end-users' experience on the network. |
 
 
-#### Flags
+## Flags
 
 Flag Type | Long | Short | Description |
 --- | --- | --- | ---
@@ -42,7 +42,7 @@ Flag Type | Long | Short | Description |
 | Global | **--network** | -n | Global flag for matching a string against Network ids. |
 | Global | **--hostname** | -h | Global flag for matching a string against Network ids. |
 
- #### Common Filters
+## Common Filters
 
 Filters are HTTP parameters that shape our API queries. The filters below... 
 
@@ -51,56 +51,56 @@ Filter | Example | Description |
 t0 | |  The beginning of the timespan for the data. The maximum lookback period is 90 days from today.
 t1 | |  The end of the timespan for the data. t1 can be a maximum of 31 days after t0.
 timespan | |  The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.
-resolution | |  
-autoResolution | |  
-deviceSerial | |  
-uplink | |  
-ip | |  
+resolution | | The time resolution in seconds for returned data. The valid resolutions are: 600, 1200, 3600, 14400, 86400. The default is 86400.
+autoResolution | | Automatically select a data resolution based on the given timespan; this overrides the value specified by the 'resolution' parameter. The default setting is false. 
+deviceSerial | | The serial of the Meraki device which the list of events will be filtered with
+uplink | | Optional filter for a specific WAN uplink. Valid uplinks are wan1, wan2, cellular. Default will return all uplinks.
+ip | | Optional filter for a specific destination IP. Default will return all destination IPs. 
 search | |  
-configTemplateId | |  
-tags | |  
+configTemplateId | | An optional parameter that is the ID of a config template. Will return all networks bound to that template. 
+tags | | An optional parameter to filter networks by tags. The filtering is case-sensitive. If tags are included, 'tagsFilterType' should also be included (see below). 
 usedState | |  
-tagsFilterType | |  
-username | |
-email | |  
-mac | |  
-serial | |  
-imei | |  
-bluetoothMac | |  
-includeConnectivityHistory | |  
-connectivityHistoryTimespan | |  
-includedEventTypes[] | |  
-excludedEventTypes[] | |  
-sensorSerial | |
-gatewaySerial | |  
-ssidNumber | |
-loginIdentifier | |  
+tagsFilterType | | An optional parameter of value 'withAnyTags' or 'withAllTags' to indicate whether to return networks which contain ANY or ALL of the included tags. If no type is included, 'withAnyTags' will be selected. 
+username | | The username of a Systems Manager user
+email | | The email of a network user account or a Systems Manager device 
+mac | | The MAC of a network client device or a Systems Manager device 
+serial | | The serial of a Systems Manager device 
+imei | | The IMEI of a Systems Manager device 
+bluetoothMac | | The MAC of a Bluetooth client 
+includeConnectivityHistory | |  Include the connectivity history for this client
+connectivityHistoryTimespan | | The timespan, in seconds, for the connectivityHistory data. By default 1 day, 86400, will be used.
+includedEventTypes[] | |  A list of event types. The returned events will be filtered to only include events with these types.
+excludedEventTypes[] | |  A list of event types. The returned events will be filtered to exclude events with these types.
+sensorSerial | | The serial of the sensor device which the list of events will be filtered with
+gatewaySerial | | The serial of the environmental gateway device which the list of events will be filtered with
+loginIdentifier | | The username, email, or phone number used during login 
 deviceType | |  
-sortOrder | |  
+sortOrder | | Sorted order of security events based on event detection time. Order options are 'ascending' or 'descending'. Default is ascending order.
 networkIds | |  
-objectType | |  
-clientId | |  
-apTag | |  
-band | |  
-ssid | |  
-vlan | |  
-fields | |  
+objectType | | [optional] The object type for which analytics will be retrieved. The default object type is person. The available types are [person, vehicle]. 
+clientId | | Filter results by network client to return per-device, per-band AP channel utilization metrics inner joined by the queried client's connection history.
+apTag | | Filter results by AP tag to return AP channel utilization metrics for devices labeled with the given tag; either :clientId or :deviceSerial must be jointly specified.
+band | | Filter results by band (either '2.4' or '5'). 
+ssid | | Filter results by SSID
+ssidNumber | | An SSID number to include. If not specified, events for all SSIDs will be returned.
+vlan | | Filter results by VLAN
+fields | | Partial selection: If present, this call will return only the selected fields of ["rawDistribution", "avg"]. All fields will be returned by default. Selected fields must be entered as a comma separated string. 
 wifiMacs | |
 serials | |  
-ids | |  
-scope | |  
-withDetails | |  
+ids | | Filter users by id(s). 
+scope | | Specifiy a scope (one of all, none, withAny, withAll, withoutAny, withoutAll) and a set of tags. 
+withDetails | | Boolean indicating if the the ids of the devices or users scoped by the target group should be included in the response 
 perPage | | The timespan for which the information will be fetched. If specifying timespan, do not specify parameters t0 and t1. The value must be in seconds and be less than or equal to 31 days. The default is 1 day.
 startingAfter | | A token used by the server to indicate the start of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
 endingBefore | | A token used by the server to indicate the end of the page. Often this is a timestamp or an ID but it is not limited to those. This parameter should not be defined by client applications. The link for the first, last, prev, or next page in the HTTP Link header should define it.
 
 
-The filters "perPage", "startingAfter", and "endingBefore" are part of the Meraki Dashboard APIs pagination strategy. 
+**The filters `perPage`, `startingAfter`, and `endingBefore` are part of the Meraki Dashboard APIs pagination strategy. 
 They should be considered overrides as Merakictl is designed to automatically handle pagination. 
-To learn more see RFC5988 Web Linking.
+To learn more see RFC5988 Web Linking.**
 
 
-##### Organization
+## Organization
 
 All Organization level API calls. 
 
@@ -141,7 +141,7 @@ All Organization level API calls.
  GET  | webhooklogs | merakictl get organization webhooklogs {organizationId} | {{t0}} {{t1}} {{timespan}} {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{url}} | Return the log of webhook POSTs sent.
  
  
-##### Network
+## Network
 
 All Network level API calls. 
 
@@ -189,7 +189,7 @@ All Network level API calls.
  GET  | traffic | merakictl get network traffic {networkId} | {{t0}} {{timespan}} {{deviceType}} | Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.
 
 
-##### Device
+## Device
 
 All Device level API calls. 
 
@@ -203,7 +203,7 @@ All Device level API calls.
  
  
  
- ##### MX Appliance 
+## MX Appliance 
  
  All MX level API calls. 
  
@@ -254,7 +254,7 @@ All Device level API calls.
  GET  | vpnstatuses | merakictl get mx vpnstatuses {organizationId} | {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} {{networkIds}} | Show VPN status for networks in an organization.
 
 
- ##### Camera MV  
+## Camera MV  
  
  All MV level API calls. 
  
@@ -275,7 +275,7 @@ All Device level API calls.
  GET  | zones | merakictl get mv zones {serial} | | Returns all configured analytic zones for this camera.
  
  
-  ##### Cellular Gateway mg  
+## Cellular Gateway mg  
   
   All MG level API calls.
   
@@ -290,7 +290,7 @@ All Device level API calls.
  
 
 
- ##### Switch MS  
+## Switch MS  
  
  All MS level API calls. 
  
@@ -338,7 +338,7 @@ All Device level API calls.
 
 
 
- ##### Wireless MR  
+## Wireless MR  
  
  All MR level API calls. 
  
@@ -384,7 +384,7 @@ All Device level API calls.
 
 
 
- ##### SM  
+## SM  
  
  All SM level API calls. 
  
@@ -415,7 +415,7 @@ All Device level API calls.
   GET  | performancehistory | merakictl get sm performancehistory {networkId} {deviceId} | {{{perPage}}} {{{startingAfter}}} {{{endingBefore}}} | Return historical records of various Systems Manager client metrics for desktop devices.
 
 
- ##### Insight  
+## Insight  
  
  All Insight level API calls. 
  
