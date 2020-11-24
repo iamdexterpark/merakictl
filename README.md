@@ -120,12 +120,13 @@ In order to invoke these commands you will have to leverage flags to specify the
 
 Flag Type | Long | Short | Description |
 --- | --- | --- | ---
-| Global | **--input** | | Global flag for using a yaml file for passing config to the Dashboard API |
 | Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
+| Global | **--input** | | Global flag for using a yaml file for passing config to the Dashboard API |
+| Global | **--diff** | | Global flag for diffing config file with dashboard config |
+| Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
 | Global | **--organization** | -o | Global flag for Organization id. |
 | Global | **--network** | -n | Global flag for Network id. |
-| Global | **--device** | -d | Global flag for Serial Number. |
-| Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
+| Global | **--hostname** |  | Global flag for Device Hostname. |
 
 ### Data Model
 Please see the examples directory for full reference guide. 

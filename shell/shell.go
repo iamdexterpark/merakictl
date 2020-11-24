@@ -11,6 +11,8 @@ import (
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
+
+	"gopkg.in/d4l3k/messagediff.v1"
 )
 
 // displayYaml - Formats an interface into a YAML byte array
@@ -65,6 +67,7 @@ func Display(metadatas []api.Results, name string, flags *pflag.FlagSet) {
 	verbose, _ := flags.GetBool("verbose")
 	export, _ := flags.GetBool("export")
 	jsonflag, _ := flags.GetBool("json")
+	diff, _ := flags.GetBool("diff")
 
 	if jsonflag {
 		format = "json"
@@ -72,10 +75,25 @@ func Display(metadatas []api.Results, name string, flags *pflag.FlagSet) {
 		format = "yaml"
 	}
 
+	// config file for diff
+	var cfgFile interface{}
+	if diff {
+		// Read Config File
+		RenderInput(&cfgFile)
+	}
+
+
 	// Concatenate []byte for single display
 	for _, metadata := range metadatas {
 		display := Console(format, metadata.Payload)
-		results = append(results, display...)
+		if diff {
+			diff, equal := messagediff.PrettyDiff(metadata.Payload, cfgFile)
+			pretty.Println(diff, equal)
+
+		} else {
+			results = append(results, display...)
+		}
+
 	} // end for loop
 
 	// Print Results to console

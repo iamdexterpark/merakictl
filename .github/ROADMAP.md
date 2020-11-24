@@ -28,13 +28,13 @@
 - [x] 100% Get Command API Coverage
 - [x] Pagination Support
 - [x] verbose debug flag
+- [x] Diff Flag (GET: compare config file against current API state)
 - [ ] Claim Assets into Org
 - [ ] 100% Get Command CLI Coverage
 
 ### Backlog
 - [ ] org/net/device flags use exact match to obfuscate Ids with the actual names
 - [ ] Meraki Tags Flag
-- [ ] Diff Flag (GET: compare config file against current API state)
 - [ ] Proxy Support (certificate path, server, port)
 - [ ] Action Batches (Bulk Operations)
 - [ ] External Key Vault (Encourage users not to store creds in exported yaml/json config)
