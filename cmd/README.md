@@ -40,11 +40,11 @@ Flag Type | Long | Short | Description |
 | Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
 | Global | **--organization** | -o | Global flag for matching a string against Organization ids. |
 | Global | **--network** | -n | Global flag for matching a string against Network ids. |
-| Global | **--hostname** | -h | Global flag for matching a string against Network ids. |
+| Global | **--hostname** | -h | Global flag for matching a string against device hostnames. |
 
 ## Common Filters
 
-Filters are HTTP parameters that shape our API queries. The filters below... 
+Filters are HTTP parameters that shape our API queries. The list of filters below is not exhaustive but provide details around those most commonly use.
 
 Filter | Example | Description |
  --- | --- | --- 
@@ -120,25 +120,25 @@ All Organization level API calls.
  GET  | configurationtemplate | merakictl get organization configurationtemplate {configTemplateId} {organizationId} | | Return a Configuration Template For This Organization.
  GET  | devices | merakictl get organization devices {organizationId} | {perPage} {startingAfter} {endingBefore} |  List the devices in an organization.
  GET  | device | merakictl get organization device {serial} {organizationId} |  | Return A Single Device From The Inventory Of An Organization.
- GET  | inventory | merakictl get organization inventory |  {perPage} {startingAfter} {endingBefore} {{usedState}} {{search}} | Return The Device Inventory For An Organization.
- GET  | licences | merakictl get organization licences {organizationId} | {perPage} {startingAfter} {endingBefore} {{deviceSerial}} {{networkId}} {{state}} | List The Licenses For An Organization.
+ GET  | inventory | merakictl get organization inventory |  {perPage} {startingAfter} {endingBefore} {usedState} {search} | Return The Device Inventory For An Organization.
+ GET  | licences | merakictl get organization licences {organizationId} | {perPage} {startingAfter} {endingBefore} {deviceSerial} {networkId} {state} | List The Licenses For An Organization.
  GET  | licence | merakictl get organization licence {licenceId} {organizationId} | | List A Single License For An Organization.
  GET  | securitysettings | merakictl get organization securitysettings {organizationId} | | Returns The Login Security Settings For An Organization.
- GET  | networks | merakictl get organization networks {organizationId} | {{configTemplateId}} {{tags}} {{tagsFilterType}} {perPage} {startingAfter} {endingBefore} | List the networks that the user has privileges on in an organization.
+ GET  | networks | merakictl get organization networks {organizationId} | {configTemplateId} {tags} {tagsFilterType} {perPage} {startingAfter} {endingBefore} | List the networks that the user has privileges on in an organization.
  GET  | ldps | merakictl get organization ldps {organizationId} | | List the SAML IdPs in your organization.
  GET  | ldp | merakictl get organization ldp {ldpId} {organizationId} | | List a SAML IdP in your organization.
  GET  | saml | merakictl get organization saml {organizationId} | | Returns the SAML SSO enabled settings for an organization.
  GET  | samlroles | merakictl get organization samlroles {organizationId} | | List the SAML roles for this organization.
  GET  | samlrole | merakictl get organization samlrole {samalRoleId} {organizationId} | | List a single SAML role for this organization.
  GET  | snmp | merakictl get organization snmp {organizationId} | | Return the SNMP settings for an organization.
- GET  | apiresponsecount | merakictl get organization apiresponsecount {organizationId} | {{t0}} {{t1}} {{timespan}} | Return an aggregated overview of API requests data.
- GET  | apirequests | merakictl get organization apirequests {organizationId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{adminId}} {{path}} {{method}} {{responseCode}} {{sourceIp}} | List the API requests made by an organization
- GET  | configurationchanges | merakictl get organization configurationchanges {organizationId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{networkId}} {{adminId}} | View the Change Log for your organization.
+ GET  | apiresponsecount | merakictl get organization apiresponsecount {organizationId} | {t0} {t1} {timespan} | Return an aggregated overview of API requests data.
+ GET  | apirequests | merakictl get organization apirequests {organizationId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {adminId} {path} {method} {responseCode} {sourceIp} | List the API requests made by an organization
+ GET  | configurationchanges | merakictl get organization configurationchanges {organizationId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {networkId} {adminId} | View the Change Log for your organization.
  GET  | devicestatus | merakictl get organization devicestatus {organizationId}  | {perPage} {startingAfter} {endingBefore} | List the status of every Meraki device in the organization.
- GET  | losslatency | merakictl get organization losslatency {organizationId} | {{t0}} {{t1}} {{timespan}} {{uplink}} {{ip}} | Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago.
+ GET  | losslatency | merakictl get organization losslatency {organizationId} | {t0} {t1} {timespan} {uplink} {ip} | Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago.
  GET  | licenseoverview | merakictl get organization licenseoverview {organizationId} | | Return an overview of the license state for an organization.
  GET  | openapi | merakictl get organization openapi {organizationId} | | Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON.
- GET  | webhooklogs | merakictl get organization webhooklogs {organizationId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{url}} | Return the log of webhook POSTs sent.
+ GET  | webhooklogs | merakictl get organization webhooklogs {organizationId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {url} | Return the log of webhook POSTs sent.
  
  
 ## Network
@@ -162,12 +162,12 @@ All Network level API calls.
  GET  | mqttbrokers | merakictl get network mqttbrokers {networkId} | | List the MQTT brokers for this network.
  GET  | mqttbroker | merakictl get network mqttbroker {mqttBrokerId} {networkId} | | Return an MQTT broker.
  GET  | netflow | merakictl get network netflow {networkId} | | Return the NetFlow traffic reporting settings for a network.
- GET  | channelutilization | merakictl get network channelutilization {networkId} | {{t0}} {{t1}} {{timespan}} {{resolution}} {perPage} {startingAfter} {endingBefore} | Get the channel utilization over each radio for all APs in a network.
- GET  | piikeys | merakictl get network piikeys {networkId} | {{username}} {{email}} {{mac}} {{serial}} {{imei}} {{bluetoothMac}} | List the keys required to access Personally Identifiable Information (PII) for a given identifier. Exactly one identifier will be accepted. If the organization contains org-wide Systems Manager users matching the key provided then there will be an entry with the key "0" containing the applicable keys.
+ GET  | channelutilization | merakictl get network channelutilization {networkId} | {t0} {t1} {timespan} {resolution} {perPage} {startingAfter} {endingBefore} | Get the channel utilization over each radio for all APs in a network.
+ GET  | piikeys | merakictl get network piikeys {networkId} | {username} {email} {mac} {serial} {imei} {bluetoothMac} | List the keys required to access Personally Identifiable Information (PII) for a given identifier. Exactly one identifier will be accepted. If the organization contains org-wide Systems Manager users matching the key provided then there will be an entry with the key "0" containing the applicable keys.
  GET  | piirequests | merakictl get network piirequests {networkId} | | List the PII requests for this network or organization.
  GET  | piirequest | merakictl get network piirequest {requestId} {networkId} | | Return a PII request.
- GET  | smdevices | merakictl get network smdevices {networkId} | {{username}} {{email}} {{mac}} {{serial}} {{imei}} {{bluetoothMac}}  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details. Exactly one identifier will be accepted.
- GET  | smowners | merakictl get network smowners {networkId} | {{username}} {{email}} {{mac}} {{serial}} {{imei}} {{bluetoothMac}}  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier. These owner IDs can be used with the Systems Manager API endpoints to retrieve owner details. Exactly one identifier will be accepted.
+ GET  | smdevices | merakictl get network smdevices {networkId} | {username} {email} {mac} {serial} {imei} {bluetoothMac}  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details. Exactly one identifier will be accepted.
+ GET  | smowners | merakictl get network smowners {networkId} | {username} {email} {mac} {serial} {imei} {bluetoothMac}  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier. These owner IDs can be used with the Systems Manager API endpoints to retrieve owner details. Exactly one identifier will be accepted.
  GET  | settings | merakictl get network settings {networkId} | | Return the settings for a network.
  GET  | snmp | merakictl get network snmp {networkId} | | Return the SNMP settings for a network.
  GET  | syslog | merakictl get network syslog {networkId} | | List the syslog servers for a network.
@@ -177,16 +177,16 @@ All Network level API calls.
  GET  | httpservers | merakictl get network httpservers {networkId} | | List the HTTP servers for a network.
  GET  | httpserver | merakictl get network httpserver {httpServerId} {networkId} | | Return an HTTP server for a network.
  GET  | webhooktest | merakictl get network webhooktest {weebhookTestId} {networkId} | | Return the status of a webhook test for a network.
- GET  | bluetoothclients | merakictl get network bluetoothclients {networkId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{includeConnectivityHistory}} | List the Bluetooth clients seen by APs in this network.
- GET  | bluetoothclient | merakictl get network bluetoothclient {networkId} | {{includeConnectivityHistory}} {{connectivityHistoryTimespan}} | Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.
+ GET  | bluetoothclients | merakictl get network bluetoothclients {networkId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {includeConnectivityHistory} | List the Bluetooth clients seen by APs in this network.
+ GET  | bluetoothclient | merakictl get network bluetoothclient {networkId} | {includeConnectivityHistory} {connectivityHistoryTimespan} | Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.
  GET  | clienttraffichistory | merakictl get network clienttraffichistory {clientId} {networkId} | {perPage} {startingAfter} {endingBefore} | Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | clientusagehistory | merakictl get network clientusagehistory {clientId} {networkId} | | Return the client's daily usage history. Usage data is in kilobytes. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
- GET  | networkclients | merakictl get network networkclients {networkId} | {{t0}} {{timespan}} {perPage} {startingAfter} {endingBefore} | List the clients that have used this network in the timespan.
+ GET  | networkclients | merakictl get network networkclients {networkId} | {t0} {timespan} {perPage} {startingAfter} {endingBefore} | List the clients that have used this network in the timespan.
  GET  | clientidentifier | merakictl get network clientidentifier {clientId} {networkId} | | Return the client associated with the given identifier. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
- GET  | environmentalevents | merakictl get network environmentalevents {networkId} | {{includedEventTypes[]}} {{excludedEventTypes[]}} {{sensorSerial}} {{gatewaySerial}} {perPage} {startingAfter} {endingBefore} | List the environmental events for the network.
- GET  | events | merakictl get network events {networkId} | {{productType}} {{includedEventTypes[]}} {{excludedEventTypes[]}} {{deviceMac}} {{deviceSerial}} {{deviceName}} {{clientIp}} {{clientMac}} {{clientName}} {{smDeviceMac}} {{smDeviceName}} {perPage} {startingAfter} {endingBefore} | List the events for the network.
- GET  | splashloginattempts | merakictl get network splashloginattempts {networkId} | {{ssidNumber}} {{loginIdentifier}} {{timespan}} | List the splash login attempts for a network.
- GET  | traffic | merakictl get network traffic {networkId} | {{t0}} {{timespan}} {{deviceType}} | Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.
+ GET  | environmentalevents | merakictl get network environmentalevents {networkId} | {includedEventTypes[]} {excludedEventTypes[]} {sensorSerial} {gatewaySerial} {perPage} {startingAfter} {endingBefore} | List the environmental events for the network.
+ GET  | events | merakictl get network events {networkId} | {productType} {includedEventTypes[]} {excludedEventTypes[]} {deviceMac} {deviceSerial} {deviceName} {clientIp} {clientMac} {clientName} {smDeviceMac} {smDeviceName} {perPage} {startingAfter} {endingBefore} | List the events for the network.
+ GET  | splashloginattempts | merakictl get network splashloginattempts {networkId} | {ssidNumber} {loginIdentifier} {timespan} | List the splash login attempts for a network.
+ GET  | traffic | merakictl get network traffic {networkId} | {t0} {timespan} {deviceType} | Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.
 
 
 ## Device
@@ -197,9 +197,9 @@ All Device level API calls.
 ----- | --------- | ------ | ----------- | ----------- |
  GET  | mgmtinterface | merakictl get device mgmtinterface {serial} | | Return the management interface settings for a device.
  GET  | singledevice | merakictl get device singledevice {serial} |  | Return a single device.
- GET  | clients | merakictl get device clients {serial} | {{t0}} {{timespan}} | List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
+ GET  | clients | merakictl get device clients {serial} | {t0} {timespan} | List the clients of a device, up to a maximum of a month ago. The usage of each client is returned in kilobytes. If the device is a switch, the switchport is returned; otherwise the switchport field is null.
  GET  | lldpcdp | merakictl get device lldpcdp {serial} | | List LLDP and CDP information for a device.
- GET  | uplinkloss | merakictl get device uplinkloss {serial} | {{t0}} {{t1}} {{timespan}} {{resolution}} {{uplink}} {{ip}} | Get the uplink loss percentage and latency in milliseconds for a wired network device.
+ GET  | uplinkloss | merakictl get device uplinkloss {serial} | {t0} {t1} {timespan} {resolution} {uplink} {ip} | Get the uplink loss percentage and latency in milliseconds for a wired network device.
  
  
  
@@ -244,14 +244,14 @@ All Device level API calls.
  GET  | thirdpartyvpnpeers | merakictl get mx thirdpartyvpnpeers {organizationId} | | Return the third party VPN peers for an organization.
  GET  | vpnfirewallrules | merakictl get mx vpnfirewallrules {organizationId} | | Return the firewall rules for an organization's site-to-site VPN.
  GET  | warmspare | merakictl get mx warmspare {networkId} | | Return MX warm spare settings.
- GET  | securityevents | merakictl get mx securityevents {clientId} {networkId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{sortOrder}} | List the security events for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+ GET  | securityevents | merakictl get mx securityevents {clientId} {networkId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {sortOrder} | List the security events for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | dhcpsubnets | merakictl get mx dhcpsubnets {serial} | | Return the DHCP subnet information for an appliance.
  GET  | performance | merakictl get mx performance {serial} | | Return the performance score for a single MX. Only primary MX devices supported. If no data is available, a 204 error code is returned.
- GET  | networksecurityevents | merakictl get mx networksecurityevents {networkId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{sortOrder}} | List the security events for a network.
- GET  | organizationsecurityevents | merakictl get mx organizationsecurityevents {organizationId} | {{t0}} {{t1}} {{timespan}} {perPage} {startingAfter} {endingBefore} {{sortOrder}} | List the security events for an organization.
+ GET  | networksecurityevents | merakictl get mx networksecurityevents {networkId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {sortOrder} | List the security events for a network.
+ GET  | organizationsecurityevents | merakictl get mx organizationsecurityevents {organizationId} | {t0} {t1} {timespan} {perPage} {startingAfter} {endingBefore} {sortOrder} | List the security events for an organization.
  GET  | uplinkstatuses | merakictl get mx uplinkstatuses {organizationId} | {perPage} {startingAfter} {endingBefore} | List the uplink status of every Meraki MX and Z series appliances in the organization.
- GET  | vpnstats | merakictl get mx vpnstats {organizationId} | {perPage} {startingAfter} {endingBefore} {{networkIds}} {{t0}} {{t1}} {{timespan}} | Show VPN history stat for networks in an organization.
- GET  | vpnstatuses | merakictl get mx vpnstatuses {organizationId} | {perPage} {startingAfter} {endingBefore} {{networkIds}} | Show VPN status for networks in an organization.
+ GET  | vpnstats | merakictl get mx vpnstats {organizationId} | {perPage} {startingAfter} {endingBefore} {networkIds} {t0} {t1} {timespan} | Show VPN history stat for networks in an organization.
+ GET  | vpnstatuses | merakictl get mx vpnstatuses {organizationId} | {perPage} {startingAfter} {endingBefore} {networkIds} | Show VPN status for networks in an organization.
 
 
 ## Camera MV  
@@ -267,11 +267,11 @@ All Device level API calls.
  GET  | objectdetectionmodels | merakictl get mv objectdetectionmodels {serial} | | Returns the MV Sense object detection model list for the given camera.
  GET  | sense | merakictl get mv  {serial} | | Returns sense settings for a given camera.
  GET  | settings | merakictl get mv settings {serial} | | Returns video settings for the given camera.
- GET  | videolink | merakictl get mv videolink {serial} | {{timestamp}} | Returns video link to the specified camera. If a timestamp is supplied, it links to that timestamp.
+ GET  | videolink | merakictl get mv videolink {serial} | {timestamp} | Returns video link to the specified camera. If a timestamp is supplied, it links to that timestamp.
  GET  | live | merakictl get mv live {serial} | | Returns live state from camera of analytics zones.
- GET  | overview | merakictl get mv overview {serial} | {{t0}} {{t1}} {{timespan}} {{objectType}} | Returns an overview of aggregate analytics data for a timespan.
- GET  | recent | merakictl get mv recent {serial} | {{objectType}} | Returns most recent record for analytics zones.
- GET  | history | merakictl get mv history {serial} {{zoneId}} | {{t0}} {{t1}} {{timespan}} {{resolution}} {{objectType}} | Return historical records for analytic zones.
+ GET  | overview | merakictl get mv overview {serial} | {t0} {t1} {timespan} {objectType} | Returns an overview of aggregate analytics data for a timespan.
+ GET  | recent | merakictl get mv recent {serial} | {objectType} | Returns most recent record for analytics zones.
+ GET  | history | merakictl get mv history {serial} {zoneId} | {t0} {t1} {timespan} {resolution} {objectType} | Return historical records for analytic zones.
  GET  | zones | merakictl get mv zones {serial} | | Returns all configured analytic zones for this camera.
  
  
@@ -332,8 +332,8 @@ All Device level API calls.
   GET  | stormcontrol | merakictl get ms stormcontrol {networkId} | | Return the storm control configuration for a switch network.
   GET  | stp | merakictl get ms stp {networkId} | | storm control.
   GET  | warmspare | merakictl get ms warmspare {serial} | | Return warm spare configuration for a switch.
-  GET  | packets | merakictl get ms packets {serial} | {{t0}} {{timespan}} | Return the packet counters for all the ports of a switch.
-  GET  | portsstatuses | merakictl get ms portsstatuses {serial} | {{t0}} {{timespan}}  | Return the status for all the ports of a switch.
+  GET  | packets | merakictl get ms packets {serial} | {t0} {timespan} | Return the packet counters for all the ports of a switch.
+  GET  | portsstatuses | merakictl get ms portsstatuses {serial} | {t0} {timespan}  | Return the status for all the ports of a switch.
 
 
 
