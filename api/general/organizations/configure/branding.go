@@ -37,18 +37,6 @@ type BrandingPolicy struct {
 	} `json:"helpSettings"`
 }
 
-// Return The Branding Policy IDs Of An Organization
-func GetBrandingPriority(organizationId string) []api.Results {
-	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies/priorities", api.BaseUrl(), organizationId)
-
-	var datamodel = BrandingPolicies{}
-	sessions, err := api.Sessions(baseurl, "GET", nil, nil, datamodel)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return sessions
-}
-
 // Return The Branding Policies Of An Organization
 func GetBrandingPolicies(organizationId string) []api.Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/brandingPolicies", api.BaseUrl(),
