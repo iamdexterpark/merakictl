@@ -100,7 +100,7 @@ func (c *Client) Do(req *Request) (*http.Response, error) {
 		}
 
 		// HTTPResponseHandler
-		checkHttpOK, checkHttpErr := c.HTTPResponsePolicy(resp, err)
+		checkHttpOK, checkHttpErr := c.HTTPResponsePolicy(req, resp, err)
 		if err != nil {
 			log.Fatalf("[ERR] %s %s request failed: %v", req.Method, req.URL, err)
 		} else {
