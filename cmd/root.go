@@ -63,7 +63,7 @@ func init() {
 	rootCmd.PersistentFlags().BoolP("diff", "d", false, "diff config file with dashboard API config")
 	rootCmd.PersistentFlags().StringP("organization", "o", "", "The target organization")
 	rootCmd.PersistentFlags().StringP("network", "n", "", "The target Network")
-	rootCmd.PersistentFlags().StringP("hostname", "", "", "The target devices hostname")
+	rootCmd.PersistentFlags().StringP("hostname", "s", "", "The target devices hostname")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
 	rootCmd.PersistentFlags().BoolP("json", "j", false, "Export config to JSON")
 	rootCmd.PersistentFlags().BoolP("verbose", "v", false, "Display HTTP Request/Response for traceback")
