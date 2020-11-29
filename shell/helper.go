@@ -2,7 +2,6 @@ package shell
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/ddexterpark/merakictl/api"
 	"github.com/ddexterpark/merakictl/api/general/organizations/configure"
 	"github.com/kr/pretty"
@@ -45,6 +44,10 @@ func ResolveMatches(regExString string, Matches []Match ) (exactMatch Match, gre
 
 	exactResults := []Match{}
 
+	// build regex for greedy matching
+	matchRegex := regexp.MustCompile(regExString)
+
+
 	// eval orgs in the org list
 	for _, data := range Matches {
 
@@ -57,19 +60,15 @@ func ResolveMatches(regExString string, Matches []Match ) (exactMatch Match, gre
 			Serial: data.Serial,
 		}
 
-		// build regex
-		matchRegex := regexp.MustCompile(regExString)
-		greedy := matchRegex.MatchString(data.Name)
 
-
-		// NEED TO ADDRESS MULTIBLE MATCH SENARIO
-
+		// Search for exact results
 		if data.Name == regExString {
-
 			exactResults = append(exactResults, match)
+		}
 
-		} else if greedy == true {
-
+		// Search for greedy results
+		greedy := matchRegex.MatchString(data.Name)
+		if greedy == true {
 			greedyResults = append(greedyResults, match) }
 	}
 
@@ -82,11 +81,12 @@ func ResolveMatches(regExString string, Matches []Match ) (exactMatch Match, gre
 			exactMatch = Match{
 				Name: data.Name,
 				ID:   data.ID,
+				Organization: data.Organization,
+				Network: data.Network,
+				Serial: data.Serial,
 			}
 		}
 	}
-
-
 
 	return exactMatch, greedyMatch
 }
@@ -110,11 +110,16 @@ func resolveOrgId (orgName string) (orgId string, orgList []string) {
 	if orgName != "" {
 			// iterate through list of orgs and append to exact/greedy lists
 			exactOrg, greedyOrg := ResolveMatches(orgName, organizations)
+			//pretty.Println(exactOrg)
+			//pretty.Println(greedyOrg)
 
 			if exactOrg.ID != "" {
-				mResults, _ := json.Marshal(exactOrg)
-				json.Unmarshal(mResults, &exactMatch)
-				orgId = exactMatch.ID
+
+				if exactOrg.Name == orgName {
+					mResults, _ := json.Marshal(exactOrg)
+					json.Unmarshal(mResults, &exactMatch)
+					orgId = exactMatch.ID
+				}
 			} else {
 				pretty.Println(greedyOrg)
 				pretty.Println("No exact match for -o flag. Please use an explicit orgId or Name^")
@@ -173,8 +178,6 @@ func resolveNetworkId (netName, orgId string, orgList []string) (netId string) {
 		exactnet, greedynet := ResolveMatches(netName, networkIdList)
 
 
-		// NEED TO FIGURE OUT LOGIC HERE.....No NetId w/ exact match
-
 		if exactnet.Name == netName {
 			netId = exactnet.ID
 
@@ -200,98 +203,105 @@ func resolveNetworkId (netName, orgId string, orgList []string) (netId string) {
 
 
 
-func ResolveFlags(flags *pflag.FlagSet) (orgId, networkId, DeviceId string) {
+func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId string) {
+	// ExactMatch array
+	//var exactMatch Match
+
+	// networkIdList array
+	var deviceIdList []Match
+
+	// greedyMatch array
+	//var greedyMatches []Match
+
+	// Determine if GetOrganizations API Call is Needed
+	if len(orgList) == 0 {
+		_, addOrgs := resolveOrgId("")
+
+		for _, addOrg := range addOrgs {
+			orgList = append(orgList, addOrg)
+		}
+	}
+
+
+	// iterate through org list
+	for _, org := range orgList {
+		// API Call to get list of networks
+		metadata := api.GetOrganizationDevices(org, "", "","")
+		var paginatedData []Match
+
+		for _, data := range metadata {
+			format, _ := json.Marshal(data.Payload)
+			json.Unmarshal(format, &paginatedData)
+			deviceIdList = append(deviceIdList, paginatedData...)
+		}
+	}
+
+	// iterate through list of orgs and append to exact/greedy lists
+	exactnet, greedynet := ResolveMatches(deviceName, deviceIdList)
+
+	if exactnet.Name == deviceName {
+
+		if len(networkId) == 0 {
+			deviceId = exactnet.Serial
+		} else if len(networkId) != 0 {
+
+			// ensure we dont have a mismatch with networkID
+			if networkId != exactnet.Network {
+				pretty.Println(greedynet)
+				pretty.Println("No exact match for -s flag. Please use an explicit networkId, Name or use -n flag in conjunction with this call ^")
+				os.Exit(1)
+			}
+			deviceId = exactnet.Serial
+		}
+	} else if len(networkId) != 0 {
+		for _, greedyMatch := range greedynet {
+
+			if greedyMatch.Network == networkId {
+				deviceId = greedyMatch.Serial
+			}
+		}
+
+	} else {
+		pretty.Println(greedynet)
+		pretty.Println("No exact match for -s flag. Please use an explicit networkId, Name or use -n flag in conjunction with this call ^")
+		os.Exit(1)
+	}
+
+	return deviceId
+}
+
+
+func ResolveFlags(flags *pflag.FlagSet) (orgId, networkId, deviceId string) {
 
 	// store flags as variables
 	orgName, _ := flags.GetString("organization")
 	networkName, _ := flags.GetString("network")
-	//deviceName, _ := flags.GetString("hostname")
+	deviceName, _ := flags.GetString("hostname")
 
 	var orgList []string
 	if orgName != "" {
 		orgId, orgList = resolveOrgId(orgName)
+		pretty.Println("-----------------------------------------------------------------")
+		pretty.Println("orgId", orgId)
+		pretty.Println("orgList", orgList)
+		pretty.Println("-----------------------------------------------------------------")
 	}
 
 	if networkName != "" {
 		networkId = resolveNetworkId(networkName, orgId, orgList)
+		pretty.Println("-----------------------------------------------------------------")
+		pretty.Println("networkName", networkName)
+		pretty.Println("networkId", networkId)
+		pretty.Println("-----------------------------------------------------------------")
 	}
 
-	//if deviceName != "" {}
-	return orgId, networkId, DeviceId
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Resolve Meraki Dashboard Organization name to id
-func ResolveTESTFUNCDELETEMELATER(flags *pflag.FlagSet) (orgId string, err error) {
-	orgName, _ := flags.GetString("organization")
-
-	// ExactMatch array
-	var exactMatch []Match
-
-	// GreedyMatch array
-	var greedyMatch []Match
-
-	//Unmarshal data into data model
-	organizations := configure.Organizations{}
-
-	// API Call to get list of organizations
-	dashboardApiCall := configure.GetOrganizations()
-
-	// Evaluation: iteration of data in api.GetOrganizations API Call
-	for _, metadata := range dashboardApiCall {
-		response, _ := json.Marshal(metadata.Payload)
-		_ = json.Unmarshal(response, &organizations)
+	if deviceName != "" {
+		deviceId = resolveDeviceId(deviceName, networkId, orgList)
+		pretty.Println("-----------------------------------------------------------------")
+		pretty.Println("deviceName", deviceName)
+		pretty.Println("Serial", deviceId)
+		pretty.Println("-----------------------------------------------------------------")
 	}
 
-	// eval orgs in the org list
-	for _, organization := range organizations {
-
-		// match data
-		match := Match{
-			Name: organization.Name,
-			ID: organization.ID,
-		}
-
-		matchRegex := regexp.MustCompile(orgName)
-		greedy := matchRegex.MatchString(organization.Name)
-
-		if organization.Name == orgName {
-			exactMatch = append(exactMatch, match)
-		} else if greedy == true {
-			greedyMatch = append(greedyMatch, match) }
-	}
-
-	switch exactMatchLen := len(exactMatch); {
-	case exactMatchLen == 1:
-		fmt.Println("The Len of exactMatch list is: ", len(exactMatch))
-
-	case exactMatchLen != 1:
-		// Condition: length of ExactMatch array is 1
-		// return ExactMatch.OrgId
-		fmt.Println("The Len of DOES NOT EQUAL 1: ", len(exactMatch))
-	}
-
-	return orgId, err
+	return orgId, networkId, deviceId
 }
