@@ -11,7 +11,7 @@ All Organization level API calls.
  HTTP | Operation | Syntax | Filters | Description |
 ----- | --------- | ------ | ----------- | ----------- |
  GET  | list | merakictl get organization list | | List the organizations that the user has privileges on.
- GET  | info | merakictl get organization info {organizationId} | | List a specific organization that the user has privileges on. 
+ GET  | details | merakictl get organization info {organizationId} | | List a specific organization that the user has privileges on. 
  GET  | actionbatches | merakictl get organization actionbatches {organizationId} | | Return The List Of Action Batches In The Organization.
  GET  | actionbatch | merakictl get organization actionbatch {actionBatchId} {organizationId} | | Return A Single Action Batch.
  GET  | admins | merakictl get organization admins {organizationId} | | List The Dashboard Administrators In This Organization.

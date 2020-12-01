@@ -14,7 +14,7 @@ var OrgCmd = &cobra.Command{
 // init - Entrypoint for OrgCmd sub-commands.
 func init() {
 	OrgCmd.AddCommand(orgList)
-	OrgCmd.AddCommand(single)
+	OrgCmd.AddCommand(detail)
 	OrgCmd.AddCommand(networks)
 	OrgCmd.AddCommand(devices)
 	OrgCmd.AddCommand(actionbatchlist)

@@ -18,13 +18,20 @@ var orgList = &cobra.Command{
 	},
 }
 
-var single = &cobra.Command{
-	Use:   "single",
+
+
+var detail = &cobra.Command{
+	Use:   "detail",
 	Short: "List a specific organization that the user has privileges on.",
 	Long:  pretty.Sprint(api.Organization{}),
 	Run: func(cmd *cobra.Command, args []string) {
 
-		org := cmd.Flag("organization").Value.String()
+		//org := cmd.Flag("organization").Value.String()
+		org, _, _ := shell.ResolveFlags(cmd.Flags())
+		if org == "" {
+			org = args[0]
+		}
+
 		metadata := configure.GetOrganization(org)
 
 		shell.Display(metadata, "organization", cmd.Flags())
