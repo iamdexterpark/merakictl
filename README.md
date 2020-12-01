@@ -2,7 +2,7 @@
 # merakictl
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/ddexterpark/merakictl)
 
-*Multi-language Documentation: [English](README.md) [日本語](README.ja.md), [简体中文](README.zh-cn.md).*
+*Multi-language Documentation: [English](README.md), [日本語](README.ja.md), [简体中文](README.zh-cn.md).*
 
 A Community developed Golang SDK and command line tool for the Meraki Dashboard API. 
 For a Vendor supported API interface please see the wonderful: [Meraki Dashboard API Python Library](https://github.com/meraki/dashboard-api-python)

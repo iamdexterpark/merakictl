@@ -19,19 +19,19 @@
 [Go](http://golang.org)プログラミング言語をインストールします。
 
 ####パスを設定
-`` `bash
+```bash
 export GOPATH = $ HOME / go
 PATH = $ PATH：$ GOPATH / binをエクスポートします
-`` `
+```
 
 ####プロジェクトをダウンロード
 
-`` `bash
+```bash
 github.com/ddexterpark/merakictlを入手してください
-`` `
+```
 
 #### CLIのコンパイル(オプション)
-`` `シェルスクリプト
+```シェルスクリプト
     ＃Linux / MacOS
     main.goをビルドします
     mv main / usr / local / sbin / merakictl
@@ -42,7 +42,7 @@ github.com/ddexterpark/merakictlを入手してください
     
     ＃Windows32ビット
     env GOOS = windows GOARCH = 386 go build main.go
-`` `
+```
     
 ＃＃ 環境変数
 
@@ -52,7 +52,7 @@ API呼び出しをカスタマイズするために設定できるオプショ�
 ####必須
 
 ** MERAKI_API_TOKEN **
-`` `シェルスクリプト
+```シェルスクリプト
       バッシュ-
       エクスポートMERAKI_API_TOKEN = 1234567890987654321
       エコー$ MERAKI_API_TOKEN
@@ -60,29 +60,29 @@ API呼び出しをカスタマイズするために設定できるオプショ�
       パワーシェル -
             setx MERAKI_API_TOKEN "1234567890987654321"
             エコー％MERAKI_API_TOKEN％
-`` `
+```
 ####オプション
  
 ** MERAKI_API_URL **
-`` `シェルスクリプト
+```シェルスクリプト
         デフォルト= 'https：//api.meraki.com/api/'
         中国= 'https：//api.meraki.cn/api/'
-`` `
+```
 
 ** MERAKI_API_VERSION **
 
 デフォルトバージョンはv1です。このツールは、2022年に廃止されるため、v0のサポートが制限されています。
 すべてのエンドポイントがv0で機能するわけではありません。
  
-`` `シェルスクリプト
+```シェルスクリプト
     デフォルト= 'v1'
-`` `
+```
     
 ##構文
 
-`` `シェルスクリプト
+```シェルスクリプト
     merakictl [COMMAND] [SUBCOMMAND] [TARGET] [flags]
-`` `
+```
 
  
 #### [コマンド]
@@ -108,14 +108,14 @@ API呼び出しをカスタマイズするために設定できるオプショ�
 
 
 構文例：
- `` `シェルスクリプト
+```シェルスクリプト
      merakictl get org list
      merakictl getorgnetworks
      merakictlはネットワークアラート設定を取得します
      merakictl get mxl3ファイアウォールルール
      merakictl get ms port
      merakictl get mr ssid
- `` `
+```
 これらのコマンドを呼び出すには、フラグを利用してターゲットのorg / network / device / switchport / ssid / etc ...を指定する必要があります。
 
 #### [フラグ]
@@ -139,12 +139,12 @@ createを実行する前に、ダッシュボードから現在の構成をエ�
 
 
 ####コマンドの例
- `` `シェルスクリプト
+```シェルスクリプト
      merakictl update vpn --input vpnconf.yaml --org 12345678
- `` `
+```
 
 #### vpnconf.yaml
-`` `yaml
+```yaml
 ---
 仲間：
   -名前：私の仲間1
@@ -180,7 +180,7 @@ createを実行する前に、ダッシュボードから現在の構成をエ�
     networkTags：
       - 無し
     ipsecPoliciesPreset：デフォルト
-`` `
+```
 
 
 
