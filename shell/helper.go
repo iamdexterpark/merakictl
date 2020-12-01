@@ -149,15 +149,16 @@ func resolveNetworkId (netName, orgId string, orgList []string) (netId string) {
 	//var greedyMatches []Match
 
 	// Determine if GetOrganizations API Call is Needed
-	if len(orgList) == 0 {
+	if orgId != "" {
+		var newOrgList []string
+		newOrgList = append(newOrgList, orgId)
+		orgList = newOrgList
+	} else if len(orgList) == 0 {
 		_, addOrgs := resolveOrgId("")
-
 		for _, addOrg := range addOrgs {
-
 			orgList = append(orgList, addOrg)
 		}
 	}
-
 
 	// iterate through org list
 	for _, org := range orgList {
@@ -203,7 +204,7 @@ func resolveNetworkId (netName, orgId string, orgList []string) (netId string) {
 
 
 
-func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId string) {
+func resolveDeviceId (deviceName, networkId, orgId string, orgList []string) (deviceId string) {
 	// ExactMatch array
 	//var exactMatch Match
 
@@ -214,7 +215,12 @@ func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId 
 	//var greedyMatches []Match
 
 	// Determine if GetOrganizations API Call is Needed
-	if len(orgList) == 0 {
+	// Determine if GetOrganizations API Call is Needed
+	if orgId != "" {
+		var newOrgList []string
+		newOrgList = append(newOrgList, orgId)
+		orgList = newOrgList
+	} else if len(orgList) == 0 {
 		_, addOrgs := resolveOrgId("")
 
 		for _, addOrg := range addOrgs {
@@ -238,13 +244,11 @@ func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId 
 
 	// iterate through list of orgs and append to exact/greedy lists
 	exactnet, greedynet := ResolveMatches(deviceName, deviceIdList)
-
 	if exactnet.Name == deviceName {
 
 		if len(networkId) == 0 {
 			deviceId = exactnet.Serial
 		} else if len(networkId) != 0 {
-
 			// ensure we dont have a mismatch with networkID
 			if networkId != exactnet.Network {
 				pretty.Println(greedynet)
@@ -253,7 +257,7 @@ func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId 
 			}
 			deviceId = exactnet.Serial
 		}
-	} else if len(networkId) != 0 {
+	} else if len(greedynet) != 0 {
 		for _, greedyMatch := range greedynet {
 
 			if greedyMatch.Network == networkId {
@@ -263,7 +267,7 @@ func resolveDeviceId (deviceName, networkId string, orgList []string) (deviceId 
 
 	} else {
 		pretty.Println(greedynet)
-		pretty.Println("No exact match for -s flag. Please use an explicit networkId, Name or use -n flag in conjunction with this call ^")
+		pretty.Println("No exact match for -s flag. Please use an explicit networkId, Name or use -n flag in conjunction with this call ")
 		os.Exit(1)
 	}
 
@@ -281,26 +285,14 @@ func ResolveFlags(flags *pflag.FlagSet) (orgId, networkId, deviceId string) {
 	var orgList []string
 	if orgName != "" {
 		orgId, orgList = resolveOrgId(orgName)
-		pretty.Println("-----------------------------------------------------------------")
-		pretty.Println("orgId", orgId)
-		pretty.Println("orgList", orgList)
-		pretty.Println("-----------------------------------------------------------------")
 	}
 
 	if networkName != "" {
 		networkId = resolveNetworkId(networkName, orgId, orgList)
-		pretty.Println("-----------------------------------------------------------------")
-		pretty.Println("networkName", networkName)
-		pretty.Println("networkId", networkId)
-		pretty.Println("-----------------------------------------------------------------")
 	}
 
 	if deviceName != "" {
-		deviceId = resolveDeviceId(deviceName, networkId, orgList)
-		pretty.Println("-----------------------------------------------------------------")
-		pretty.Println("deviceName", deviceName)
-		pretty.Println("Serial", deviceId)
-		pretty.Println("-----------------------------------------------------------------")
+		deviceId = resolveDeviceId(deviceName, networkId, orgId, orgList)
 	}
 
 	return orgId, networkId, deviceId
