@@ -82,7 +82,7 @@ func GetOrganizations() []Results {
 
 // GetOrganizationNetworks - List the networks that the user has privileges on in an organization
 func GetOrganizationNetworks(organizationId, configTemplateId, tagsFilterType, startingAfter,
-	endingBefore, tags, perPage string) []Results {
+	endingBefore, tags, perPage  string) []Results {
 	baseurl := fmt.Sprintf("%s/organizations/%s/networks", BaseUrl(), organizationId)
 	var datamodel = Network{}
 
