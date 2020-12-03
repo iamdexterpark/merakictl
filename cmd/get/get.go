@@ -4,7 +4,7 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/get/device"
 	"github.com/ddexterpark/merakictl/cmd/get/network"
 	"github.com/ddexterpark/merakictl/cmd/get/organization"
-	"github.com/ddexterpark/merakictl/cmd/get/wireless"
+	"github.com/ddexterpark/merakictl/cmd/get/mr"
 	"github.com/spf13/cobra"
 )
 
@@ -16,9 +16,10 @@ var GetCmd = &cobra.Command{
 }
 
 func init() {
+	GetCmd.AddCommand(test)
 	GetCmd.AddCommand(organization.OrgCmd)
 	GetCmd.AddCommand(device.DeviceCmd)
 	GetCmd.AddCommand(network.NetCmd)
-	GetCmd.AddCommand(wireless.MRCmd)
+	GetCmd.AddCommand(mr.MRCmd)
 	GetCmd.AddCommand(apikey)
 }

@@ -28,14 +28,14 @@ Subcommand | Abbreviated | Description |
 --- | --- | --- |
 | **organization** | org | Collection of Networks. |
 | **network** | net | Collection of Devices. | 
-| **device** | dev | Meraki Products. | 
-| **mx** | | UTM appliances with SD-WAN capability included. | 
-| **ms**  | | Branch and campus access and aggregation switches with remote packet capture and cable testing. |
-| **mr** | |  Industry-leading indoor and outdoor 802.11ax wireless access points with built-in location analytics. |
-| **mv** | | Indoor and outdoor smart cameras, eliminating traditional external storage such as NVRs. |
-| **mg** | |  Cellular gateways seamlessly transpose a wireless cellular signal to wired Ethernet, providing primary or failover connectivity. |
-| **sm** | |  A complete enterprise solution for provisioning, monitoring, and securing of mobile devices. |
-| **insight** | in |  End-to-end visibility into end-users' experience on the network. |
+| **device** | sn | Meraki Products. | 
+| **appliance** | **mx** | UTM appliances with SD-WAN capability included. | 
+| **switch**  | **ms** | Branch and campus access and aggregation switches with remote packet capture and cable testing. |
+| **wireless** | **mr** |  Industry-leading indoor and outdoor 802.11ax wireless access points with built-in location analytics. |
+| **camera** | **mv** | Indoor and outdoor smart cameras, eliminating traditional external storage such as NVRs. |
+| **gateway** | **mg** |  Cellular gateways seamlessly transpose a wireless cellular signal to wired Ethernet, providing primary or failover connectivity. |
+| **systems** | **sm** |  A complete enterprise solution for provisioning, monitoring, and securing of mobile devices. |
+| **insight** | **in** |  End-to-end visibility into end-users' experience on the network. |
 
 
 ## Flags

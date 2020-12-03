@@ -1,9 +1,9 @@
 package network
 
 import (
-	"github.com/ddexterpark/merakictl/api"
-	"github.com/ddexterpark/merakictl/api/general/networks/configure"
-	"github.com/ddexterpark/merakictl/shell"
+	"github.com/ddexterpark/dashboard-api-golang/api"
+	"github.com/ddexterpark/dashboard-api-golang/api/general/networks/configure"
+	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/spf13/cobra"
 )
 

@@ -1,4 +1,4 @@
-package wireless
+package mr
 
 import "github.com/spf13/cobra"
 

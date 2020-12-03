@@ -1,8 +1,8 @@
 package wireless
 
 import (
-	"github.com/ddexterpark/merakictl/api/products/wireless/configure"
-	"github.com/ddexterpark/merakictl/shell"
+	"github.com/ddexterpark/dashboard-api-golang/api/products/wireless/configure"
+	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/spf13/cobra"
 )
 

@@ -1,8 +1,8 @@
 package update
 
 import (
-	"github.com/ddexterpark/merakictl/api/general/organizations/configure"
-	"github.com/ddexterpark/merakictl/shell"
+	"github.com/ddexterpark/dashboard-api-golang/api/general/organizations/configure"
+	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/spf13/cobra"
 )
 
