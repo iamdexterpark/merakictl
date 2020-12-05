@@ -70,11 +70,11 @@ func init() {
 	rootCmd.PersistentFlags().StringP("network", "n", "", "The target Network")
 	rootCmd.PersistentFlags().StringP("hostname", "s", "", "The target devices hostname")
 
-	/*
 	// Flags for URL Parameters
 		rootCmd.PersistentFlags().StringP("perPage", "", "10", "")
 		rootCmd.PersistentFlags().StringP("startingAfter", "", "", "")
 		rootCmd.PersistentFlags().StringP("endingBefore", "", "", "")
+		rootCmd.PersistentFlags().StringP("configurationUpdatedAfter", "", "", "")
 		rootCmd.PersistentFlags().StringP("t0", "", "", "")
 		rootCmd.PersistentFlags().StringP("t1", "", "", "")
 		rootCmd.PersistentFlags().StringP("timespan", "", "", "")
@@ -117,5 +117,5 @@ func init() {
 		rootCmd.PersistentFlags().StringP("ids", "", "", "")
 		rootCmd.PersistentFlags().StringP("scope", "", "", "")
 		rootCmd.PersistentFlags().StringP("withDetails", "", "", "")
-	 */
+
 }

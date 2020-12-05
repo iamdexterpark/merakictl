@@ -22,4 +22,4 @@ func init() {
 	GetCmd.AddCommand(network.NetCmd)
 	GetCmd.AddCommand(wireless.MRCmd)
 	GetCmd.AddCommand(environmentalvariables)
-}
+	}

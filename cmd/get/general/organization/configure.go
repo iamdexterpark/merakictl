@@ -19,7 +19,7 @@ var list = &cobra.Command{
 }
 
 var detail = &cobra.Command{
-	Use:   "detail",
+	Use:   "details",
 	Short: "List a specific organization that the user has privileges on.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -35,7 +35,6 @@ var detail = &cobra.Command{
 var actionbatches = &cobra.Command{
 	Use:   "actionbatches",
 	Short: "Return The List Of Action Batches In The Organization.",
-	Long:  pretty.Sprint(configure.ActionBatchList{}),
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
@@ -51,26 +50,20 @@ var actionbatches = &cobra.Command{
 var actionbatch = &cobra.Command{
 	Use:   "actionbatch",
 	Short: "Return The List Of Action Batches In The Organization.",
-	Long:  pretty.Sprint(configure.ActionBatchList{}),
 	Run: func(cmd *cobra.Command, args []string) {
-
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[1]
 		}
-
 		actionBatchId := args[0]
-		
 		metadata := configure.GetActionBatch(org, actionBatchId)
 		shell.Display(metadata, "actionbatchlist", cmd.Flags())
-
 	},
 }
 
 var admins = &cobra.Command{
 	Use:   "admins",
 	Short: "Return The List Of Action Batches In The Organization.",
-	Long:  pretty.Sprint(configure.Admin{}),
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
@@ -84,8 +77,7 @@ var admins = &cobra.Command{
 
 var brandingPolicies = &cobra.Command{
 	Use:   "brandingPolicies",
-	Short: "",
-	Long:  pretty.Sprint(configure.BrandingPolicies{}),
+	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
@@ -99,31 +91,58 @@ var brandingPolicies = &cobra.Command{
 
 var brandingPolicy = &cobra.Command{
 	Use:   "brandingPolicy",
-	Short: "",
-	Long:  pretty.Sprint(configure.BrandingPolicy{}),
+	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
-			org = args[0]
+			org = args[1]
 		}
 		brandingId := args[0]
-
 		metadata := configure.GetBrandingPolicy(org, brandingId)
 		shell.Display(metadata, "brandingPolicy", cmd.Flags())
-
 	},
 }
+
+var configurationtemplates = &cobra.Command{
+Use:   "configurationtemplates",
+Short: "List The Configuration Templates For This Organization.",
+Run: func(cmd *cobra.Command, args []string) {
+org, _, _ := shell.ResolveFlags(cmd.Flags())
+if org == "" {
+org = args[0]
+}
+metadata := configure.GetConfigurationTemplates(org)
+shell.Display(metadata, "configurationtemplates", cmd.Flags())
+},
+}
+
+var configurationtemplate = &cobra.Command{
+Use:   "configurationtemplate",
+Short: "Return a Configuration Template For This Organization.",
+Run: func(cmd *cobra.Command, args []string) {
+org, _, _ := shell.ResolveFlags(cmd.Flags())
+if org == "" {
+org = args[1]
+}
+configTemplateId := args[0]
+metadata := configure.GetConfigurationTemplate(org, configTemplateId)
+shell.Display(metadata, "configurationtemplate", cmd.Flags())
+},
+}
+
 
 var devices = &cobra.Command{
 	Use:   "devices",
 	Short: "List the devices in an organization.",
-	Long:  pretty.Sprint(api.Devices{}),
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		metadata := api.GetOrganizationDevices(org, "10", "", "")
+		perPage, _ := cmd.Flags().GetString("perPage")
+		startingAfter, _ := cmd.Flags().GetString("startingAfter")
+		configurationUpdatedAfter, _ := cmd.Flags().GetString("configurationUpdatedAfter")
+		metadata := api.GetOrganizationDevices(org, perPage, startingAfter, configurationUpdatedAfter)
 		shell.Display(metadata, "devices", cmd.Flags())
 	},
 }
