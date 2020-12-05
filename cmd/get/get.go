@@ -1,10 +1,10 @@
 package get
 
 import (
-	"github.com/ddexterpark/merakictl/cmd/get/device"
-	"github.com/ddexterpark/merakictl/cmd/get/network"
-	"github.com/ddexterpark/merakictl/cmd/get/organization"
-	"github.com/ddexterpark/merakictl/cmd/get/mr"
+	"github.com/ddexterpark/merakictl/cmd/get/general/device"
+	"github.com/ddexterpark/merakictl/cmd/get/general/network"
+	"github.com/ddexterpark/merakictl/cmd/get/general/organization"
+	"github.com/ddexterpark/merakictl/cmd/get/products/wireless"
 	"github.com/spf13/cobra"
 )
 
@@ -20,6 +20,6 @@ func init() {
 	GetCmd.AddCommand(organization.OrgCmd)
 	GetCmd.AddCommand(device.DeviceCmd)
 	GetCmd.AddCommand(network.NetCmd)
-	GetCmd.AddCommand(mr.MRCmd)
-	GetCmd.AddCommand(apikey)
+	GetCmd.AddCommand(wireless.MRCmd)
+	GetCmd.AddCommand(environmentalvariables)
 }

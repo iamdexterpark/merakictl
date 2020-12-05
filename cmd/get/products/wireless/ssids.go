@@ -1,4 +1,4 @@
-package mr
+package wireless
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/wireless/configure"

@@ -13,7 +13,7 @@ It compiles into a cross-platform (Linux/Mac/Win) static binary.
 
 Currently, we are in Alpha version: [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
 
-## Run From Source Code 
+## Compile CLI From Source Code (Optional) 
 
 #### Installation
 Install the [Go](http://golang.org) programming language.
@@ -33,6 +33,7 @@ go get github.com/ddexterpark/merakictl
 #### Compile CLI (Optional) 
 ```shell script
     # Linux/MacOS
+    cd /Users/{$USERNAME}/go/src/github.com/ddexterpark/merakictl
     go build main.go
     mv main /usr/local/sbin/merakictl
     export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
@@ -43,6 +44,8 @@ go get github.com/ddexterpark/merakictl
     # Windows 32-bit
     env GOOS=windows GOARCH=386 go build main.go
 ```
+
+At this point the CLI should be available by calling `merakictl` from any locatio.
     
 ## Environment Variables
 
@@ -77,6 +80,8 @@ Not all endpoints will work in v0.
 ```shell script
     Default = 'v1'
 ```
+
+#### Auto Completion
     
 ## Syntax
 
@@ -140,46 +145,25 @@ In most cases the API commands preform overwrite operations, **any dashboard con
 
 #### Example Cmd
  ```shell script
-     merakictl update vpn --input vpnconf.yaml --org 12345678
+    # export list of orgs to yaml file
+     merakictl get org list -e 
  ```  
 
-#### vpnconf.yaml
+#### organizations.yaml
 ```yaml
 ---
-peers:
-  - name: My peer 1
-    publicIp: 123.123.123.1
-    privateSubnets:
-      - 192.168.1.0/24
-      - 192.168.128.0/24
-    secret: asdf1234
-    ipsecPolicies:
-      ikeCipherAlgo:
-        - tripledes
-      ikeAuthAlgo:
-        - sha1
-      ikeDiffieHellmanGroup:
-        - group2
-      ikeLifetime: 28800
-      childCipherAlgo:
-        - aes128
-      childAuthAlgo:
-        - sha1
-      childPfsGroup:
-        - disabled
-      childLifetime: 28800
-    networkTags:
-      - all
-  - name: My peer 2
-    publicIp: 123.123.123.2
-    remoteId: miles@meraki.com
-    privateSubnets:
-      - 192.168.2.0/24
-      - 192.168.129.0/24
-    secret: asdf56785678567856785678
-    networkTags:
-      - none
-    ipsecPoliciesPreset: default
+- id: "100000000000000000"
+  name: MyOrganization
+  samlConsumerUrl: https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
+  samlConsumerUrls:
+  - https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
+  url: https://n1.meraki.com/o/A0bcDefg/manage/organization/overview
+- id: "671599294431625609"
+  name: YourOrganization
+  samlConsumerUrl: https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
+  samlConsumerUrls:
+  - https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
+  url: https://n2.meraki.com/o/R1stUvwx/manage/organization/overview
 ```
 
 

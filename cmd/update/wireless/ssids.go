@@ -10,7 +10,7 @@ import (
 var ssid = &cobra.Command{
 	Use:   "ssid",
 	Short: "Update The MR SSIDs In A Network.",
-	Long:  `merakictl  update mr ssid {SSID#} -n {NetworkId} --input {FILENAME}.yaml`,
+	Long:  `merakictl  update wireless ssid {SSID#} -n {NetworkId} --input {FILENAME}.yaml`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Flags

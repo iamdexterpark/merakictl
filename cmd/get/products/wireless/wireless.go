@@ -1,10 +1,10 @@
-package mr
+package wireless
 
 import "github.com/spf13/cobra"
 
 // MRCmd - Root for all organization CLI commands.
 var MRCmd = &cobra.Command{
-	Use:   "mr",
+	Use:   "wireless",
 	Short: "",
 	Long:  "List of available wifi specific API calls exposed via CLI.",
 }

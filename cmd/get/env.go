@@ -1,7 +1,6 @@
 package get
 
 import (
-	"fmt"
 	"github.com/ddexterpark/dashboard-api-golang/api"
 	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/kr/pretty"
@@ -9,12 +8,16 @@ import (
 )
 
 // apikey -> api.Token()
-var apikey = &cobra.Command{
-	Use:   "apikey",
-	Short: "",
+var environmentalvariables = &cobra.Command{
+	Use:   "env",
+	Short: "Prints out environmental variables",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("API KEY is : %s \n", api.Token())
+		obfuscated := string(api.Token()[len(api.Token())-6:])
+		pretty.Println("API KEY is : *****************"+obfuscated)
+		pretty.Println("API Version is :", api.APIversion())
+		pretty.Println("API BaseUrl is :", api.BaseUrl())
+
 
 	},
 }

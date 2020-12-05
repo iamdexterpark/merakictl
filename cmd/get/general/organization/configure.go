@@ -21,16 +21,12 @@ var list = &cobra.Command{
 var detail = &cobra.Command{
 	Use:   "detail",
 	Short: "List a specific organization that the user has privileges on.",
-	Long:  pretty.Sprint(api.Organization{}),
 	Run: func(cmd *cobra.Command, args []string) {
-
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-
 		metadata := configure.GetOrganization(org)
-
 		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }
@@ -41,16 +37,12 @@ var actionbatches = &cobra.Command{
 	Short: "Return The List Of Action Batches In The Organization.",
 	Long:  pretty.Sprint(configure.ActionBatchList{}),
 	Run: func(cmd *cobra.Command, args []string) {
-
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		
 		status := cmd.Flag("status").Value.String()
-		
 		metadata := configure.GetActionBatchList(org, status)
-		
 		shell.Display(metadata, "actionbatchlist", cmd.Flags())
 
 	},

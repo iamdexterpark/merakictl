@@ -1,6 +1,7 @@
 package update
 
 import (
+	"github.com/ddexterpark/merakictl/cmd/update/general/organization"
 	"github.com/ddexterpark/merakictl/cmd/update/wireless"
 	"github.com/spf13/cobra"
 )
@@ -13,6 +14,6 @@ var UpdateCmd = &cobra.Command{
 }
 
 func init() {
-	UpdateCmd.AddCommand(org)
+	UpdateCmd.AddCommand(organization.Org)
 	UpdateCmd.AddCommand(wireless.MRCmd)
 }
