@@ -2,7 +2,7 @@
 # merakictl
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/ddexterpark/merakictl)
 
-*多语言文档：[英文](../README.md), [日本语](docs/README.ja.md)，[简体中文](docs/README.zh-cn.md).*
+*多语言文档：[英文](README.md), [日本语](README.ja.md)，[简体中文](README.zh-cn.md).*
 
 社区开发的用于Meraki Dashboard API的Golang SDK和命令行工具。
 有关供应商支持的API接口，请参见精彩内容：[Meraki仪表板API Python库]https://github.com/meraki/dashboard-api-python)
