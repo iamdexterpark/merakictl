@@ -22,10 +22,10 @@ All Organization level API calls.
  GET  | devices | merakictl get organization devices {organizationId} | --perPage --startingAfter --endingBefore |  List the devices in an organization.
  GET  | device | merakictl get organization device {serial} {organizationId} |  | Return A Single Device From The Inventory Of An Organization.
  GET  | inventory | merakictl get organization inventory |  --perPage --startingAfter --endingBefore --usedState --search | Return The Device Inventory For An Organization.
- GET  | licences | merakictl get organization licences {organizationId} | --perPage --startingAfter --endingBefore --deviceSerial {networkId} --state | List The Licenses For An Organization.
+ GET  | licences | merakictl get organization licences {organizationId} | --perPage --startingAfter --endingBefore --deviceSerial --networkId --state | List The Licenses For An Organization.
  GET  | licence | merakictl get organization licence {licenceId} {organizationId} | | List A Single License For An Organization.
  GET  | securitysettings | merakictl get organization securitysettings {organizationId} | | Returns The Login Security Settings For An Organization.
- GET  | networks | merakictl get organization networks {organizationId} | {configTemplateId} --tags --tagsFilterType --perPage --startingAfter --endingBefore | List the networks that the user has privileges on in an organization.
+ GET  | networks | merakictl get organization networks {organizationId} | --configTemplateId --tags --tagsFilterType --perPage --startingAfter --endingBefore | List the networks that the user has privileges on in an organization.
  GET  | ldps | merakictl get organization ldps {organizationId} | | List the SAML IdPs in your organization.
  GET  | ldp | merakictl get organization ldp {ldpId} {organizationId} | | List a SAML IdP in your organization.
  GET  | saml | merakictl get organization saml {organizationId} | | Returns the SAML SSO enabled settings for an organization.
@@ -34,7 +34,7 @@ All Organization level API calls.
  GET  | snmp | merakictl get organization snmp {organizationId} | | Return the SNMP settings for an organization.
  GET  | apiresponsecount | merakictl get organization apiresponsecount {organizationId} | --t0 --t1 --timespan | Return an aggregated overview of API requests data.
  GET  | apirequests | merakictl get organization apirequests {organizationId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore --adminId --path --method --responseCode --sourceIp | List the API requests made by an organization
- GET  | configurationchanges | merakictl get organization configurationchanges {organizationId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore {networkId} --adminId | View the Change Log for your organization.
+ GET  | configurationchanges | merakictl get organization configurationchanges {organizationId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore --networkId --adminId | View the Change Log for your organization.
  GET  | devicestatus | merakictl get organization devicestatus {organizationId}  | --perPage --startingAfter --endingBefore | List the status of every Meraki device in the organization.
  GET  | losslatency | merakictl get organization losslatency {organizationId} | --t0 --t1 --timespan --uplink --ip | Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago.
  GET  | licenseoverview | merakictl get organization licenseoverview {organizationId} | | Return an overview of the license state for an organization.
@@ -64,11 +64,11 @@ All Network level API calls.
  GET  | mqttbroker | merakictl get network mqttbroker {mqttBrokerId} {networkId} | | Return an MQTT broker.
  GET  | netflow | merakictl get network netflow {networkId} | | Return the NetFlow traffic reporting settings for a network.
  GET  | channelutilization | merakictl get network channelutilization {networkId} | --t0 --t1 --timespan --resolution --perPage --startingAfter --endingBefore | Get the channel utilization over each radio for all APs in a network.
- GET  | piikeys | merakictl get network piikeys {networkId} | --username --email --mac {serial} --imei --bluetoothMac | List the keys required to access Personally Identifiable Information (PII) for a given identifier. Exactly one identifier will be accepted. If the organization contains org-wide Systems Manager users matching the key provided then there will be an entry with the key "0" containing the applicable keys.
+ GET  | piikeys | merakictl get network piikeys {networkId} | --username --email --mac --serial --imei --bluetoothMac | List the keys required to access Personally Identifiable Information (PII) for a given identifier. Exactly one identifier will be accepted. If the organization contains org-wide Systems Manager users matching the key provided then there will be an entry with the key "0" containing the applicable keys.
  GET  | piirequests | merakictl get network piirequests {networkId} | | List the PII requests for this network or organization.
  GET  | piirequest | merakictl get network piirequest {requestId} {networkId} | | Return a PII request.
- GET  | smdevices | merakictl get network smdevices {networkId} | --username --email --mac {serial} --imei --bluetoothMac  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details. Exactly one identifier will be accepted.
- GET  | smowners | merakictl get network smowners {networkId} | --username --email --mac {serial} --imei --bluetoothMac  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier. These owner IDs can be used with the Systems Manager API endpoints to retrieve owner details. Exactly one identifier will be accepted.
+ GET  | smdevices | merakictl get network smdevices {networkId} | --username --email --mac --serial --imei --bluetoothMac  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier. These device IDs can be used with the Systems Manager API endpoints to retrieve device details. Exactly one identifier will be accepted.
+ GET  | smowners | merakictl get network smowners {networkId} | --username --email --mac --serial --imei --bluetoothMac  | Given a piece of Personally Identifiable Information (PII), return the Systems Manager owner ID(s) associated with that identifier. These owner IDs can be used with the Systems Manager API endpoints to retrieve owner details. Exactly one identifier will be accepted.
  GET  | settings | merakictl get network settings {networkId} | | Return the settings for a network.
  GET  | snmp | merakictl get network snmp {networkId} | | Return the SNMP settings for a network.
  GET  | syslog | merakictl get network syslog {networkId} | | List the syslog servers for a network.
@@ -172,7 +172,7 @@ All Device level API calls.
  GET  | live | merakictl get mv live {serial} | | Returns live state from camera of analytics zones.
  GET  | overview | merakictl get mv overview {serial} | --t0 --t1 --timespan --objectType | Returns an overview of aggregate analytics data for a timespan.
  GET  | recent | merakictl get mv recent {serial} | --objectType | Returns most recent record for analytics zones.
- GET  | history | merakictl get mv history {serial} --zoneId | --t0 --t1 --timespan --resolution --objectType | Return historical records for analytic zones.
+ GET  | history | merakictl get mv history --serial --zoneId | --t0 --t1 --timespan --resolution --objectType | Return historical records for analytic zones.
  GET  | zones | merakictl get mv zones {serial} | | Returns all configured analytic zones for this camera.
  
  
@@ -261,8 +261,8 @@ All Device level API calls.
   GET  | ssids | merakictl get mr ssids {networkId} | | List the MR SSIDs in a network.
   GET  | ssid | merakictl get mr ssid {number} {networkId}| | Return a single MR SSID.
   GET  | airmarshal | merakictl get mr airmarshal {networkId} | --t0 --timespan | List Air Marshal scan results from a network.
-  GET  | channelutilizationhistory | merakictl get mr channelutilizationhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band | Return AP channel utilization over time for a device or network client.
-  GET  | clientcounthistory | merakictl get mr clientcounthistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band --ssid | Return wireless client counts over time for a network, device, or network client.
+  GET  | channelutilizationhistory | merakictl get mr channelutilizationhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band | Return AP channel utilization over time for a device or network client.
+  GET  | clientcounthistory | merakictl get mr clientcounthistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band --ssid | Return wireless client counts over time for a network, device, or network client.
   GET  | connectionstat | merakictl get mr connectionstat {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag | Aggregated connectivity info for a given client on this network. Clients are identified by their MAC.
   GET  | connectionstats  | merakictl get mr connectionstats  {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag  |  Aggregated connectivity info for this network, grouped by clients.
   GET  | connectivityevents | merakictl get mr connectivityevents {clientId} {networkId} | --perPage --startingAfter --endingBefore --t0 --t1 --timespan --types --includedSeverities --band --ssidNumber --deviceSerial | List the wireless connectivity events for a client within a network in the timespan.
@@ -271,17 +271,17 @@ All Device level API calls.
   GET  | latencystats | merakictl get mr latencystats {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag --fields | Aggregated latency info for this network, grouped by clients.
   GET  | deviceconnectionstats | merakictl get mr deviceconnectionstats {serial} | --t0 --t1 --timespan --band --ssid --vlan --apTag | Aggregated connectivity info for a given AP on this network.
   GET  | networkconnectionstats | merakictl get mr networkconnectionstats {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag | Aggregated connectivity info for this network.
-  GET  | dataratehistory | merakictl get mr dataratehistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band --ssid | Return PHY data rates over time for a network, device, or network client.
+  GET  | dataratehistory | merakictl get mr dataratehistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band --ssid | Return PHY data rates over time for a network, device, or network client.
   GET  | connectionstats | merakictl get mr connectionstats {networkId} |--t0 --t1 --timespan --band --ssid --vlan --apTag | Aggregated connectivity info for this network, grouped by node.
   GET  | latencystats | merakictl get mr latencystats {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag --fields | Aggregated latency info for this network, grouped by node.
   GET  | failedconnections | merakictl get mr failedconnections {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag {serial} {clientId} | List of all failed client connection events on this network in a given time range.
-  GET  | latencyhistory | merakictl get mr latencyhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band --ssid --accessCategory | Return average wireless latency over time for a network, device, or network client.
+  GET  | latencyhistory | merakictl get mr latencyhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band --ssid --accessCategory | Return average wireless latency over time for a network, device, or network client.
   GET  | devicelatencystats | merakictl get mr latencystats {serial} | --t0 --t1 --timespan --band --ssid --vlan --apTag --fields | Aggregated latency info for a given AP on this network.
   GET  | networklatencystats | merakictl get mr networklatencystats {networkId} | --t0 --t1 --timespan --band --ssid --vlan --apTag --fields | Aggregated latency info for this network.
   GET  | meshstatuses | merakictl get mr meshstatuses {networkId} | --perPage --startingAfter --endingBefore | List wireless mesh statuses for repeaters.
-  GET  | signalqualityhistory | merakictl get mr signalqualityhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band --ssid | Return signal quality (SNR/RSSI) over time for a device or network client.
+  GET  | signalqualityhistory | merakictl get mr signalqualityhistory {networkId} | --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band --ssid | Return signal quality (SNR/RSSI) over time for a device or network client.
   GET  | status | merakictl get mr status {serial} | | Return the SSID statuses of an access point.
-  GET  | usagehistory | merakictl get mr usagehistory {networkId} |  --t0 --t1 --timespan --resolution --autoResolution {clientId} --deviceSerial --apTag --band --ssid | Return AP usage over time for a device or network client.
+  GET  | usagehistory | merakictl get mr usagehistory {networkId} |  --t0 --t1 --timespan --resolution --autoResolution --clientId --deviceSerial --apTag --band --ssid | Return AP usage over time for a device or network client.
 
 
 
@@ -300,7 +300,7 @@ All Device level API calls.
   GET  | securitycenters | merakictl get sm securitycenters {deviceId} {networkId} | | List the security centers on a device.
   GET  | softwares | merakictl get sm softwares {deviceId} {networkId} | | Get a list of softwares associated with a device.
   GET  | wlanlists | merakictl get sm wlanlists {deviceId} {networkId} | | List the saved SSID names on a device.
-  GET  | devices | merakictl get sm devices {networkId} | --fields --wifiMacs {serial}s --ids --scope --perPage --startingAfter --endingBefore | List the devices enrolled in an SM network with various specified fields and filters.
+  GET  | devices | merakictl get sm devices {networkId} | --fields --wifiMacs --serials --ids --scope --perPage --startingAfter --endingBefore | List the devices enrolled in an SM network with various specified fields and filters.
   GET  | profiles | merakictl get sm profiles {networkId} | | List all profiles in a network.
   GET  | targetgroups | merakictl get sm targetgroups {networkId} | --withDetails | List the target groups in this network.
   GET  | targetgroup | merakictl get sm targetgroup {targetGroupId} {networkId} | --withDetails | Return a target group.
