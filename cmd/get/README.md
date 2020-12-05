@@ -20,7 +20,6 @@ All Organization level API calls.
  GET  | configurationtemplates | merakictl get organization configurationtemplates {organizationId} | | List The Configuration Templates For This Organization.
  GET  | configurationtemplate | merakictl get organization configurationtemplate {configTemplateId} {organizationId} | | Return a Configuration Template For This Organization.
  GET  | devices | merakictl get organization devices {organizationId} | --perPage --startingAfter --endingBefore --configurationUpdatedAfter |  List the devices in an organization.
- GET  | device | merakictl get organization device {serial} {organizationId} |  | Return A Single Device From The Inventory Of An Organization.
  GET  | inventory | merakictl get organization inventory |  --perPage --startingAfter --endingBefore --usedState --search | Return The Device Inventory For An Organization.
  GET  | licences | merakictl get organization licences {organizationId} | --perPage --startingAfter --endingBefore --deviceSerial --networkId --state | List The Licenses For An Organization.
  GET  | licence | merakictl get organization licence {licenceId} {organizationId} | | List A Single License For An Organization.
