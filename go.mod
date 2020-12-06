@@ -3,7 +3,7 @@ module github.com/ddexterpark/merakictl
 go 1.14
 
 require (
-	github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206193132-9b449e72162f
+	github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206211228-77abb4a50515
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/kr/pretty v0.2.1
 	github.com/magiconair/properties v1.8.4 // indirect

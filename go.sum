@@ -39,6 +39,10 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206193132-9b449e72162f h1:n72DUByZ+37NBA73hYpKbrJayFH10L8CD+0c1IinplI=
 github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206193132-9b449e72162f/go.mod h1:Lcc770b85zD8jRoZE/3xDkm5j32iTs906Ec5f3ECSUc=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206193728-ed9424ca23ed h1:UqKMDmaQuiqy4kFWyKXjscm+qgmoI7b/boHJSYNZLCo=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206193728-ed9424ca23ed/go.mod h1:Lcc770b85zD8jRoZE/3xDkm5j32iTs906Ec5f3ECSUc=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206211228-77abb4a50515 h1:2zyNVFz0rucdHohpo9hz1Gmf6z4ojTn/GjJEk54RiIE=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20201206211228-77abb4a50515/go.mod h1:Lcc770b85zD8jRoZE/3xDkm5j32iTs906Ec5f3ECSUc=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=

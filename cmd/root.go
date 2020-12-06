@@ -117,5 +117,5 @@ func init() {
 		rootCmd.PersistentFlags().StringP("ids", "", "", "")
 		rootCmd.PersistentFlags().StringP("scope", "", "", "")
 		rootCmd.PersistentFlags().StringP("withDetails", "", "", "")
-
+		rootCmd.PersistentFlags().StringP("licenceId", "", "", "")
 }

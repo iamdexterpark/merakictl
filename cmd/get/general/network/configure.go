@@ -1,8 +1,8 @@
 package network
 
 import (
-	"github.com/ddexterpark/dashboard-api-golang/api"
 	"github.com/ddexterpark/dashboard-api-golang/api/general/networks/configure"
+	organizations "github.com/ddexterpark/dashboard-api-golang/api/general/organizations/configure"
 	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/spf13/cobra"
 )
@@ -15,7 +15,7 @@ var clients = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 
 		net := cmd.Flag("network").Value.String()
-		metadata := api.GetNetworkClients(net, "", "",
+		metadata := organizations.GetNetworkClients(net, "", "",
 			"", "", "", "")
 		shell.Display(metadata, "clients", cmd.Flags())
 	},
