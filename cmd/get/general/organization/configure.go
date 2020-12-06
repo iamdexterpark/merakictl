@@ -1,10 +1,8 @@
 package organization
 
 import (
-	"github.com/ddexterpark/dashboard-api-golang/api"
 	"github.com/ddexterpark/dashboard-api-golang/api/general/organizations/configure"
 	"github.com/ddexterpark/dashboard-api-golang/shell"
-	"github.com/kr/pretty"
 	"github.com/spf13/cobra"
 )
 
@@ -142,15 +140,37 @@ var devices = &cobra.Command{
 		perPage, _ := cmd.Flags().GetString("perPage")
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		configurationUpdatedAfter, _ := cmd.Flags().GetString("configurationUpdatedAfter")
-		metadata := api.GetOrganizationDevices(org, perPage, startingAfter, configurationUpdatedAfter)
+		metadata := configure.GetOrganizationDevices(org, perPage, startingAfter, configurationUpdatedAfter)
 		shell.Display(metadata, "devices", cmd.Flags())
 	},
 }
 
+
+var inventory = &cobra.Command{
+	Use:   "inventory",
+	Short: "Return The Device Inventory For An Organization.",
+	Run: func(cmd *cobra.Command, args []string) {
+		org, _, _ := shell.ResolveFlags(cmd.Flags())
+		if org == "" {
+			org = args[0]
+		}
+
+		perPage, _ := cmd.Flags().GetString("perPage")
+		startingAfter, _ := cmd.Flags().GetString("startingAfter")
+		endingBefore, _ := cmd.Flags().GetString("endingBefore")
+		usedState, _ := cmd.Flags().GetString("usedState")
+		search, _ := cmd.Flags().GetString("search")
+
+		metadata := configure.GetInventoryDevices(org, perPage, startingAfter, endingBefore, usedState, search)
+		shell.Display(metadata, "devices", cmd.Flags())
+	},
+}
+
+
+
 var networks = &cobra.Command{
 	Use:   "networks",
 	Short: "List the networks that the user has privileges on in an organization.",
-	Long:  pretty.Sprint(api.Network{}),
 	Run: func(cmd *cobra.Command, args []string) {
 
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -165,7 +185,7 @@ var networks = &cobra.Command{
 		endingBefore :=  cmd.Flag("endingBefore").Value.String()
 		tags := cmd.Flag("tags").Value.String()
 
-		metadata := api.GetOrganizationNetworks(org, configTemplateId,
+		metadata := configure.GetOrganizationNetworks(org, configTemplateId,
 			tagsFilterType, startingAfter, endingBefore, tags, perPage)
 
 		shell.Display(metadata, "networks", cmd.Flags())

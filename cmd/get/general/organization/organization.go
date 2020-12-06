@@ -20,6 +20,7 @@ func init() {
 	OrgCmd.AddCommand(admins)
 	OrgCmd.AddCommand(brandingPolicies)
 	OrgCmd.AddCommand(brandingPolicy)
-	OrgCmd.AddCommand(networks)
+	OrgCmd.AddCommand(inventory)
 	OrgCmd.AddCommand(devices)
+	OrgCmd.AddCommand(networks)
 }
