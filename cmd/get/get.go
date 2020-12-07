@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/get/general/network"
 	"github.com/ddexterpark/merakictl/cmd/get/general/organization"
 	"github.com/ddexterpark/merakictl/cmd/get/products/wireless"
+	"github.com/ddexterpark/merakictl/cmd/get/products/insight"
 	"github.com/spf13/cobra"
 )
 
@@ -20,6 +21,7 @@ func init() {
 	GetCmd.AddCommand(organization.OrgCmd)
 	GetCmd.AddCommand(device.DeviceCmd)
 	GetCmd.AddCommand(network.NetCmd)
+	GetCmd.AddCommand(insight.InsightCmd)
 	GetCmd.AddCommand(wireless.MRCmd)
 	GetCmd.AddCommand(environmentalvariables)
 	}
