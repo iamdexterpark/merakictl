@@ -4,6 +4,7 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/get/general/device"
 	"github.com/ddexterpark/merakictl/cmd/get/general/network"
 	"github.com/ddexterpark/merakictl/cmd/get/general/organization"
+	"github.com/ddexterpark/merakictl/cmd/get/products/appliance"
 	"github.com/ddexterpark/merakictl/cmd/get/products/camera"
 	"github.com/ddexterpark/merakictl/cmd/get/products/cellulargateway"
 	"github.com/ddexterpark/merakictl/cmd/get/products/sm"
@@ -24,6 +25,7 @@ func init() {
 	GetCmd.AddCommand(test)
 	GetCmd.AddCommand(organization.OrgCmd)
 	GetCmd.AddCommand(device.DeviceCmd)
+	GetCmd.AddCommand(appliance.MXCmd)
 	GetCmd.AddCommand(network.NetCmd)
 	GetCmd.AddCommand(_switch.MSCmd)
 	GetCmd.AddCommand(camera.MVCmd)

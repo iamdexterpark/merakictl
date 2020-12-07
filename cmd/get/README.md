@@ -137,7 +137,7 @@ All Device level API calls.
  GET  | uplinkbandwidth | merakictl get mx uplinkbandwidth {networkId} | | Returns the uplink bandwidth settings for your MX network..
  GET  | uplinkselection | merakictl get mx uplinkselection {networkId} | | Show uplink selection settings for an MX network.
  GET  | trafficshaping | merakictl get mx trafficshaping {networkId} | | Display the traffic shaping settings for an MX network.
- GET  | vlanssettings | merakictl get mx vlanssettings {networkId} | | Returns the enabled status of VLANs for the network.
+ GET  | vlansettings | merakictl get mx vlansettings {networkId} | | Returns the enabled status of VLANs for the network.
  GET  | vlans | merakictl get mx vlans {networkId} | | List the VLANs for an MX network.
  GET  | vlan | merakictl get mx vlan {vlanId} {networkId} | | Return a VLAN.
  GET  | sitetositevpn | merakictl get mx sitetositevpn {networkId} | | Return the site-to-site VPN settings of a network. Only valid for MX networks.
@@ -150,8 +150,8 @@ All Device level API calls.
  GET  | networksecurityevents | merakictl get mx networksecurityevents {networkId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore --sortOrder | List the security events for a network.
  GET  | organizationsecurityevents | merakictl get mx organizationsecurityevents {organizationId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore --sortOrder | List the security events for an organization.
  GET  | uplinkstatuses | merakictl get mx uplinkstatuses {organizationId} | --perPage --startingAfter --endingBefore | List the uplink status of every Meraki MX and Z series appliances in the organization.
- GET  | vpnstats | merakictl get mx vpnstats {organizationId} | --perPage --startingAfter --endingBefore {networkId}s --t0 --t1 --timespan | Show VPN history stat for networks in an organization.
- GET  | vpnstatuses | merakictl get mx vpnstatuses {organizationId} | --perPage --startingAfter --endingBefore {networkId}s | Show VPN status for networks in an organization.
+ GET  | vpnstats | merakictl get mx vpnstats {organizationId} | --perPage --startingAfter --endingBefore {networkIds} --t0 --t1 --timespan | Show VPN history stat for networks in an organization.
+ GET  | vpnstatuses | merakictl get mx vpnstatuses {organizationId} | --perPage --startingAfter --endingBefore {networkIds} | Show VPN status for networks in an organization.
 
 
 ## Camera MV  
