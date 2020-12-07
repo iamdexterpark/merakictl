@@ -47,6 +47,7 @@ All Network level API calls.
 
  HTTP | Operation | Syntax | Filters | Description |
 ----- | --------- | ------ | ----------- | ----------- |
+ GET  | details | merakictl get network details {networkId} | | Return a network.
  GET  | alertconfiguration | merakictl get network alertconfiguration {networkId} | | Return the alert configuration for this network.
  GET  | clientpolicy | merakictl get network clientpolicy {clientId} {networkId} | | Return the policy assigned to a client on the network. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | clientsplashauthorization | merakictl get network clientsplashauthorization {clientId} {networkId} | | Return the splash authorization for a client, for each SSID they've associated with through splash. Only enabled SSIDs with Click-through splash enabled will be included. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.

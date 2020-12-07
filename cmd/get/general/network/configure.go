@@ -7,6 +7,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var details = &cobra.Command{
+	Use:   "details",
+	Short: "Return a network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		metadata := configure.GetNetwork(networkId)
+		shell.Display(metadata, "details", cmd.Flags())
+	},
+}
+
 // clients
 var clients = &cobra.Command{
 	Use:   "clients",
