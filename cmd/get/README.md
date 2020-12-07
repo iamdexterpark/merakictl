@@ -297,14 +297,14 @@ All Device level API calls.
   GET  | networkadapters | merakictl get sm networkadapters {deviceId} {networkId} | | List the network adapters of a device.
   GET  | restrictions | merakictl get sm restrictions {deviceId} {networkId} | | List the restrictions on a device.
   GET  | securitycenters | merakictl get sm securitycenters {deviceId} {networkId} | | List the security centers on a device.
-  GET  | softwares | merakictl get sm softwares {deviceId} {networkId} | | Get a list of softwares associated with a device.
+  GET  | devicesoftware | merakictl get sm softwares {deviceId} {networkId} | | Get a list of softwares associated with a device.
   GET  | wlanlists | merakictl get sm wlanlists {deviceId} {networkId} | | List the saved SSID names on a device.
   GET  | devices | merakictl get sm devices {networkId} | --fields --wifiMacs --serials --ids --scope --perPage --startingAfter --endingBefore | List the devices enrolled in an SM network with various specified fields and filters.
   GET  | profiles | merakictl get sm profiles {networkId} | | List all profiles in a network.
   GET  | targetgroups | merakictl get sm targetgroups {networkId} | --withDetails | List the target groups in this network.
   GET  | targetgroup | merakictl get sm targetgroup {targetGroupId} {networkId} | --withDetails | Return a target group.
   GET  | deviceprofiles | merakictl get sm deviceprofiles {clientId} {networkId} | | Get the profiles associated with a user.
-  GET  | softwares | merakictl get sm softwares {clientId} {networkId} | | Get a list of softwares associated with a user.
+  GET  | usersoftware | merakictl get sm softwares {clientId} {networkId} | | Get a list of softwares associated with a user.
   GET  | users | merakictl get sm users {networkId} | --ids --usernames --emails --scope | List the owners in an SM network with various specified fields and filters.
   GET  | vppaccount | merakictl get sm vppaccount {vppAccountId} {organizationId} | | Get a hash containing the unparsed token of the VPP account with the given ID.
   GET  | vppaccounts | merakictl get sm vppaccounts {organizationId} | | List the VPP accounts in the organization.
