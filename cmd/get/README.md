@@ -199,16 +199,16 @@ All Device level API calls.
   GET  | accesscontrollists | merakictl get ms accesscontrollists {networkId} | | Return the access control lists for a MS network.
   GET  | accesspolicies | merakictl get ms accesspolicies {networkId} | | List the access policies for a switch network. Only returns access policies with 'my RADIUS server' as authentication method.
   GET  | accesspolicy | merakictl get ms {accessPolicyNumber}  {networkId}| | Return a specific access policy for a switch network.
+  GET  | switchportprofiles | merakictl get ms switchportprofile {configTemplateId} {profileId} {organizationId} | | Return all the ports of a switch profile.
   GET  | switchportsprofile | merakictl get ms switchportsprofile {configTemplateId} {profileId} {portId} {organizationId} | | Return a switch profile port.
-  GET  | switchportprofile | merakictl get ms switchportprofile {configTemplateId} {profileId} {organizationId} | | Return all the ports of a switch profile.
   GET  | switchprofiles | merakictl get ms switchprofiles {configTemplateId} {organizationId} | | List the switch profiles for your switch template configuration.
   GET  | dhcpserverpolicy | merakictl get ms dhcpserverpolicy {networkId} | | Return the DHCP server policy.
   GET  | dscp | merakictl get ms dscp {networkId} | | Return the DSCP to CoS mappings.
   GET  | linkaggregations | merakictl get ms linkaggregations {networkId} | | List link aggregation groups.
   GET  | mtu | merakictl get ms mtu {networkId} | | Return the MTU configuration.
   GET  | portschedules | merakictl get ms portschedules {networkId} | | List switch port schedules.
-  GET  | ports | merakictl get ms ports {serial} | | List the switch ports for a switch.
-  GET  | port | merakictl get ms port {portId} {serial}  | | Return a switch port.
+  GET  | switchports | merakictl get ms ports {serial} | | List the switch ports for a switch.
+  GET  | switchport | merakictl get ms port {portId} {serial}  | | Return a switch port.
   GET  | qosruleids | merakictl get ms qosruleids {networkId} | | Return the quality of service rule IDs by order in which they will be processed by the switch.
   GET  | qosrules | merakictl get ms qosrules {networkId} | | List quality of service rules.
   GET  | qosrule | merakictl get ms qosrule {qosRuleId} {networkId} | | Return a quality of service rule.
