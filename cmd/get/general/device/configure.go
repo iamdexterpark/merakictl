@@ -8,25 +8,27 @@ import (
 
 // management
 var management = &cobra.Command{
-	Use:   "management",
+	Use:   "managementinterface",
 	Short: "Return The Management Interface Settings For A Device.",
-	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-
-		serial := cmd.Flag("device").Value.String()
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
 		metadata := configure.GetManagementInterface(serial)
 		shell.Display(metadata, "ManagementInterface", cmd.Flags())
 	},
 }
 
 // device
-var device = &cobra.Command{
-	Use:   "device",
+var details = &cobra.Command{
+	Use:   "details",
 	Short: "Return A Single Device.",
-	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-
-		serial := cmd.Flag("device").Value.String()
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
 		metadata := configure.GetSingleDevice(serial)
 		shell.Display(metadata, "device", cmd.Flags())
 	},

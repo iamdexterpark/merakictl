@@ -14,7 +14,7 @@ var DeviceCmd = &cobra.Command{
 // init - Entrypoint for DeviceCmd sub-commands.
 func init() {
 	DeviceCmd.AddCommand(management)
-	DeviceCmd.AddCommand(device)
+	DeviceCmd.AddCommand(details)
 	DeviceCmd.AddCommand(clients)
 	DeviceCmd.AddCommand(lldpCdp)
 	DeviceCmd.AddCommand(uplink)
