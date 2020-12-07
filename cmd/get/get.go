@@ -4,6 +4,7 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/get/general/device"
 	"github.com/ddexterpark/merakictl/cmd/get/general/network"
 	"github.com/ddexterpark/merakictl/cmd/get/general/organization"
+	"github.com/ddexterpark/merakictl/cmd/get/products/camera"
 	"github.com/ddexterpark/merakictl/cmd/get/products/cellulargateway"
 	"github.com/ddexterpark/merakictl/cmd/get/products/wireless"
 	"github.com/ddexterpark/merakictl/cmd/get/products/insight"
@@ -22,6 +23,7 @@ func init() {
 	GetCmd.AddCommand(organization.OrgCmd)
 	GetCmd.AddCommand(device.DeviceCmd)
 	GetCmd.AddCommand(network.NetCmd)
+	GetCmd.AddCommand(camera.MVCmd)
 	GetCmd.AddCommand(cellulargateway.MGCmd)
 	GetCmd.AddCommand(insight.InsightCmd)
 	GetCmd.AddCommand(wireless.MRCmd)

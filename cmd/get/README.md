@@ -163,16 +163,16 @@ All Device level API calls.
  GET  | qualityandretention | merakictl get mv qualityandretention {serial} | | Returns quality and retention settings for the given camera.
  GET  | qualityretentionprofiles | merakictl get mv qualityretentionprofiles {networkId} | | List the quality retention profiles for this network.
  GET  | qualityretentionprofile | merakictl get mv qualityretentionprofile {qualityRetentionProfileId} {networkId} | | Retrieve a single quality retention profile.
- GET  | schedules | merakictl get mvschedules  {networkId} | | Returns a list of all camera recording schedules.
+ GET  | schedules | merakictl get mv schedules  {networkId} | | Returns a list of all camera recording schedules.
  GET  | objectdetectionmodels | merakictl get mv objectdetectionmodels {serial} | | Returns the MV Sense object detection model list for the given camera.
- GET  | sense | merakictl get mv  {serial} | | Returns sense settings for a given camera.
- GET  | settings | merakictl get mv settings {serial} | | Returns video settings for the given camera.
+ GET  | sense | merakictl get mv sense {serial} | | Returns sense settings for a given camera.
+ GET  | videosettings | merakictl get mv videosettings {serial} | | Returns video settings for the given camera.
  GET  | videolink | merakictl get mv videolink {serial} | --timestamp | Returns video link to the specified camera. If a timestamp is supplied, it links to that timestamp.
- GET  | live | merakictl get mv live {serial} | | Returns live state from camera of analytics zones.
- GET  | overview | merakictl get mv overview {serial} | --t0 --t1 --timespan --objectType | Returns an overview of aggregate analytics data for a timespan.
- GET  | recent | merakictl get mv recent {serial} | --objectType | Returns most recent record for analytics zones.
- GET  | history | merakictl get mv history --serial --zoneId | --t0 --t1 --timespan --resolution --objectType | Return historical records for analytic zones.
- GET  | zones | merakictl get mv zones {serial} | | Returns all configured analytic zones for this camera.
+ GET  | liveanalytics | merakictl get mv liveanalytics {serial} | | Returns live state from camera of analytics zones.
+ GET  | analyticsoverview | merakictl get mv analyticsoverview {serial} | --t0 --t1 --timespan --objectType | Returns an overview of aggregate analytics data for a timespan.
+ GET  | recentanalytics | merakictl get mv recentanalytics {serial} | --objectType | Returns most recent record for analytics zones.
+ GET  | analyticszoneshistory | merakictl get mv analyticszoneshistory {zoneId} {serial} | --t0 --t1 --timespan --resolution --objectType | Return historical records for analytic zones.
+ GET  | analyticszones | merakictl get mv analyticszones {serial} | | Returns all configured analytic zones for this camera.
  
  
 ## Cellular Gateway mg  
