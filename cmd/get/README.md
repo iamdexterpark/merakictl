@@ -47,14 +47,13 @@ All Network level API calls.
 
  HTTP | Operation | Syntax | Filters | Description |
 ----- | --------- | ------ | ----------- | ----------- |
- GET  |  | merakictl get network {networkId} | | Return a network.
  GET  | alertconfiguration | merakictl get network alertconfiguration {networkId} | | Return the alert configuration for this network.
  GET  | clientpolicy | merakictl get network clientpolicy {clientId} {networkId} | | Return the policy assigned to a client on the network. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
- GET  | clientsplashauthorization | merakictl get network clientsplashauthorization clientId {networkId} | | Return the splash authorization for a client, for each SSID they've associated with through splash. Only enabled SSIDs with Click-through splash enabled will be included. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
+ GET  | clientsplashauthorization | merakictl get network clientsplashauthorization {clientId} {networkId} | | Return the splash authorization for a client, for each SSID they've associated with through splash. Only enabled SSIDs with Click-through splash enabled will be included. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | devices | merakictl get network devices {networkId} | | List the devices in a network.
  GET  | firmwareupgrades | merakictl get network firmwareupgrades {networkId} | | Get current maintenance window for a network.
  GET  | floorplans | merakictl get network floorplans {networkId} | | List the floor plans that belong to your network.
- GET  | floorplan | merakictl get network floorplan {floorPlanI}d {networkId} | | Find a floor plan by ID.
+ GET  | floorplan | merakictl get network floorplan {floorPlanId} {networkId} | | Find a floor plan by ID.
  GET  | grouppolicies | merakictl get network grouppolicies {networkId} | | List the group policies in a network.
  GET  | grouppolicy | merakictl get network grouppolicy {groupPolicyId} {networkId} | | Display a group policy.
  GET  | merakiauthusers | merakictl get network merakiauthusers {networkId} | | List the users configured under Meraki Authentication for a network (splash guest or RADIUS users for a wireless network, or client VPN users for a wired network).
@@ -78,14 +77,14 @@ All Network level API calls.
  GET  | httpserver | merakictl get network httpserver {httpServerId} {networkId} | | Return an HTTP server for a network.
  GET  | webhooktest | merakictl get network webhooktest {weebhookTestId} {networkId} | | Return the status of a webhook test for a network.
  GET  | bluetoothclients | merakictl get network bluetoothclients {networkId} | --t0 --t1 --timespan --perPage --startingAfter --endingBefore --includeConnectivityHistory | List the Bluetooth clients seen by APs in this network.
- GET  | bluetoothclient | merakictl get network bluetoothclient {networkId} | --includeConnectivityHistory --connectivityHistoryTimespan | Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.
+ GET  | bluetoothclient | merakictl get network bluetoothclient {bluetoothClientId} {networkId} | --includeConnectivityHistory --connectivityHistoryTimespan | Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.
  GET  | clienttraffichistory | merakictl get network clienttraffichistory {clientId} {networkId} | --perPage --startingAfter --endingBefore | Return the client's network traffic data over time. Usage data is in kilobytes. This endpoint requires detailed traffic analysis to be enabled on the Network-wide > General page. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | clientusagehistory | merakictl get network clientusagehistory {clientId} {networkId} | | Return the client's daily usage history. Usage data is in kilobytes. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | networkclients | merakictl get network networkclients {networkId} | --t0 --timespan --perPage --startingAfter --endingBefore | List the clients that have used this network in the timespan.
  GET  | clientidentifier | merakictl get network clientidentifier {clientId} {networkId} | | Return the client associated with the given identifier. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.
  GET  | environmentalevents | merakictl get network environmentalevents {networkId} | --includedEventTypes[] --excludedEventTypes[] --sensorSerial --gatewaySerial --perPage --startingAfter --endingBefore | List the environmental events for the network.
  GET  | events | merakictl get network events {networkId} | --productType --includedEventTypes[] --excludedEventTypes[] --deviceMac --deviceSerial --deviceName --clientIp --clientMac --clientName --smDeviceMac --smDeviceName --perPage --startingAfter --endingBefore | List the events for the network.
- GET  | splashloginattempts | merakictl get network splashloginattempts {networkId} | --ssidNumber --loginIdentifier --timespan | List the splash login attempts for a network.
+ GET  | splashloginattempts | merakictl get network splashloginattempts {networkId} | --splashLoginAttempts --ssidNumber --loginIdentifier --timespan | List the splash login attempts for a network.
  GET  | traffic | merakictl get network traffic {networkId} | --t0 --timespan --deviceType | Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.
 
 

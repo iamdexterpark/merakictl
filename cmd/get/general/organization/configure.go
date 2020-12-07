@@ -101,6 +101,7 @@ var brandingPolicy = &cobra.Command{
 	},
 }
 
+
 var configurationtemplates = &cobra.Command{
 Use:   "configurationtemplates",
 Short: "List The Configuration Templates For This Organization.",
