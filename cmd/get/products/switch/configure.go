@@ -93,8 +93,8 @@ Run: func(cmd *cobra.Command, args []string) {
 	}
 
 	configTemplateId := args[0]
-
-metadata := configure.GetSwitchTemplateConfigProfiles(orgId, configTemplateId)
+	profileId := args[1]
+metadata := configure.GetSwitchPortProfiles(orgId, configTemplateId, profileId)
 shell.Display(metadata, "switchprofiles", cmd.Flags())
 },
 }
@@ -120,7 +120,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetDSCPCOSMapping(networkId)
+metadata := configure.GetDscpToCosMappings(networkId)
 shell.Display(metadata, "dscp", cmd.Flags())
 },
 }
@@ -133,7 +133,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetLinkAggregationGroups(networkId)
+metadata := configure.GetLinkAggregations(networkId)
 shell.Display(metadata, "linkaggregations", cmd.Flags())
 },
 }
@@ -159,7 +159,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetSwitchPortSchedules(networkId)
+metadata := configure.GetPortSchedules(networkId)
 shell.Display(metadata, "portschedules", cmd.Flags())
 },
 }
@@ -172,7 +172,7 @@ _, _, serial := shell.ResolveFlags(cmd.Flags())
 if serial == "" {
 	serial = args[0]
 }
-metadata := configure.GetSwitchPorts(serial)
+metadata := configure.GetPorts(serial)
 shell.Display(metadata, "switchports", cmd.Flags())
 },
 }
@@ -199,14 +199,14 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetQoSRuleIds(networkId)
+metadata := configure.GetQoSRuleOrder(networkId)
 shell.Display(metadata, "qosruleids", cmd.Flags())
 },
 }
 
 var qosrules = &cobra.Command{
 Use:   "qosrules",
-Short: "ist quality of service rules.",
+Short: "first quality of service rules.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
@@ -252,7 +252,7 @@ Run: func(cmd *cobra.Command, args []string) {
 	if serial == "" {
 		serial = args[0]
 	}
-metadata := configure.GetLayer3Interfaces(serial)
+metadata := configure.GetInterfaces(serial)
 shell.Display(metadata, "l3interfaces", cmd.Flags())
 },
 }
@@ -267,7 +267,7 @@ var l3interface = &cobra.Command{
 		}
 
 		interfaceId := args[0]
-		metadata := configure.GetLayer3Interface(serial, interfaceId)
+		metadata := configure.GetInterface(serial, interfaceId)
 		shell.Display(metadata, "l3interface", cmd.Flags())
 	},
 }
@@ -280,7 +280,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetMulticastRendezvousPoints(networkId)
+metadata := configure.GetRendezvousPoints(networkId)
 shell.Display(metadata, "rendezvouspoints", cmd.Flags())
 },
 }
@@ -294,7 +294,7 @@ var rendezvouspoint = &cobra.Command{
 			networkId = args[1]
 		}
 		rendezvousPointId := args[0]
-		metadata := configure.GetMulticastRendezvousPoint(networkId, rendezvousPointId)
+		metadata := configure.GetRendezvousPoint(networkId, rendezvousPointId)
 		shell.Display(metadata, "rendezvouspoint", cmd.Flags())
 	},
 }
@@ -307,7 +307,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetMulticastSettings(networkId)
+metadata := configure.GetMulticast(networkId)
 shell.Display(metadata, "multicast", cmd.Flags())
 },
 }
@@ -320,7 +320,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 networkId = args[0]
 }
-metadata := configure.GetOSPFRouting(networkId)
+metadata := configure.GetOSPF(networkId)
 shell.Display(metadata, "ospf", cmd.Flags())
 },
 }
@@ -360,7 +360,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 networkId = args[0]
 }
-metadata := configure.GetSwitchNetworkSettings(networkId)
+metadata := configure.GetSettings(networkId)
 shell.Display(metadata, "settings", cmd.Flags())
 },
 }
@@ -376,7 +376,7 @@ networkId = args[2]
 
 	switchStackId := args[0]
 	interfaceId := args[1]
-metadata := configure.GetInterfaceDHCPConfiguration(networkId, switchStackId, interfaceId)
+metadata := configure.GetStackDHCP(networkId, switchStackId, interfaceId)
 shell.Display(metadata, "stackdhcp", cmd.Flags())
 },
 }
@@ -390,7 +390,7 @@ if networkId == "" {
 networkId = args[1]
 }
 	switchStackId := args[0]
-metadata := configure.GetStackLayer3Interfaces(networkId, switchStackId)
+metadata := configure.GetStackInterfaces(networkId, switchStackId)
 shell.Display(metadata, "stackl3interfaces", cmd.Flags())
 },
 }
@@ -405,7 +405,7 @@ var stackl3interface = &cobra.Command{
 		}
 		switchStackId := args[0]
 		interfaceId := args[1]
-		metadata := configure.GetStackLayer3Interface(networkId, switchStackId, interfaceId)
+		metadata := configure.GetStackInterface(networkId, switchStackId, interfaceId)
 		shell.Display(metadata, "stackl3interface", cmd.Flags())
 	},
 }
@@ -452,7 +452,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 networkId = args[0]
 }
-metadata := configure.GetSwitchStacks(networkId)
+metadata := configure.GetStacks(networkId)
 shell.Display(metadata, "switchstacks", cmd.Flags())
 },
 }
@@ -466,7 +466,7 @@ var switchstack = &cobra.Command{
 			networkId = args[1]
 		}
 		switchStackId := args[0]
-		metadata := configure.GetSwitchStack(networkId, switchStackId)
+		metadata := configure.GetStack(networkId, switchStackId)
 		shell.Display(metadata, "switchstack", cmd.Flags())
 	},
 }
@@ -492,7 +492,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 networkId = args[0]
 }
-metadata := configure.GetSTPSettings(networkId)
+metadata := configure.GetSTP(networkId)
 shell.Display(metadata, "stp", cmd.Flags())
 },
 }

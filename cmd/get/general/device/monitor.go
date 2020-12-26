@@ -18,7 +18,7 @@ var clients = &cobra.Command{
 
 		t0, _ := cmd.Flags().GetString("t0")
 		timespan, _ := cmd.Flags().GetString("timespan")
-		metadata := monitor.GetDeviceClients(serial, t0, timespan)
+		metadata := monitor.GetClients(serial, t0, timespan)
 		shell.Display(metadata, "deviceClients", cmd.Flags())
 	},
 }
@@ -32,7 +32,7 @@ var lldpCdp = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := monitor.GetlldpCdp(serial)
+		metadata := monitor.GetLldpCdp(serial)
 		shell.Display(metadata, "lldpCdp", cmd.Flags())
 	},
 }
@@ -54,7 +54,7 @@ var uplink = &cobra.Command{
 		uplink, _ := cmd.Flags().GetString("uplink")
 		ip, _ := cmd.Flags().GetString("ip")
 
-		metadata := monitor.GetUplinkLoss(serial,t0, t1, timespan, resolution, uplink, ip)
+		metadata := monitor.GetLossAndLatencyHistory(serial,t0, t1, timespan, resolution, uplink, ip)
 		shell.Display(metadata, "uplinkLoss", cmd.Flags())
 	},
 }

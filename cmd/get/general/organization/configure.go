@@ -39,7 +39,7 @@ var actionbatches = &cobra.Command{
 			org = args[0]
 		}
 		status := cmd.Flag("status").Value.String()
-		metadata := configure.GetActionBatchList(org, status)
+		metadata := configure.GetActionBatches(org, status)
 		shell.Display(metadata, "actionbatchlist", cmd.Flags())
 
 	},
@@ -110,7 +110,7 @@ org, _, _ := shell.ResolveFlags(cmd.Flags())
 if org == "" {
 org = args[0]
 }
-metadata := configure.GetConfigurationTemplates(org)
+metadata := configure.GetConfigTemplates(org)
 shell.Display(metadata, "configurationtemplates", cmd.Flags())
 },
 }
@@ -124,7 +124,7 @@ if org == "" {
 org = args[1]
 }
 configTemplateId := args[0]
-metadata := configure.GetConfigurationTemplate(org, configTemplateId)
+metadata := configure.GetConfigTemplate(org, configTemplateId)
 shell.Display(metadata, "configurationtemplate", cmd.Flags())
 },
 }
@@ -185,7 +185,7 @@ var licences = &cobra.Command{
 		deviceSerial, _ := cmd.Flags().GetString("deviceSerial")
 		state, _ := cmd.Flags().GetString("state")
 
-		metadata := configure.GetOrganizationLicenses(org, perPage,
+		metadata := configure.GetLicenses(org, perPage,
 			startingAfter, endingBefore, deviceSerial, networkId, state)
 			shell.Display(metadata, "licences", cmd.Flags())
 	},
@@ -200,7 +200,7 @@ var licence = &cobra.Command{
 			org = args[0]
 		}
 		licenceId, _ := cmd.Flags().GetString("licenceId")
-		metadata := configure.GetOrganizationLicense(org, licenceId)
+		metadata := configure.GetLicense(org, licenceId)
 		shell.Display(metadata, "licences", cmd.Flags())
 	},
 }
@@ -238,7 +238,7 @@ var networks = &cobra.Command{
 		tagsFilterType, _ := cmd.Flags().GetString("tagsFilterType")
 		tags, _ := cmd.Flags().GetString("tags")
 
-		metadata := configure.GetOrganizationNetworks(org, configTemplateId,
+		metadata := configure.GetNetworks(org, configTemplateId,
 			tagsFilterType, startingAfter, endingBefore, tags, perPage)
 
 		shell.Display(metadata, "networks", cmd.Flags())
@@ -255,7 +255,7 @@ var ldps = &cobra.Command{
 			org = args[0]
 		}
 
-		metadata := configure.GetLDPS(org)
+		metadata := configure.GetIDPS(org)
 		shell.Display(metadata, "ldps", cmd.Flags())
 	},
 }
@@ -270,7 +270,7 @@ var ldp = &cobra.Command{
 		}
 
 		ldp := args[0]
-		metadata := configure.GetLDP(org, ldp)
+		metadata := configure.GetIDP(org, ldp)
 		shell.Display(metadata, "ldps", cmd.Flags())
 	},
 }

@@ -36,7 +36,7 @@ var clients = &cobra.Command{
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-		metadata := organizations.GetNetworkClients(networkId, t0, t1,
+		metadata := organizations.GetClients(networkId, t0, t1,
 			timespan, perPage, startingAfter, endingBefore)
 		shell.Display(metadata, "clients", cmd.Flags())
 	},
@@ -50,7 +50,7 @@ var alertconfig = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetNetworkAlertConfig(networkId)
+		metadata := configure.GetAlertSettings(networkId)
 		shell.Display(metadata, "alertconfig", cmd.Flags())
 	},
 }
@@ -91,7 +91,7 @@ var devices = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetNetworkDevices(networkId)
+		metadata := configure.GetDevices(networkId)
 		shell.Display(metadata, "devices", cmd.Flags())
 	},
 }
@@ -104,7 +104,7 @@ var firmwareupgrades = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetMaintenanceWindow(networkId)
+		metadata := configure.GetFirmwareUpgrades(networkId)
 		shell.Display(metadata, "firmwareupgrades", cmd.Flags())
 	},
 }
@@ -255,27 +255,6 @@ var channelutilization = &cobra.Command{
 	},
 }
 
-var piikeys = &cobra.Command{
-	Use:   "piikeys",
-	Short: "List the keys required to access Personally Identifiable Information (PII) for a given identifier.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[0]
-		}
-		username, _ := cmd.Flags().GetString("username")
-		email, _ := cmd.Flags().GetString("email")
-		mac, _ := cmd.Flags().GetString("mac")
-		serial, _ := cmd.Flags().GetString("serial")
-		imei, _ := cmd.Flags().GetString("imei")
-		bluetoothMac, _ := cmd.Flags().GetString("bluetoothMac")
-
-		metadata := configure.GetPiiKeys(networkId,
-			username, email, mac, serial,imei, bluetoothMac)
-		shell.Display(metadata, "piikeys", cmd.Flags())
-	},
-}
-
 var piirequests = &cobra.Command{
 	Use:   "piirequests",
 	Short: "List the PII requests for this network or organization.",
@@ -354,7 +333,7 @@ var settings = &cobra.Command{
 			networkId = args[0]
 		}
 
-		metadata := configure.GetNetworkSettings(networkId)
+		metadata := configure.GetSettings(networkId)
 		shell.Display(metadata, "settings", cmd.Flags())
 	},
 }
@@ -410,7 +389,7 @@ var trafficshaping = &cobra.Command{
 			networkId = args[0]
 		}
 
-		metadata := configure.GetTrafficShaping(networkId)
+		metadata := configure.GetTrafficAnalysis(networkId)
 		shell.Display(metadata, "trafficshaping", cmd.Flags())
 	},
 }
@@ -424,7 +403,7 @@ var dscp = &cobra.Command{
 			networkId = args[0]
 		}
 
-		metadata := configure.GetTrafficShapingDSCP(networkId)
+		metadata := configure.GetDscpTaggingOptions(networkId)
 		shell.Display(metadata, "dscp", cmd.Flags())
 	},
 }
@@ -466,7 +445,7 @@ var webhooktest = &cobra.Command{
 			networkId = args[1]
 		}
 		weebhookTestId := args[0]
-		metadata := configure.GetWebhookStatus(networkId, weebhookTestId)
+		metadata := configure.GetWebhookTests(networkId, weebhookTestId)
 		shell.Display(metadata, "webhooktest", cmd.Flags())
 	},
 }

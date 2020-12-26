@@ -31,7 +31,7 @@ if networkId == "" {
 
 	attemptId := args[0]
 
-metadata := configure.GetBypassActivationLockStatus(networkId, attemptId)
+metadata := configure.GetBypassActivationLockAttempts(networkId, attemptId)
 shell.Display(metadata, "bypassactivationlockattempts", cmd.Flags())
 },
 }
@@ -121,7 +121,7 @@ if networkId == "" {
 	networkId = args[1]
 }
 	deviceId := args[0]
-metadata := configure.GetDeviceAssociatedSoftware(networkId, deviceId)
+metadata := configure.GetDeviceSoftwares(networkId, deviceId)
 shell.Display(metadata, "devicesoftware", cmd.Flags())
 },
 }
@@ -136,7 +136,7 @@ if networkId == "" {
 	networkId = args[1]
 }
 	deviceId := args[0]
-metadata := configure.GetDeviceSSIDNames(networkId, deviceId)
+metadata := configure.GetDeviceWlanLists(networkId, deviceId)
 shell.Display(metadata, "wlanlists", cmd.Flags())
 },
 }
@@ -160,7 +160,7 @@ if networkId == "" {
 	startingAfter, _ := cmd.Flags().GetString("startingAfter")
 	endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-metadata := configure.GetSMEnrolledDevices(networkId,
+metadata := configure.GetSMDevices(networkId,
 	fields, wifiMacs, serials, ids, scope, perPage,
 	startingAfter, endingBefore)
 shell.Display(metadata, "devices", cmd.Flags())
@@ -176,7 +176,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 	networkId = args[0]
 }
-metadata := configure.GetNetworkProfiles(networkId)
+metadata := configure.GetProfiles(networkId)
 shell.Display(metadata, "profiles", cmd.Flags())
 },
 }
@@ -225,7 +225,7 @@ if networkId == "" {
 }
 	userId  := args[0]
 
-metadata := configure.GetUserAssociatedSoftware(networkId, userId)
+metadata := configure.GetSmUserSoftware(networkId, userId)
 shell.Display(metadata, "usersoftware", cmd.Flags())
 },
 }
@@ -245,7 +245,7 @@ if networkId == "" {
 	emails, _ := cmd.Flags().GetString("emails")
 	scope, _ := cmd.Flags().GetString("scope")
 
-metadata := configure.GetSMNetworkOwners(networkId, ids, usernames, emails, scope)
+metadata := configure.GetSmUsers(networkId, ids, usernames, emails, scope)
 shell.Display(metadata, "users", cmd.Flags())
 },
 }

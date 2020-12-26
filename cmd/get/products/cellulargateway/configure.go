@@ -15,7 +15,7 @@ var connectivitymonitor = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetConnectivityTesting(networkId)
+		metadata := configure.GetConnectivityMonitoringDestinations(networkId)
 		shell.Display(metadata, "connectivitymonitor", cmd.Flags())
 	},
 }
@@ -28,7 +28,7 @@ var dhcp = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetDHCPSettings(networkId)
+		metadata := configure.GetDhcp(networkId)
 		shell.Display(metadata, "dhcp", cmd.Flags())
 	},
 }
@@ -41,7 +41,7 @@ var lan = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := configure.GetLANSettings(serial)
+		metadata := configure.GetLan(serial)
 		shell.Display(metadata, "lan", cmd.Flags())
 	},
 }
@@ -80,7 +80,7 @@ var uplink = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetUplinkSettings(networkId)
+		metadata := configure.GetUplink(networkId)
 		shell.Display(metadata, "uplink", cmd.Flags())
 	},
 }

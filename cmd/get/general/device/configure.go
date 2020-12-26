@@ -29,7 +29,7 @@ var details = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := configure.GetSingleDevice(serial)
+		metadata := configure.GetDevice(serial)
 		shell.Display(metadata, "device", cmd.Flags())
 	},
 }

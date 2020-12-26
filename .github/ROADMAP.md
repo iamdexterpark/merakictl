@@ -24,14 +24,13 @@
 - [x] Marshal JSON Data
 - [x] Marshal YAML Data
 
-### Beta Release 2021 Q1 (DEC)
-- [x] 100% Get Command API Coverage
+### Beta Release 2021 Q1
 - [x] Pagination Support
 - [x] verbose debug flag
 - [x] Diff Flag (GET: compare config file against current API state)
 - [x] org/net/device flags use exact match to obfuscate Ids with the actual names
+- [x] 100% Get Command CLI Coverage
 - [ ] Claim Assets into Org
-- [ ] 100% Get Command CLI Coverage
 
 ### Backlog
 - [ ] Meraki Filter by Tags Flag 

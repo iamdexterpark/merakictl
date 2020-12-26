@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/dashboard-api-golang/shell"
 	"github.com/kr/pretty"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // apikey -> api.Token()
@@ -13,10 +14,17 @@ var environmentalvariables = &cobra.Command{
 	Short: "Prints out environmental variables",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		obfuscated := string(api.Token()[len(api.Token())-6:])
+
+		api.EnvironmentalVariables()
+
+		apiKey := viper.GetString("MERAKI_DASHBOARD_API_KEY")
+		baseUrl :=  viper.GetString("MERAKI_DASHBOARD_API_URL")
+		version :=  viper.GetString("MERAKI_DASHBOARD_API_VERSION")
+
+		obfuscated := string(apiKey[len(apiKey)-6:])
 		pretty.Println("API KEY is : *****************"+obfuscated)
-		pretty.Println("API Version is :", api.APIversion())
-		pretty.Println("API BaseUrl is :", api.BaseUrl())
+		pretty.Println("API Version is :", version)
+		pretty.Println("API BaseUrl is :", baseUrl)
 
 
 	},

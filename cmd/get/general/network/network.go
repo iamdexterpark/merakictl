@@ -30,7 +30,6 @@ func init() {
 	NetCmd.AddCommand(mqttbroker)
 	NetCmd.AddCommand(netflow)
 	NetCmd.AddCommand(channelutilization)
-	NetCmd.AddCommand(piikeys)
 	NetCmd.AddCommand(piirequests)
 	NetCmd.AddCommand(piirequest)
 	NetCmd.AddCommand(smdevices)

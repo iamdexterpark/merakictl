@@ -57,7 +57,7 @@ var schedules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetCameraRecordingSchedules(networkId)
+		metadata := configure.GetCameraSchedules(networkId)
 		shell.Display(metadata, "schedules", cmd.Flags())
 	},
 }
@@ -83,7 +83,7 @@ var sense = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := configure.GetSenseSettings(serial)
+		metadata := configure.GetSense(serial)
 		shell.Display(metadata, "sense", cmd.Flags())
 	},
 }
@@ -111,8 +111,7 @@ var videolink = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		timestamp, _ := cmd.Flags().GetString("timestamp")
-		metadata := configure.GetVideoLink(serial,timestamp)
+		metadata := configure.GetVideoLink(serial)
 		shell.Display(metadata, "videolink", cmd.Flags())
 	},
 }

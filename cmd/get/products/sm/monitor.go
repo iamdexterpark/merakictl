@@ -15,7 +15,7 @@ var cellularusagehistory = &cobra.Command{
 			networkId = args[1]
 		}
 		deviceId := args[0]
-		metadata := monitor.GetClientCellularData(networkId, deviceId)
+		metadata := monitor.GetCellularUsageHistory(networkId, deviceId)
 		shell.Display(metadata, "cellularusagehistory", cmd.Flags())
 	},
 }
@@ -35,7 +35,7 @@ networkId = args[1]
 	startingAfter, _ := cmd.Flags().GetString("startingAfter")
 	endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-metadata := monitor.GetHistoricalConnectivityData(networkId, deviceId,
+metadata := monitor.GetConnectivity(networkId, deviceId,
 	perPage, startingAfter, endingBefore)
 shell.Display(metadata, "connectivity", cmd.Flags())
 },
@@ -56,7 +56,7 @@ networkId = args[1]
 	startingAfter, _ := cmd.Flags().GetString("startingAfter")
 	endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-metadata := monitor.GetDesktopDevicesHistoricalRecords(networkId, deviceId, perPage, startingAfter, endingBefore)
+metadata := monitor.GetDesktopLogs(networkId, deviceId, perPage, startingAfter, endingBefore)
 shell.Display(metadata, "desktoplogs", cmd.Flags())
 },
 }
@@ -76,7 +76,7 @@ networkId = args[1]
 	startingAfter, _ := cmd.Flags().GetString("startingAfter")
 	endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-metadata := monitor.GetCommandHistoricalRecords(networkId,
+metadata := monitor.GetPerformanceHistory(networkId,
 	deviceId, perPage, startingAfter, endingBefore)
 shell.Display(metadata, "devicecommandlogs", cmd.Flags())
 },
@@ -96,7 +96,7 @@ networkId = args[1]
 	startingAfter, _ := cmd.Flags().GetString("startingAfter")
 	endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-metadata := monitor.GetClientMetricsHistoricalRecords(networkId,
+metadata := monitor.GetPerformanceHistory(networkId,
 	deviceId, perPage, startingAfter, endingBefore)
 shell.Display(metadata, "performancehistory", cmd.Flags())
 },

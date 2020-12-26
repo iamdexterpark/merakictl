@@ -35,7 +35,7 @@ var portsstatuses = &cobra.Command{
 		t0, _ := cmd.Flags().GetString("t0")
 		timespan, _ := cmd.Flags().GetString("timespan")
 
-		metadata := monitor.GetPortsStatus(serial,t0,timespan)
+		metadata := monitor.GetStatuses(serial,t0,timespan)
 		shell.Display(metadata, "portsstatuses", cmd.Flags())
 	},
 }

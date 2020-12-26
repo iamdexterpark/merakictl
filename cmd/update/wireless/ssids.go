@@ -23,7 +23,7 @@ var ssid = &cobra.Command{
 		var format interface{}
 		shell.RenderInput(&format)
 
-		metadata := configure.UpdateSSID(networkId, ssidNumber, format)
+		metadata := configure.PutSSID(networkId, ssidNumber, format)
 		shell.Display(metadata, "ssid", cmd.Flags())
 
 	},

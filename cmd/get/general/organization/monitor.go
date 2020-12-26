@@ -116,7 +116,7 @@ var losslatency = &cobra.Command{
 		ip, _ := cmd.Flags().GetString("ip")
 
 
-		metadata := monitor.GetLossLatency(org, t0, t1, timespan, uplink, ip)
+		metadata := monitor.GetUplinksLossAndLatency(org, t0, t1, timespan, uplink, ip)
 		shell.Display(metadata, "losslatency", cmd.Flags())
 	},
 }
@@ -143,7 +143,7 @@ var openapi = &cobra.Command{
 		if org == "" {
 			org = args[0]
 		}
-		metadata := monitor.GetOpenAPI(org)
+		metadata := monitor.GetOpenapiSpec(org)
 		shell.Display(metadata, "openapi", cmd.Flags())
 	},
 }

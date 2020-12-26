@@ -60,13 +60,11 @@ var clienttraffichistory = &cobra.Command{
 		}
 
 		clientId := args[0]
-		trafficHistory, _ := cmd.Flags().GetString("trafficHistory")
 		perPage, _ := cmd.Flags().GetString("perPage")
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-		metadata := monitor.GetClientNetworkTraffic(networkId, clientId,
-			trafficHistory,perPage,startingAfter,endingBefore)
+		metadata := monitor.GetTrafficHistory(networkId, clientId,perPage,startingAfter,endingBefore)
 		shell.Display(metadata, "clienttraffichistory", cmd.Flags())
 	},
 }
@@ -80,7 +78,7 @@ var clientusagehistory = &cobra.Command{
 			networkId = args[1]
 		}
 		clientId := args[0]
-		metadata := monitor.GetClientUsageHistory(networkId, clientId)
+		metadata := monitor.GetClient(networkId, clientId)
 		shell.Display(metadata, "clientusagehistory", cmd.Flags())
 	},
 }
@@ -112,7 +110,7 @@ var clientidentifier = &cobra.Command{
 			networkId = args[1]
 		}
 		clientId := args[0]
-		metadata := monitor.GetAssociatedClient(networkId, clientId)
+		metadata := monitor.GetClient(networkId, clientId)
 		shell.Display(metadata, "clientidentifier", cmd.Flags())
 	},
 }
@@ -201,7 +199,7 @@ var traffic = &cobra.Command{
 		timespan, _ := cmd.Flags().GetString("timespan")
 		deviceType, _ := cmd.Flags().GetString("deviceType")
 
-		metadata := monitor.GetTrafficAnalysis(networkId,t0,timespan,deviceType)
+		metadata := monitor.GetTraffic(networkId,t0,timespan,deviceType)
 		shell.Display(metadata, "traffic", cmd.Flags())
 	},
 }

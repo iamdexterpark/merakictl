@@ -24,7 +24,7 @@ var securityevents = &cobra.Command{
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		endingBefore, _ := cmd.Flags().GetString("endingBefore")
 		sortOrder, _ := cmd.Flags().GetString("sortOrder")
-		metadata := monitor.GetSecurityEvents(networkId, clientId, t0,
+		metadata := monitor.GetClientSecurityEvents(networkId, clientId, t0,
 			t1, timespan,
 			perPage, startingAfter,endingBefore, sortOrder)
 			shell.Display(metadata, "securityevents", cmd.Flags())
@@ -59,7 +59,7 @@ serial = args[0]
 }
 
 
-metadata := monitor.GetPerformanceScore(serial)
+metadata := monitor.GetPerformance(serial)
 shell.Display(metadata, "performance", cmd.Flags())
 },
 }
@@ -155,7 +155,7 @@ var vpnstats = &cobra.Command{
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-		metadata := monitor.GetVPNHistory(orgId, t0, t1, timespan, perPage,
+		metadata := monitor.GetVpnStats(orgId, t0, t1, timespan, perPage,
 			startingAfter, endingBefore, networkId)
 		shell.Display(metadata, "vpnstats", cmd.Flags())
 	},

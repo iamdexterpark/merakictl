@@ -104,7 +104,7 @@ _, networkId, _ := shell.ResolveFlags(cmd.Flags())
 if networkId == "" {
 networkId = args[0]
 }
-metadata := configure.GetWirelessSettings(networkId)
+metadata := configure.GetSettings(networkId)
 shell.Display(metadata, "wirelesssettings", cmd.Flags())
 },
 }
@@ -197,7 +197,7 @@ if networkId == "" {
 networkId = args[1]
 }
 	number := args[0]
-metadata := configure.GetTrafficShapingSettings(networkId, number)
+metadata := configure.GetTrafficShapingRules(networkId, number)
 shell.Display(metadata, "trafficshapingrules", cmd.Flags())
 },
 }

@@ -16,7 +16,7 @@ var airmarshal = &cobra.Command{
 		}
 		t0, _ := cmd.Flags().GetString("t0")
 		timespan, _ := cmd.Flags().GetString("timespan")
-		metadata := monitor.GetAirMarshalScanResults(networkId, t0, timespan)
+		metadata := monitor.GetAirMarshal(networkId, t0, timespan)
 			shell.Display(metadata, "airmarshal", cmd.Flags())
 	},
 }
@@ -41,7 +41,7 @@ var channelutilizationhistory = &cobra.Command{
 		apTag,_ := cmd.Flags().GetString("apTag")
 		band,_ := cmd.Flags().GetString("band")
 
-		metadata := monitor.GetAPChannelUtilization(networkId, t0, t1, timespan, resolution, autoResolution, clientId, deviceSerial,apTag,band)
+		metadata := monitor.GetChannelUtilizationHistory(networkId, t0, t1, timespan, resolution, autoResolution, clientId, deviceSerial,apTag,band)
 		shell.Display(metadata, "channelutilizationhistory", cmd.Flags())
 	},
 }
@@ -66,7 +66,7 @@ deviceSerial,_ := cmd.Flags().GetString("deviceSerial")
 apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
-metadata := monitor.GetWirelessClientCount(networkId,t0,t1, timespan, resolution, autoResolution, clientId, deviceSerial, apTag, band, ssid)
+metadata := monitor.GetClientCountHistory(networkId,t0,t1, timespan, resolution, autoResolution, clientId, deviceSerial, apTag, band, ssid)
 shell.Display(metadata, "clientcounthistory", cmd.Flags())
 },
 }
@@ -81,7 +81,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-
+clientId, _ := cmd.Flags().GetString("clientId")
 t0, _ := cmd.Flags().GetString("t0")
 t1, _ := cmd.Flags().GetString("t1")
 timespan, _ := cmd.Flags().GetString("timespan")
@@ -89,32 +89,32 @@ vlan,_ := cmd.Flags().GetString("vlan")
 apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
-metadata := monitor.GetAggregatedConnectivity(networkId, t0, t1, timespan, band, ssid, vlan, apTag)
+metadata := monitor.GetConnectionStat(networkId, clientId, t0, t1, timespan, band, ssid, vlan, apTag)
 shell.Display(metadata, "connectionstat", cmd.Flags())
 },
 }
 
 
 
-
+// FIX THIS
 var connectionstats = &cobra.Command{
 Use:   "connectionstats",
 Short: "Aggregated connectivity info for this network, grouped by clients.",
 Run: func(cmd *cobra.Command, args []string) {
-_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-if networkId == "" {
-networkId = args[0]
+_, _, deviceId := shell.ResolveFlags(cmd.Flags())
+if deviceId == "" {
+deviceId = args[0]
 }
 
-t0, _ := cmd.Flags().GetString("t0")
-t1, _ := cmd.Flags().GetString("t1")
-timespan, _ := cmd.Flags().GetString("timespan")
-vlan, _ := cmd.Flags().GetString("vlan")
-apTag,_ := cmd.Flags().GetString("apTag")
-band,_ := cmd.Flags().GetString("band")
-ssid,_ := cmd.Flags().GetString("ssid")
-metadata := monitor.GetAggregatedConnectivityPerNetwork(networkId,
-	t0, t1, timespan, band, ssid, vlan, apTag)
+	clientId, _ := cmd.Flags().GetString("clientId")
+	t0, _ := cmd.Flags().GetString("t0")
+	t1, _ := cmd.Flags().GetString("t1")
+	timespan, _ := cmd.Flags().GetString("timespan")
+	vlan,_ := cmd.Flags().GetString("vlan")
+	apTag,_ := cmd.Flags().GetString("apTag")
+	band,_ := cmd.Flags().GetString("band")
+	ssid,_ := cmd.Flags().GetString("ssid")
+	metadata := monitor.GetConnectionStat(deviceId, clientId, t0, t1, timespan, band, ssid, vlan, apTag)
 shell.Display(metadata, "connectionstats", cmd.Flags())
 },
 }
@@ -144,7 +144,7 @@ deviceSerial,_ := cmd.Flags().GetString("deviceSerial")
 ssidNumber,_ := cmd.Flags().GetString("ssidNumber")
 band,_ := cmd.Flags().GetString("band")
 
-metadata := monitor.GetWirelessConnectivityEvents(networkId,
+metadata := monitor.GetConnectivityEvents(networkId,
 	clientId, perPage, startingAfter, endingBefore, t0, t1,
 	timespan,types, includedSeverities, band, ssidNumber, deviceSerial)
 shell.Display(metadata, "connectivityevents", cmd.Flags())
@@ -231,7 +231,7 @@ shell.Display(metadata, "latencystats", cmd.Flags())
 
 
 
-
+// FIX THIS
 var deviceconnectionstats = &cobra.Command{
 Use:   "deviceconnectionstats",
 Short: "",
@@ -249,7 +249,7 @@ band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 vlan, _ := cmd.Flags().GetString("vlan")
 
-metadata := monitor.GetAPAggregatedConnectivity(serial, t0,t1,timespan,band,ssid,vlan,apTag)
+metadata := monitor.GetAPLatencyStats(serial, serial, t0,t1,timespan,band,ssid,vlan,apTag)
 shell.Display(metadata, "deviceconnectionstats", cmd.Flags())
 },
 }
@@ -271,8 +271,10 @@ apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 vlan, _ := cmd.Flags().GetString("vlan")
-metadata := monitor.GetAggregatedConnectivityPerNetwork(networkId,
-	t0, t1,timespan,band, ssid, vlan, apTag)
+fields, _ := cmd.Flags().GetString("fields")
+
+metadata := monitor.GetAggregatedLatencies(networkId,
+	t0, t1,timespan,band, ssid, vlan, apTag, fields)
 shell.Display(metadata, "networkconnectionstats", cmd.Flags())
 },
 }
@@ -322,7 +324,7 @@ apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 vlan, _ := cmd.Flags().GetString("vlan")
-metadata := monitor.GetAggregatedConnectivityClients(networkId,
+metadata := monitor.GetConnectionStats(networkId,
 	clientId, t0, t1, timespan, band, ssid,vlan, apTag)
 shell.Display(metadata, "connectionstatsnode", cmd.Flags())
 },
@@ -366,7 +368,7 @@ apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 vlan, _ := cmd.Flags().GetString("vlan")
-metadata := monitor.GetFailedClientConnections(networkId, t0, t1, timespan, band, ssid, vlan, apTag)
+metadata := monitor.GetFailedConnections(networkId, t0, t1, timespan, band, ssid, vlan, apTag)
 shell.Display(metadata, "failedconnections", cmd.Flags())
 },
 }
@@ -417,7 +419,7 @@ band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 fields, _ := cmd.Flags().GetString("fields")
 vlan, _ := cmd.Flags().GetString("vlan")
-metadata := monitor.GetAggregatedLatencyPerAP(serial, t0,
+metadata := monitor.GetAggregatedLatencies(serial, t0,
 	t1,timespan,band,ssid,vlan,apTag,fields)
 shell.Display(metadata, "devicelatencystats", cmd.Flags())
 },
@@ -440,7 +442,7 @@ band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 fields, _ := cmd.Flags().GetString("fields")
 vlan, _ := cmd.Flags().GetString("vlan")
-metadata := monitor.GetAggregatedLatencyPerNetwork(networkId,
+metadata := monitor.GetAggregatedLatencies(networkId,
 	t0,t1,timespan,band,ssid,vlan,apTag, fields)
 shell.Display(metadata, "networklatencystats", cmd.Flags())
 },
@@ -485,7 +487,7 @@ apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 
-metadata := monitor.GetSignalQuality(networkId,t0,t1,
+metadata := monitor.GetSignalQualityHistory(networkId,t0,t1,
 	timespan,resolution,autoResolution,clientId,
 	deviceSerial,apTag,band, ssid)
 shell.Display(metadata, "signalqualityhistory", cmd.Flags())
@@ -503,7 +505,7 @@ if serial == "" {
 	serial = args[0]
 }
 
-metadata := monitor.GetSSIDStatuses(serial)
+metadata := monitor.GetStatus(serial)
 shell.Display(metadata, "status", cmd.Flags())
 },
 }
@@ -528,7 +530,7 @@ deviceSerial,_ := cmd.Flags().GetString("deviceSerial")
 apTag,_ := cmd.Flags().GetString("apTag")
 band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
-metadata := monitor.GetAPUsageHistory(networkId,t0,
+metadata := monitor.GetUsageHistory(networkId,t0,
 	t1,timespan,resolution,autoResolution,clientId,
 	deviceSerial,apTag,band,ssid)
 shell.Display(metadata, "usagehistory", cmd.Flags())

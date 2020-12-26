@@ -14,7 +14,7 @@ var liveanalytics = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := monitor.GetLiveState(serial)
+		metadata := monitor.GetAnalyticZones(serial)
 		shell.Display(metadata, "liveanalytics", cmd.Flags())
 	},
 }
@@ -31,7 +31,7 @@ var analyticsoverview = &cobra.Command{
 		t1, _ := cmd.Flags().GetString("t1")
 		timespan, _ := cmd.Flags().GetString("timespan")
 		objectType, _ := cmd.Flags().GetString("objectType")
-		metadata := monitor.GetAggregateAnalytics(serial, t0, t1, timespan, objectType)
+		metadata := monitor.GetAnalyticsOverview(serial, t0, t1, timespan, objectType)
 		shell.Display(metadata, "analyticsoverview", cmd.Flags())
 	},
 }
@@ -45,7 +45,7 @@ var recentanalytics = &cobra.Command{
 			serial = args[0]
 		}
 		objectType, _ := cmd.Flags().GetString("objectType")
-		metadata := monitor.GetAnalyticsZoneRecord(serial, objectType)
+		metadata := monitor.GetAnalyticsRecent(serial, objectType)
 		shell.Display(metadata, "recentanalytics", cmd.Flags())
 	},
 }
@@ -65,7 +65,7 @@ var analyticszoneshistory = &cobra.Command{
 		timespan, _ := cmd.Flags().GetString("timespan")
 		resolution, _ := cmd.Flags().GetString("resolution")
 		objectType, _ := cmd.Flags().GetString("objectType")
-		metadata := monitor.GetAnalyticsZoneHistoricalRecords(serial,
+		metadata := monitor.GetAnalyticsZoneHistory(serial,
 			zoneId, t0, t1, timespan, resolution, objectType)
 		shell.Display(metadata, "analyticszoneshistory", cmd.Flags())
 	},

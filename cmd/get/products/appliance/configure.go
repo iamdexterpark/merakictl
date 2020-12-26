@@ -48,7 +48,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetContentFilteringSettings(networkId)
+metadata := configure.GetContentFiltering(networkId)
 shell.Display(metadata, "contentfiltering", cmd.Flags())
 },
 }
@@ -225,7 +225,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetPortVLANSettings(networkId)
+metadata := configure.GetAppliancePorts(networkId)
 shell.Display(metadata, "ports", cmd.Flags())
 },
 }
@@ -240,7 +240,7 @@ var port = &cobra.Command{
 		}
 
 		portId := args[0]
-		metadata := configure.GetPortVLANSetting(networkId, portId)
+		metadata := configure.GetAppliancePort(networkId, portId)
 		shell.Display(metadata, "port", cmd.Flags())
 	},
 }
@@ -255,7 +255,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetMXIntrusionSettings(networkId)
+metadata := configure.GetNetworkSecurityIntrusion(networkId)
 shell.Display(metadata, "networkintrusion", cmd.Flags())
 },
 }
@@ -271,7 +271,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetOrganizationIntrusionSettings(networkId)
+metadata := configure.GetOrganizationSecurityIntrusion(networkId)
 shell.Display(metadata, "organizationintrusion", cmd.Flags())
 },
 }
@@ -303,7 +303,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetApplianceSettings(networkId)
+metadata := configure.GetSettings(networkId)
 shell.Display(metadata, "settings", cmd.Flags())
 },
 }
@@ -319,7 +319,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetLANConfiguration(networkId)
+metadata := configure.GetSingleLan(networkId)
 shell.Display(metadata, "singlelan", cmd.Flags())
 },
 }
@@ -410,7 +410,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetUplinkBandwidthSettings(networkId)
+metadata := configure.GetUplinkBandwidth(networkId)
 shell.Display(metadata, "uplinkbandwidth", cmd.Flags())
 },
 }
@@ -426,7 +426,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetUplinkSelectionSettings(networkId)
+metadata := configure.GetUplinkSelection(networkId)
 shell.Display(metadata, "uplinkselection", cmd.Flags())
 },
 }
@@ -440,7 +440,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetTrafficShapingSettings(networkId)
+metadata := configure.GetTrafficShapingRules(networkId)
 shell.Display(metadata, "trafficshaping", cmd.Flags())
 },
 }
@@ -456,7 +456,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetVLANStatus(networkId)
+metadata := configure.GetVLANSettings(networkId)
 shell.Display(metadata, "vlansettings", cmd.Flags())
 },
 }
@@ -470,7 +470,7 @@ if networkId == "" {
 networkId = args[0]
 }
 
-metadata := configure.GetPortVLANSettings(networkId)
+metadata := configure.GetVLANs(networkId)
 shell.Display(metadata, "vlans", cmd.Flags())
 },
 }
@@ -485,7 +485,7 @@ var vlan = &cobra.Command{
 		}
 
 		vlanId := args[0]
-		metadata := configure.GetPortVLANSetting(networkId, vlanId)
+		metadata := configure.GetVLAN(networkId, vlanId)
 		shell.Display(metadata, "vlan", cmd.Flags())
 	},
 }
@@ -508,12 +508,12 @@ var thirdpartyvpnpeers = &cobra.Command{
 Use:   "thirdpartyvpnpeers",
 Short: "Return the third party VPN peers for an organization.",
 Run: func(cmd *cobra.Command, args []string) {
-_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-if networkId == "" {
-networkId = args[0]
+orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+if orgId == "" {
+orgId = args[0]
 }
 
-metadata := configure.GetThirdPartyVPN(networkId)
+metadata := configure.GetThirdPartyVPNPeers(orgId)
 shell.Display(metadata, "thirdpartyvpnpeers", cmd.Flags())
 },
 }
