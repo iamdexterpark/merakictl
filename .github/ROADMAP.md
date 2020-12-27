@@ -38,9 +38,9 @@
 - [x] 100% Cellular Gateway CLI Coverage
 - [x] 100% Camera CLI Coverage
 - [x] 100% SM CLI Coverage
+- [x] 100% Appliance CLI Coverage
 
 ### Backlog
-- [ ] 100% Appliance CLI Coverage
 - [ ] 100% Switch CLI Coverage
 - [ ] 100% Wireless CLI Coverage
 

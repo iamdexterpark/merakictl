@@ -6,6 +6,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
+	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
 	"github.com/spf13/cobra"
 )
@@ -81,7 +82,10 @@ var MSCmd = &cobra.Command{
 }
 
 func init() {
-	MSCmd.AddCommand()
+	MXCmd.AddCommand(mx.PostCustomPerformanceClass)
+	MXCmd.AddCommand(mx.PostStaticRoute)
+	MXCmd.AddCommand(mx.PostVLAN)
+	MXCmd.AddCommand(mx.PostWarmspare)
 }
 
 var MRCmd = &cobra.Command{

@@ -159,15 +159,16 @@ func init() {
 	MXCmd.AddCommand(mx.GetSiteToSiteVPN)
 	MXCmd.AddCommand(mx.GetThirdPartyVPNPeers)
 	MXCmd.AddCommand(mx.GetVPNFirewallRules)
-	MXCmd.AddCommand(mx.GetWarmspare)
 	MXCmd.AddCommand(mx.GetSecurityEvents)
 	MXCmd.AddCommand(mx.GetDHCPSubnets)
 	MXCmd.AddCommand(mx.GetPerformance)
 	MXCmd.AddCommand(mx.GetNetworkSecurityEvents)
 	MXCmd.AddCommand(mx.GetOrganizationSecurityEvents)
 	MXCmd.AddCommand(mx.GetUplinkStatuses)
+	MXCmd.AddCommand(mx.GetBGP)
 	MXCmd.AddCommand(mx.GetVPNStats)
 	MXCmd.AddCommand(mx.GetVPNStatuses)
+	MXCmd.AddCommand(mx.GetWarmspare)
 }
 
 var MSCmd = &cobra.Command{

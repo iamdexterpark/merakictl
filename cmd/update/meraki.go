@@ -8,6 +8,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/products/mg"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
+	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
 	"github.com/spf13/cobra"
 )
@@ -76,7 +77,34 @@ var MXCmd = &cobra.Command{
 }
 
 func init() {
-	MXCmd.AddCommand()
+	MXCmd.AddCommand(mx.PutBGP)
+	MXCmd.AddCommand(mx.PutPortForwardingRules)
+	MXCmd.AddCommand(mx.PutPort)
+	MXCmd.AddCommand(mx.PutCellularFirewallRules)
+	MXCmd.AddCommand(mx.PutConnectivityMonitoringDestinations)
+	MXCmd.AddCommand(mx.PutContentFiltering)
+	MXCmd.AddCommand(mx.PutCustomPerformanceClass)
+	MXCmd.AddCommand(mx.PutFirewalledService)
+	MXCmd.AddCommand(mx.PutInboundFirewallRules)
+	MXCmd.AddCommand(mx.PutL3FirewallRules)
+	MXCmd.AddCommand(mx.PutL7FirewallRules)
+	MXCmd.AddCommand(mx.PutMalware)
+	MXCmd.AddCommand(mx.PutNetworkIntrusion)
+	MXCmd.AddCommand(mx.PutOneToManyNatRules)
+	MXCmd.AddCommand(mx.PutOneToOneNatRules)
+	MXCmd.AddCommand(mx.PutOrganizationIntrusion)
+	MXCmd.AddCommand(mx.PutSingleLan)
+	MXCmd.AddCommand(mx.PutSiteToSiteVPN)
+	MXCmd.AddCommand(mx.PutStaticRoute)
+	MXCmd.AddCommand(mx.PutThirdPartyVPNPeers)
+	MXCmd.AddCommand(mx.PutTrafficShaping)
+	MXCmd.AddCommand(mx.PutTrafficShapingRules)
+	MXCmd.AddCommand(mx.PutUplinkBandwidth)
+	MXCmd.AddCommand(mx.PutUplinkSelection)
+	MXCmd.AddCommand(mx.PutVLAN)
+	MXCmd.AddCommand(mx.PutVLANSettings)
+	MXCmd.AddCommand(mx.PutVPNFirewallRules)
+	MXCmd.AddCommand(mx.PutWarmspare)
 }
 
 var MSCmd = &cobra.Command{
