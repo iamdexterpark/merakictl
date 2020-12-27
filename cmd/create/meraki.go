@@ -6,6 +6,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
+	"github.com/ddexterpark/merakictl/meraki/products/ms"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
 	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
@@ -73,7 +74,10 @@ var MXCmd = &cobra.Command{
 }
 
 func init() {
-	MXCmd.AddCommand()
+	MXCmd.AddCommand(mx.PostCustomPerformanceClass)
+	MXCmd.AddCommand(mx.PostStaticRoute)
+	MXCmd.AddCommand(mx.PostVLAN)
+	MXCmd.AddCommand(mx.PostWarmspare)
 }
 
 var MSCmd = &cobra.Command{
@@ -83,10 +87,22 @@ var MSCmd = &cobra.Command{
 }
 
 func init() {
-	MXCmd.AddCommand(mx.PostCustomPerformanceClass)
-	MXCmd.AddCommand(mx.PostStaticRoute)
-	MXCmd.AddCommand(mx.PostVLAN)
-	MXCmd.AddCommand(mx.PostWarmspare)
+	MSCmd.AddCommand(ms.PostAccessPolicy)
+	MSCmd.AddCommand(ms.PostRemoveFromStack)
+	MSCmd.AddCommand(ms.PostAddToStack)
+	MSCmd.AddCommand(ms.PostClone)
+	MSCmd.AddCommand(ms.PostStaticRoute)
+	MSCmd.AddCommand(ms.PostAccessPolicy)
+	MSCmd.AddCommand(ms.PostL3Interface)
+	MSCmd.AddCommand(ms.PostLinkAggregations)
+	MSCmd.AddCommand(ms.PostPortCycle)
+	MSCmd.AddCommand(ms.PostPortSchedules)
+	MSCmd.AddCommand(ms.PostQoSRule)
+	MSCmd.AddCommand(ms.PostRendezvousPoint)
+	MSCmd.AddCommand(ms.PostStackL3Interface)
+	MSCmd.AddCommand(ms.PostStackStaticRoute)
+	MSCmd.AddCommand(ms.PostSwitchStack)
+	MSCmd.AddCommand(ms.GetPortsStatuses)
 }
 
 var MRCmd = &cobra.Command{

@@ -40,11 +40,9 @@
 - [x] 100% SM CLI Coverage
 - [x] 100% Appliance CLI Coverage
 - [x] 100% Wireless CLI Coverage
+- [x] 100% Switch CLI Coverage
 
 ### Backlog
-- [ ] 100% Switch CLI Coverage
-
-
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Proxy Support (certificate path, server, port)
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)

@@ -20,6 +20,22 @@ shell.Display(metadata, "AccessControlLists", cmd.Flags())
 },
 }
 
+var PutAccessControlLists  = &cobra.Command{
+	Use:   "AccessControlLists",
+	Short: "Return the access control lists for a MS network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutAccessControlLists(networkId, format)
+		shell.Display(metadata, "AccessControlLists", cmd.Flags())
+	},
+}
+
 var GetAccessPolicies = &cobra.Command{
 Use:   "AccessPolicies",
 Short: "List the access policies for a ms network. Only returns access policies with 'my RADIUS server' as authentication method.",
@@ -45,6 +61,54 @@ if networkId == "" {
 metadata := configure.GetAccessPolicy(networkId, accessPolicyNumber)
 shell.Display(metadata, "AccessPolicy", cmd.Flags())
 },
+}
+
+var DelAccessPolicy = &cobra.Command{
+	Use:   "AccessPolicy",
+	Short: "Return a specific access policy for a ms network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		accessPolicyNumber := args[0]
+		metadata := configure.DelAccessPolicy(networkId, accessPolicyNumber)
+		shell.Display(metadata, "AccessPolicy", cmd.Flags())
+	},
+}
+
+var PutAccessPolicy = &cobra.Command{
+	Use:   "AccessPolicy",
+	Short: "Return a specific access policy for a ms network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		accessPolicyNumber := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutAccessPolicy(networkId, accessPolicyNumber, format)
+		shell.Display(metadata, "AccessPolicy", cmd.Flags())
+	},
+}
+
+var PostAccessPolicy = &cobra.Command{
+	Use:   "AccessPolicy",
+	Short: "Return a specific access policy for a ms network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostAccessPolicy(networkId, format)
+		shell.Display(metadata, "AccessPolicy", cmd.Flags())
+	},
 }
 
 var GetSwitchPortsProfiles = &cobra.Command{
@@ -83,6 +147,26 @@ shell.Display(metadata, "SwitchPortProfile", cmd.Flags())
 },
 }
 
+var PutSwitchPortProfile = &cobra.Command{
+	Use:   "SwitchPortProfile",
+	Short: "Return all the ports of a ms profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+		if orgId == "" {
+			orgId = args[3]
+		}
+
+		configTemplateId := args[0]
+		profileId := args[1]
+		portId := args[2]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSwitchPortProfile(orgId, configTemplateId, profileId, portId, format)
+		shell.Display(metadata, "SwitchPortProfile", cmd.Flags())
+	},
+}
+
 var GetSwitchProfiles = &cobra.Command{
 Use:   "SwitchProfiles",
 Short: "List the ms profiles for your ms template configuration.",
@@ -99,6 +183,23 @@ shell.Display(metadata, "SwitchProfiles", cmd.Flags())
 },
 }
 
+var PostClone = &cobra.Command{
+	Use:   "SwitchPortProfile",
+	Short: "Return all the ports of a ms profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+		if orgId == "" {
+			orgId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostClone(orgId, format)
+		shell.Display(metadata, "SwitchPortProfile", cmd.Flags())
+	},
+}
+
 var GetDHCPServerPolicy = &cobra.Command{
 Use:   "DHCPServerPolicy",
 Short: "Return the DHCP server policy.",
@@ -112,6 +213,23 @@ shell.Display(metadata, "DHCPServerPolicy", cmd.Flags())
 },
 }
 
+var PutDHCPServerPolicy = &cobra.Command{
+	Use:   "DHCPServerPolicy",
+	Short: "Return the DHCP server policy.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutDHCPServerPolicy(networkId, format)
+		shell.Display(metadata, "DHCPServerPolicy", cmd.Flags())
+	},
+}
+
+
 var GetDSCP = &cobra.Command{
 Use:   "DSCP",
 Short: "Return the DSCP to CoS mappings.",
@@ -123,6 +241,22 @@ if networkId == "" {
 metadata := configure.GetDscpToCosMappings(networkId)
 shell.Display(metadata, "DSCP", cmd.Flags())
 },
+}
+
+var PutDSCP = &cobra.Command{
+	Use:   "DSCP",
+	Short: "Return the DSCP to CoS mappings.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutDscpToCosMappings(networkId, format)
+		shell.Display(metadata, "DSCP", cmd.Flags())
+	},
 }
 
 var GetLinkAggregations = &cobra.Command{
@@ -138,6 +272,53 @@ shell.Display(metadata, "LinkAggregations", cmd.Flags())
 },
 }
 
+var DelLinkAggregations = &cobra.Command{
+	Use:   "LinkAggregations",
+	Short: "Split a link aggregation group into separate ports",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		linkAggregationId := args[0]
+		metadata := configure.DelLinkAggregation(networkId, linkAggregationId)
+		shell.Display(metadata, "LinkAggregations", cmd.Flags())
+	},
+}
+
+var PutLinkAggregations = &cobra.Command{
+	Use:   "LinkAggregations",
+	Short: "Split a link aggregation group into separate ports",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		linkAggregationId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutLinkAggregation(networkId, linkAggregationId, format)
+		shell.Display(metadata, "LinkAggregations", cmd.Flags())
+	},
+}
+
+var PostLinkAggregations = &cobra.Command{
+	Use:   "LinkAggregations",
+	Short: "Split a link aggregation group into separate ports",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostLinkAggregation(networkId, format)
+		shell.Display(metadata, "LinkAggregations", cmd.Flags())
+	},
+}
+
 var GetMTU = &cobra.Command{
 Use:   "MTU",
 Short: "Return the MTU configuration.",
@@ -151,6 +332,22 @@ shell.Display(metadata, "MTU", cmd.Flags())
 },
 }
 
+var PutMTU = &cobra.Command{
+	Use:   "MTU",
+	Short: "Return the MTU configuration.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutMTU(networkId, format)
+		shell.Display(metadata, "MTU", cmd.Flags())
+	},
+}
+
 var GetPortSchedules = &cobra.Command{
 Use:   "PortSchedules",
 Short: "List ms port schedules.",
@@ -162,6 +359,53 @@ if networkId == "" {
 metadata := configure.GetPortSchedules(networkId)
 shell.Display(metadata, "PortSchedules", cmd.Flags())
 },
+}
+
+var DelPortSchedules = &cobra.Command{
+	Use:   "PortSchedules",
+	Short: "List ms port schedules.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		portScheduleId := args[0]
+		metadata := configure.DelPortSchedules(networkId, portScheduleId )
+		shell.Display(metadata, "PortSchedules", cmd.Flags())
+	},
+}
+
+var PutPortSchedules = &cobra.Command{
+	Use:   "PortSchedules",
+	Short: "List ms port schedules.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		portScheduleId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutPortSchedules(networkId, portScheduleId, format)
+		shell.Display(metadata, "PortSchedules", cmd.Flags())
+	},
+}
+
+var PostPortSchedules = &cobra.Command{
+	Use:   "PortSchedules",
+	Short: "List ms port schedules.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostPortSchedules(networkId, format)
+		shell.Display(metadata, "PortSchedules", cmd.Flags())
+	},
 }
 
 var GetSwitchPorts = &cobra.Command{
@@ -191,6 +435,23 @@ shell.Display(metadata, "SwitchPort", cmd.Flags())
 },
 }
 
+var PutSwitchPort = &cobra.Command{
+	Use:   "SwitchPort",
+	Short: "Return a single ms port.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[1]
+		}
+		portId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSwitchPort(serial, portId, format)
+		shell.Display(metadata, "SwitchPort", cmd.Flags())
+	},
+}
+
 var GetQoSRuleOrder = &cobra.Command{
 Use:   "QoSRuleOrder",
 Short: "Return the quality of service rule IDs by order in which they will be processed by the ms.",
@@ -202,6 +463,22 @@ if networkId == "" {
 metadata := configure.GetQoSRuleOrder(networkId)
 shell.Display(metadata, "QoSRuleOrder", cmd.Flags())
 },
+}
+
+var PutQoSRuleOrder = &cobra.Command{
+	Use:   "QoSRuleOrder",
+	Short: "Return the quality of service rule IDs by order in which they will be processed by the ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutQoSRuleOrder(networkId, format)
+		shell.Display(metadata, "QoSRuleOrder", cmd.Flags())
+	},
 }
 
 var GetQoSRules = &cobra.Command{
@@ -231,6 +508,53 @@ shell.Display(metadata, "QoSRule", cmd.Flags())
 },
 }
 
+var DelQoSRule = &cobra.Command{
+	Use:   "QoSRule",
+	Short: "Return a quality of service rule.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		qosRuleId := args[0]
+		metadata := configure.DelQoSRule(networkId, qosRuleId)
+		shell.Display(metadata, "QoSRule", cmd.Flags())
+	},
+}
+
+var PutQoSRule = &cobra.Command{
+	Use:   "QoSRule",
+	Short: "Return a quality of service rule.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		qosRuleId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutQoSRule(networkId, qosRuleId, format)
+		shell.Display(metadata, "QoSRule", cmd.Flags())
+	},
+}
+
+var PostQoSRule = &cobra.Command{
+	Use:   "QoSRule",
+	Short: "Return a quality of service rule.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostQoSRule(networkId, format)
+		shell.Display(metadata, "QoSRule", cmd.Flags())
+	},
+}
+
 var GetDHCP = &cobra.Command{
 Use:   "DHCP",
 Short: "Return a layer 3 interface DHCP configuration for a ms.",
@@ -242,6 +566,22 @@ if networkId == "" {
 metadata := configure.GetDHCPServerPolicy(networkId)
 shell.Display(metadata, "DHCP", cmd.Flags())
 },
+}
+
+var PutDHCP = &cobra.Command{
+	Use:   "DHCP",
+	Short: "Return a layer 3 interface DHCP configuration for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutDHCPServerPolicy(networkId, format)
+		shell.Display(metadata, "DHCP", cmd.Flags())
+	},
 }
 
 var GetL3Interfaces = &cobra.Command{
@@ -268,6 +608,58 @@ var GetL3Interface = &cobra.Command{
 
 		interfaceId := args[0]
 		metadata := configure.GetInterface(serial, interfaceId)
+		shell.Display(metadata, "L3Interface", cmd.Flags())
+	},
+}
+
+var DelL3Interface = &cobra.Command{
+	Use:   "L3Interface",
+	Short: "Return a layer 3 interface for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[1]
+		}
+
+		interfaceId := args[0]
+		metadata := configure.DelInterface(serial, interfaceId)
+		shell.Display(metadata, "L3Interface", cmd.Flags())
+	},
+}
+
+var PutL3Interface = &cobra.Command{
+	Use:   "L3Interface",
+	Short: "Return a layer 3 interface for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[1]
+		}
+
+		interfaceId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PutInterface(serial, interfaceId, format)
+		shell.Display(metadata, "L3Interface", cmd.Flags())
+	},
+}
+
+var PostL3Interface = &cobra.Command{
+	Use:   "L3Interface",
+	Short: "Return a layer 3 interface for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostInterface(serial, format)
 		shell.Display(metadata, "L3Interface", cmd.Flags())
 	},
 }
@@ -299,6 +691,54 @@ var GetRendezvousPoint = &cobra.Command{
 	},
 }
 
+//FIX IN DASHBOARD-API-GOLANG
+var DelRendezvousPoint = &cobra.Command{
+	Use:   "RendezvousPoint",
+	Short: "Delete a multicast rendezvous point.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		//rendezvousPointId := args[0]
+		//metadata := configure.DelRendezvousPoint(networkId, rendezvousPointId)
+		//shell.Display(metadata, "RendezvousPoint", cmd.Flags())
+	},
+}
+
+var PutRendezvousPoint = &cobra.Command{
+	Use:   "RendezvousPoint",
+	Short: "List multicast rendezvous points.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		rendezvousPointId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutRendezvousPoint(networkId, rendezvousPointId, format)
+		shell.Display(metadata, "RendezvousPoint", cmd.Flags())
+	},
+}
+
+var PostRendezvousPoint = &cobra.Command{
+	Use:   "RendezvousPoint",
+	Short: "List multicast rendezvous points.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostRendezvousPoint(networkId, format)
+		shell.Display(metadata, "RendezvousPoint", cmd.Flags())
+	},
+}
+
 var GetMulticast = &cobra.Command{
 Use:   "Multicast",
 Short: "Return multicast settings for a network.",
@@ -312,6 +752,22 @@ shell.Display(metadata, "Multicast", cmd.Flags())
 },
 }
 
+var PutMulticast = &cobra.Command{
+	Use:   "Multicast",
+	Short: "Return multicast settings for a network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutMulticast(networkId, format)
+		shell.Display(metadata, "Multicast", cmd.Flags())
+	},
+}
+
 var GetOSPF = &cobra.Command{
 Use:   "OSPF",
 Short: "Return layer 3 OSPF routing configuration.",
@@ -323,6 +779,22 @@ networkId = args[0]
 metadata := configure.GetOSPF(networkId)
 shell.Display(metadata, "OSPF", cmd.Flags())
 },
+}
+
+var PutOSPF = &cobra.Command{
+	Use:   "OSPF",
+	Short: "Return layer 3 OSPF routing configuration.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutOSPF(networkId, format)
+		shell.Display(metadata, "OSPF", cmd.Flags())
+	},
 }
 
 var GetStaticRoutes = &cobra.Command{
@@ -352,6 +824,54 @@ var GetStaticRoute = &cobra.Command{
 	},
 }
 
+var DelStaticRoute = &cobra.Command{
+	Use:   "StaticRoute",
+	Short: "Return a layer 3 static route for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[1]
+		}
+		staticRouteId := args[0]
+		metadata := configure.DelStaticRoute(serial, staticRouteId)
+		shell.Display(metadata, "StaticRoute", cmd.Flags())
+	},
+}
+
+var PutStaticRoute = &cobra.Command{
+	Use:   "StaticRoute",
+	Short: "Return a layer 3 static route for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[1]
+		}
+		staticRouteId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutStaticRoute(serial, staticRouteId,format)
+		shell.Display(metadata, "StaticRoute", cmd.Flags())
+	},
+}
+
+var PostStaticRoute = &cobra.Command{
+	Use:   "StaticRoute",
+	Short: "Return a layer 3 static route for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostStaticRoute(serial, format)
+		shell.Display(metadata, "StaticRoute", cmd.Flags())
+	},
+}
+
+
 var GetSettings = &cobra.Command{
 Use:   "Settings",
 Short: "Returns the ms network settings.",
@@ -363,6 +883,22 @@ networkId = args[0]
 metadata := configure.GetSettings(networkId)
 shell.Display(metadata, "Settings", cmd.Flags())
 },
+}
+
+var PutSettings = &cobra.Command{
+	Use:   "Settings",
+	Short: "Returns the ms network settings.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSettings(networkId, format)
+		shell.Display(metadata, "Settings", cmd.Flags())
+	},
 }
 
 var GetStackDHCP = &cobra.Command{
@@ -379,6 +915,26 @@ networkId = args[2]
 metadata := configure.GetStackDHCP(networkId, switchStackId, interfaceId)
 shell.Display(metadata, "StackDHCP", cmd.Flags())
 },
+}
+
+var PutStackDHCP = &cobra.Command{
+	Use:   "StackDHCP",
+	Short: "Return a layer 3 interface DHCP configuration for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+
+		switchStackId := args[0]
+		interfaceId := args[1]
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutStackDHCP(networkId, switchStackId, interfaceId, format)
+		shell.Display(metadata, "StackDHCP", cmd.Flags())
+	},
 }
 
 var GetStackL3Interfaces = &cobra.Command{
@@ -401,11 +957,61 @@ var GetStackL3Interface = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
-			networkId = args[1]
+			networkId = args[2]
 		}
 		switchStackId := args[0]
 		interfaceId := args[1]
 		metadata := configure.GetStackInterface(networkId, switchStackId, interfaceId)
+		shell.Display(metadata, "StackL3Interface", cmd.Flags())
+	},
+}
+
+var DelStackL3Interface = &cobra.Command{
+	Use:   "StackL3Interface",
+	Short: "List layer 3 interfaces for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+		switchStackId := args[0]
+		interfaceId := args[1]
+		metadata := configure.DelStackInterface(networkId, switchStackId, interfaceId)
+		shell.Display(metadata, "StackL3Interface", cmd.Flags())
+	},
+}
+
+var PutStackL3Interface = &cobra.Command{
+	Use:   "StackL3Interface",
+	Short: "List layer 3 interfaces for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+		switchStackId := args[0]
+		interfaceId := args[1]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutStackInterface(networkId, switchStackId, interfaceId, format)
+		shell.Display(metadata, "StackL3Interface", cmd.Flags())
+	},
+}
+
+var PostStackL3Interface = &cobra.Command{
+	Use:   "StackL3Interface",
+	Short: "List layer 3 interfaces for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		switchStackId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostStackInterface(networkId, switchStackId, format)
 		shell.Display(metadata, "StackL3Interface", cmd.Flags())
 	},
 }
@@ -443,6 +1049,58 @@ var GetStackStaticRoute = &cobra.Command{
 	},
 }
 
+var DelStackStaticRoute = &cobra.Command{
+	Use:   "StackStaticRoute",
+	Short: "Return a layer 3 static route for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+
+		switchStackId := args[0]
+		staticRouteId := args[1]
+		metadata := configure.DelStackStaticRoute(networkId, switchStackId, staticRouteId)
+		shell.Display(metadata, "StackStaticRoute", cmd.Flags())
+	},
+}
+
+var PutStackStaticRoute = &cobra.Command{
+	Use:   "StackStaticRoute",
+	Short: "Return a layer 3 static route for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+
+		switchStackId := args[0]
+		staticRouteId := args[1]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutStackStaticRoute(networkId, switchStackId, staticRouteId, format)
+		shell.Display(metadata, "StackStaticRoute", cmd.Flags())
+	},
+}
+
+var PostStackStaticRoute = &cobra.Command{
+	Use:   "StackStaticRoute",
+	Short: "Return a layer 3 static route for a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		switchStackId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostStackStaticRoute(networkId, switchStackId, format)
+		shell.Display(metadata, "StackStaticRoute", cmd.Flags())
+	},
+}
 
 var GetSwitchStacks = &cobra.Command{
 Use:   "SwitchStacks",
@@ -471,6 +1129,70 @@ var GetSwitchStack = &cobra.Command{
 	},
 }
 
+
+var PostAddToStack = &cobra.Command{
+	Use:   "AddToStack",
+	Short: "Show a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		switchStackId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostAddToStack(networkId, switchStackId, format)
+		shell.Display(metadata, "AddToStack", cmd.Flags())
+	},
+}
+
+var PostSwitchStack = &cobra.Command{
+	Use:   "SwitchStack",
+	Short: "Show a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		switchStackId := args[0]
+		metadata := configure.PostStack(networkId, switchStackId)
+		shell.Display(metadata, "SwitchStack", cmd.Flags())
+	},
+}
+
+var DelSwitchStack = &cobra.Command{
+	Use:   "SwitchStack",
+	Short: "Show a ms stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		switchStackId := args[0]
+		metadata := configure.DelStack(networkId, switchStackId)
+		shell.Display(metadata, "SwitchStack", cmd.Flags())
+	},
+}
+
+var PostRemoveFromStack = &cobra.Command{
+	Use:   "RemoveFromStack",
+	Short: "Remove a switch from a stack.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		switchStackId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostRemoveFromStack(networkId, switchStackId, format)
+		shell.Display(metadata, "RemoveFromStack", cmd.Flags())
+	},
+}
+
+
 var GetStormControl = &cobra.Command{
 Use:   "StormControl",
 Short: "Return the storm control configuration for a ms network.",
@@ -482,6 +1204,22 @@ networkId = args[0]
 metadata := configure.GetStormControl(networkId)
 shell.Display(metadata, "StormControl", cmd.Flags())
 },
+}
+
+var PutStormControl = &cobra.Command{
+	Use:   "StormControl",
+	Short: "Return the storm control configuration for a ms network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutStormControl(networkId, format)
+		shell.Display(metadata, "StormControl", cmd.Flags())
+	},
 }
 
 var GetSTP = &cobra.Command{
@@ -497,6 +1235,22 @@ shell.Display(metadata, "STP", cmd.Flags())
 },
 }
 
+var PutSTP = &cobra.Command{
+	Use:   "STP",
+	Short: "Return warm spare configuration for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSTP(networkId, format)
+		shell.Display(metadata, "STP", cmd.Flags())
+	},
+}
+
 var GetWarmSpare = &cobra.Command{
 Use:   "WarmSpare",
 Short: "Return warm spare configuration for a ms.",
@@ -508,4 +1262,20 @@ if serial == "" {
 metadata := configure.GetWarmSpare(serial)
 shell.Display(metadata, "WarmSpare", cmd.Flags())
 },
+}
+
+var PutWarmSpare = &cobra.Command{
+	Use:   "WarmSpare",
+	Short: "Return warm spare configuration for a ms.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutWarmSpare(serial,format)
+		shell.Display(metadata, "WarmSpare", cmd.Flags())
+	},
 }

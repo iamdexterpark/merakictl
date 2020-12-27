@@ -6,6 +6,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
+	"github.com/ddexterpark/merakictl/meraki/products/ms"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
 	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
@@ -76,7 +77,16 @@ var MSCmd = &cobra.Command{
 }
 
 func init() {
-	MSCmd.AddCommand()
+	MSCmd.AddCommand(ms.DelAccessPolicy)
+	MSCmd.AddCommand(ms.DelStaticRoute)
+	MSCmd.AddCommand(ms.DelL3Interface)
+	MSCmd.AddCommand(ms.DelLinkAggregations)
+	MSCmd.AddCommand(ms.DelPortSchedules)
+	MSCmd.AddCommand(ms.DelQoSRule)
+	MSCmd.AddCommand(ms.DelRendezvousPoint)
+	MSCmd.AddCommand(ms.DelStackL3Interface)
+	MSCmd.AddCommand(ms.DelStackStaticRoute)
+	MSCmd.AddCommand(ms.DelSwitchStack)
 }
 
 var MRCmd = &cobra.Command{

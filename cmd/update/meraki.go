@@ -7,6 +7,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
 	"github.com/ddexterpark/merakictl/meraki/products/mg"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
+	"github.com/ddexterpark/merakictl/meraki/products/ms"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
 	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
@@ -114,7 +115,29 @@ var MSCmd = &cobra.Command{
 }
 
 func init() {
-	MSCmd.AddCommand()
+	MSCmd.AddCommand(ms.PutAccessControlLists)
+	MSCmd.AddCommand(ms.PutStaticRoute)
+	MSCmd.AddCommand(ms.PutDHCP)
+	MSCmd.AddCommand(ms.PutSettings)
+	MSCmd.AddCommand(ms.PutAccessPolicy)
+	MSCmd.AddCommand(ms.PutDHCPServerPolicy)
+	MSCmd.AddCommand(ms.PutL3Interface)
+	MSCmd.AddCommand(ms.PutLinkAggregations)
+	MSCmd.AddCommand(ms.PutMTU)
+	MSCmd.AddCommand(ms.PutMulticast)
+	MSCmd.AddCommand(ms.PutOSPF)
+	MSCmd.AddCommand(ms.PutPortSchedules)
+	MSCmd.AddCommand(ms.PutQoSRule)
+	MSCmd.AddCommand(ms.PutQoSRuleOrder)
+	MSCmd.AddCommand(ms.PutRendezvousPoint)
+	MSCmd.AddCommand(ms.PutStackDHCP)
+	MSCmd.AddCommand(ms.PutStackL3Interface)
+	MSCmd.AddCommand(ms.PutStackStaticRoute)
+	MSCmd.AddCommand(ms.PutStormControl)
+	MSCmd.AddCommand(ms.PutSTP)
+	MSCmd.AddCommand(ms.PutSwitchPort)
+	MSCmd.AddCommand(ms.PutSwitchPortProfile)
+	MSCmd.AddCommand(ms.PutWarmSpare)
 }
 
 var MRCmd = &cobra.Command{
