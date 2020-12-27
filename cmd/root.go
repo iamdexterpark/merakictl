@@ -21,8 +21,11 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/remove"
 	"github.com/ddexterpark/merakictl/cmd/update"
 	"github.com/ddexterpark/merakictl/cmd/utilities"
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 	"log"
+	"os"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -48,8 +51,45 @@ func Execute() {
 	}
 }
 
+var cfgFile string
+
+// initConfig reads in config file and ENV variables if set.
+func initConfig() {
+	if cfgFile != "" {
+		// Use config file from the flag.
+		viper.SetConfigFile(cfgFile)
+	} else {
+		// Find home directory.
+		home, err := homedir.Dir()
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// Search config in home directory with name ".merakictl" (without extension).
+		viper.AddConfigPath(home)
+		viper.AddConfigPath(currentdir())
+		viper.SetConfigName(".merakictl")
+	}
+
+	viper.AutomaticEnv() // read in environment variables that match
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+	}
+}
+
+// currentdir - get the current working directory
+func currentdir() (cwd string) {
+	cwd, err := os.Getwd()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return cwd
+}
+
 func init() {
-	cobra.OnInitialize(utilities.InitConfig)
+	cobra.OnInitialize(initConfig)
 	rootCmd.AddCommand(utilities.CompletionCmd)
 	rootCmd.AddCommand(utilities.Version)
 	//rootCmd.AddCommand(utilities.Upgrade)
@@ -61,7 +101,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	rootCmd.PersistentFlags().StringVar(&utilities.CfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
 	rootCmd.PersistentFlags().BoolP("diff", "d", false, "diff config file with dashboard API config")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
 	rootCmd.PersistentFlags().BoolP("json", "j", false, "Export config to JSON")
@@ -72,7 +112,7 @@ func init() {
 	rootCmd.PersistentFlags().StringP("network", "n", "", "The target Network")
 	rootCmd.PersistentFlags().StringP("hostname", "s", "", "The target devices hostname")
 
-	// Flags for URL Parameters
+	// Flags for URL Parameters need to be moved. Hard to read autocompletion help menu.
 		rootCmd.PersistentFlags().StringP("perPage", "", "10", "")
 		rootCmd.PersistentFlags().StringP("startingAfter", "", "", "")
 		rootCmd.PersistentFlags().StringP("endingBefore", "", "", "")
