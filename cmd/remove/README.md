@@ -8,8 +8,13 @@ All Organization level API calls.
 
  HTTP | Operation | Syntax | Filters | Description |
 ----- | --------- | ------ | ----------- | ----------- |
-DELETE | {orgName} | merakictl remove org {orgName} | | Delete an organization.
- 
+DELETE | fromList | merakictl remove organization fromList {orgId} | | Delete an organization.
+DELETE | actionBatch | merakictl remove organization actionBatch {actionBatchId} {orgId} | | Delete an action batch.
+DELETE | admin | merakictl remove organization admin {adminId} {orgId} | | Revoke all access for a dashboard administrator within this organization.
+DELETE | brandingPolicy | merakictl remove organization brandingPolicy {brandingPolicyId} {orgId} | | Delete a branding policy.
+DELETE | configurationTemplate | merakictl remove organization configurationTemplate {configTemplateId} {orgId} | | Remove a configuration template.
+DELETE | idp | merakictl remove organization idp {idpId} {orgId} | | .
+DELETE | samlRole | merakictl remove organization samlRole {samlRoleId} {orgId} | | .
 
 ## Network
 

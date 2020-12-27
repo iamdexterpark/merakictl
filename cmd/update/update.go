@@ -1,8 +1,6 @@
 package update
 
 import (
-	"github.com/ddexterpark/merakictl/cmd/update/general/organization"
-	"github.com/ddexterpark/merakictl/cmd/update/wireless"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +11,18 @@ var UpdateCmd = &cobra.Command{
 	Long:  "Base for all HTTP PUT Calls to Meraki Dashboard.",
 }
 
+
 func init() {
-	UpdateCmd.AddCommand(organization.Org)
-	UpdateCmd.AddCommand(wireless.MRCmd)
+	UpdateCmd.AddCommand(OrgCmd)
+	UpdateCmd.AddCommand(NetCmd)
+	UpdateCmd.AddCommand(DeviceCmd)
+	UpdateCmd.AddCommand(MXCmd)
+	UpdateCmd.AddCommand(MSCmd)
+	UpdateCmd.AddCommand(MRCmd)
+	UpdateCmd.AddCommand(MGCmd)
+	UpdateCmd.AddCommand(MVCmd)
+	UpdateCmd.AddCommand(SMCmd)
+	UpdateCmd.AddCommand(InsightCmd)
 }
+
+

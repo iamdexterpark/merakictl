@@ -12,5 +12,14 @@ var CreateCmd = &cobra.Command{
 }
 
 func init() {
-	CreateCmd.AddCommand(org)
+	CreateCmd.AddCommand(OrgCmd)
+	CreateCmd.AddCommand(NetCmd)
+	CreateCmd.AddCommand(DeviceCmd)
+	CreateCmd.AddCommand(MXCmd)
+	CreateCmd.AddCommand(MSCmd)
+	CreateCmd.AddCommand(MRCmd)
+	CreateCmd.AddCommand(MGCmd)
+	CreateCmd.AddCommand(MVCmd)
+	CreateCmd.AddCommand(SMCmd)
+	CreateCmd.AddCommand(InsightCmd)
 }

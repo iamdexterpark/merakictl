@@ -1,7 +1,6 @@
 package remove
 
 import (
-	"github.com/ddexterpark/merakictl/cmd/remove/general/organization"
 	"github.com/spf13/cobra"
 )
 
@@ -13,5 +12,14 @@ var DeleteCmd = &cobra.Command{
 }
 
 func init() {
-	DeleteCmd.AddCommand(organization.Org)
+	DeleteCmd.AddCommand(OrgCmd)
+	DeleteCmd.AddCommand(NetCmd)
+	DeleteCmd.AddCommand(DeviceCmd)
+	DeleteCmd.AddCommand(MXCmd)
+	DeleteCmd.AddCommand(MSCmd)
+	DeleteCmd.AddCommand(MRCmd)
+	DeleteCmd.AddCommand(MGCmd)
+	DeleteCmd.AddCommand(MVCmd)
+	DeleteCmd.AddCommand(SMCmd)
+	DeleteCmd.AddCommand(InsightCmd)
 }

@@ -43,6 +43,9 @@ go get github.com/ddexterpark/merakictl
     
     # Windows 32-bit
     env GOOS=windows GOARCH=386 go build main.go
+
+    # AutoCompletion
+    merakictl completion [bash|zsh|fish|powershell]
 ```
 
 At this point the CLI should be available by calling `merakictl` from any locatio.
