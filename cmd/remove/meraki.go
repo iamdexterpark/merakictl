@@ -23,6 +23,12 @@ var OrgCmd = &cobra.Command{
 
 func init() {
 	OrgCmd.AddCommand(organization.DelOrganization)
+	OrgCmd.AddCommand(organization.DelActionBatch)
+	OrgCmd.AddCommand(organization.DelAdmins)
+	OrgCmd.AddCommand(organization.DelBrandingPolicy)
+	OrgCmd.AddCommand(organization.DelConfigurationTemplate)
+	OrgCmd.AddCommand(organization.DelIDP)
+	OrgCmd.AddCommand(organization.DelSamlRole)
 }
 
 var NetCmd = &cobra.Command{

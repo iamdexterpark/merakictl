@@ -1,6 +1,8 @@
 package claim
 
-import "github.com/spf13/cobra"
+import (
+	"github.com/spf13/cobra"
+)
 
 // ClaimCmd
 var ClaimCmd = &cobra.Command{
@@ -9,5 +11,9 @@ var ClaimCmd = &cobra.Command{
 	Long:  "Claim assets and licenses to Meraki Dashboard.",
 }
 
+
+
 func init() {
+	ClaimCmd.AddCommand(OrgCmd)
+	ClaimCmd.AddCommand(NetCmd)
 }

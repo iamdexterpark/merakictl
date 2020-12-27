@@ -23,6 +23,17 @@ var OrgCmd = &cobra.Command{
 
 func init() {
 	OrgCmd.AddCommand(organization.PutOrganization)
+	OrgCmd.AddCommand(organization.PutBrandingPolicyPriorities)
+	OrgCmd.AddCommand(organization.PutBrandingPolicy)
+	OrgCmd.AddCommand(organization.PutSNMP)
+	OrgCmd.AddCommand(organization.PutActionBatch)
+	OrgCmd.AddCommand(organization.PutAdmins)
+	OrgCmd.AddCommand(organization.PutConfigurationTemplate)
+	OrgCmd.AddCommand(organization.PutIDP)
+	OrgCmd.AddCommand(organization.PutLicence)
+	OrgCmd.AddCommand(organization.PutLoginSecurity)
+	OrgCmd.AddCommand(organization.PutSAML)
+	OrgCmd.AddCommand(organization.PutSamlRole)
 }
 
 var NetCmd = &cobra.Command{

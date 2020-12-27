@@ -4,6 +4,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/device"
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
+
 	//"github.com/ddexterpark/merakictl/meraki/products/mx"
 	//"github.com/ddexterpark/merakictl/meraki/products/mv"
 	//"github.com/ddexterpark/merakictl/meraki/products/mg"
@@ -21,7 +22,16 @@ var OrgCmd = &cobra.Command{
 }
 
 func init() {
-	OrgCmd.AddCommand(organization.PutOrganization)
+	OrgCmd.AddCommand(organization.PostActionBatch)
+	OrgCmd.AddCommand(organization.PostClone)
+	OrgCmd.AddCommand(organization.PostCombineNetworks)
+	OrgCmd.AddCommand(organization.PostOrganization)
+	OrgCmd.AddCommand(organization.PostAdmins)
+	OrgCmd.AddCommand(organization.PostBrandingPolicy)
+	OrgCmd.AddCommand(organization.PostConfigurationTemplate)
+	OrgCmd.AddCommand(organization.PostIDP)
+	OrgCmd.AddCommand(organization.PostNetworks)
+	OrgCmd.AddCommand(organization.PostSamlRole)
 }
 
 var NetCmd = &cobra.Command{

@@ -32,13 +32,14 @@
 - [x] 100% Get Command CLI Coverage
 - [x] 100% Networks CLI Coverage
 - [x] 100% Devices CLI Coverage
+- [x] 100% Organizations CLI Coverage
 - [ ] Claim Assets into Org
 
 ### Backlog
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Proxy Support (certificate path, server, port)
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)
-- [ ] 100% Organizations CLI Coverage
+
 - [ ] 100% Appliance CLI Coverage
 - [ ] 100% Camera CLI Coverage
 - [ ] 100% Cellular Gateway CLI Coverage
