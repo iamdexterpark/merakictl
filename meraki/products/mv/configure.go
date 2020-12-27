@@ -19,6 +19,22 @@ var GetQualityAndRetention = &cobra.Command{
 	},
 }
 
+var PutQualityAndRetention = &cobra.Command{
+	Use:   "QualityAndRetention",
+	Short: "Returns quality and retention settings for the given mv.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutQualityAndRetention(serial, format)
+		shell.Display(metadata, "QualityAndRetention", cmd.Flags())
+	},
+}
+
 var GetQualityRetentionProfiles = &cobra.Command{
 	Use:   "QualityRetentionProfiles",
 	Short: "List the quality retention profiles for this network.",
@@ -45,6 +61,60 @@ var GetQualityRetentionProfile = &cobra.Command{
 
 		metadata := configure.GetQualityRetentionProfile(networkId,
 			qualityRetentionProfileId)
+		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
+	},
+}
+
+var DelQualityRetentionProfile = &cobra.Command{
+	Use:   "QualityRetentionProfile",
+	Short: "Retrieve a single quality retention profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		qualityRetentionProfileId:= args[0]
+
+		metadata := configure.DelQualityRetentionProfile(networkId,
+			qualityRetentionProfileId)
+		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
+	},
+}
+
+var PutQualityRetentionProfile = &cobra.Command{
+	Use:   "QualityRetentionProfile",
+	Short: "Retrieve a single quality retention profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		qualityRetentionProfileId:= args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutQualityRetentionProfile(networkId,
+			qualityRetentionProfileId, format)
+		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
+	},
+}
+
+var PostQualityRetentionProfile = &cobra.Command{
+	Use:   "QualityRetentionProfile",
+	Short: "Retrieve a single quality retention profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostQualityRetentionProfiles(networkId,
+			 format)
 		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
 	},
 }
@@ -88,6 +158,21 @@ var GetSense = &cobra.Command{
 	},
 }
 
+var PutSense = &cobra.Command{
+	Use:   "Sense",
+	Short: "Returns sense settings for a given mv.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSense(serial, format)
+		shell.Display(metadata, "Sense", cmd.Flags())
+	},
+}
 
 var GetVideoSettings = &cobra.Command{
 	Use:   "VideoSettings",
@@ -102,6 +187,21 @@ var GetVideoSettings = &cobra.Command{
 	},
 }
 
+var PutVideoSettings = &cobra.Command{
+	Use:   "VideoSettings",
+	Short: "Returns video settings for the given mv.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutVideoSettings(serial, format)
+		shell.Display(metadata, "VideoSettings", cmd.Flags())
+	},
+}
 
 var GetVideoLink = &cobra.Command{
 	Use:   "VideoLink",

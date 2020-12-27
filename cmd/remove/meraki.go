@@ -2,6 +2,7 @@ package remove
 
 
 import (
+	"github.com/ddexterpark/merakictl/meraki/products/mv"
 	"github.com/spf13/cobra"
 	//"github.com/ddexterpark/merakictl/meraki/general/device"
 	"github.com/ddexterpark/merakictl/meraki/general/network"
@@ -108,7 +109,7 @@ var MVCmd = &cobra.Command{
 }
 
 func init() {
-	MVCmd.AddCommand()
+	MVCmd.AddCommand(mv.DelQualityRetentionProfile)
 }
 
 var SMCmd = &cobra.Command{

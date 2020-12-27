@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
+	"github.com/ddexterpark/merakictl/meraki/products/mv"
 
 	//"github.com/ddexterpark/merakictl/meraki/products/sm"
 	//"github.com/ddexterpark/merakictl/meraki/products/ms"
@@ -114,7 +115,7 @@ var MVCmd = &cobra.Command{
 }
 
 func init() {
-	MVCmd.AddCommand()
+	MVCmd.AddCommand(mv.PostQualityRetentionProfile)
 }
 
 var SMCmd = &cobra.Command{
