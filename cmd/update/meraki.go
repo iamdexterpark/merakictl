@@ -5,8 +5,8 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
+	"github.com/ddexterpark/merakictl/meraki/products/mg"
 	"github.com/spf13/cobra"
-
 	//"github.com/ddexterpark/merakictl/meraki/products/sm"
 	//"github.com/ddexterpark/merakictl/meraki/products/ms"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
@@ -106,7 +106,12 @@ var MGCmd = &cobra.Command{
 }
 
 func init() {
-	MGCmd.AddCommand()
+	MGCmd.AddCommand(mg.PutConnectivityMonitor)
+	MGCmd.AddCommand(mg.PutDHCP)
+	MGCmd.AddCommand(mg.PutLan)
+	MGCmd.AddCommand(mg.PutPortForwardingRules)
+	MGCmd.AddCommand(mg.PutSubnetPool)
+	MGCmd.AddCommand(mg.PutUplink)
 }
 
 

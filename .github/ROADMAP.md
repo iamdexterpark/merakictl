@@ -35,6 +35,7 @@
 - [x] 100% Organizations CLI Coverage
 - [x] Claim Assets into Org
 - [x] 100% Insight CLI Coverage
+- [x] 100% Cellular Gateway CLI Coverage
 
 ### Backlog
 - [ ] Meraki Filter by Tags Flag 
@@ -43,7 +44,7 @@
 
 - [ ] 100% Appliance CLI Coverage
 - [ ] 100% Camera CLI Coverage
-- [ ] 100% Cellular Gateway CLI Coverage
+
 
 - [ ] 100% SM CLI Coverage
 - [ ] 100% Switch CLI Coverage
