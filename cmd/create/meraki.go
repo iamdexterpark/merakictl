@@ -1,6 +1,16 @@
 package create
 
 import (
+	"github.com/ddexterpark/merakictl/meraki/general/device"
+	"github.com/ddexterpark/merakictl/meraki/general/network"
+	"github.com/ddexterpark/merakictl/meraki/general/organization"
+	//"github.com/ddexterpark/merakictl/meraki/products/mx"
+	//"github.com/ddexterpark/merakictl/meraki/products/mv"
+	//"github.com/ddexterpark/merakictl/meraki/products/mg"
+	//"github.com/ddexterpark/merakictl/meraki/products/insight"
+	//"github.com/ddexterpark/merakictl/meraki/products/sm"
+	//"github.com/ddexterpark/merakictl/meraki/products/ms"
+	//"github.com/ddexterpark/merakictl/meraki/products/mr"
 	"github.com/spf13/cobra"
 )
 
@@ -11,7 +21,7 @@ var OrgCmd = &cobra.Command{
 }
 
 func init() {
-	OrgCmd.AddCommand()
+	OrgCmd.AddCommand(organization.PutOrganization)
 }
 
 var NetCmd = &cobra.Command{
@@ -21,7 +31,19 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand()
+	NetCmd.AddCommand(network.PostBindNetwork)
+	NetCmd.AddCommand(network.PostClaimSerials)
+	NetCmd.AddCommand(network.PostFloorplan)
+	NetCmd.AddCommand(network.PostGroupPolicy)
+	NetCmd.AddCommand(network.PostHTTPServer)
+	NetCmd.AddCommand(network.PostMerakiAuthUser)
+	NetCmd.AddCommand(network.PostMQTTBroker)
+	NetCmd.AddCommand(network.PostPIIRequest)
+	NetCmd.AddCommand(network.PostProvisionClient)
+	NetCmd.AddCommand(network.PostRemoveSerials)
+	NetCmd.AddCommand(network.PostSplitNetwork)
+	NetCmd.AddCommand(network.PostUnBindNetwork)
+	NetCmd.AddCommand(network.PostWebhookTest)
 }
 
 var DeviceCmd = &cobra.Command{
@@ -32,7 +54,8 @@ var DeviceCmd = &cobra.Command{
 }
 
 func init() {
-	DeviceCmd.AddCommand()
+	DeviceCmd.AddCommand(device.PostBlinkLEDs)
+	DeviceCmd.AddCommand(device.PostReboot)
 }
 
 var MXCmd = &cobra.Command{

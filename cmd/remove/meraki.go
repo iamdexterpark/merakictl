@@ -3,7 +3,16 @@ package remove
 
 import (
 	"github.com/spf13/cobra"
+	//"github.com/ddexterpark/merakictl/meraki/general/device"
+	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
+	//"github.com/ddexterpark/merakictl/meraki/products/mx"
+	//"github.com/ddexterpark/merakictl/meraki/products/mv"
+	//"github.com/ddexterpark/merakictl/meraki/products/mg"
+	//"github.com/ddexterpark/merakictl/meraki/products/insight"
+	//"github.com/ddexterpark/merakictl/meraki/products/sm"
+	//"github.com/ddexterpark/merakictl/meraki/products/ms"
+	//"github.com/ddexterpark/merakictl/meraki/products/mr"
 )
 
 var OrgCmd = &cobra.Command{
@@ -23,7 +32,14 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand()
+	NetCmd.AddCommand(network.DelFloorplan)
+	NetCmd.AddCommand(network.DelGroupPolicy)
+	NetCmd.AddCommand(network.DelHTTPServer)
+	NetCmd.AddCommand(network.DelMerakiAuthUser)
+	NetCmd.AddCommand(network.DelMQTTBroker)
+	NetCmd.AddCommand(network.DelNetwork)
+	NetCmd.AddCommand(network.DelPIIRequest)
+
 }
 
 var DeviceCmd = &cobra.Command{
@@ -34,7 +50,7 @@ var DeviceCmd = &cobra.Command{
 }
 
 func init() {
-	DeviceCmd.AddCommand()
+	//DeviceCmd.AddCommand()
 }
 
 var MXCmd = &cobra.Command{

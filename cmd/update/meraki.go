@@ -3,6 +3,15 @@ package update
 
 import (
 	"github.com/spf13/cobra"
+	"github.com/ddexterpark/merakictl/meraki/general/device"
+	"github.com/ddexterpark/merakictl/meraki/general/network"
+	"github.com/ddexterpark/merakictl/meraki/general/organization"
+	//"github.com/ddexterpark/merakictl/meraki/products/mx"
+	//"github.com/ddexterpark/merakictl/meraki/products/mv"
+	//"github.com/ddexterpark/merakictl/meraki/products/mg"
+	//"github.com/ddexterpark/merakictl/meraki/products/insight"
+	//"github.com/ddexterpark/merakictl/meraki/products/sm"
+	//"github.com/ddexterpark/merakictl/meraki/products/ms"
 	"github.com/ddexterpark/merakictl/meraki/products/mr"
 )
 
@@ -13,7 +22,7 @@ var OrgCmd = &cobra.Command{
 }
 
 func init() {
-	OrgCmd.AddCommand()
+	OrgCmd.AddCommand(organization.PutOrganization)
 }
 
 var NetCmd = &cobra.Command{
@@ -23,7 +32,20 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand()
+	NetCmd.AddCommand(network.PutAlertConfig)
+	NetCmd.AddCommand(network.PutClientSplashAuthorization)
+	NetCmd.AddCommand(network.PutFirmwareUpgrades)
+	NetCmd.AddCommand(network.PutFloorplan)
+	NetCmd.AddCommand(network.PutGroupPolicy)
+	NetCmd.AddCommand(network.PutHTTPServer)
+	NetCmd.AddCommand(network.PutMerakiAuthUser)
+	NetCmd.AddCommand(network.PutMQTTBroker)
+	NetCmd.AddCommand(network.PutNetflow)
+	NetCmd.AddCommand(network.PutNetwork)
+	NetCmd.AddCommand(network.PutSettings)
+	NetCmd.AddCommand(network.PutSNMP)
+	NetCmd.AddCommand(network.PutSyslog)
+	NetCmd.AddCommand(network.PutTrafficAnalysis)
 }
 
 var DeviceCmd = &cobra.Command{
@@ -34,7 +56,8 @@ var DeviceCmd = &cobra.Command{
 }
 
 func init() {
-	DeviceCmd.AddCommand()
+	DeviceCmd.AddCommand(device.PutDevice)
+	DeviceCmd.AddCommand(device.PutManagementInterface)
 }
 
 var MXCmd = &cobra.Command{

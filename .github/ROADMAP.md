@@ -30,29 +30,19 @@
 - [x] Diff Flag (GET: compare config file against current API state)
 - [x] org/net/device flags use exact match to obfuscate Ids with the actual names
 - [x] 100% Get Command CLI Coverage
+- [x] 100% Networks CLI Coverage
+- [x] 100% Devices CLI Coverage
 - [ ] Claim Assets into Org
 
 ### Backlog
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Proxy Support (certificate path, server, port)
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)
-- [ ] 100% Organizations API Coverage
 - [ ] 100% Organizations CLI Coverage
-- [ ] 100% Networks API Coverage
-- [ ] 100% Networks CLI Coverage
-- [ ] 100% Devices API Coverage
-- [ ] 100% Devices CLI Coverage
-- [ ] 100% Appliance API Coverage
 - [ ] 100% Appliance CLI Coverage
-- [ ] 100% Camera API Coverage
 - [ ] 100% Camera CLI Coverage
-- [ ] 100% Cellular Gateway API Coverage
 - [ ] 100% Cellular Gateway CLI Coverage
-- [ ] 100% Insight API Coverage
 - [ ] 100% Insight CLI Coverage
-- [ ] 100% SM API Coverage
 - [ ] 100% SM CLI Coverage
-- [ ] 100% Switch API Coverage
 - [ ] 100% Switch CLI Coverage
-- [ ] 100% Wireless API Coverage
 - [ ] 100% Wireless CLI Coverage

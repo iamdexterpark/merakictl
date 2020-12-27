@@ -111,7 +111,7 @@ var DeviceCmd = &cobra.Command{
 
 func init() {
 	DeviceCmd.AddCommand(device.GetManagementInterface)
-	DeviceCmd.AddCommand(device.GetDetails)
+	DeviceCmd.AddCommand(device.GetDevice)
 	DeviceCmd.AddCommand(device.GetClients)
 	DeviceCmd.AddCommand(device.GetLLDPcdp)
 	DeviceCmd.AddCommand(device.GetUplink)
