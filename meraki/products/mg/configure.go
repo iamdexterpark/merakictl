@@ -2,7 +2,7 @@ package mg
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/cellulargateway/configure"
-	"github.com/ddexterpark/dashboard-api-golang/shell"
+	shell "github.com/ddexterpark/merakictl/utilities"
 	"github.com/spf13/cobra"
 )
 

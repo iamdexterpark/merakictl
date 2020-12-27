@@ -2,7 +2,7 @@ package organization
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/general/organizations/monitor"
-	"github.com/ddexterpark/dashboard-api-golang/shell"
+	shell "github.com/ddexterpark/merakictl/utilities"
 	"github.com/spf13/cobra"
 )
 

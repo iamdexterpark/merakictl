@@ -2,7 +2,7 @@ package mx
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/appliance/configure"
-	"github.com/ddexterpark/dashboard-api-golang/shell"
+	shell "github.com/ddexterpark/merakictl/utilities"
 	"github.com/spf13/cobra"
 )
 

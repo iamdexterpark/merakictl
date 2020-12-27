@@ -18,9 +18,9 @@ package cmd
 import (
 	"github.com/ddexterpark/merakictl/cmd/create"
 	"github.com/ddexterpark/merakictl/cmd/get"
+	"github.com/ddexterpark/merakictl/cmd/misc"
 	"github.com/ddexterpark/merakictl/cmd/remove"
 	"github.com/ddexterpark/merakictl/cmd/update"
-	"github.com/ddexterpark/merakictl/cmd/utilities"
 	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -90,8 +90,8 @@ func currentdir() (cwd string) {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-	rootCmd.AddCommand(utilities.CompletionCmd)
-	rootCmd.AddCommand(utilities.Version)
+	rootCmd.AddCommand(misc.CompletionCmd)
+	rootCmd.AddCommand(misc.Version)
 	//rootCmd.AddCommand(utilities.Upgrade)
 	rootCmd.AddCommand(get.GetCmd)
 	rootCmd.AddCommand(update.UpdateCmd)

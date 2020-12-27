@@ -1,7 +1,7 @@
 package get
 
 import (
-	"github.com/ddexterpark/merakictl/cmd/utilities"
+	"github.com/ddexterpark/merakictl/cmd/misc"
 	"github.com/spf13/cobra"
 )
 
@@ -13,8 +13,8 @@ var GetCmd = &cobra.Command{
 }
 
 func init() {
-	GetCmd.AddCommand(utilities.EnvironmentalVariables)
-	GetCmd.AddCommand(utilities.Test)
+	GetCmd.AddCommand(misc.EnvironmentalVariables)
+	GetCmd.AddCommand(misc.Test)
 	GetCmd.AddCommand(OrgCmd)
 	GetCmd.AddCommand(NetCmd)
 	GetCmd.AddCommand(DeviceCmd)
