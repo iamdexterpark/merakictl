@@ -4,11 +4,8 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/device"
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
+	"github.com/ddexterpark/merakictl/meraki/products/insight"
 
-	//"github.com/ddexterpark/merakictl/meraki/products/mx"
-	//"github.com/ddexterpark/merakictl/meraki/products/mv"
-	//"github.com/ddexterpark/merakictl/meraki/products/mg"
-	//"github.com/ddexterpark/merakictl/meraki/products/insight"
 	//"github.com/ddexterpark/merakictl/meraki/products/sm"
 	//"github.com/ddexterpark/merakictl/meraki/products/ms"
 	//"github.com/ddexterpark/merakictl/meraki/products/mr"
@@ -137,6 +134,6 @@ var InsightCmd = &cobra.Command{
 }
 
 func init() {
-	InsightCmd.AddCommand()
+	InsightCmd.AddCommand(insight.PostMonitoredMediaServer)
 
 }

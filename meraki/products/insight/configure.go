@@ -32,3 +32,50 @@ var GetMonitoredMediaServer = &cobra.Command{
 		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
 	},
 }
+
+var DelMonitoredMediaServer = &cobra.Command{
+	Use:   "MonitoredMediaServer",
+	Short: "Delete a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
+	Run: func(cmd *cobra.Command, args []string) {
+		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+		if orgId == "" {
+			orgId = args[1]
+		}
+		monitoredMediaServerId := args[0]
+		metadata := configure.DelMonitoredMediaServer(orgId, monitoredMediaServerId)
+		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
+	},
+}
+
+var PutMonitoredMediaServer = &cobra.Command{
+	Use:   "MonitoredMediaServer",
+	Short: "Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
+	Run: func(cmd *cobra.Command, args []string) {
+		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+		if orgId == "" {
+			orgId = args[1]
+		}
+		monitoredMediaServerId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutMonitoredMediaServer(orgId, monitoredMediaServerId, format)
+		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
+	},
+}
+
+var PostMonitoredMediaServer = &cobra.Command{
+	Use:   "MonitoredMediaServer",
+	Short: "Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
+	Run: func(cmd *cobra.Command, args []string) {
+		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
+		if orgId == "" {
+			orgId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostMonitoredMediaServer(orgId, format)
+		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
+	},
+}
