@@ -6,10 +6,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
-
-	//"github.com/ddexterpark/merakictl/meraki/products/sm"
-	//"github.com/ddexterpark/merakictl/meraki/products/ms"
-	//"github.com/ddexterpark/merakictl/meraki/products/mr"
+	"github.com/ddexterpark/merakictl/meraki/products/sm"
 	"github.com/spf13/cobra"
 )
 
@@ -125,7 +122,15 @@ var SMCmd = &cobra.Command{
 }
 
 func init() {
-	SMCmd.AddCommand()
+	SMCmd.AddCommand(sm.PostBypassActivationLockAttempts)
+	SMCmd.AddCommand(sm.PostWipeDevice)
+	SMCmd.AddCommand(sm.PostCheckin)
+	SMCmd.AddCommand(sm.PostModifyTags)
+	SMCmd.AddCommand(sm.PostLockDevices)
+	SMCmd.AddCommand(sm.PostMoveDevices)
+	SMCmd.AddCommand(sm.PostRefreshDevice)
+	SMCmd.AddCommand(sm.PostTargetGroup)
+	SMCmd.AddCommand(sm.PostUnEnrollDevice)
 }
 
 var InsightCmd = &cobra.Command{

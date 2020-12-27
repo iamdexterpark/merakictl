@@ -36,6 +36,23 @@ shell.Display(metadata, "BypassActivationLockAttempts", cmd.Flags())
 },
 }
 
+var PostBypassActivationLockAttempts = &cobra.Command{
+	Use:   "BypassActivationLockAttempts",
+	Short: "Bypass activation lock attempt status.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostBypassActivationLockAttempts(networkId, format)
+		shell.Display(metadata, "BypassActivationLockAttempts", cmd.Flags())
+	},
+}
 
 var GetCerts = &cobra.Command{
 Use:   "Certs",
@@ -65,6 +82,24 @@ if networkId == "" {
 metadata := configure.GetDeviceProfiles(networkId, deviceId)
 shell.Display(metadata, "DeviceProfiles", cmd.Flags())
 },
+}
+
+var PutFields = &cobra.Command{
+	Use:   "Fields",
+	Short: "Modify the fields of a device.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PutFields(networkId, format)
+		shell.Display(metadata, "Fields", cmd.Flags())
+	},
 }
 
 var GetNetworkAdapters = &cobra.Command{
@@ -141,6 +176,41 @@ shell.Display(metadata, "WlanLists", cmd.Flags())
 },
 }
 
+var PostModifyTags = &cobra.Command{
+	Use:   "ModifyTags",
+	Short: "Add, delete, or update the tags of a set of devices.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostModifyTags(networkId, format)
+		shell.Display(metadata, "ModifyTags", cmd.Flags())
+	},
+}
+
+var PostCheckin = &cobra.Command{
+	Use:   "Checkin",
+	Short: "Force check-in a set of devices.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostCheckin(networkId, format)
+		shell.Display(metadata, "Checkin", cmd.Flags())
+	},
+}
 
 var GetDevices = &cobra.Command{
 Use:   "Devices",
@@ -167,6 +237,93 @@ shell.Display(metadata, "Devices", cmd.Flags())
 },
 }
 
+var PostLockDevices = &cobra.Command{
+	Use:   "LockDevices",
+	Short: "Lock a set of devices.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostLock(networkId, format)
+		shell.Display(metadata, "LockDevices", cmd.Flags())
+	},
+}
+
+var PostMoveDevices = &cobra.Command{
+	Use:   "MoveDevices",
+	Short: "Move a set of devicesto a new network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostMove(networkId, format)
+		shell.Display(metadata, "MoveDevices", cmd.Flags())
+	},
+}
+
+var PostRefreshDevice = &cobra.Command{
+	Use:   "RefreshDevice",
+	Short: "Refresh the details of a device",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		deviceId := args[0]
+
+		metadata := configure.PostRefreshDetails(networkId, deviceId)
+		shell.Display(metadata, "RefreshDevice", cmd.Flags())
+	},
+}
+
+var PostUnEnrollDevice = &cobra.Command{
+	Use:   "UnEnrollDevice",
+	Short: "UnEnroll a device.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		deviceId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostUnenroll(networkId, deviceId, format)
+		shell.Display(metadata, "UnEnrollDevice", cmd.Flags())
+	},
+}
+
+var PostWipeDevice = &cobra.Command{
+	Use:   "WipeDevice",
+	Short: "Wipe a device.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+
+		metadata := configure.PostWipeDevice(networkId, format)
+		shell.Display(metadata, "WipeDevice", cmd.Flags())
+	},
+}
 
 var GetProfiles = &cobra.Command{
 Use:   "Profiles",
@@ -198,6 +355,38 @@ shell.Display(metadata, "TargetGroups", cmd.Flags())
 },
 }
 
+var PostTargetGroup = &cobra.Command{
+	Use:   "TargetGroup",
+	Short: "Add a target group.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		withDetails, _ := cmd.Flags().GetString("withDetails")
+
+		metadata := configure.PostTargetGroups(networkId, withDetails)
+		shell.Display(metadata, "TargetGroup", cmd.Flags())
+	},
+}
+
+var DelTargetGroup = &cobra.Command{
+	Use:   "TargetGroup",
+	Short: "Delete a target group from a network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		withDetails, _ := cmd.Flags().GetString("withDetails")
+
+		metadata := configure.DelTargetGroup(networkId, withDetails)
+		shell.Display(metadata, "TargetGroup", cmd.Flags())
+	},
+}
+
 var GetTargetGroup = &cobra.Command{
 	Use:   "TargetGroup",
 	Short: "Return a target group.",
@@ -211,6 +400,23 @@ var GetTargetGroup = &cobra.Command{
 		withDetails, _ := cmd.Flags().GetString("withDetails")
 
 		metadata := configure.GetTargetGroup(networkId, targetGroupId, withDetails)
+		shell.Display(metadata, "TargetGroup", cmd.Flags())
+	},
+}
+
+var PutTargetGroup = &cobra.Command{
+	Use:   "TargetGroup",
+	Short: "Update a target group.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		targetGroupId := args[0]
+		withDetails, _ := cmd.Flags().GetString("withDetails")
+
+		metadata := configure.PutTargetGroup(networkId, targetGroupId, withDetails)
 		shell.Display(metadata, "TargetGroup", cmd.Flags())
 	},
 }
