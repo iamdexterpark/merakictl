@@ -1,4 +1,4 @@
-package cmd
+package utilities
 
 import (
 	"github.com/mitchellh/go-homedir"
@@ -7,13 +7,13 @@ import (
 	"os"
 )
 
-var cfgFile string
+var CfgFile string
 
 // initConfig reads in config file and ENV variables if set.
-func initConfig() {
-	if cfgFile != "" {
+func InitConfig() {
+	if CfgFile != "" {
 		// Use config file from the flag.
-		viper.SetConfigFile(cfgFile)
+		viper.SetConfigFile(CfgFile)
 	} else {
 		// Find home directory.
 		home, err := homedir.Dir()

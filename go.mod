@@ -3,6 +3,7 @@ module github.com/ddexterpark/merakictl
 go 1.14
 
 require (
+	github.com/blang/semver v3.5.1+incompatible
 	github.com/ddexterpark/dashboard-api-golang v0.0.0-20201226003530-9404048c9be8
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/kr/pretty v0.2.1
@@ -10,6 +11,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/mitchellh/mapstructure v1.4.0 // indirect
 	github.com/pelletier/go-toml v1.8.1 // indirect
+	github.com/rhysd/go-github-selfupdate v1.2.2
 	github.com/spf13/afero v1.4.1 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
 	github.com/spf13/cobra v1.1.1

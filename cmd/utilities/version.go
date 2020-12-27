@@ -1,4 +1,4 @@
-package cmd
+package utilities
 
 import (
 	"fmt"
@@ -6,10 +6,9 @@ import (
 )
 
 // version
-var version = &cobra.Command{
+var Version = &cobra.Command{
 	Use:   "version",
 	Short: "",
-	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Merakictl Alpha Version")
 

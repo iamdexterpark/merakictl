@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-package cmd
+package utilities
 
 import (
 	"os"
@@ -22,7 +22,7 @@ import (
 )
 
 // completionCmd represents the completion command
-var completionCmd = &cobra.Command{
+var CompletionCmd = &cobra.Command{
 	Use:   "completion [bash|zsh|fish|powershell]",
 	Short: "Generate completion script",
 	Long: `To load completions:

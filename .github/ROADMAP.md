@@ -42,8 +42,8 @@
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Proxy Support (certificate path, server, port)
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)
-
 - [ ] 100% Appliance CLI Coverage
 - [ ] 100% SM CLI Coverage
 - [ ] 100% Switch CLI Coverage
 - [ ] 100% Wireless CLI Coverage
+- [ ] Static Binary Self Update

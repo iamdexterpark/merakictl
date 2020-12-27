@@ -1,5 +1,5 @@
 /*
-Copyright © 2020 NAME HERE <EMAIL ADDRESS>
+Copyright © 2020 Dexter Park dDexterPark@icloud.com
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import (
 	"github.com/ddexterpark/merakictl/cmd/get"
 	"github.com/ddexterpark/merakictl/cmd/remove"
 	"github.com/ddexterpark/merakictl/cmd/update"
+	"github.com/ddexterpark/merakictl/cmd/utilities"
 	"github.com/spf13/cobra"
 	"log"
 )
@@ -48,9 +49,10 @@ func Execute() {
 }
 
 func init() {
-	cobra.OnInitialize(initConfig)
-	rootCmd.AddCommand(completionCmd)
-	rootCmd.AddCommand(version)
+	cobra.OnInitialize(utilities.InitConfig)
+	rootCmd.AddCommand(utilities.CompletionCmd)
+	rootCmd.AddCommand(utilities.Version)
+	//rootCmd.AddCommand(utilities.Upgrade)
 	rootCmd.AddCommand(get.GetCmd)
 	rootCmd.AddCommand(update.UpdateCmd)
 	rootCmd.AddCommand(create.CreateCmd)
@@ -59,7 +61,7 @@ func init() {
 	// Here you will define your flags and configuration settings.
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
+	rootCmd.PersistentFlags().StringVar(&utilities.CfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
 	rootCmd.PersistentFlags().BoolP("diff", "d", false, "diff config file with dashboard API config")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
 	rootCmd.PersistentFlags().BoolP("json", "j", false, "Export config to JSON")
