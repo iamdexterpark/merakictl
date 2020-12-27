@@ -39,10 +39,11 @@
 - [x] 100% Camera CLI Coverage
 - [x] 100% SM CLI Coverage
 - [x] 100% Appliance CLI Coverage
+- [x] 100% Wireless CLI Coverage
 
 ### Backlog
 - [ ] 100% Switch CLI Coverage
-- [ ] 100% Wireless CLI Coverage
+
 
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Proxy Support (certificate path, server, port)

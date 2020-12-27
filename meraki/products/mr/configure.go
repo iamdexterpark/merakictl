@@ -21,8 +21,24 @@ shell.Display(metadata, "AlternateMGMTInterface", cmd.Flags())
 },
 }
 
-var GetBluetoothSettings = &cobra.Command{
-Use:   "BluetoothSettings",
+var PutAlternateMGMTInterface = &cobra.Command{
+	Use:   "AlternateMGMTInterface",
+	Short: "Return alternate management interface and devices with IP assigned.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutAlternateManagementInterface(networkId, format)
+		shell.Display(metadata, "AlternateMGMTInterface", cmd.Flags())
+	},
+}
+
+var GetBluetoothNetworkSettings = &cobra.Command{
+Use:   "BluetoothNetworkSettings",
 Short: "Return the Bluetooth settings for a network. Bluetooth settings must be enabled on the network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -30,10 +46,25 @@ if networkId == "" {
 networkId = args[0]
 }
 metadata := configure.GetBluetoothNetworkSettings(networkId)
-shell.Display(metadata, "BluetoothSettings", cmd.Flags())
+shell.Display(metadata, "BluetoothNetworkSettings", cmd.Flags())
 },
 }
 
+var PutBluetoothNetworkSettings = &cobra.Command{
+	Use:   "BluetoothNetworkSettings",
+	Short: "Return the Bluetooth settings for a network. Bluetooth settings must be enabled on the network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutBluetoothNetworkSettings(networkId, format)
+		shell.Display(metadata, "BluetoothNetworkSettings", cmd.Flags())
+	},
+}
 
 var GetBluetoothDeviceSettings = &cobra.Command{
 Use:   "BluetoothDeviceSettings",
@@ -48,6 +79,21 @@ shell.Display(metadata, "BluetoothDeviceSettings", cmd.Flags())
 },
 }
 
+var PutBluetoothDeviceSettings = &cobra.Command{
+	Use:   "BluetoothDeviceSettings",
+	Short: "Return the bluetooth settings for a mr device.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutBluetoothDeviceSettings(serial, format)
+		shell.Display(metadata, "BluetoothDeviceSettings", cmd.Flags())
+	},
+}
 
 var GetRadioSettings = &cobra.Command{
 Use:   "RadioSettings",
@@ -62,6 +108,21 @@ shell.Display(metadata, "RadioSettings", cmd.Flags())
 },
 }
 
+var PutRadioSettings = &cobra.Command{
+	Use:   "RadioSettings",
+	Short: "Return the radio settings of a device.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, _, serial := shell.ResolveFlags(cmd.Flags())
+		if serial == "" {
+			serial = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutRadioSettings(serial, format)
+		shell.Display(metadata, "RadioSettings", cmd.Flags())
+	},
+}
 
 var GetRFProfiles = &cobra.Command{
 Use:   "RFProfiles",
@@ -89,12 +150,61 @@ if networkId == "" {
 networkId = args[1]
 }
 
-	rfProfileId := args[0]
+rfProfileId := args[0]
 metadata := configure.GetRFProfile(networkId, rfProfileId)
 shell.Display(metadata, "RFProfile", cmd.Flags())
 },
 }
 
+var DelRFProfile = &cobra.Command{
+	Use:   "RFProfile",
+	Short: "Return a RF profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		rfProfileId := args[0]
+		metadata := configure.DelRFProfile(networkId, rfProfileId)
+		shell.Display(metadata, "RFProfile", cmd.Flags())
+	},
+}
+
+var PutRFProfile = &cobra.Command{
+	Use:   "RFProfile",
+	Short: "Return a RF profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		rfProfileId := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutRFProfile(networkId, rfProfileId, format)
+		shell.Display(metadata, "RFProfile", cmd.Flags())
+	},
+}
+
+var PostRFProfile = &cobra.Command{
+	Use:   "RFProfile",
+	Short: "Return a RF profile.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostRFProfile(networkId, format)
+		shell.Display(metadata, "RFProfile", cmd.Flags())
+	},
+}
 
 var GetWirelessSettings = &cobra.Command{
 Use:   "WirelessSettings",
@@ -109,6 +219,21 @@ shell.Display(metadata, "WirelessSettings", cmd.Flags())
 },
 }
 
+var PutWirelessSettings = &cobra.Command{
+	Use:   "WirelessSettings",
+	Short: "Return the mr settings for a network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSettings(networkId, format)
+		shell.Display(metadata, "WirelessSettings", cmd.Flags())
+	},
+}
 
 var GetL3FirewallRules = &cobra.Command{
 Use:   "L3FirewallRules",
@@ -125,6 +250,24 @@ shell.Display(metadata, "L3FirewallRules", cmd.Flags())
 },
 }
 
+var PutL3FirewallRules = &cobra.Command{
+	Use:   "L3FirewallRules",
+	Short: "Return the L3 firewall rules for an SSID on an MR network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		number := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutL3FirewallRules(networkId, number, format)
+		shell.Display(metadata, "L3FirewallRules", cmd.Flags())
+	},
+}
+
 var GetL7FirewallRules = &cobra.Command{
 	Use:   "l7FirewallRules",
 	Short: "Return the L7 firewall rules for an SSID on an MR network.",
@@ -136,6 +279,24 @@ var GetL7FirewallRules = &cobra.Command{
 
 		number := args[0]
 		metadata := configure.GetL7FirewallRules(networkId, number)
+		shell.Display(metadata, "L7FirewallRules", cmd.Flags())
+	},
+}
+
+var PutL7FirewallRules = &cobra.Command{
+	Use:   "l7FirewallRules",
+	Short: "Return the L7 firewall rules for an SSID on an MR network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		number := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutL7FirewallRules(networkId, number, format)
 		shell.Display(metadata, "L7FirewallRules", cmd.Flags())
 	},
 }
@@ -172,6 +333,62 @@ var GetIdentityPSK = &cobra.Command{
 	},
 }
 
+var DelIdentityPSK = &cobra.Command{
+	Use:   "identitypsk",
+	Short: "Return an Identity PSK.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+
+		number := args[0]
+		identityPskId := args[1]
+		metadata := configure.DelIdentityPSK(networkId,
+			number, identityPskId)
+		shell.Display(metadata, "IdentityPSK", cmd.Flags())
+	},
+}
+
+var PutIdentityPSK = &cobra.Command{
+	Use:   "identitypsk",
+	Short: "Return an Identity PSK.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[2]
+		}
+
+		number := args[0]
+		identityPskId := args[1]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutIdentityPSK(networkId,
+			number, identityPskId, format)
+		shell.Display(metadata, "IdentityPSK", cmd.Flags())
+	},
+}
+
+var PostIdentityPSK = &cobra.Command{
+	Use:   "identitypsk",
+	Short: "Return an Identity PSK.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		number := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PostIdentityPSK(networkId,
+			number, format)
+		shell.Display(metadata, "IdentityPSK", cmd.Flags())
+	},
+}
+
 var GetSplashSettings = &cobra.Command{
 Use:   "SplashSettings",
 Short: "Display the splash page settings for the given SSID.",
@@ -187,6 +404,22 @@ shell.Display(metadata, "SplashSettings", cmd.Flags())
 },
 }
 
+var PutSplashSettings = &cobra.Command{
+	Use:   "SplashSettings",
+	Short: "Display the splash page settings for the given SSID.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		number := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutSplashPageSettings(networkId, number, format)
+		shell.Display(metadata, "SplashSettings", cmd.Flags())
+	},
+}
 
 var GetTrafficShapingRules = &cobra.Command{
 Use:   "TrafficShapingRules",
@@ -202,6 +435,22 @@ shell.Display(metadata, "TrafficShapingRules", cmd.Flags())
 },
 }
 
+var PutTrafficShapingRules = &cobra.Command{
+	Use:   "TrafficShapingRules",
+	Short: "Display the traffic shaping settings for a SSID on an MR network.",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		number := args[0]
+		// Read Config File
+		var format interface{}
+		shell.RenderInput(&format)
+		metadata := configure.PutTrafficShapingRules(networkId, number, format)
+		shell.Display(metadata, "TrafficShapingRules", cmd.Flags())
+	},
+}
 
 var GetSSIDs = &cobra.Command{
 	Use:   "SSIDs",

@@ -125,6 +125,17 @@ var MRCmd = &cobra.Command{
 
 func init() {
 	MRCmd.AddCommand(mr.PutSSID)
+	MRCmd.AddCommand(mr.PutTrafficShapingRules)
+	MRCmd.AddCommand(mr.PutL7FirewallRules)
+	MRCmd.AddCommand(mr.PutL3FirewallRules)
+	MRCmd.AddCommand(mr.PutAlternateMGMTInterface)
+	MRCmd.AddCommand(mr.PutBluetoothDeviceSettings)
+	MRCmd.AddCommand(mr.PutBluetoothNetworkSettings)
+	MRCmd.AddCommand(mr.PutIdentityPSK)
+	MRCmd.AddCommand(mr.PutRadioSettings)
+	MRCmd.AddCommand(mr.PutRFProfile)
+	MRCmd.AddCommand(mr.PutSplashSettings)
+	MRCmd.AddCommand(mr.PutWirelessSettings)
 }
 
 var MGCmd = &cobra.Command{

@@ -5,6 +5,7 @@ import (
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
 	"github.com/ddexterpark/merakictl/meraki/products/insight"
+	"github.com/ddexterpark/merakictl/meraki/products/mr"
 	"github.com/ddexterpark/merakictl/meraki/products/mv"
 	"github.com/ddexterpark/merakictl/meraki/products/mx"
 	"github.com/ddexterpark/merakictl/meraki/products/sm"
@@ -95,7 +96,8 @@ var MRCmd = &cobra.Command{
 }
 
 func init() {
-	MRCmd.AddCommand()
+	MRCmd.AddCommand(mr.PostIdentityPSK)
+	MRCmd.AddCommand(mr.PostRFProfile)
 }
 
 var MGCmd = &cobra.Command{
