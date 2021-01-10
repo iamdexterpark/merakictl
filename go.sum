@@ -72,6 +72,12 @@ github.com/ddexterpark/dashboard-api-golang v0.0.0-20210109060407-e8a2c9a5b63c h
 github.com/ddexterpark/dashboard-api-golang v0.0.0-20210109060407-e8a2c9a5b63c/go.mod h1:KhqagWN61AhBWmX2z/HH/fjSZo8mqmaiarHs3DgMG/8=
 github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110022502-e369927fa4b7 h1:/11Tn3T+XEa+BXufnfF3PA63kF0K8C3Ax+kvf4su68Q=
 github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110022502-e369927fa4b7/go.mod h1:KhqagWN61AhBWmX2z/HH/fjSZo8mqmaiarHs3DgMG/8=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110040651-5ea5ecb1a7cc h1:jAcgNvjSbmuReR43Meybo5p079b/SxCwM5l29Wh/Yrg=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110040651-5ea5ecb1a7cc/go.mod h1:KhqagWN61AhBWmX2z/HH/fjSZo8mqmaiarHs3DgMG/8=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110041456-f3bfdf4d7d91 h1:dtjX7lsBsANX1b8Mp46b2aU1MZYthDADo4hcutYL5D0=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110041456-f3bfdf4d7d91/go.mod h1:KhqagWN61AhBWmX2z/HH/fjSZo8mqmaiarHs3DgMG/8=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110043749-4137d274e50b h1:w3w8xk+xTV+J3Ex9Lt92v59w5iD/61zAFU2hk7sGTn8=
+github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110043749-4137d274e50b/go.mod h1:KhqagWN61AhBWmX2z/HH/fjSZo8mqmaiarHs3DgMG/8=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8PWV+bWy6jNmig1y/TA+kYO4g3RSRF0IAv0no=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
