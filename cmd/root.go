@@ -19,7 +19,7 @@ package cmd
 import (
 	"github.com/ddexterpark/merakictl/cmd/delete"
 	"github.com/ddexterpark/merakictl/cmd/get"
-	"github.com/ddexterpark/merakictl/cmd/misc"
+	"github.com/ddexterpark/merakictl/cmd/utilities"
 	"github.com/ddexterpark/merakictl/cmd/post"
 	"github.com/ddexterpark/merakictl/cmd/put"
 	"github.com/spf13/cobra"
@@ -42,8 +42,8 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.AddCommand(misc.CompletionCmd)
-	rootCmd.AddCommand(misc.Version)
+	rootCmd.AddCommand(utilities.CompletionCmd)
+	rootCmd.AddCommand(utilities.Version)
 	//rootCmd.AddCommand(shell.Upgrade)
 	rootCmd.AddCommand(get.ShowCmd)
 	rootCmd.AddCommand(put.UpdateCmd)

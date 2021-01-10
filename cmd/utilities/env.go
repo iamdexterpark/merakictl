@@ -1,4 +1,4 @@
-package misc
+package utilities
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api"
