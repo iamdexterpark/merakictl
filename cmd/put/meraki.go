@@ -151,7 +151,7 @@ func init() {
 	MRCmd.AddCommand(mr.PutTrafficShapingRules)
 	MRCmd.AddCommand(mr.PutL7FirewallRules)
 	MRCmd.AddCommand(mr.PutL3FirewallRules)
-	MRCmd.AddCommand(mr.PutAlternateMGMTInterface)
+	MRCmd.AddCommand(mr.PutAlternateManagementInterface)
 	MRCmd.AddCommand(mr.PutBluetoothDeviceSettings)
 	MRCmd.AddCommand(mr.PutBluetoothNetworkSettings)
 	MRCmd.AddCommand(mr.PutIdentityPSK)

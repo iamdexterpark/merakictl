@@ -225,7 +225,7 @@ var MRCmd = &cobra.Command{
 }
 
 func init() {
-	MRCmd.AddCommand(mr.GetAlternateMGMTInterface)
+	MRCmd.AddCommand(mr.GetAlternateManagementInterface)
 	MRCmd.AddCommand(mr.GetBluetoothNetworkSettings)
 	MRCmd.AddCommand(mr.GetBluetoothDeviceSettings)
 	MRCmd.AddCommand(mr.GetRadioSettings)

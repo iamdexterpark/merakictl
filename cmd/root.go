@@ -44,7 +44,7 @@ func Execute() {
 func init() {
 	rootCmd.AddCommand(misc.CompletionCmd)
 	rootCmd.AddCommand(misc.Version)
-	//rootCmd.AddCommand(utilities.Upgrade)
+	//rootCmd.AddCommand(shell.Upgrade)
 	rootCmd.AddCommand(get.ShowCmd)
 	rootCmd.AddCommand(put.UpdateCmd)
 	rootCmd.AddCommand(post.CreateCmd)

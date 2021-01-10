@@ -3,7 +3,7 @@ package network
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/general/networks/configure"
 	organizations "github.com/ddexterpark/dashboard-api-golang/api/general/organizations/configure"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 

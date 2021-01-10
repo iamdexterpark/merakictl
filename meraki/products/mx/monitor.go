@@ -2,12 +2,12 @@ package mx
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/appliance/monitor"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 var GetSecurityEvents = &cobra.Command{
-	Use:   "SecurityEvents",
+	Use:   "securityEvents",
 	Short: "List the security events for a client. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -33,7 +33,7 @@ var GetSecurityEvents = &cobra.Command{
 
 
 var GetDHCPSubnets = &cobra.Command{
-	Use:   "DHCPSubnets",
+	Use:   "dhcpSubnets",
 	Short: "Return the DHCP subnet information for an mx.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -50,7 +50,7 @@ var GetDHCPSubnets = &cobra.Command{
 
 
 var GetPerformance = &cobra.Command{
-Use:   "Performance",
+Use:   "performance",
 Short: "Return the performance score for a single MX. Only primary MX devices supported. If no data is available, a 204 error code is returned.",
 Run: func(cmd *cobra.Command, args []string) {
 _, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -66,7 +66,7 @@ shell.Display(metadata, "Performance", cmd.Flags())
 
 
 var GetNetworkSecurityEvents = &cobra.Command{
-Use:   "NetworkSecurityEvents",
+Use:   "networkSecurityEvents",
 Short: "List the security events for a network.",
 Run: func(cmd *cobra.Command, args []string) {
 	orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -92,7 +92,7 @@ shell.Display(metadata, "NetworkSecurityEvents", cmd.Flags())
 
 
 var GetOrganizationSecurityEvents = &cobra.Command{
-Use:   "OrganizationSecurityEvents",
+Use:   "organizationSecurityEvents",
 Short: "List the security events for an organization.",
 Run: func(cmd *cobra.Command, args []string) {
 	orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -117,7 +117,7 @@ shell.Display(metadata, "OrganizationSecurityEvents", cmd.Flags())
 
 
 var GetUplinkStatuses = &cobra.Command{
-Use:   "UplinkStatuses",
+Use:   "uplinkStatuses",
 Short: "List the uplink status of every Meraki MX and Z series appliances in the organization.",
 Run: func(cmd *cobra.Command, args []string) {
 	orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -138,7 +138,7 @@ shell.Display(metadata, "UplinkStatuses", cmd.Flags())
 
 
 var GetVPNStats = &cobra.Command{
-	Use:   "VPNStats",
+	Use:   "vpnStats",
 	Short: "Show VPN history stat for networks in an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -163,7 +163,7 @@ var GetVPNStats = &cobra.Command{
 
 
 var GetVPNStatuses = &cobra.Command{
-	Use:   "VPNStatuses",
+	Use:   "vpnStatuses",
 	Short: "Show VPN status for networks in an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, networkId, _ := shell.ResolveFlags(cmd.Flags())

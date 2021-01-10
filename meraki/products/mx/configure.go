@@ -2,13 +2,13 @@ package mx
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/appliance/configure"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 
 var GetConnectivityMonitoringDestinations = &cobra.Command{
-Use:   "ConnectivityMonitoringDestinations",
+Use:   "connectivityMonitoringDestinations",
 Short: "Return the connectivity testing destinations for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -22,7 +22,7 @@ shell.Display(metadata, "ConnectivityMonitoringDestinations", cmd.Flags())
 }
 
 var PutConnectivityMonitoringDestinations = &cobra.Command{
-	Use:   "ConnectivityMonitoringDestinations",
+	Use:   "connectivityMonitoringDestinations",
 	Short: "Return the connectivity testing destinations for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -38,7 +38,7 @@ var PutConnectivityMonitoringDestinations = &cobra.Command{
 
 
 var GetContentFilteringCategories = &cobra.Command{
-Use:   "ContentFilteringCategories",
+Use:   "contentFilteringCategories",
 Short: "List all available content filtering categories for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -54,7 +54,7 @@ shell.Display(metadata, "ContentFilteringCategories", cmd.Flags())
 
 
 var GetContentFiltering = &cobra.Command{
-Use:   "ContentFiltering",
+Use:   "contentFiltering",
 Short: "Return the content filtering settings for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -68,7 +68,7 @@ shell.Display(metadata, "ContentFiltering", cmd.Flags())
 }
 
 var PutContentFiltering = &cobra.Command{
-	Use:   "ContentFiltering",
+	Use:   "contentFiltering",
 	Short: "Return the content filtering settings for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -85,7 +85,7 @@ var PutContentFiltering = &cobra.Command{
 
 
 var GetCellularFirewallRules = &cobra.Command{
-Use:   "CellularFirewallRules",
+Use:   "cellularFirewallRules",
 Short: "Return the cellular firewall rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -99,7 +99,7 @@ shell.Display(metadata, "CellularFirewallRules", cmd.Flags())
 }
 
 var PutCellularFirewallRules = &cobra.Command{
-	Use:   "CellularFirewallRules",
+	Use:   "cellularFirewallRules",
 	Short: "Return the cellular firewall rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -114,7 +114,7 @@ var PutCellularFirewallRules = &cobra.Command{
 }
 
 var GetFirewalledServices = &cobra.Command{
-Use:   "FirewalledServices",
+Use:   "firewalledServices",
 Short: "List the mx services and their accessibility rules.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -130,7 +130,7 @@ shell.Display(metadata, "FirewalledServices", cmd.Flags())
 
 
 var GetFirewalledService = &cobra.Command{
-	Use:   "FirewalledService",
+	Use:   "firewalledService",
 	Short: "Return the accessibility settings of the given service ('ICMP', 'web', or 'SNMP').",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -145,7 +145,7 @@ var GetFirewalledService = &cobra.Command{
 }
 
 var PutFirewalledService = &cobra.Command{
-	Use:   "FirewalledService",
+	Use:   "firewalledService",
 	Short: "Return the accessibility settings of the given service ('ICMP', 'web', or 'SNMP').",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -163,7 +163,7 @@ var PutFirewalledService = &cobra.Command{
 
 
 var GetInboundFirewallRules = &cobra.Command{
-Use:   "InboundFirewallRules",
+Use:   "inboundFirewallRules",
 Short: "Return the inbound firewall rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -177,7 +177,7 @@ shell.Display(metadata, "InboundFirewallRules", cmd.Flags())
 }
 
 var PutInboundFirewallRules = &cobra.Command{
-	Use:   "InboundFirewallRules",
+	Use:   "inboundFirewallRules",
 	Short: "Return the inbound firewall rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -192,7 +192,7 @@ var PutInboundFirewallRules = &cobra.Command{
 }
 
 var GetL3FirewallRules = &cobra.Command{
-Use:   "L3FirewallRules",
+Use:   "l3FirewallRules",
 Short: "Return the L3 firewall rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -207,7 +207,7 @@ shell.Display(metadata, "L3FirewallRules", cmd.Flags())
 
 // works
 var PutL3FirewallRules = &cobra.Command{
-	Use:   "L3FirewallRules",
+	Use:   "l3FirewallRules",
 	Short: "Return the L3 firewall rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -224,7 +224,7 @@ var PutL3FirewallRules = &cobra.Command{
 }
 
 var GetL7ApplicationCategories = &cobra.Command{
-Use:   "L7ApplicationCategories",
+Use:   "l7ApplicationCategories",
 Short: "Return the L7 firewall application categories and their associated applications for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -240,7 +240,7 @@ shell.Display(metadata, "L7ApplicationCategories", cmd.Flags())
 
 
 var GetL7FirewallRules = &cobra.Command{
-Use:   "L7FirewallRule",
+Use:   "l7FirewallRule",
 Short: "List the MX L7 firewall rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -254,7 +254,7 @@ shell.Display(metadata, "L7FirewallRule", cmd.Flags())
 }
 
 var PutL7FirewallRules = &cobra.Command{
-	Use:   "L7FirewallRule",
+	Use:   "l7FirewallRule",
 	Short: "List the MX L7 firewall rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -270,7 +270,7 @@ var PutL7FirewallRules = &cobra.Command{
 
 
 var GetOneToManyNatRules = &cobra.Command{
-Use:   "OneToManyNatRules",
+Use:   "oneToManyNatRules",
 Short: "Return the 1:Many NAT mapping rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -284,7 +284,7 @@ shell.Display(metadata, "OneToManyNatRules", cmd.Flags())
 }
 
 var PutOneToManyNatRules = &cobra.Command{
-	Use:   "OneToManyNatRules",
+	Use:   "oneToManyNatRules",
 	Short: "Return the 1:Many NAT mapping rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -299,7 +299,7 @@ var PutOneToManyNatRules = &cobra.Command{
 }
 
 var GetOneToOneNatRules = &cobra.Command{
-Use:   "OneToOneNatRules",
+Use:   "oneToOneNatRules",
 Short: "Return the 1:1 NAT mapping rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -313,7 +313,7 @@ shell.Display(metadata, "OneToOneNatRules", cmd.Flags())
 }
 
 var PutOneToOneNatRules = &cobra.Command{
-	Use:   "OneToOneNatRules",
+	Use:   "oneToOneNatRules",
 	Short: "Return the 1:1 NAT mapping rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -330,7 +330,7 @@ var PutOneToOneNatRules = &cobra.Command{
 
 
 var GetPortForwardingRules = &cobra.Command{
-Use:   "PortForwardingRules",
+Use:   "portForwardingRules",
 Short: "Return the port forwarding rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -344,7 +344,7 @@ shell.Display(metadata, "PortForwardingRules", cmd.Flags())
 }
 
 var PutPortForwardingRules = &cobra.Command{
-	Use:   "PortForwardingRules",
+	Use:   "portForwardingRules",
 	Short: "Return the port forwarding rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -359,7 +359,7 @@ var PutPortForwardingRules = &cobra.Command{
 }
 
 var GetPorts = &cobra.Command{
-Use:   "Ports",
+Use:   "ports",
 Short: "List per-port VLAN settings for all ports of a MX.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -373,8 +373,8 @@ shell.Display(metadata, "Ports", cmd.Flags())
 }
 
 var GetPort = &cobra.Command{
-	Use:   "Port",
-	Short: "\tReturn per-port VLAN settings for a single MX port.",
+	Use:   "port",
+	Short: "Return per-port VLAN settings for a single MX port.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -388,8 +388,8 @@ var GetPort = &cobra.Command{
 }
 
 var PutPort = &cobra.Command{
-	Use:   "Port",
-	Short: "\tReturn per-port VLAN settings for a single MX port.",
+	Use:   "port",
+	Short: "Return per-port VLAN settings for a single MX port.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -405,7 +405,7 @@ var PutPort = &cobra.Command{
 }
 
 var GetNetworkIntrusion = &cobra.Command{
-Use:   "NetworkIntrusion",
+Use:   "networkIntrusion",
 Short: "Returns all supported intrusion settings for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -419,7 +419,7 @@ shell.Display(metadata, "NetworkIntrusion", cmd.Flags())
 }
 
 var PutNetworkIntrusion = &cobra.Command{
-	Use:   "NetworkIntrusion",
+	Use:   "networkIntrusion",
 	Short: "Returns all supported intrusion settings for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -434,7 +434,7 @@ var PutNetworkIntrusion = &cobra.Command{
 }
 
 var GetOrganizationIntrusion = &cobra.Command{
-Use:   "OrganizationIntrusion",
+Use:   "organizationIntrusion",
 Short: "Returns all supported intrusion settings for an organization.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -448,7 +448,7 @@ shell.Display(metadata, "OrganizationIntrusion", cmd.Flags())
 }
 
 var PutOrganizationIntrusion = &cobra.Command{
-	Use:   "OrganizationIntrusion",
+	Use:   "organizationIntrusion",
 	Short: "Returns all supported intrusion settings for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -463,7 +463,7 @@ var PutOrganizationIntrusion = &cobra.Command{
 }
 
 var GetMalware = &cobra.Command{
-Use:   "Malware",
+Use:   "malware",
 Short: "Returns all supported malware settings for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -477,7 +477,7 @@ shell.Display(metadata, "Malware", cmd.Flags())
 }
 
 var PutMalware = &cobra.Command{ // Sorry for the poor choice of words.
-	Use:   "Malware",
+	Use:   "malware",
 	Short: "Returns all supported malware settings for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -493,7 +493,7 @@ var PutMalware = &cobra.Command{ // Sorry for the poor choice of words.
 
 
 var GetSettings = &cobra.Command{
-Use:   "Settings",
+Use:   "settings",
 Short: "Return the mx settings for a network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -509,7 +509,7 @@ shell.Display(metadata, "Settings", cmd.Flags())
 
 
 var GetSingleLan = &cobra.Command{
-Use:   "SingleLan",
+Use:   "lan",
 Short: "Return single LAN configuration.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -523,7 +523,7 @@ shell.Display(metadata, "SingleLan", cmd.Flags())
 }
 
 var PutSingleLan = &cobra.Command{
-	Use:   "SingleLan",
+	Use:   "lan",
 	Short: "Return single LAN configuration.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -538,7 +538,7 @@ var PutSingleLan = &cobra.Command{
 }
 
 var GetStaticRoutes = &cobra.Command{
-Use:   "StaticRoutes",
+Use:   "staticRoutes",
 Short: "List the static routes for an MX or teleworker network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -553,7 +553,7 @@ shell.Display(metadata, "StaticRoutes", cmd.Flags())
 
 
 var GetStaticRoute = &cobra.Command{
-	Use:   "StaticRoute",
+	Use:   "staticRoute",
 	Short: "\tReturn a static route for an MX or teleworker network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -568,7 +568,7 @@ var GetStaticRoute = &cobra.Command{
 }
 
 var DelStaticRoute = &cobra.Command{
-	Use:   "StaticRoute",
+	Use:   "staticRoute",
 	Short: "Delete a static route for an MX or teleworker network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -583,7 +583,7 @@ var DelStaticRoute = &cobra.Command{
 }
 
 var PutStaticRoute = &cobra.Command{
-	Use:   "StaticRoute",
+	Use:   "staticRoute",
 	Short: "Update a static route for an MX or teleworker network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -600,8 +600,8 @@ var PutStaticRoute = &cobra.Command{
 }
 
 var PostStaticRoute = &cobra.Command{
-	Use:   "StaticRoute",
-	Short: "\tReturn a static route for an MX or teleworker network.",
+	Use:   "staticRoute",
+	Short: "Return a static route for an MX or teleworker network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -615,7 +615,7 @@ var PostStaticRoute = &cobra.Command{
 }
 
 var GetCustomPerformanceClasses = &cobra.Command{
-Use:   "CustomPerformanceClasses",
+Use:   "customPerformanceClasses",
 Short: "List all custom performance classes for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -629,7 +629,7 @@ shell.Display(metadata, "CustomPerformanceClasses", cmd.Flags())
 }
 
 var GetCustomPerformanceClass = &cobra.Command{
-	Use:   "CustomPerformanceClass",
+	Use:   "customPerformanceClass",
 	Short: "Return a custom performance class for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -645,7 +645,7 @@ var GetCustomPerformanceClass = &cobra.Command{
 }
 
 var DelCustomPerformanceClass = &cobra.Command{
-	Use:   "CustomPerformanceClass",
+	Use:   "customPerformanceClass",
 	Short: "Return a custom performance class for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -661,7 +661,7 @@ var DelCustomPerformanceClass = &cobra.Command{
 }
 
 var PutCustomPerformanceClass = &cobra.Command{
-	Use:   "CustomPerformanceClass",
+	Use:   "customPerformanceClass",
 	Short: "Return a custom performance class for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -679,7 +679,7 @@ var PutCustomPerformanceClass = &cobra.Command{
 }
 
 var PostCustomPerformanceClass = &cobra.Command{
-	Use:   "CustomPerformanceClass",
+	Use:   "customPerformanceClass",
 	Short: "Return a custom performance class for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -694,7 +694,7 @@ var PostCustomPerformanceClass = &cobra.Command{
 }
 
 var GetTrafficShapingRules = &cobra.Command{
-Use:   "TrafficShapingRules",
+Use:   "trafficShapingRules",
 Short: "Display the traffic shaping settings rules for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -708,7 +708,7 @@ shell.Display(metadata, "TrafficShapingRules", cmd.Flags())
 }
 
 var PutTrafficShapingRules = &cobra.Command{
-	Use:   "TrafficShapingRules",
+	Use:   "trafficShapingRules",
 	Short: "Display the traffic shaping settings rules for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -724,7 +724,7 @@ var PutTrafficShapingRules = &cobra.Command{
 }
 
 var GetUplinkBandwidth = &cobra.Command{
-Use:   "UplinkBandwidth",
+Use:   "uplinkBandwidth",
 Short: "Returns the uplink bandwidth settings for your MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -739,7 +739,7 @@ shell.Display(metadata, "UplinkBandwidth", cmd.Flags())
 }
 
 var PutUplinkBandwidth = &cobra.Command{
-	Use:   "UplinkBandwidth",
+	Use:   "uplinkBandwidth",
 	Short: "Returns the uplink bandwidth settings for your MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -754,7 +754,7 @@ var PutUplinkBandwidth = &cobra.Command{
 }
 
 var GetUplinkSelection = &cobra.Command{
-Use:   "UplinkSelection",
+Use:   "uplinkSelection",
 Short: "Show uplink selection settings for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -768,7 +768,7 @@ shell.Display(metadata, "UplinkSelection", cmd.Flags())
 }
 
 var PutUplinkSelection = &cobra.Command{
-	Use:   "UplinkSelection",
+	Use:   "uplinkSelection",
 	Short: "Show uplink selection settings for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -783,7 +783,7 @@ var PutUplinkSelection = &cobra.Command{
 }
 
 var GetTrafficShaping = &cobra.Command{
-Use:   "TrafficShaping",
+Use:   "trafficShaping",
 Short: "Display the traffic shaping settings for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -797,7 +797,7 @@ shell.Display(metadata, "TrafficShaping", cmd.Flags())
 }
 
 var PutTrafficShaping = &cobra.Command{
-	Use:   "TrafficShaping",
+	Use:   "trafficShaping",
 	Short: "Display the traffic shaping settings for an MX network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -813,7 +813,7 @@ var PutTrafficShaping = &cobra.Command{
 
 
 var GetVLANSettings = &cobra.Command{
-Use:   "VLANSettings",
+Use:   "vlanSettings",
 Short: "Returns the enabled status of VLANs for the network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -827,7 +827,7 @@ shell.Display(metadata, "VLANSettings", cmd.Flags())
 }
 
 var PutVLANSettings = &cobra.Command{
-	Use:   "VLANSettings",
+	Use:   "vlanSettings",
 	Short: "Returns the enabled status of VLANs for the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -842,7 +842,7 @@ var PutVLANSettings = &cobra.Command{
 }
 
 var GetVLANs = &cobra.Command{
-Use:   "VLANs",
+Use:   "vlans",
 Short: "List the VLANs for an MX network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -856,7 +856,7 @@ shell.Display(metadata, "VLANs", cmd.Flags())
 }
 
 var GetVLAN = &cobra.Command{
-	Use:   "VLAN",
+	Use:   "vlan",
 	Short: "Return a VLAN.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -871,7 +871,7 @@ var GetVLAN = &cobra.Command{
 }
 
 var DelVLAN = &cobra.Command{
-	Use:   "VLAN",
+	Use:   "vlan",
 	Short: "Return a VLAN.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -887,7 +887,7 @@ var DelVLAN = &cobra.Command{
 
 
 var PutVLAN = &cobra.Command{
-	Use:   "VLAN",
+	Use:   "vlan",
 	Short: "Return a VLAN.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -904,7 +904,7 @@ var PutVLAN = &cobra.Command{
 }
 
 var PostVLAN = &cobra.Command{
-	Use:   "VLAN",
+	Use:   "vlan",
 	Short: "Return a VLAN.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -919,7 +919,7 @@ var PostVLAN = &cobra.Command{
 }
 
 var GetBGP = &cobra.Command{
-	Use:   "BGP",
+	Use:   "bgp",
 	Short: "Return a Hub BGP Configuration.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -933,7 +933,7 @@ var GetBGP = &cobra.Command{
 }
 
 var PutBGP = &cobra.Command{
-	Use:   "BGP",
+	Use:   "bgp",
 	Short: "Return a Hub BGP Configuration.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -948,7 +948,7 @@ var PutBGP = &cobra.Command{
 }
 
 var GetSiteToSiteVPN = &cobra.Command{
-Use:   "SiteToSiteVPN",
+Use:   "siteToSiteVPN",
 Short: "Return the site-to-site VPN settings of a network. Only valid for MX networks.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -962,7 +962,7 @@ shell.Display(metadata, "SiteToSiteVPN", cmd.Flags())
 }
 
 var PutSiteToSiteVPN = &cobra.Command{
-	Use:   "SiteToSiteVPN",
+	Use:   "siteToSiteVPN",
 	Short: "Return the site-to-site VPN settings of a network. Only valid for MX networks.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -977,7 +977,7 @@ var PutSiteToSiteVPN = &cobra.Command{
 }
 
 var GetThirdPartyVPNPeers = &cobra.Command{
-Use:   "ThirdPartyVPNPeers",
+Use:   "thirdPartyVPNPeers",
 Short: "Return the third party VPN peers for an organization.",
 Run: func(cmd *cobra.Command, args []string) {
 orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -991,7 +991,7 @@ shell.Display(metadata, "ThirdPartyVPNPeers", cmd.Flags())
 }
 
 var PutThirdPartyVPNPeers = &cobra.Command{
-	Use:   "ThirdPartyVPNPeers",
+	Use:   "thirdPartyVPNPeers",
 	Short: "Return the third party VPN peers for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -1006,7 +1006,7 @@ var PutThirdPartyVPNPeers = &cobra.Command{
 }
 
 var GetVPNFirewallRules = &cobra.Command{
-Use:   "VPNFirewallRules",
+Use:   "vpnFirewallRules",
 Short: "Return the firewall rules for an organization's site-to-site VPN.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -1020,7 +1020,7 @@ shell.Display(metadata, "VPNFirewallRules", cmd.Flags())
 }
 
 var PutVPNFirewallRules = &cobra.Command{
-	Use:   "VPNFirewallRules",
+	Use:   "vpnFirewallRules",
 	Short: "Return the firewall rules for an organization's site-to-site VPN.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -1035,7 +1035,7 @@ var PutVPNFirewallRules = &cobra.Command{
 }
 
 var GetWarmspare = &cobra.Command{
-Use:   "Warmspare",
+Use:   "warmspare",
 Short: "Return MX warm spare settings.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -1049,7 +1049,7 @@ shell.Display(metadata, "Warmspare", cmd.Flags())
 }
 
 var PutWarmspare = &cobra.Command{
-	Use:   "Warmspare",
+	Use:   "warmspare",
 	Short: "Return MX warm spare settings.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -1064,7 +1064,7 @@ var PutWarmspare = &cobra.Command{
 }
 
 var PostWarmspare = &cobra.Command{
-	Use:   "Warmspare",
+	Use:   "warmspare",
 	Short: "Return MX warm spare settings.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())

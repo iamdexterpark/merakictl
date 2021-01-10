@@ -2,13 +2,13 @@ package sm
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/sm/configure"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 
 var GetApnsCert = &cobra.Command{
-	Use:   "ApnsCert",
+	Use:   "apnsCert",
 	Short: "Get the organization's APNS certificate.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -21,7 +21,7 @@ if orgId == "" {
 }
 
 var GetBypassActivationLockAttempts = &cobra.Command{
-Use:   "BypassActivationLockAttempts",
+Use:   "bypassActivationLockAttempts",
 Short: "Bypass activation lock attempt status.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -37,7 +37,7 @@ shell.Display(metadata, "BypassActivationLockAttempts", cmd.Flags())
 }
 
 var PostBypassActivationLockAttempts = &cobra.Command{
-	Use:   "BypassActivationLockAttempts",
+	Use:   "bypassActivationLockAttempts",
 	Short: "Bypass activation lock attempt status.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -52,7 +52,7 @@ var PostBypassActivationLockAttempts = &cobra.Command{
 }
 
 var GetCerts = &cobra.Command{
-Use:   "Certs",
+Use:   "certs",
 Short: "List the certs on a device",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -68,7 +68,7 @@ shell.Display(metadata, "Certs", cmd.Flags())
 
 
 var GetDeviceProfiles = &cobra.Command{
-Use:   "DeviceProfiles",
+Use:   "deviceProfiles",
 Short: "Get the profiles associated with a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -82,7 +82,7 @@ shell.Display(metadata, "DeviceProfiles", cmd.Flags())
 }
 
 var PutFields = &cobra.Command{
-	Use:   "Fields",
+	Use:   "fields",
 	Short: "Modify the fields of a device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -97,7 +97,7 @@ var PutFields = &cobra.Command{
 }
 
 var GetNetworkAdapters = &cobra.Command{
-Use:   "NetworkAdapters",
+Use:   "networkAdapters",
 Short: "List the network adapters of a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -112,7 +112,7 @@ shell.Display(metadata, "NetworkAdapters", cmd.Flags())
 
 
 var GetRestrictions = &cobra.Command{
-Use:   "Restrictions",
+Use:   "restrictions",
 Short: "List the restrictions on a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -127,7 +127,7 @@ shell.Display(metadata, "Restrictions", cmd.Flags())
 
 
 var GetSecurityCenters = &cobra.Command{
-Use:   "SecurityCenters",
+Use:   "securityCenters",
 Short: "List the security centers on a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -142,7 +142,7 @@ shell.Display(metadata, "SecurityCenters", cmd.Flags())
 
 
 var GetDeviceSoftware = &cobra.Command{
-Use:   "DeviceSoftware",
+Use:   "deviceSoftware",
 Short: "Get a list of softwares associated with a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -157,7 +157,7 @@ shell.Display(metadata, "DeviceSoftware", cmd.Flags())
 
 
 var GetWlanLists = &cobra.Command{
-Use:   "WlanLists",
+Use:   "wlanLists",
 Short: "List the saved SSID names on a device.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -171,7 +171,7 @@ shell.Display(metadata, "WlanLists", cmd.Flags())
 }
 
 var PostModifyTags = &cobra.Command{
-	Use:   "ModifyTags",
+	Use:   "modifyTags",
 	Short: "Add, delete, or put the tags of a set of devices.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -186,7 +186,7 @@ var PostModifyTags = &cobra.Command{
 }
 
 var PostCheckin = &cobra.Command{
-	Use:   "Checkin",
+	Use:   "checkin",
 	Short: "Force check-in a set of devices.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -201,7 +201,7 @@ var PostCheckin = &cobra.Command{
 }
 
 var GetDevices = &cobra.Command{
-Use:   "Devices",
+Use:   "devices",
 Short: "List the devices enrolled in an SM network with various specified fields and filters.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -226,7 +226,7 @@ shell.Display(metadata, "Devices", cmd.Flags())
 }
 
 var PostLockDevices = &cobra.Command{
-	Use:   "LockDevices",
+	Use:   "lockDevices",
 	Short: "Lock a set of devices.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -242,7 +242,7 @@ var PostLockDevices = &cobra.Command{
 }
 
 var PostMoveDevices = &cobra.Command{
-	Use:   "MoveDevices",
+	Use:   "moveDevices",
 	Short: "Move a set of devicesto a new network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -258,7 +258,7 @@ var PostMoveDevices = &cobra.Command{
 }
 
 var PostRefreshDevice = &cobra.Command{
-	Use:   "RefreshDevice",
+	Use:   "refreshDevice",
 	Short: "Refresh the details of a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -274,7 +274,7 @@ var PostRefreshDevice = &cobra.Command{
 }
 
 var PostUnEnrollDevice = &cobra.Command{
-	Use:   "UnEnrollDevice",
+	Use:   "unEnrollDevice",
 	Short: "UnEnroll a device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -290,7 +290,7 @@ var PostUnEnrollDevice = &cobra.Command{
 }
 
 var PostWipeDevice = &cobra.Command{
-	Use:   "WipeDevice",
+	Use:   "wipeDevice",
 	Short: "Wipe a device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -305,7 +305,7 @@ var PostWipeDevice = &cobra.Command{
 }
 
 var GetProfiles = &cobra.Command{
-Use:   "Profiles",
+Use:   "profiles",
 Short: "List all profiles in a network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -319,7 +319,7 @@ shell.Display(metadata, "Profiles", cmd.Flags())
 
 
 var GetTargetGroups = &cobra.Command{
-Use:   "TargetGroups",
+Use:   "targetGroups",
 Short: "List the target groups in this network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -335,7 +335,7 @@ shell.Display(metadata, "TargetGroups", cmd.Flags())
 }
 
 var PostTargetGroup = &cobra.Command{
-	Use:   "TargetGroup",
+	Use:   "targetGroup",
 	Short: "Add a target group.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -351,7 +351,7 @@ var PostTargetGroup = &cobra.Command{
 }
 
 var DelTargetGroup = &cobra.Command{
-	Use:   "TargetGroup",
+	Use:   "targetGroup",
 	Short: "Delete a target group from a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -367,7 +367,7 @@ var DelTargetGroup = &cobra.Command{
 }
 
 var GetTargetGroup = &cobra.Command{
-	Use:   "TargetGroup",
+	Use:   "targetGroup",
 	Short: "Return a target group.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -384,7 +384,7 @@ var GetTargetGroup = &cobra.Command{
 }
 
 var PutTargetGroup = &cobra.Command{
-	Use:   "TargetGroup",
+	Use:   "targetGroup",
 	Short: "Update a target group.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -401,7 +401,7 @@ var PutTargetGroup = &cobra.Command{
 }
 
 var GetUserSoftware = &cobra.Command{
-Use:   "UserSoftware",
+Use:   "userSoftware",
 Short: "Get a list of softwares associated with a user.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -417,7 +417,7 @@ shell.Display(metadata, "UserSoftware", cmd.Flags())
 
 
 var GetUsers = &cobra.Command{
-Use:   "Users",
+Use:   "users",
 Short: "List the owners in an SM network with various specified fields and filters.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -437,7 +437,7 @@ shell.Display(metadata, "Users", cmd.Flags())
 
 
 var GetVPPAccounts = &cobra.Command{
-Use:   "VPPAccounts",
+Use:   "vppAccounts",
 Short: "Get a hash containing the unparsed token of the VPP account with the given ID.",
 Run: func(cmd *cobra.Command, args []string) {
 orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -450,7 +450,7 @@ shell.Display(metadata, "VPPAccounts", cmd.Flags())
 }
 
 var GetVPPAccount = &cobra.Command{
-	Use:   "VPPAccount",
+	Use:   "vppAccount",
 	Short: "List the VPP accounts in the organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())

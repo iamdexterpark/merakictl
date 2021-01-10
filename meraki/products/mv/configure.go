@@ -2,12 +2,12 @@ package mv
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/camera/configure"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 var GetQualityAndRetention = &cobra.Command{
-	Use:   "QualityAndRetention",
+	Use:   "qualityAndRetention",
 	Short: "Returns quality and retention settings for the given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -20,7 +20,7 @@ var GetQualityAndRetention = &cobra.Command{
 }
 
 var PutQualityAndRetention = &cobra.Command{
-	Use:   "QualityAndRetention",
+	Use:   "qualityAndRetention",
 	Short: "Returns quality and retention settings for the given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -35,7 +35,7 @@ var PutQualityAndRetention = &cobra.Command{
 }
 
 var GetQualityRetentionProfiles = &cobra.Command{
-	Use:   "QualityRetentionProfiles",
+	Use:   "qualityRetentionProfiles",
 	Short: "List the quality retention profiles for this network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -48,7 +48,7 @@ var GetQualityRetentionProfiles = &cobra.Command{
 }
 
 var GetQualityRetentionProfile = &cobra.Command{
-	Use:   "QualityRetentionProfile",
+	Use:   "qualityRetentionProfile",
 	Short: "Retrieve a single quality retention profile.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -65,7 +65,7 @@ var GetQualityRetentionProfile = &cobra.Command{
 }
 
 var DelQualityRetentionProfile = &cobra.Command{
-	Use:   "QualityRetentionProfile",
+	Use:   "qualityRetentionProfile",
 	Short: "Retrieve a single quality retention profile.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -82,7 +82,7 @@ var DelQualityRetentionProfile = &cobra.Command{
 }
 
 var PutQualityRetentionProfile = &cobra.Command{
-	Use:   "QualityRetentionProfile",
+	Use:   "qualityRetentionProfile",
 	Short: "Retrieve a single quality retention profile.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -100,7 +100,7 @@ var PutQualityRetentionProfile = &cobra.Command{
 }
 
 var PostQualityRetentionProfile = &cobra.Command{
-	Use:   "QualityRetentionProfile",
+	Use:   "qualityRetentionProfile",
 	Short: "Retrieve a single quality retention profile.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -115,7 +115,7 @@ var PostQualityRetentionProfile = &cobra.Command{
 }
 
 var GetSchedules = &cobra.Command{
-	Use:   "Schedules",
+	Use:   "schedules",
 	Short: "Returns a list of all mv recording schedules.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -128,7 +128,7 @@ var GetSchedules = &cobra.Command{
 }
 
 var GetObjectDetectionModels = &cobra.Command{
-	Use:   "ObjectDetectionModels",
+	Use:   "objectDetectionModels",
 	Short: "Returns the MV Sense object detection model list for the given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -141,7 +141,7 @@ var GetObjectDetectionModels = &cobra.Command{
 }
 
 var GetSense = &cobra.Command{
-	Use:   "Sense",
+	Use:   "sense",
 	Short: "Returns sense settings for a given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -154,7 +154,7 @@ var GetSense = &cobra.Command{
 }
 
 var PutSense = &cobra.Command{
-	Use:   "Sense",
+	Use:   "sense",
 	Short: "Returns sense settings for a given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -169,7 +169,7 @@ var PutSense = &cobra.Command{
 }
 
 var GetVideoSettings = &cobra.Command{
-	Use:   "VideoSettings",
+	Use:   "videoSettings",
 	Short: "Returns video settings for the given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -182,7 +182,7 @@ var GetVideoSettings = &cobra.Command{
 }
 
 var PutVideoSettings = &cobra.Command{
-	Use:   "VideoSettings",
+	Use:   "videoSettings",
 	Short: "Returns video settings for the given mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -197,7 +197,7 @@ var PutVideoSettings = &cobra.Command{
 }
 
 var GetVideoLink = &cobra.Command{
-	Use:   "VideoLink",
+	Use:   "videoLink",
 	Short: "Returns video link to the specified mv. If a timestamp is supplied, it links to that timestamp.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())

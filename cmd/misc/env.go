@@ -2,7 +2,7 @@ package misc
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api"
-	"github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/kr/pretty"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -39,6 +39,6 @@ var Test = &cobra.Command{
 	Short: "test stuff.",
 	Long:  pretty.Sprint("test"),
 	Run: func(cmd *cobra.Command, args []string) {
-		pretty.Println(utilities.ResolveFlags(cmd.Flags()))
+		pretty.Println(shell.ResolveFlags(cmd.Flags()))
 	},
 }

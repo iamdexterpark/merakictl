@@ -2,12 +2,12 @@ package ms
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/switch/monitor"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 var GetPackets = &cobra.Command{
-	Use:   "Packets",
+	Use:   "packets",
 	Short: "Return the packet counters for all the ports of a ms.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -24,7 +24,7 @@ var GetPackets = &cobra.Command{
 }
 
 var GetPortsStatuses = &cobra.Command{
-	Use:   "PortsStatuses",
+	Use:   "portsStatuses",
 	Short: "Return the status for all the ports of a ms.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())

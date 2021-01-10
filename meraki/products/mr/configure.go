@@ -2,7 +2,7 @@ package mr
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/wireless/configure"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 

@@ -2,12 +2,12 @@ package mv
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/camera/monitor"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 var GetLiveAnalytics = &cobra.Command{
-	Use:   "LiveAnalytics",
+	Use:   "liveAnalytics",
 	Short: "Returns live state from mv of analytics zones.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -20,7 +20,7 @@ var GetLiveAnalytics = &cobra.Command{
 }
 
 var GetAnalyticsOverview = &cobra.Command{
-	Use:   "AnalyticsOverview",
+	Use:   "analyticsOverview",
 	Short: "Returns an overview of aggregate analytics data for a timespan.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -37,7 +37,7 @@ var GetAnalyticsOverview = &cobra.Command{
 }
 
 var GetRecentAnalytics = &cobra.Command{
-	Use:   "RecentAnalytics",
+	Use:   "recentAnalytics",
 	Short: "Returns most recent record for analytics zones.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -51,7 +51,7 @@ var GetRecentAnalytics = &cobra.Command{
 }
 
 var GetAnalyticsZonesHistory = &cobra.Command{
-	Use:   "AnalyticsZonesHistory",
+	Use:   "analyticsZonesHistory",
 	Short: "Return historical records for analytic zones.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -72,7 +72,7 @@ var GetAnalyticsZonesHistory = &cobra.Command{
 }
 
 var GetAnalyticsZones = &cobra.Command{
-	Use:   "AnalyticsZones",
+	Use:   "analyticsZones",
 	Short: "Returns all configured analytic zones for this mv.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())

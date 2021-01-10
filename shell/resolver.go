@@ -1,4 +1,4 @@
-package utilities
+package shell
 
 import (
 	"encoding/json"

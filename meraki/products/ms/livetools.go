@@ -2,12 +2,12 @@ package ms
 
 import (
 	"github.com/ddexterpark/dashboard-api-golang/api/products/switch/livetools"
-	shell "github.com/ddexterpark/merakictl/utilities"
+	"github.com/ddexterpark/merakictl/shell"
 	"github.com/spf13/cobra"
 )
 
 var PostPortCycle = &cobra.Command{
-	Use:   "CyclePorts",
+	Use:   "cyclePorts",
 	Short: "Cycle a set of switch ports.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, serial := shell.ResolveFlags(cmd.Flags())
