@@ -8,7 +8,7 @@ import (
 
 
 var GetConnectivityMonitor = &cobra.Command{
-	Use:   "ConnectivityMonitor",
+	Use:   "connectivityMonitor",
 	Short: "Return the connectivity testing destinations for an MG network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -21,7 +21,7 @@ var GetConnectivityMonitor = &cobra.Command{
 }
 
 var PutConnectivityMonitor = &cobra.Command{
-	Use:   "ConnectivityMonitor",
+	Use:   "connectivityMonitor",
 	Short: "Update the connectivity testing destinations for an MG network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -36,7 +36,7 @@ var PutConnectivityMonitor = &cobra.Command{
 }
 
 var GetDHCP = &cobra.Command{
-	Use:   "DHCP",
+	Use:   "dhcp",
 	Short: "List common DHCP settings of MGs.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -49,7 +49,7 @@ var GetDHCP = &cobra.Command{
 }
 
 var PutDHCP = &cobra.Command{
-	Use:   "DHCP",
+	Use:   "dhcp",
 	Short: "List common DHCP settings of MGs.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -64,7 +64,7 @@ var PutDHCP = &cobra.Command{
 }
 
 var GetLan = &cobra.Command{
-	Use:   "Lan",
+	Use:   "lan",
 	Short: "Show the LAN Settings of a MG.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -77,7 +77,7 @@ var GetLan = &cobra.Command{
 }
 
 var PutLan = &cobra.Command{
-	Use:   "Lan",
+	Use:   "lan",
 	Short: "Show the LAN Settings of a MG.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -92,7 +92,7 @@ var PutLan = &cobra.Command{
 }
 
 var GetPortForwardingRules = &cobra.Command{
-	Use:   "PortForwardingRules",
+	Use:   "portForwardingRules",
 	Short: "Returns the port forwarding rules for a single MG.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -105,7 +105,7 @@ var GetPortForwardingRules = &cobra.Command{
 }
 
 var PutPortForwardingRules = &cobra.Command{
-	Use:   "PortForwardingRules",
+	Use:   "portForwardingRules",
 	Short: "Returns the port forwarding rules for a single MG.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -120,7 +120,7 @@ var PutPortForwardingRules = &cobra.Command{
 }
 
 var GetSubnetPool = &cobra.Command{
-	Use:   "SubnetPool",
+	Use:   "subnetPool",
 	Short: "Return the subnet pool and mask configured for MGs in the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -133,7 +133,7 @@ var GetSubnetPool = &cobra.Command{
 }
 
 var PutSubnetPool = &cobra.Command{
-	Use:   "SubnetPool",
+	Use:   "subnetPool",
 	Short: "Return the subnet pool and mask configured for MGs in the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -148,7 +148,7 @@ var PutSubnetPool = &cobra.Command{
 }
 
 var GetUplink = &cobra.Command{
-	Use:   "Uplink",
+	Use:   "uplink",
 	Short: "Returns the uplink settings for your MG network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -161,7 +161,7 @@ var GetUplink = &cobra.Command{
 }
 
 var PutUplink = &cobra.Command{
-	Use:   "Uplink",
+	Use:   "uplink",
 	Short: "Returns the uplink settings for your MG network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
