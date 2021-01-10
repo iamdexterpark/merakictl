@@ -221,7 +221,7 @@ band,_ := cmd.Flags().GetString("band")
 ssid,_ := cmd.Flags().GetString("ssid")
 vlan, _ := cmd.Flags().GetString("vlan")
 
-metadata := monitor.GetDeviceconnectionStats(serial, t0, t1, timespan, band, ssid, vlan, apTag)
+metadata := monitor.GetDeviceConnectionStats(serial, t0, t1, timespan, band, ssid, vlan, apTag)
 shell.Display(metadata, "DeviceConnectionStats", cmd.Flags())
 },
 }

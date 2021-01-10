@@ -7,8 +7,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var GetAlertConfig = &cobra.Command{
-	Use:   "AlertConfig",
+var GetAlertSettings = &cobra.Command{
+	Use:   "alertSettings",
 	Short: "Return The Alert Configuration For This Network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -16,55 +16,28 @@ var GetAlertConfig = &cobra.Command{
 			networkId = args[0]
 		}
 		metadata := configure.GetAlertSettings(networkId)
-		shell.Display(metadata, "AlertConfig", cmd.Flags())
+		shell.Display(metadata, "AlertSettings", cmd.Flags())
 	},
 }
 
-var PutAlertConfig = &cobra.Command{
-	Use:   "AlertConfig",
+var PutAlertSettings = &cobra.Command{
+	Use:   "alertSettings",
 	Short: "Update the alert configuration for this network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutAlertSettings(networkId, format)
-		shell.Display(metadata, "AlertConfig", cmd.Flags())
+		var format configure.AlertSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAlertSettings(networkId,  input)
+		shell.Display(metadata, "AlertSettings", cmd.Flags())
 	},
 }
-
-
-// clients
-var GetClients = &cobra.Command{
-	Use:   "Clients",
-	Short: "List the clients that have used this network in the timespan.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[0]
-		}
-		t0, _ := cmd.Flags().GetString("t0")
-		t1, _ := cmd.Flags().GetString("t1")
-		timespan, _ := cmd.Flags().GetString("timespan")
-		perPage, _ := cmd.Flags().GetString("perPage")
-		startingAfter, _ := cmd.Flags().GetString("startingAfter")
-		endingBefore, _ := cmd.Flags().GetString("endingBefore")
-
-		metadata := organizations.GetClients(networkId, t0, t1,
-			timespan, perPage, startingAfter, endingBefore)
-		shell.Display(metadata, "clients", cmd.Flags())
-	},
-}
-
-
 
 var GetClientPolicy = &cobra.Command{
-	Use:   "ClientPolicy",
-	Short: "Return the policy assigned to a client on the network. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.",
+	Use:   "clientPolicy",
+	Short: "Return the policy assigned to a client on the network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -76,22 +49,38 @@ var GetClientPolicy = &cobra.Command{
 	},
 }
 
-var GetClientSplashAuthorization = &cobra.Command{
-	Use:   "ClientSplashAuthorization",
-	Short: "Return the splash authorization for a client, for each SSID they've associated with through splash. Only enabled SSIDs with Click-through splash enabled will be included. Clients can be identified by a client key or either the MAC or IP depending on whether the network uses Track-by-IP.",
+var PutClientPolicy = &cobra.Command{
+	Use:   "clientPolicy",
+	Short: "Update the policy assigned to a client on the network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[1]
 		}
 		clientId := args[0]
-		metadata := configure.GetSplashAuthorization(networkId, clientId)
-		shell.Display(metadata, "ClientSplashAuthorization", cmd.Flags())
+		var format configure.ClientPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutClientPolicy(networkId, clientId,  input)
+		shell.Display(metadata, "ClientPolicy", cmd.Flags())
 	},
 }
 
-var PutClientSplashAuthorization = &cobra.Command{
-	Use:   "ClientSplashAuthorization",
+var GetSplashAuthorizationStatus = &cobra.Command{
+	Use:   "splashAuthorizationStatus",
+	Short: "Return the splash authorization for a client",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		clientId := args[0]
+		metadata := configure.GetSplashAuthorizationStatus(networkId, clientId)
+		shell.Display(metadata, "SplashAuthorizationStatus", cmd.Flags())
+	},
+}
+
+var PutSplashAuthorizationStatus = &cobra.Command{
+	Use:   "splashAuthorizationStatus",
 	Short: "Update a client's splash authorization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -99,39 +88,33 @@ var PutClientSplashAuthorization = &cobra.Command{
 			networkId = args[1]
 		}
 		clientId := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutSplashAuthorization(networkId, clientId, format)
-		shell.Display(metadata, "ClientSplashAuthorization", cmd.Flags())
+		var format configure.SplashAuthorizationStatus
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSplashAuthorizationStatus(networkId, clientId,  input)
+		shell.Display(metadata, "SplashAuthorizationStatus", cmd.Flags())
 	},
 }
 
-var PostProvisionClient = &cobra.Command{
-	Use:   "ProvisionClient",
+var PostProvisionClients = &cobra.Command{
+	Use:   "provisionClients",
 	Short: "Update a client's splash authorization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostProvisionClient(networkId, format)
-		shell.Display(metadata, "ProvisionClient", cmd.Flags())
+		var format configure.ProvisionClients
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostProvisionClients(networkId,  input)
+		shell.Display(metadata, "ProvisionClients", cmd.Flags())
 	},
 }
 
 
 
 var GetDevices = &cobra.Command{
-	Use:   "Devices",
-	Short: "List the devices in a network.",
+	Use:   "devices",
+	Short: "List the devices in a network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -142,9 +125,9 @@ var GetDevices = &cobra.Command{
 	},
 }
 
-var PostClaimSerials = &cobra.Command{
-	Use:   "ClaimSerials",
-	Short: "Claim devices into a network.",
+var PostClaimDevices = &cobra.Command{
+	Use:   "claimDevices",
+	Short: "Claim devices into a network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -153,40 +136,34 @@ var PostClaimSerials = &cobra.Command{
 
 		format := args[0]
 		if format == "" {
-			// Read Config File
-			var format interface{}
-			shell.RenderInput(&format)
-		}
 
-		metadata := configure.PostClaimSerials(networkId, format)
+		}
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostClaimDevices(networkId,  input)
 		shell.Display(metadata, "ClaimSerials", cmd.Flags())
 	},
 }
 
-var PostRemoveSerials = &cobra.Command{
-	Use:   "RemoveSerials",
-	Short: "Remove a single device.",
+var PostRemoveDevices = &cobra.Command{
+	Use:   "removeDevices",
+	Short: "Remove a single device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[1]
 		}
-
 		format := args[0]
 		if format == "" {
-			// Read Config File
-			var format interface{}
-			shell.RenderInput(&format)
 		}
-
-		metadata := configure.PostUnClaimSerials(networkId, format)
-		shell.Display(metadata, "RemoveSerials", cmd.Flags())
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostRemoveDevices(networkId,  input)
+		shell.Display(metadata, "RemoveDevices", cmd.Flags())
 	},
 }
 
 var GetFirmwareUpgrades = &cobra.Command{
-	Use:   "FirmwareUpgrades",
-	Short: "Get current maintenance window for a network.",
+	Use:   "firmwareUpgrades",
+	Short: "Get current maintenance window for a network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -197,22 +174,28 @@ var GetFirmwareUpgrades = &cobra.Command{
 	},
 }
 
-// MISSING BODY PARAM in dashboard-api-golang
+
 var PutFirmwareUpgrades = &cobra.Command{
-	Use:   "FirmwareUpgrades",
+	Use:   "firmwareUpgrades",
 	Short: "Update current maintenance window for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
-			networkId = args[0]
+			networkId = args[1]
 		}
-		metadata := configure.PutFirmwareUpgrades(networkId)
+		format := args[0]
+		if format == "" {
+
+		}
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutFirmwareUpgrades(networkId,  input)
 		shell.Display(metadata, "FirmwareUpgrades", cmd.Flags())
 	},
 }
 
-var GetFloorplans = &cobra.Command{
-	Use:   "Floorplans",
+
+var GetFloorPlans = &cobra.Command{
+	Use:   "floorPlans",
 	Short: "List the floor plans that belong to your network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -220,13 +203,28 @@ var GetFloorplans = &cobra.Command{
 			networkId = args[0]
 		}
 		metadata := configure.GetFloorPlans(networkId)
-		shell.Display(metadata, "Floorplans", cmd.Flags())
+		shell.Display(metadata, "FloorPlans", cmd.Flags())
 	},
 }
 
-var GetFloorplan = &cobra.Command{
-	Use:   "Floorplan",
-	Short: "Find a floor plan by ID.",
+var PostFloorPlan = &cobra.Command{
+	Use:   "floorPlan",
+	Short: "Upload a floor plan",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		var format configure.FloorPlan
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostFloorPlan(networkId,  input)
+		shell.Display(metadata, "FloorPlan", cmd.Flags())
+	},
+}
+
+var GetFloorPlan = &cobra.Command{
+	Use:   "floorplan",
+	Short: "Find a floor plan by ID",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -235,13 +233,30 @@ var GetFloorplan = &cobra.Command{
 
 		floorplanId := args[0]
 		metadata := configure.GetFloorPlan(networkId, floorplanId)
-		shell.Display(metadata, "Floorplan", cmd.Flags())
+		shell.Display(metadata, "FloorPlan", cmd.Flags())
 	},
 }
 
-var DelFloorplan = &cobra.Command{
-	Use:   "Floorplan",
-	Short: "Delete a floor plan by ID.",
+var PutFloorPlan = &cobra.Command{
+	Use:   "floorPlan",
+	Short: "Update a floor plan's geolocation and other meta data",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+
+		floorplanId := args[0]
+		var format configure.FloorPlan
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutFloorPlan(networkId, floorplanId,  input)
+		shell.Display(metadata, "FloorPlan", cmd.Flags())
+	},
+}
+
+var DelFloorPlan = &cobra.Command{
+	Use:   "floorPlan",
+	Short: "Destroy a floor plan",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -250,51 +265,13 @@ var DelFloorplan = &cobra.Command{
 
 		floorplanId := args[0]
 		metadata := configure.DelFloorPlan(networkId, floorplanId)
-		shell.Display(metadata, "Floorplan", cmd.Flags())
-	},
-}
-
-var PutFloorplan = &cobra.Command{
-	Use:   "Floorplan",
-	Short: "Find a floor plan by ID.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[1]
-		}
-
-		floorplanId := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutFloorPlan(networkId, floorplanId, format)
-		shell.Display(metadata, "Floorplan", cmd.Flags())
-	},
-}
-
-var PostFloorplan = &cobra.Command{
-	Use:   "Floorplan",
-	Short: "Find a floor plan by ID.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[1]
-		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostFloorPlan(networkId, format)
-		shell.Display(metadata, "Floorplan", cmd.Flags())
+		shell.Display(metadata, "FloorPlan", cmd.Flags())
 	},
 }
 
 var GetGroupPolicies = &cobra.Command{
-	Use:   "GroupPolicies",
-	Short: "List the group policies in a network.",
+	Use:   "groupPolicies",
+	Short: "List the group policies in a network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -306,7 +283,7 @@ var GetGroupPolicies = &cobra.Command{
 }
 
 var GetGroupPolicy = &cobra.Command{
-	Use:   "GroupPolicy ",
+	Use:   "groupPolicy ",
 	Short: "Display a group policy.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -319,9 +296,41 @@ var GetGroupPolicy = &cobra.Command{
 	},
 }
 
+var PostGroupPolicy = &cobra.Command{
+	Use:   "groupPolicy ",
+	Short: "Create a group policy",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		var format configure.GroupPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostGroupPolicy(networkId,  input)
+		shell.Display(metadata, "GroupPolicy", cmd.Flags())
+	},
+}
+
+
+var PutGroupPolicy = &cobra.Command{
+	Use:   "groupPolicy ",
+	Short: "Update a group policy",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[1]
+		}
+		groupPolicyId := args[0]
+		var format configure.GroupPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutGroupPolicy(networkId, groupPolicyId,  input)
+		shell.Display(metadata, "GroupPolicy", cmd.Flags())
+	},
+}
+
 var DelGroupPolicy = &cobra.Command{
-	Use:   "GroupPolicy ",
-	Short: "Delete a group policy.",
+	Use:   "groupPolicy ",
+	Short: "Delete a group policy",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -333,46 +342,9 @@ var DelGroupPolicy = &cobra.Command{
 	},
 }
 
-var PutGroupPolicy = &cobra.Command{
-	Use:   "GroupPolicy ",
-	Short: "Update a group policy.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[1]
-		}
-		groupPolicyId := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutGroupPolicy(networkId, groupPolicyId, format)
-		shell.Display(metadata, "GroupPolicy", cmd.Flags())
-	},
-}
-
-var PostGroupPolicy = &cobra.Command{
-	Use:   "GroupPolicy ",
-	Short: "Update a group policy.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[0]
-		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostGroupPolicy(networkId, format)
-		shell.Display(metadata, "GroupPolicy", cmd.Flags())
-	},
-}
-
 var GetMerakiAuthUsers = &cobra.Command{
-	Use:   "MerakiAuthUsers",
-	Short: "List the users configured under Meraki Authentication for a network (splash guest or RADIUS users for a mr network, or client VPN users for a wired network).",
+	Use:   "merakiAuthUsers",
+	Short: "List the users configured under Meraki Authentication for a network",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -383,9 +355,23 @@ var GetMerakiAuthUsers = &cobra.Command{
 	},
 }
 
+var PostMerakiAuthUser = &cobra.Command{
+	Use:   "merakiAuthUser",
+	Short: "Create a user configured with Meraki Authentication for a network",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		var format configure.MerakiAuthUser
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostMerakiAuthUser(networkId,  input)
+		shell.Display(metadata, "MerakiAuthUser", cmd.Flags())
+	},
+}
 
 var GetMerakiAuthUser = &cobra.Command{
-	Use:   "MerakiAuthUser",
+	Use:   "merakiAuthUser",
 	Short: "Return the Meraki Auth splash guest, RADIUS, or client VPN user.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -399,8 +385,8 @@ var GetMerakiAuthUser = &cobra.Command{
 }
 
 var DelMerakiAuthUser = &cobra.Command{
-	Use:   "MerakiAuthUser",
-	Short: "Delete the Meraki Auth splash guest, RADIUS, or client VPN user.",
+	Use:   "merakiAuthUser",
+	Short: "Delete a user configured with Meraki Authentication",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
@@ -413,56 +399,40 @@ var DelMerakiAuthUser = &cobra.Command{
 }
 
 var PutMerakiAuthUser = &cobra.Command{
-	Use:   "MerakiAuthUser",
-	Short: "Update the Meraki Auth splash guest, RADIUS, or client VPN user.",
+	Use:   "merakiAuthUser",
+	Short: "Update a user configured with Meraki Authentication",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
+		var format configure.MerakiAuthUser
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		merakiAuthUserId := args[0]
-		metadata := configure.PutMerakiAuthUser(networkId, merakiAuthUserId, format)
+		metadata := configure.PutMerakiAuthUser(networkId, merakiAuthUserId,  input)
 		shell.Display(metadata, "MerakiAuthUser", cmd.Flags())
 	},
 }
 
-var PostMerakiAuthUser = &cobra.Command{
-	Use:   "MerakiAuthUser",
-	Short: "Create the Meraki Auth splash guest, RADIUS, or client VPN user.",
-	Run: func(cmd *cobra.Command, args []string) {
-		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
-		if networkId == "" {
-			networkId = args[0]
-		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostMerakiAuthUser(networkId, format)
-		shell.Display(metadata, "MerakiAuthUser", cmd.Flags())
-	},
-}
+
 
 
 var GetMQTTBrokers = &cobra.Command{
-	Use:   "MQTTBrokers",
+	Use:   "mqttBrokers",
 	Short: "List the MQTT brokers for this network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetMqttBrokers(networkId)
+		metadata := configure.GetMQTTBrokers(networkId)
 		shell.Display(metadata, "MQTTBrokers", cmd.Flags())
 	},
 }
 
 
 var GetMQTTBroker = &cobra.Command{
-	Use:   "MQTTBroker",
+	Use:   "mqttBroker",
 	Short: "Return an MQTT broker.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -470,13 +440,13 @@ var GetMQTTBroker = &cobra.Command{
 			networkId = args[1]
 		}
 		mqttBrokerId := args[0]
-		metadata := configure.GetMqttBroker(networkId, mqttBrokerId)
+		metadata := configure.GetMQTTBroker(networkId, mqttBrokerId)
 		shell.Display(metadata, "MQTTBroker", cmd.Flags())
 	},
 }
 
 var DelMQTTBroker = &cobra.Command{
-	Use:   "MQTTBroker",
+	Use:   "mqttBroker",
 	Short: "Delete a MQTT broker.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -484,13 +454,13 @@ var DelMQTTBroker = &cobra.Command{
 			networkId = args[1]
 		}
 		mqttBrokerId := args[0]
-		metadata := configure.DelMqttBroker(networkId, mqttBrokerId)
+		metadata := configure.DelMQTTBroker(networkId, mqttBrokerId)
 		shell.Display(metadata, "MQTTBroker", cmd.Flags())
 	},
 }
 
 var PutMQTTBroker = &cobra.Command{
-	Use:   "MQTTBroker",
+	Use:   "mqttBroker",
 	Short: "Return an MQTT broker.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -498,36 +468,30 @@ var PutMQTTBroker = &cobra.Command{
 			networkId = args[1]
 		}
 		mqttBrokerId := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutMqttBroker(networkId, mqttBrokerId, format)
+		var format configure.MQTTBroker
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutMQTTBroker(networkId, mqttBrokerId,  input)
 		shell.Display(metadata, "MQTTBroker", cmd.Flags())
 	},
 }
 
 var PostMQTTBroker = &cobra.Command{
-	Use:   "MQTTBroker",
+	Use:   "mqttBroker",
 	Short: "Create a MQTT broker.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostMqttBroker(networkId, format)
+		var format configure.MQTTBroker
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostMQTTBroker(networkId,  input)
 		shell.Display(metadata, "MQTTBroker", cmd.Flags())
 	},
 }
 
 var GetNetflow = &cobra.Command{
-	Use:   "Netflow",
+	Use:   "netflow",
 	Short: "Return the NetFlow traffic reporting settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -540,25 +504,22 @@ var GetNetflow = &cobra.Command{
 }
 
 var PutNetflow = &cobra.Command{
-	Use:   "Netflow",
+	Use:   "netflow",
 	Short: "Return the NetFlow traffic reporting settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutNetFlow(networkId, format)
+		var format configure.NetFlow
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutNetFlow(networkId,  input)
 		shell.Display(metadata, "Netflow", cmd.Flags())
 	},
 }
 
 var GetChannelUtilization = &cobra.Command{
-	Use:   "ChannelUtilization",
+	Use:   "channelUtilization",
 	Short: "Get the channel utilization over each radio for all APs in a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -580,20 +541,20 @@ var GetChannelUtilization = &cobra.Command{
 }
 
 var GetPIIRequests = &cobra.Command{
-	Use:   "PIIRequests",
+	Use:   "piiRequests",
 	Short: "List the PII requests for this network or organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.GetPiiRequests(networkId)
+		metadata := configure.GetPIIRequests(networkId)
 		shell.Display(metadata, "PIIRequests", cmd.Flags())
 	},
 }
 
 var GetPIIRequest = &cobra.Command{
-	Use:   "PIIRequest",
+	Use:   "piiRequest",
 	Short: "Return a PII request.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -601,13 +562,13 @@ var GetPIIRequest = &cobra.Command{
 			networkId = args[1]
 		}
 		requestId := args[0]
-		metadata := configure.GetPiiRequest(networkId, requestId)
+		metadata := configure.GetPIIRequest(networkId, requestId)
 		shell.Display(metadata, "PIIRequest", cmd.Flags())
 	},
 }
 
 var DelPIIRequest = &cobra.Command{
-	Use:   "PIIRequest",
+	Use:   "piiRequest",
 	Short: "Delete a PII request.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -615,29 +576,28 @@ var DelPIIRequest = &cobra.Command{
 			networkId = args[1]
 		}
 		requestId := args[0]
-		metadata := configure.DelPiiRequest(networkId, requestId)
+		metadata := configure.DelPIIRequest(networkId, requestId)
 		shell.Display(metadata, "PIIRequest", cmd.Flags())
 	},
 }
 
 var PostPIIRequest = &cobra.Command{
-	Use:   "PIIRequest",
+	Use:   "piiRequest",
 	Short: "Create a PII request.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostPiiRequest(networkId, format)
+		var format configure.PIIRequest
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostPIIRequest(networkId,  input)
 		shell.Display(metadata, "PIIRequest", cmd.Flags())
 	},
 }
 
 var GetSMDevices = &cobra.Command{
-	Use:   "SMDevices",
+	Use:   "smDevices",
 	Short: "Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -651,14 +611,14 @@ var GetSMDevices = &cobra.Command{
 		imei, _ := cmd.Flags().GetString("imei")
 		bluetoothMac, _ := cmd.Flags().GetString("bluetoothMac")
 
-		metadata := configure.GetSmDevicesForKey(networkId,
+		metadata := configure.GetSMDevices(networkId,
 			username, email, mac, serial, imei, bluetoothMac)
 		shell.Display(metadata, "SMDevices", cmd.Flags())
 	},
 }
 
 var GetSMOwners = &cobra.Command{
-	Use:   "SMOwners",
+	Use:   "smOwners",
 	Short: "Given a piece of Personally Identifiable Information (PII), return the Systems Manager device ID(s) associated with that identifier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -672,7 +632,7 @@ var GetSMOwners = &cobra.Command{
 		imei, _ := cmd.Flags().GetString("imei")
 		bluetoothMac, _ := cmd.Flags().GetString("bluetoothMac")
 
-		metadata := configure.GetSmOwnersForKey(networkId,
+		metadata := configure.GetSMOwners(networkId,
 			username, email, mac, serial, imei, bluetoothMac)
 		shell.Display(metadata, "SMOwners", cmd.Flags())
 	},
@@ -680,7 +640,7 @@ var GetSMOwners = &cobra.Command{
 
 
 var GetSettings = &cobra.Command{
-	Use:   "Settings",
+	Use:   "settings",
 	Short: "Return the settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -694,23 +654,22 @@ var GetSettings = &cobra.Command{
 }
 
 var PutSettings = &cobra.Command{
-	Use:   "Settings",
+	Use:   "settings",
 	Short: "Update the settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSettings(networkId, format)
+		var format configure.Settings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSettings(networkId,  input)
 		shell.Display(metadata, "Settings", cmd.Flags())
 	},
 }
 
 var GetSNMP = &cobra.Command{
-	Use:   "SNMP",
+	Use:   "snmp",
 	Short: "Return the SNMP settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -723,25 +682,23 @@ var GetSNMP = &cobra.Command{
 	},
 }
 
-// FIX in Dashboard-API-GoLang
 var PutSNMP = &cobra.Command{
-	Use:   "SNMP",
+	Use:   "snmp",
 	Short: "Return the SNMP settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		//metadata := configure.PutSNMP(networkId, format)
-		//shell.Display(metadata, "SNMP", cmd.Flags())
+		var format configure.SNMP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSNMP(networkId,  input)
+		shell.Display(metadata, "SNMP", cmd.Flags())
 	},
 }
 
-var GetSyslog = &cobra.Command{
-	Use:   "Syslog",
+var GetSyslogServers = &cobra.Command{
+	Use:   "syslogServers",
 	Short: "List the syslog servers for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -750,28 +707,27 @@ var GetSyslog = &cobra.Command{
 		}
 
 		metadata := configure.GetSyslogServers(networkId)
-		shell.Display(metadata, "Syslog", cmd.Flags())
+		shell.Display(metadata, "SyslogServers", cmd.Flags())
 	},
 }
 
-var PutSyslog = &cobra.Command{
-	Use:   "Syslog",
+var PutSyslogServers = &cobra.Command{
+	Use:   "syslogServers",
 	Short: "Update the syslog servers for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSyslogServers(networkId, format)
-		shell.Display(metadata, "Syslog", cmd.Flags())
+		var format configure.SyslogServers
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSyslogServers(networkId,  input)
+		shell.Display(metadata, "SyslogServers", cmd.Flags())
 	},
 }
 
 var GetTrafficAnalysis = &cobra.Command{
-	Use:   "TrafficAnalysis",
+	Use:   "trafficAnalysis",
 	Short: "Return the traffic analysis settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -785,23 +741,22 @@ var GetTrafficAnalysis = &cobra.Command{
 }
 
 var PutTrafficAnalysis = &cobra.Command{
-	Use:   "TrafficAnalysis",
+	Use:   "trafficAnalysis",
 	Short: "Update the traffic analysis settings for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutTrafficAnalysis(networkId, format)
+		var format configure.TrafficAnalysis
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutTrafficAnalysis(networkId,  input)
 		shell.Display(metadata, "TrafficAnalysis", cmd.Flags())
 	},
 }
 
 var GetTrafficShaping = &cobra.Command{
-	Use:   "TrafficShaping",
+	Use:   "trafficShaping",
 	Short: "Returns the application categories for traffic shaping rules.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -814,8 +769,8 @@ var GetTrafficShaping = &cobra.Command{
 	},
 }
 
-var GetDSCP = &cobra.Command{
-	Use:   "DSCP",
+var GetDSCPTaggingOptions = &cobra.Command{
+	Use:   "dscpTaggingOptions",
 	Short: "Returns the available DSCP tagging options for your traffic shaping rules.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -823,13 +778,13 @@ var GetDSCP = &cobra.Command{
 			networkId = args[0]
 		}
 
-		metadata := configure.GetDscpTaggingOptions(networkId)
-		shell.Display(metadata, "DSCP", cmd.Flags())
+		metadata := configure.GetDSCPTaggingOptions(networkId)
+		shell.Display(metadata, "DSCPTaggingOptions", cmd.Flags())
 	},
 }
 
 var GetHTTPServers = &cobra.Command{
-	Use:   "HTTPServers",
+	Use:   "httpServers",
 	Short: "List the HTTP servers for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -843,7 +798,7 @@ var GetHTTPServers = &cobra.Command{
 }
 
 var GetHTTPServer = &cobra.Command{
-	Use:   "HTTPServer",
+	Use:   "httpServer",
 	Short: "Return an HTTP server for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -857,43 +812,38 @@ var GetHTTPServer = &cobra.Command{
 }
 
 var PutHTTPServer = &cobra.Command{
-	Use:   "HTTPServer",
+	Use:   "httpServer",
 	Short: "Update an HTTP server for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
+		var format configure.HTTPServer
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		httpServerId := args[0]
-		metadata := configure.PutHTTPServer(networkId, httpServerId, format)
+		metadata := configure.PutHTTPServer(networkId, httpServerId,  input)
 		shell.Display(metadata, "HTTPServer", cmd.Flags())
 	},
 }
 
-// FIX in DASHBOARD-API-GOLANG
 var PostHTTPServer = &cobra.Command{
-	Use:   "HTTPServer",
+	Use:   "httpServer",
 	Short: "Create a HTTP server for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		//metadata := configure.PostHTTPServer(networkId,format)
-		//shell.Display(metadata, "HTTPServer", cmd.Flags())
+		var format configure.HTTPServer
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostHTTPServer(networkId,  input)
+		shell.Display(metadata, "HTTPServer", cmd.Flags())
 	},
 }
 
 var DelHTTPServer = &cobra.Command{
-	Use:   "HTTPServer",
+	Use:   "httpServer",
 	Short: "Delete an HTTP server for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -907,7 +857,7 @@ var DelHTTPServer = &cobra.Command{
 }
 
 var GetWebhookTest = &cobra.Command{
-	Use:   "WebhookTest",
+	Use:   "webhookTest",
 	Short: "Return the status of a webhook test for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -915,26 +865,26 @@ var GetWebhookTest = &cobra.Command{
 			networkId = args[1]
 		}
 		weebhookTestId := args[0]
-		metadata := configure.GetWebhookTests(networkId, weebhookTestId)
+		metadata := configure.GetWebhookTest(networkId, weebhookTestId)
 		shell.Display(metadata, "WebhookTest", cmd.Flags())
 	},
 }
 
 var PostWebhookTest = &cobra.Command{
-	Use:   "WebhookTest",
+	Use:   "webhookTest",
 	Short: "Post  a webhook test for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		metadata := configure.PostWebhookTests(networkId)
+		metadata := configure.PostWebhookTest(networkId)
 		shell.Display(metadata, "WebhookTest", cmd.Flags())
 	},
 }
 
 var GetNetwork = &cobra.Command{
-	Use:   "Details",
+	Use:   "details",
 	Short: "Return a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -947,23 +897,22 @@ var GetNetwork = &cobra.Command{
 }
 
 var PutNetwork = &cobra.Command{
-	Use:   "Details",
+	Use:   "details",
 	Short: "Return a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutNetwork(networkId, format)
+		var format configure.Network
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutNetwork(networkId,  input)
 		shell.Display(metadata, "Details", cmd.Flags())
 	},
 }
 
 var DelNetwork = &cobra.Command{
-	Use:   "Details",
+	Use:   "details",
 	Short: "Delete a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -975,53 +924,70 @@ var DelNetwork = &cobra.Command{
 	},
 }
 
-//FIX IN DASHBOARD-API-GOLANG
 var PostBindNetwork = &cobra.Command{
-	Use:   "BindNetwork",
+	Use:   "bindNetwork",
 	Short: "Bind a network to a template.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		//metadata := configure.PostBindNetwork()
-		//shell.Display(metadata, "BindNetwork", cmd.Flags())
+		var format configure.Network
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostBindNetwork(networkId,  input)
+		shell.Display(metadata, "BindNetwork", cmd.Flags())
 	},
 }
 
-//FIX IN DASHBOARD-API-GOLANG
+
 var PostUnBindNetwork = &cobra.Command{
-	Use:   "UnBindNetwork",
+	Use:   "unbindNetwork",
 	Short: "UnBind a network from a template.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		//metadata := configure.PostUnBindNetwork()
-		//shell.Display(metadata, "UnBindNetwork", cmd.Flags())
+		var format configure.Network
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostUnBindNetwork(networkId,  input)
+		shell.Display(metadata, "UnBindNetwork", cmd.Flags())
 	},
 }
 
-//FIX IN DASHBOARD-API-GOLANG
+
 var PostSplitNetwork = &cobra.Command{
-	Use:   "SplitNetwork",
+	Use:   "splitNetwork",
 	Short: "Split a network from a template.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		//metadata := configure.PostSplitNetwork()
-		//shell.Display(metadata, "SplitNetwork", cmd.Flags())
+		var format configure.Network
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostSplitNetwork(networkId,  input)
+		shell.Display(metadata, "SplitNetwork", cmd.Flags())
+	},
+}
+
+var GetClients = &cobra.Command{
+	Use:   "clients",
+	Short: "Return the policy assigned to a client on the network",
+	Run: func(cmd *cobra.Command, args []string) {
+		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
+		if networkId == "" {
+			networkId = args[0]
+		}
+		t0, _ := cmd.Flags().GetString("t0")
+		t1, _ := cmd.Flags().GetString("t1")
+		timespan, _ := cmd.Flags().GetString("timespan")
+		perPage, _ := cmd.Flags().GetString("perPage")
+		startingAfter, _ := cmd.Flags().GetString("startingAfter")
+		endingBefore, _ := cmd.Flags().GetString("endingBefore")
+
+		metadata := organizations.GetClients(networkId, t0, t1,
+			timespan, perPage, startingAfter, endingBefore)
+		shell.Display(metadata, "clients", cmd.Flags())
 	},
 }

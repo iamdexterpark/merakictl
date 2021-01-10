@@ -7,7 +7,7 @@ import (
 )
 
 var GetBluetoothClients = &cobra.Command{
-	Use:   "BluetoothClients",
+	Use:   "bluetoothClients",
 	Short: "List the Bluetooth clients seen by APs in this network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -31,7 +31,7 @@ var GetBluetoothClients = &cobra.Command{
 }
 
 var GetBluetoothClient = &cobra.Command{
-	Use:   "BluetoothClient",
+	Use:   "bluetoothClient",
 	Short: "Return a Bluetooth client. Bluetooth clients can be identified by their ID or their MAC.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -51,7 +51,7 @@ var GetBluetoothClient = &cobra.Command{
 
 
 var GetClientTrafficHistory = &cobra.Command{
-	Use:   "ClientTrafficHistory",
+	Use:   "clientTrafficHistory",
 	Short: "Return the client's network traffic data over time. Usage data is in kilobytes.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -64,13 +64,13 @@ var GetClientTrafficHistory = &cobra.Command{
 		startingAfter, _ := cmd.Flags().GetString("startingAfter")
 		endingBefore, _ := cmd.Flags().GetString("endingBefore")
 
-		metadata := monitor.GetTrafficHistory(networkId, clientId, perPage, startingAfter, endingBefore)
+		metadata := monitor.GetClientTrafficHistory(networkId, clientId, perPage, startingAfter, endingBefore)
 		shell.Display(metadata, "ClientTrafficHistory", cmd.Flags())
 	},
 }
 
 var GetClientUsageHistory = &cobra.Command{
-	Use:   "ClientUsageHistory",
+	Use:   "clientUsageHistory",
 	Short: "Return the client's daily usage history.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -78,13 +78,13 @@ var GetClientUsageHistory = &cobra.Command{
 			networkId = args[1]
 		}
 		clientId := args[0]
-		metadata := monitor.GetClient(networkId, clientId)
+		metadata := monitor.GetClientUsageHistory(networkId, clientId)
 		shell.Display(metadata, "ClientUsageHistory", cmd.Flags())
 	},
 }
 
 var GetNetworkClients = &cobra.Command{
-	Use:   "NetworkClients",
+	Use:   "networkClients",
 	Short: "List the clients that have used this network in the timespan.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -101,8 +101,10 @@ var GetNetworkClients = &cobra.Command{
 	},
 }
 
-var GetClientIdentifier = &cobra.Command{
-	Use:   "ClientIdentifier",
+
+
+var GetNetworkClient = &cobra.Command{
+	Use:   "clientIdentifier",
 	Short: "Return the client associated with the given identifier.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -116,7 +118,7 @@ var GetClientIdentifier = &cobra.Command{
 }
 
 var GetEnvironmentalEvents = &cobra.Command{
-	Use:   "EnvironmentalEvents",
+	Use:   "environmentalEvents",
 	Short: "List the environmental events for the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -137,7 +139,7 @@ var GetEnvironmentalEvents = &cobra.Command{
 }
 
 var GetEvents = &cobra.Command{
-	Use:   "Events",
+	Use:   "events",
 	Short: "List the events for the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -168,7 +170,7 @@ var GetEvents = &cobra.Command{
 }
 
 var GetSplashLoginAttempts = &cobra.Command{
-	Use:   "SplashLoginAttempts",
+	Use:   "splashLoginAttempts",
 	Short: "List the splash login attempts for a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -188,7 +190,7 @@ var GetSplashLoginAttempts = &cobra.Command{
 
 
 var GetTraffic = &cobra.Command{
-	Use:   "Traffic",
+	Use:   "traffic",
 	Short: "Return the traffic analysis data for this network. Traffic analysis with hostname visibility must be enabled on the network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())

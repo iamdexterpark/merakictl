@@ -1,4 +1,4 @@
-package update
+package put
 
 import (
 	"github.com/ddexterpark/merakictl/meraki/general/device"
@@ -42,10 +42,10 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand(network.PutAlertConfig)
-	NetCmd.AddCommand(network.PutClientSplashAuthorization)
+	NetCmd.AddCommand(network.PutAlertSettings)
+	NetCmd.AddCommand(network.PutSplashAuthorizationStatus)
 	NetCmd.AddCommand(network.PutFirmwareUpgrades)
-	NetCmd.AddCommand(network.PutFloorplan)
+	NetCmd.AddCommand(network.PutFloorPlan)
 	NetCmd.AddCommand(network.PutGroupPolicy)
 	NetCmd.AddCommand(network.PutHTTPServer)
 	NetCmd.AddCommand(network.PutMerakiAuthUser)
@@ -54,7 +54,7 @@ func init() {
 	NetCmd.AddCommand(network.PutNetwork)
 	NetCmd.AddCommand(network.PutSettings)
 	NetCmd.AddCommand(network.PutSNMP)
-	NetCmd.AddCommand(network.PutSyslog)
+	NetCmd.AddCommand(network.PutSyslogServers)
 	NetCmd.AddCommand(network.PutTrafficAnalysis)
 }
 

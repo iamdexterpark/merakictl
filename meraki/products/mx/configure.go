@@ -29,10 +29,9 @@ var PutConnectivityMonitoringDestinations = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutConnectivityMonitoringDestinations(networkId, format)
+		var format configure.ConnectivityMonitoringDestinations
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutConnectivityMonitoringDestinations(networkId,  input)
 		shell.Display(metadata, "ConnectivityMonitoringDestinations", cmd.Flags())
 	},
 }
@@ -76,10 +75,9 @@ var PutContentFiltering = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutContentFiltering(networkId, format)
+		var format configure.ContentFiltering
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutContentFiltering(networkId,  input)
 		shell.Display(metadata, "ContentFiltering", cmd.Flags())
 	},
 }
@@ -108,10 +106,9 @@ var PutCellularFirewallRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutCellularFirewallRules(networkId, format)
+		var format configure.CellularFirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutCellularFirewallRules(networkId,  input)
 		shell.Display(metadata, "CellularFirewallRules", cmd.Flags())
 	},
 }
@@ -157,10 +154,9 @@ var PutFirewalledService = &cobra.Command{
 		}
 
 		serviceId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutFirewalledService(networkId, serviceId, format)
+		var format configure.FirewalledService
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutFirewalledService(networkId, serviceId,  input)
 		shell.Display(metadata, "FirewalledService", cmd.Flags())
 	},
 }
@@ -188,10 +184,9 @@ var PutInboundFirewallRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutInboundFirewallRules(networkId, format)
+		var format configure.InboundFirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutInboundFirewallRules(networkId,  input)
 		shell.Display(metadata, "InboundFirewallRules", cmd.Flags())
 	},
 }
@@ -210,6 +205,7 @@ shell.Display(metadata, "L3FirewallRules", cmd.Flags())
 },
 }
 
+// works
 var PutL3FirewallRules = &cobra.Command{
 	Use:   "L3FirewallRules",
 	Short: "Return the L3 firewall rules for an MX network.",
@@ -218,10 +214,11 @@ var PutL3FirewallRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutL3FirewallRules(networkId, format)
+
+		var format configure.L3FirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+
+		metadata := configure.PutL3FirewallRules(networkId,  input)
 		shell.Display(metadata, "L3FirewallRules", cmd.Flags())
 	},
 }
@@ -264,10 +261,9 @@ var PutL7FirewallRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutL7FirewallRules(networkId, format)
+		var format configure.L7FirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutL7FirewallRules(networkId,  input)
 		shell.Display(metadata, "L7FirewallRule", cmd.Flags())
 	},
 }
@@ -295,10 +291,9 @@ var PutOneToManyNatRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutOneToManyNatRules(networkId, format)
+		var format configure.OneToManyNatRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutOneToManyNatRules(networkId,  input)
 		shell.Display(metadata, "OneToManyNatRules", cmd.Flags())
 	},
 }
@@ -325,10 +320,9 @@ var PutOneToOneNatRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutOneToOneNatRules(networkId, format)
+		var format configure.OneToOneNatRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutOneToOneNatRules(networkId,  input)
 		shell.Display(metadata, "OneToOneNatRules", cmd.Flags())
 	},
 }
@@ -357,10 +351,9 @@ var PutPortForwardingRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutPortForwardingRules(networkId, format)
+		var format configure.PortForwardingRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutPortForwardingRules(networkId,  input)
 		shell.Display(metadata, "PortForwardingRules", cmd.Flags())
 	},
 }
@@ -404,10 +397,9 @@ var PutPort = &cobra.Command{
 		}
 
 		portId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutAppliancePort(networkId, portId, format)
+		var format configure.AppliancePort
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAppliancePort(networkId, portId,  input)
 		shell.Display(metadata, "Port", cmd.Flags())
 	},
 }
@@ -434,10 +426,9 @@ var PutNetworkIntrusion = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutNetworkSecurityIntrusion(networkId, format)
+		var format configure.SecurityIntrusion
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutNetworkSecurityIntrusion(networkId,  input)
 		shell.Display(metadata, "NetworkIntrusion", cmd.Flags())
 	},
 }
@@ -464,10 +455,9 @@ var PutOrganizationIntrusion = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutOrganizationSecurityIntrusion(networkId, format)
+		var format configure.OrganizationSecurityIntrusion
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutOrganizationSecurityIntrusion(networkId,  input)
 		shell.Display(metadata, "OrganizationIntrusion", cmd.Flags())
 	},
 }
@@ -494,10 +484,9 @@ var PutMalware = &cobra.Command{ // Sorry for the poor choice of words.
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutMalwareSettings(networkId, format)
+		var format configure.MalwareSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutMalwareSettings(networkId,  input)
 		shell.Display(metadata, "Malware", cmd.Flags())
 	},
 }
@@ -541,10 +530,9 @@ var PutSingleLan = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSingleLan(networkId, format)
+		var format configure.SingleLan
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSingleLan(networkId,  input)
 		shell.Display(metadata, "SingleLan", cmd.Flags())
 	},
 }
@@ -604,10 +592,9 @@ var PutStaticRoute = &cobra.Command{
 		}
 
 		staticRouteId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStaticRoute(networkId, staticRouteId, format)
+		var format configure.StaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStaticRoute(networkId, staticRouteId,  input)
 		shell.Display(metadata, "StaticRoute", cmd.Flags())
 	},
 }
@@ -620,11 +607,9 @@ var PostStaticRoute = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostStaticRoutes(networkId, format)
+		var format configure.StaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostStaticRoutes(networkId,  input)
 		shell.Display(metadata, "StaticRoute", cmd.Flags())
 	},
 }
@@ -685,11 +670,10 @@ var PutCustomPerformanceClass = &cobra.Command{
 		}
 
 		customPerformanceClassId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.CustomPerformanceClass
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PutPerformanceClass(networkId,
-			customPerformanceClassId, format)
+			customPerformanceClassId,  input)
 		shell.Display(metadata, "CustomPerformanceClass", cmd.Flags())
 	},
 }
@@ -702,10 +686,9 @@ var PostCustomPerformanceClass = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostPerformanceClasses(networkId, format)
+		var format configure.CustomPerformanceClass
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostPerformanceClasses(networkId,  input)
 		shell.Display(metadata, "CustomPerformanceClass", cmd.Flags())
 	},
 }
@@ -732,11 +715,10 @@ var PutTrafficShapingRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.TrafficShapingRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
 
-		metadata := configure.PutTrafficShapingRules(networkId, format)
+		metadata := configure.PutTrafficShapingRules(networkId,  input)
 		shell.Display(metadata, "TrafficShapingRules", cmd.Flags())
 	},
 }
@@ -764,11 +746,9 @@ var PutUplinkBandwidth = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutUplinkBandwidth(networkId, format)
+		var format configure.UplinkBandwidth
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutUplinkBandwidth(networkId,  input)
 		shell.Display(metadata, "UplinkBandwidth", cmd.Flags())
 	},
 }
@@ -795,10 +775,9 @@ var PutUplinkSelection = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutUplinkSelection(networkId, format)
+		var format configure.UplinkSelection
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutUplinkSelection(networkId,  input)
 		shell.Display(metadata, "UplinkSelection", cmd.Flags())
 	},
 }
@@ -825,10 +804,9 @@ var PutTrafficShaping = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutTrafficShapingRules(networkId, format)
+		var format configure.TrafficShaping
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutTrafficShapingRules(networkId,  input)
 		shell.Display(metadata, "TrafficShaping", cmd.Flags())
 	},
 }
@@ -856,10 +834,9 @@ var PutVLANSettings = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutVLANSettings(networkId, format)
+		var format configure.VLANSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutVLANSettings(networkId,  input)
 		shell.Display(metadata, "VLANSettings", cmd.Flags())
 	},
 }
@@ -919,10 +896,9 @@ var PutVLAN = &cobra.Command{
 		}
 
 		vlanId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutVLAN(networkId, vlanId, format)
+		var format configure.VLAN
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutVLAN(networkId, vlanId,  input)
 		shell.Display(metadata, "VLAN", cmd.Flags())
 	},
 }
@@ -935,11 +911,9 @@ var PostVLAN = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostVLAN(networkId, format)
+		var format configure.VLAN
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostVLAN(networkId,  input)
 		shell.Display(metadata, "VLAN", cmd.Flags())
 	},
 }
@@ -966,10 +940,9 @@ var PutBGP = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutBGP(networkId, format)
+		var format configure.BGP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutBGP(networkId,  input)
 		shell.Display(metadata, "BGP", cmd.Flags())
 	},
 }
@@ -996,10 +969,9 @@ var PutSiteToSiteVPN = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSiteToSiteVPN(networkId, format)
+		var format configure.SiteToSiteVPN
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSiteToSiteVPN(networkId,  input)
 		shell.Display(metadata, "SiteToSiteVPN", cmd.Flags())
 	},
 }
@@ -1026,10 +998,9 @@ var PutThirdPartyVPNPeers = &cobra.Command{
 		if orgId == "" {
 			orgId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutThirdPartyVPNPeers(orgId, format)
+		var format configure.ThirdPartyVPNPeers
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutThirdPartyVPNPeers(orgId,  input)
 		shell.Display(metadata, "ThirdPartyVPNPeers", cmd.Flags())
 	},
 }
@@ -1056,10 +1027,9 @@ var PutVPNFirewallRules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutCellularFirewallRules(networkId, format)
+		var format configure.VpnFirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutCellularFirewallRules(networkId,  input)
 		shell.Display(metadata, "VPNFirewallRules", cmd.Flags())
 	},
 }
@@ -1086,10 +1056,9 @@ var PutWarmspare = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutWarmSpare(networkId, format)
+		var format configure.WarmSpare
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutWarmSpare(networkId,  input)
 		shell.Display(metadata, "Warmspare", cmd.Flags())
 	},
 }
@@ -1102,10 +1071,9 @@ var PostWarmspare = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostWarmSpare(networkId, format)
+		var format configure.WarmSpare
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostWarmSpare(networkId,  input)
 		shell.Display(metadata, "Warmspare", cmd.Flags())
 	},
 }

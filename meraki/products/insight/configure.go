@@ -56,10 +56,9 @@ var PutMonitoredMediaServer = &cobra.Command{
 			orgId = args[1]
 		}
 		monitoredMediaServerId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutMonitoredMediaServer(orgId, monitoredMediaServerId, format)
+		var format configure.MonitoredMediaServer
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutMonitoredMediaServer(orgId, monitoredMediaServerId,  input)
 		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
 	},
 }
@@ -72,10 +71,9 @@ var PostMonitoredMediaServer = &cobra.Command{
 		if orgId == "" {
 			orgId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostMonitoredMediaServer(orgId, format)
+		var format configure.MonitoredMediaServer
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostMonitoredMediaServer(orgId,  input)
 		shell.Display(metadata, "MonitoredMediaServer", cmd.Flags())
 	},
 }

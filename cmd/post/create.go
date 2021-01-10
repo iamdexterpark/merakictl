@@ -1,4 +1,4 @@
-package create
+package post
 
 import (
 	"github.com/spf13/cobra"
@@ -7,6 +7,7 @@ import (
 // CreateCmd
 var CreateCmd = &cobra.Command{
 	Use:   "create",
+	Aliases: []string{"post", "set"},
 	Short: "",
 	Long:  "Base for all HTTP POST Calls to Meraki Dashboard.",
 }

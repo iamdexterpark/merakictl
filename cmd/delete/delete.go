@@ -1,4 +1,4 @@
-package remove
+package delete
 
 import (
 	"github.com/spf13/cobra"
@@ -6,9 +6,9 @@ import (
 
 // DeleteCmd
 var DeleteCmd = &cobra.Command{
-	Use:   "remove",
-	Short: "",
-	Long:  "Base for all HTTP DEL Calls to Meraki Dashboard.",
+	Use:   "delete",
+	Aliases: []string{"no"},
+	Short: "Base for all HTTP DEL Calls to Meraki Dashboard.",
 }
 
 func init() {

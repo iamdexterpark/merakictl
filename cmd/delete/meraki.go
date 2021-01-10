@@ -1,4 +1,4 @@
-package remove
+package delete
 
 
 import (
@@ -36,7 +36,7 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand(network.DelFloorplan)
+	NetCmd.AddCommand(network.DelFloorPlan)
 	NetCmd.AddCommand(network.DelGroupPolicy)
 	NetCmd.AddCommand(network.DelHTTPServer)
 	NetCmd.AddCommand(network.DelMerakiAuthUser)

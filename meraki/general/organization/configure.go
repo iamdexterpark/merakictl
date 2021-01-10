@@ -9,7 +9,7 @@ import (
 
 
 var GetActionBatches = &cobra.Command{
-	Use:   "ActionBatches",
+	Use:   "actionBatches",
 	Short: "Return The List Of Action Batches In The Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -24,7 +24,7 @@ var GetActionBatches = &cobra.Command{
 }
 
 var GetActionBatch = &cobra.Command{
-	Use:   "ActionBatch",
+	Use:   "actionBatch",
 	Short: "Return The List Of Action Batches In The Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -38,7 +38,7 @@ var GetActionBatch = &cobra.Command{
 }
 
 var DelActionBatch = &cobra.Command{
-	Use:   "ActionBatch",
+	Use:   "actionBatch",
 	Short: "Delete Action Batches In The Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -52,40 +52,38 @@ var DelActionBatch = &cobra.Command{
 }
 
 var PutActionBatch = &cobra.Command{
-	Use:   "ActionBatch",
+	Use:   "actionBatch",
 	Short: "Update The List Of Action Batches In The Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.ActionBatch
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		actionBatchId := args[0]
-		metadata := configure.PutActionBatch(org, actionBatchId, format)
+		metadata := configure.PutActionBatch(org, actionBatchId, input)
 		shell.Display(metadata, "ActionBatch", cmd.Flags())
 	},
 }
 
 var PostActionBatch = &cobra.Command{
-	Use:   "ActionBatch",
+	Use:   "actionBatch",
 	Short: "Create an Action Batch.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostActionBatch(org, format)
+		var format configure.ActionBatch
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostActionBatch(org, input)
 		shell.Display(metadata, "ActionBatch", cmd.Flags())
 	},
 }
 
 var GetAdmins = &cobra.Command{
-	Use:   "Admins",
+	Use:   "admins",
 	Short: "Display a list of dashboard administrators.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -99,7 +97,7 @@ var GetAdmins = &cobra.Command{
 }
 
 var DelAdmins = &cobra.Command{
-	Use:   "Admins",
+	Use:   "admins",
 	Short: "Delete a dashboard administrator.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -114,7 +112,7 @@ var DelAdmins = &cobra.Command{
 }
 
 var PostAdmins = &cobra.Command{
-	Use:   "Admins",
+	Use:   "admins",
 	Short: "Create a new dashboard administrator.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -129,7 +127,7 @@ var PostAdmins = &cobra.Command{
 }
 
 var PutAdmins = &cobra.Command{
-	Use:   "Admins",
+	Use:   "admins",
 	Short: "Create a new dashboard administrator.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -137,17 +135,16 @@ var PutAdmins = &cobra.Command{
 			org = args[1]
 		}
 		adminId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutAdmin(org, adminId, format)
+		var format configure.Admin
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAdmin(org, adminId, input)
 		shell.Display(metadata, "Admins", cmd.Flags())
 
 	},
 }
 
 var GetBrandingPolicies = &cobra.Command{
-	Use:   "BrandingPolicies",
+	Use:   "brandingPolicies",
 	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -161,24 +158,23 @@ var GetBrandingPolicies = &cobra.Command{
 }
 
 var PutBrandingPolicyPriorities = &cobra.Command{
-	Use:   "BrandingPolicyPriorities",
+	Use:   "brandingPolicyPriorities",
 	Short: "Update the priority ordering of an organization's branding policies.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutBrandingPolicyPriorities(org, format)
+		var format configure.BrandingPolicyPriorities
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutBrandingPolicyPriorities(org, input)
 		shell.Display(metadata, "BrandingPolicyPriorities", cmd.Flags())
 
 	},
 }
 
 var GetBrandingPolicy = &cobra.Command{
-	Use:   "BrandingPolicy",
+	Use:   "brandingPolicy",
 	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -192,7 +188,7 @@ var GetBrandingPolicy = &cobra.Command{
 }
 
 var DelBrandingPolicy = &cobra.Command{
-	Use:   "BrandingPolicy",
+	Use:   "brandingPolicy",
 	Short: "Delete The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -206,7 +202,7 @@ var DelBrandingPolicy = &cobra.Command{
 }
 
 var PutBrandingPolicy = &cobra.Command{
-	Use:   "BrandingPolicy",
+	Use:   "brandingPolicy",
 	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -214,32 +210,30 @@ var PutBrandingPolicy = &cobra.Command{
 			org = args[1]
 		}
 		brandingId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutBrandingPolicy(org, brandingId, format)
+		var format configure.BrandingPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutBrandingPolicy(org, brandingId, input)
 		shell.Display(metadata, "BrandingPolicy", cmd.Flags())
 	},
 }
 
 var PostBrandingPolicy = &cobra.Command{
-	Use:   "BrandingPolicy",
+	Use:   "brandingPolicy",
 	Short: "Return The Branding Policy IDs Of An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostBrandingPolicy(org, format)
+		var format configure.BrandingPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostBrandingPolicy(org, input)
 		shell.Display(metadata, "BrandingPolicy", cmd.Flags())
 	},
 }
 
 var GetConfigurationTemplates = &cobra.Command{
-Use:   "ConfigurationTemplates",
+Use:   "configurationTemplates",
 Short: "List The Configuration Templates For This Organization.",
 Run: func(cmd *cobra.Command, args []string) {
 org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -252,7 +246,7 @@ shell.Display(metadata, "ConfigurationTemplates", cmd.Flags())
 }
 
 var GetConfigurationTemplate = &cobra.Command{
-Use:   "ConfigurationTemplate",
+Use:   "configurationTemplate",
 Short: "Return a Configuration Template For This Organization.",
 Run: func(cmd *cobra.Command, args []string) {
 org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -266,7 +260,7 @@ shell.Display(metadata, "ConfigurationTemplate", cmd.Flags())
 }
 
 var DelConfigurationTemplate = &cobra.Command{
-	Use:   "ConfigurationTemplate",
+	Use:   "configurationTemplate",
 	Short: "Delete a Configuration Template For This Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -280,7 +274,7 @@ var DelConfigurationTemplate = &cobra.Command{
 }
 
 var PutConfigurationTemplate = &cobra.Command{
-	Use:   "ConfigurationTemplate",
+	Use:   "configurationTemplate",
 	Short: "Update a Configuration Template For This Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -288,34 +282,30 @@ var PutConfigurationTemplate = &cobra.Command{
 			org = args[1]
 		}
 		configTemplateId := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutConfigTemplate(org, configTemplateId, format)
+		var format configure.ConfigTemplate
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutConfigTemplate(org, configTemplateId, input)
 		shell.Display(metadata, "ConfigurationTemplate", cmd.Flags())
 	},
 }
 
 var PostConfigurationTemplate = &cobra.Command{
-	Use:   "ConfigurationTemplate",
+	Use:   "configurationTemplate",
 	Short: "Create a Configuration Template For This Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostConfigTemplate(org, format)
+		var format configure.ConfigTemplate
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostConfigTemplate(org, input)
 		shell.Display(metadata, "ConfigurationTemplate", cmd.Flags())
 	},
 }
 
 var GetDevices = &cobra.Command{
-	Use:   "Devices",
+	Use:   "devices",
 	Short: "List the devices in an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -332,7 +322,7 @@ var GetDevices = &cobra.Command{
 
 
 var GetInventoryDevices = &cobra.Command{
-	Use:   "InventoryDevices",
+	Use:   "inventoryDevices",
 	Short: "Return The Device Inventory For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -352,7 +342,7 @@ var GetInventoryDevices = &cobra.Command{
 }
 
 var GetInventoryDevice = &cobra.Command{
-	Use:   "InventoryDevice",
+	Use:   "inventoryDevice",
 	Short: "Return The Device Inventory For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -368,7 +358,7 @@ var GetInventoryDevice = &cobra.Command{
 }
 
 var GetLicences = &cobra.Command{
-	Use:   "Licences",
+	Use:   "licences",
 	Short: "List The Licenses For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -392,7 +382,7 @@ var GetLicences = &cobra.Command{
 }
 
 var PostAssignSeats = &cobra.Command{
-	Use:   "AssignSeats",
+	Use:   "assignSeats",
 	Short: "List A Single License For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -402,16 +392,15 @@ var PostAssignSeats = &cobra.Command{
 		if serial == "" {
 			serial = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostAssignSeats(org, serial, format)
+		var format configure.AssignSeats
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostAssignSeats(org, serial, input)
 		shell.Display(metadata, "AssignSeats", cmd.Flags())
 	},
 }
 
 var PostMoveSeats = &cobra.Command{
-	Use:   "MoveSeats",
+	Use:   "moveSeats",
 	Short: "List A Single License For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -421,16 +410,15 @@ var PostMoveSeats = &cobra.Command{
 		if serial == "" {
 			serial = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostMoveSeats(org, serial, format)
+		var format configure.MoveSeats
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostMoveSeats(org, serial, input)
 		shell.Display(metadata, "MoveSeats", cmd.Flags())
 	},
 }
 
 var PostMoveLicenses = &cobra.Command{
-	Use:   "MoveLicenses",
+	Use:   "moveLicenses",
 	Short: "List A Single License For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -440,16 +428,15 @@ var PostMoveLicenses = &cobra.Command{
 		if serial == "" {
 			serial = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostMoveLicenses(org, serial, format)
+		var format configure.MoveLicenses
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostMoveLicenses(org, serial, input)
 		shell.Display(metadata, "MoveLicenses", cmd.Flags())
 	},
 }
 
 var PostRenewSeats = &cobra.Command{
-	Use:   "RenewSeats",
+	Use:   "renewSeats",
 	Short: "List A Single License For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -459,16 +446,15 @@ var PostRenewSeats = &cobra.Command{
 		if serial == "" {
 			serial = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostRenewSeats(org, serial, format)
+		var format configure.RenewSeats
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostRenewSeats(org, serial, input)
 		shell.Display(metadata, "RenewSeats", cmd.Flags())
 	},
 }
 
 var GetLicence = &cobra.Command{
-	Use:   "Licence",
+	Use:   "licence",
 	Short: "List A Single License For An Organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -482,7 +468,7 @@ var GetLicence = &cobra.Command{
 }
 
 var PutLicence = &cobra.Command{
-	Use:   "Licence",
+	Use:   "licence",
 	Short: "Update a license.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -517,16 +503,15 @@ var PutLoginSecurity = &cobra.Command{
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutLoginSecurity(org, format)
+		var format configure.LoginSecurity
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutLoginSecurity(org, input)
 		shell.Display(metadata, "LoginSecurity", cmd.Flags())
 	},
 }
 
 var GetNetworks = &cobra.Command{
-	Use:   "Networks",
+	Use:   "networks",
 	Short: "List the networks that the user has privileges on in an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -553,18 +538,17 @@ var GetNetworks = &cobra.Command{
 
 
 var PostNetworks = &cobra.Command{
-	Use:   "Networks",
-	Short: "List the networks that the user has privileges on in an organization.",
+	Use:   "networks",
+	Short: "Create a network that the user has privileges on in an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostNetworks(org, format)
+		var format configure.Networks
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostNetworks(org, input)
 
 		shell.Display(metadata, "Networks", cmd.Flags())
 
@@ -572,7 +556,7 @@ var PostNetworks = &cobra.Command{
 }
 
 var PostCombineNetworks = &cobra.Command{
-	Use:   "CombineNetworks",
+	Use:   "combineNetworks",
 	Short: "Combine multiple networks into a single network.",
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -580,10 +564,9 @@ var PostCombineNetworks = &cobra.Command{
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostCombineNetworks(org, format)
+		var format configure.CombineNetworks
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostCombineNetworks(org, input)
 
 		shell.Display(metadata, "CombineNetworks", cmd.Flags())
 
@@ -591,7 +574,7 @@ var PostCombineNetworks = &cobra.Command{
 }
 
 var GetIDPS = &cobra.Command{
-	Use:   "IDPS",
+	Use:   "idps",
 	Short: "List the SAML IdPs in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -605,7 +588,7 @@ var GetIDPS = &cobra.Command{
 }
 
 var GetIDP = &cobra.Command{
-	Use:   "IDP",
+	Use:   "idp",
 	Short: "List a SAML IdP in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -620,7 +603,7 @@ var GetIDP = &cobra.Command{
 }
 
 var DelIDP = &cobra.Command{
-	Use:   "IDP",
+	Use:   "idp",
 	Short: "List a SAML IdP in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -635,7 +618,7 @@ var DelIDP = &cobra.Command{
 }
 
 var PutIDP = &cobra.Command{
-	Use:   "IDP",
+	Use:   "idp",
 	Short: "List a SAML IdP in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -644,33 +627,30 @@ var PutIDP = &cobra.Command{
 		}
 
 		ldp := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutIDP(org, ldp, format)
+		var format configure.IDP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutIDP(org, ldp, input)
 		shell.Display(metadata, "IDP", cmd.Flags())
 	},
 }
 
 var PostIDP = &cobra.Command{
-	Use:   "IDP",
+	Use:   "idp",
 	Short: "List a SAML IdP in your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostIDP(org, format)
+		var format configure.IDP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostIDP(org, input)
 		shell.Display(metadata, "IDP", cmd.Flags())
 	},
 }
 
 var GetSAML = &cobra.Command{
-	Use:   "SAML",
+	Use:   "saml",
 	Short: "Returns the SAML SSO enabled settings for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -684,24 +664,22 @@ var GetSAML = &cobra.Command{
 }
 
 var PutSAML = &cobra.Command{
-	Use:   "SAML",
+	Use:   "saml",
 	Short: "Returns the SAML SSO enabled settings for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSAML(org, format)
+		var format configure.SAML
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSAML(org, input)
 		shell.Display(metadata, "SAML", cmd.Flags())
 	},
 }
 
 var GetSamlRoles = &cobra.Command{
-	Use:   "SamlRoles",
+	Use:   "samlRoles",
 	Short: "List the SAML roles for this organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -715,7 +693,7 @@ var GetSamlRoles = &cobra.Command{
 }
 
 var GetSamlRole = &cobra.Command{
-	Use:   "SamlRole",
+	Use:   "samlRole",
 	Short: "List a single SAML role for this organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -729,7 +707,7 @@ var GetSamlRole = &cobra.Command{
 }
 
 var DelSamlRole = &cobra.Command{
-	Use:   "SamlRole",
+	Use:   "samlRole",
 	Short: "List a single SAML role for this organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -743,7 +721,7 @@ var DelSamlRole = &cobra.Command{
 }
 
 var PutSamlRole = &cobra.Command{
-	Use:   "SamlRole",
+	Use:   "samlRole",
 	Short: "List a single SAML role for this organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -751,32 +729,30 @@ var PutSamlRole = &cobra.Command{
 			org = args[1]
 		}
 		samlRoleId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSAMLRole(org, samlRoleId, format)
+		var format configure.SAMLRole
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSAMLRole(org, samlRoleId, input)
 		shell.Display(metadata, "SamlRole", cmd.Flags())
 	},
 }
 
 var PostSamlRole = &cobra.Command{
-	Use:   "SamlRole",
+	Use:   "samlRole",
 	Short: "List a single SAML role for this organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostSAMLRole(org, format)
+		var format configure.SAMLRole
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostSAMLRole(org, input)
 		shell.Display(metadata, "SamlRole", cmd.Flags())
 	},
 }
 
 var GetSNMP = &cobra.Command{
-	Use:   "SNMP",
+	Use:   "snmp",
 	Short: "Return the SNMP settings for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -788,24 +764,24 @@ var GetSNMP = &cobra.Command{
 	},
 }
 
+
 var PutSNMP = &cobra.Command{
-	Use:   "SNMP",
+	Use:   "snmp",
 	Short: "Update the SNMP settings for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSNMP(org, format)
+		var format configure.SNMP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSNMP(org, input)
 		shell.Display(metadata, "SNMP", cmd.Flags())
 	},
 }
 
 var GetList = &cobra.Command{
-	Use:   "List",
+	Use:   "list",
 	Short: "List the organizations that the user has privileges on.",
 	Run: func(cmd *cobra.Command, args []string) {
 		metadata := configure.GetOrganizations()
@@ -814,7 +790,7 @@ var GetList = &cobra.Command{
 }
 
 var GetDetail = &cobra.Command{
-	Use:   "Details",
+	Use:   "details",
 	Short: "List a specific organization that the user has privileges on.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -828,7 +804,7 @@ var GetDetail = &cobra.Command{
 
 
 var DelOrganization = &cobra.Command{
-	Use:   "fromList",
+	Use:   "details",
 	Short: "Delete an existing organization",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -841,7 +817,7 @@ var DelOrganization = &cobra.Command{
 }
 
 var PutOrganization = &cobra.Command{
-	Use:   "org",
+	Use:   "details",
 	Short: "Update an existing organization",
 	Run: func(cmd *cobra.Command, args []string) {
 
@@ -857,43 +833,42 @@ var PutOrganization = &cobra.Command{
 }
 
 var PostOrganization = &cobra.Command{
-	Use:   "org",
+	Use:   "details",
 	Short: "Create an organization",
 	Run: func(cmd *cobra.Command, args []string) {
-		var name = args[0]
+		name := args[0]
 		metadata := configure.PostOrganization(name)
 		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }
 
 var PostClaim = &cobra.Command{
-	Use:   "org",
+	Use:   "claim",
 	Short: "Claim a list of devices, licenses, and/or orders into an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
 			org = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostClaim(org, format)
+		var format configure.Claim
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostClaim(org, input)
 		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }
 
 var PostClone = &cobra.Command{
-	Use:   "org",
+	Use:   "clone",
 	Short: "Create a new organization by cloning the addressed organization",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
 		if org == "" {
-			org = args[0]
+			org = args[1]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostClone(org, format)
+		name := args[0]
+		var format configure.Clone
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostClone(org, name, input)
 		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }

@@ -27,6 +27,6 @@ var NetCmd = &cobra.Command{
 }
 
 func init() {
-	NetCmd.AddCommand(network.PostRemoveSerials)
-	NetCmd.AddCommand(network.PostClaimSerials)
+	NetCmd.AddCommand(network.PostRemoveDevices)
+	NetCmd.AddCommand(network.PostClaimDevices)
 }

@@ -28,10 +28,9 @@ var PutAccessControlLists  = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutAccessControlLists(networkId, format)
+		var format configure.AccessControlLists
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAccessControlLists(networkId,  input)
 		shell.Display(metadata, "AccessControlLists", cmd.Flags())
 	},
 }
@@ -86,10 +85,9 @@ var PutAccessPolicy = &cobra.Command{
 			networkId = args[1]
 		}
 		accessPolicyNumber := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutAccessPolicy(networkId, accessPolicyNumber, format)
+		var format configure.AccessPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAccessPolicy(networkId, accessPolicyNumber,  input)
 		shell.Display(metadata, "AccessPolicy", cmd.Flags())
 	},
 }
@@ -102,11 +100,9 @@ var PostAccessPolicy = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostAccessPolicy(networkId, format)
+		var format configure.AccessPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostAccessPolicy(networkId,  input)
 		shell.Display(metadata, "AccessPolicy", cmd.Flags())
 	},
 }
@@ -159,10 +155,9 @@ var PutSwitchPortProfile = &cobra.Command{
 		configTemplateId := args[0]
 		profileId := args[1]
 		portId := args[2]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSwitchPortProfile(orgId, configTemplateId, profileId, portId, format)
+		var format configure.SwitchProfile
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSwitchPortProfile(orgId, configTemplateId, profileId, portId,  input)
 		shell.Display(metadata, "SwitchPortProfile", cmd.Flags())
 	},
 }
@@ -191,11 +186,9 @@ var PostClone = &cobra.Command{
 		if orgId == "" {
 			orgId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostClone(orgId, format)
+		var format configure.Clone
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostClone(orgId,  input)
 		shell.Display(metadata, "SwitchPortProfile", cmd.Flags())
 	},
 }
@@ -221,10 +214,9 @@ var PutDHCPServerPolicy = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutDHCPServerPolicy(networkId, format)
+		var format configure.DHCPServerPolicy
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutDHCPServerPolicy(networkId,  input)
 		shell.Display(metadata, "DHCPServerPolicy", cmd.Flags())
 	},
 }
@@ -251,10 +243,9 @@ var PutDSCP = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutDscpToCosMappings(networkId, format)
+		var format configure.DscpToCosMappings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutDscpToCosMappings(networkId,  input)
 		shell.Display(metadata, "DSCP", cmd.Flags())
 	},
 }
@@ -295,10 +286,9 @@ var PutLinkAggregations = &cobra.Command{
 			networkId = args[1]
 		}
 		linkAggregationId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutLinkAggregation(networkId, linkAggregationId, format)
+		var format configure.LinkAggregation
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutLinkAggregation(networkId, linkAggregationId,  input)
 		shell.Display(metadata, "LinkAggregations", cmd.Flags())
 	},
 }
@@ -311,10 +301,9 @@ var PostLinkAggregations = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostLinkAggregation(networkId, format)
+		var format configure.LinkAggregation
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostLinkAggregation(networkId,  input)
 		shell.Display(metadata, "LinkAggregations", cmd.Flags())
 	},
 }
@@ -340,10 +329,9 @@ var PutMTU = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutMTU(networkId, format)
+		var format configure.MTU
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutMTU(networkId,  input)
 		shell.Display(metadata, "MTU", cmd.Flags())
 	},
 }
@@ -384,10 +372,9 @@ var PutPortSchedules = &cobra.Command{
 			networkId = args[1]
 		}
 		portScheduleId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutPortSchedules(networkId, portScheduleId, format)
+		var format configure.PortSchedules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutPortSchedules(networkId, portScheduleId,  input)
 		shell.Display(metadata, "PortSchedules", cmd.Flags())
 	},
 }
@@ -400,10 +387,9 @@ var PostPortSchedules = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostPortSchedules(networkId, format)
+		var format configure.PortSchedules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostPortSchedules(networkId,  input)
 		shell.Display(metadata, "PortSchedules", cmd.Flags())
 	},
 }
@@ -444,10 +430,9 @@ var PutSwitchPort = &cobra.Command{
 			serial = args[1]
 		}
 		portId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSwitchPort(serial, portId, format)
+		var format configure.Port
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSwitchPort(serial, portId,  input)
 		shell.Display(metadata, "SwitchPort", cmd.Flags())
 	},
 }
@@ -473,10 +458,9 @@ var PutQoSRuleOrder = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutQoSRuleOrder(networkId, format)
+		var format configure.QoSRuleOrder
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutQoSRuleOrder(networkId,  input)
 		shell.Display(metadata, "QoSRuleOrder", cmd.Flags())
 	},
 }
@@ -531,10 +515,9 @@ var PutQoSRule = &cobra.Command{
 			networkId = args[1]
 		}
 		qosRuleId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutQoSRule(networkId, qosRuleId, format)
+		var format configure.QoSRule
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutQoSRule(networkId, qosRuleId,  input)
 		shell.Display(metadata, "QoSRule", cmd.Flags())
 	},
 }
@@ -547,10 +530,9 @@ var PostQoSRule = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostQoSRule(networkId, format)
+		var format configure.QoSRule
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostQoSRule(networkId,  input)
 		shell.Display(metadata, "QoSRule", cmd.Flags())
 	},
 }
@@ -576,10 +558,9 @@ var PutDHCP = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutDHCPServerPolicy(networkId, format)
+		var format configure.DHCP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutDHCPServerPolicy(networkId,  input)
 		shell.Display(metadata, "DHCP", cmd.Flags())
 	},
 }
@@ -637,11 +618,9 @@ var PutL3Interface = &cobra.Command{
 		}
 
 		interfaceId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutInterface(serial, interfaceId, format)
+		var format configure.Interface
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutInterface(serial, interfaceId,  input)
 		shell.Display(metadata, "L3Interface", cmd.Flags())
 	},
 }
@@ -654,12 +633,9 @@ var PostL3Interface = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostInterface(serial, format)
+		var format configure.Interface
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostInterface(serial,  input)
 		shell.Display(metadata, "L3Interface", cmd.Flags())
 	},
 }
@@ -715,10 +691,9 @@ var PutRendezvousPoint = &cobra.Command{
 			networkId = args[1]
 		}
 		rendezvousPointId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutRendezvousPoint(networkId, rendezvousPointId, format)
+		var format configure.RendezvousPoint
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutRendezvousPoint(networkId, rendezvousPointId,  input)
 		shell.Display(metadata, "RendezvousPoint", cmd.Flags())
 	},
 }
@@ -731,10 +706,9 @@ var PostRendezvousPoint = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostRendezvousPoint(networkId, format)
+		var format configure.RendezvousPoint
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostRendezvousPoint(networkId,  input)
 		shell.Display(metadata, "RendezvousPoint", cmd.Flags())
 	},
 }
@@ -760,10 +734,9 @@ var PutMulticast = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutMulticast(networkId, format)
+		var format configure.Multicast
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutMulticast(networkId,  input)
 		shell.Display(metadata, "Multicast", cmd.Flags())
 	},
 }
@@ -789,10 +762,9 @@ var PutOSPF = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutOSPF(networkId, format)
+		var format configure.OSPF
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutOSPF(networkId,  input)
 		shell.Display(metadata, "OSPF", cmd.Flags())
 	},
 }
@@ -847,10 +819,9 @@ var PutStaticRoute = &cobra.Command{
 			serial = args[1]
 		}
 		staticRouteId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStaticRoute(serial, staticRouteId,format)
+		var format configure.StaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStaticRoute(serial, staticRouteId,  input)
 		shell.Display(metadata, "StaticRoute", cmd.Flags())
 	},
 }
@@ -863,10 +834,9 @@ var PostStaticRoute = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostStaticRoute(serial, format)
+		var format configure.StaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostStaticRoute(serial,  input)
 		shell.Display(metadata, "StaticRoute", cmd.Flags())
 	},
 }
@@ -893,10 +863,9 @@ var PutSettings = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSettings(networkId, format)
+		var format configure.Settings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSettings(networkId,  input)
 		shell.Display(metadata, "Settings", cmd.Flags())
 	},
 }
@@ -928,11 +897,9 @@ var PutStackDHCP = &cobra.Command{
 
 		switchStackId := args[0]
 		interfaceId := args[1]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStackDHCP(networkId, switchStackId, interfaceId, format)
+		var format configure.StackDHCP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStackDHCP(networkId, switchStackId, interfaceId,  input)
 		shell.Display(metadata, "StackDHCP", cmd.Flags())
 	},
 }
@@ -991,10 +958,9 @@ var PutStackL3Interface = &cobra.Command{
 		}
 		switchStackId := args[0]
 		interfaceId := args[1]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStackInterface(networkId, switchStackId, interfaceId, format)
+		var format configure.StackInterfaces
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStackInterface(networkId, switchStackId, interfaceId,  input)
 		shell.Display(metadata, "StackL3Interface", cmd.Flags())
 	},
 }
@@ -1008,10 +974,9 @@ var PostStackL3Interface = &cobra.Command{
 			networkId = args[1]
 		}
 		switchStackId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostStackInterface(networkId, switchStackId, format)
+		var format configure.StackInterface
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostStackInterface(networkId, switchStackId,  input)
 		shell.Display(metadata, "StackL3Interface", cmd.Flags())
 	},
 }
@@ -1076,10 +1041,9 @@ var PutStackStaticRoute = &cobra.Command{
 
 		switchStackId := args[0]
 		staticRouteId := args[1]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStackStaticRoute(networkId, switchStackId, staticRouteId, format)
+		var format configure.StackStaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStackStaticRoute(networkId, switchStackId, staticRouteId,  input)
 		shell.Display(metadata, "StackStaticRoute", cmd.Flags())
 	},
 }
@@ -1094,10 +1058,9 @@ var PostStackStaticRoute = &cobra.Command{
 		}
 
 		switchStackId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostStackStaticRoute(networkId, switchStackId, format)
+		var format configure.StackStaticRoute
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostStackStaticRoute(networkId, switchStackId,  input)
 		shell.Display(metadata, "StackStaticRoute", cmd.Flags())
 	},
 }
@@ -1139,10 +1102,9 @@ var PostAddToStack = &cobra.Command{
 			networkId = args[1]
 		}
 		switchStackId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostAddToStack(networkId, switchStackId, format)
+		var format configure.Stacks
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostAddToStack(networkId, switchStackId,  input)
 		shell.Display(metadata, "AddToStack", cmd.Flags())
 	},
 }
@@ -1184,10 +1146,9 @@ var PostRemoveFromStack = &cobra.Command{
 			networkId = args[1]
 		}
 		switchStackId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostRemoveFromStack(networkId, switchStackId, format)
+		var format configure.Stack
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostRemoveFromStack(networkId, switchStackId,  input)
 		shell.Display(metadata, "RemoveFromStack", cmd.Flags())
 	},
 }
@@ -1214,10 +1175,9 @@ var PutStormControl = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutStormControl(networkId, format)
+		var format configure.StormControl
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutStormControl(networkId,  input)
 		shell.Display(metadata, "StormControl", cmd.Flags())
 	},
 }
@@ -1243,10 +1203,9 @@ var PutSTP = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSTP(networkId, format)
+		var format configure.STP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSTP(networkId,  input)
 		shell.Display(metadata, "STP", cmd.Flags())
 	},
 }
@@ -1272,10 +1231,9 @@ var PutWarmSpare = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutWarmSpare(serial,format)
+		var format configure.WarmSpare
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutWarmSpare(serial,  input)
 		shell.Display(metadata, "WarmSpare", cmd.Flags())
 	},
 }

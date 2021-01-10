@@ -27,10 +27,9 @@ var PutQualityAndRetention = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutQualityAndRetention(serial, format)
+		var format configure.QualityAndRetention
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutQualityAndRetention(serial,  input)
 		shell.Display(metadata, "QualityAndRetention", cmd.Flags())
 	},
 }
@@ -92,11 +91,10 @@ var PutQualityRetentionProfile = &cobra.Command{
 		}
 
 		qualityRetentionProfileId:= args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.QualityRetentionProfile
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PutQualityRetentionProfile(networkId,
-			qualityRetentionProfileId, format)
+			qualityRetentionProfileId,  input)
 		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
 	},
 }
@@ -109,12 +107,9 @@ var PostQualityRetentionProfile = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostQualityRetentionProfiles(networkId,
-			 format)
+		var format configure.QualityRetentionProfile
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostQualityRetentionProfiles(networkId, input)
 		shell.Display(metadata, "QualityRetentionProfile", cmd.Flags())
 	},
 }
@@ -166,10 +161,9 @@ var PutSense = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSense(serial, format)
+		var format configure.Sense
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSense(serial,  input)
 		shell.Display(metadata, "Sense", cmd.Flags())
 	},
 }
@@ -195,10 +189,9 @@ var PutVideoSettings = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutVideoSettings(serial, format)
+		var format configure.VideoSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutVideoSettings(serial,  input)
 		shell.Display(metadata, "VideoSettings", cmd.Flags())
 	},
 }

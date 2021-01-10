@@ -8,7 +8,7 @@ import (
 
 var GetClients = &cobra.Command{
 	Use:   "Clients",
-	Short: "Return A Devices Clients.",
+	Short: "Return A Devices Clients",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
 		if serial == "" {
@@ -18,27 +18,27 @@ var GetClients = &cobra.Command{
 		t0, _ := cmd.Flags().GetString("t0")
 		timespan, _ := cmd.Flags().GetString("timespan")
 		metadata := monitor.GetClients(serial, t0, timespan)
-		shell.Display(metadata, "deviceClients", cmd.Flags())
+		shell.Display(metadata, "Clients", cmd.Flags())
 	},
 }
 
-var GetLLDPcdp = &cobra.Command{
-	Use:   "LLDPcdp",
-	Short: "List LLDP and CDP information for a device.",
+var GetLLdpCdp = &cobra.Command{
+	Use:   "LLdpCdp",
+	Short: "List LLDP and CDP information for a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := monitor.GetLldpCdp(serial)
-		shell.Display(metadata, "lldpcdp", cmd.Flags())
+		metadata := monitor.GetLLdpCdp(serial)
+		shell.Display(metadata, "LLdpCdp", cmd.Flags())
 	},
 }
 
 
 var GetUplink = &cobra.Command{
 	Use:   "Uplink",
-	Short: "Get the uplink loss percentage and latency in milliseconds for a wired network device.",
+	Short: "Get the uplink loss percentage and latency in milliseconds for a wired network device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
 		if serial == "" {

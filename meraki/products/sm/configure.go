@@ -44,12 +44,9 @@ var PostBypassActivationLockAttempts = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostBypassActivationLockAttempts(networkId, format)
+		var format configure.BypassActivationLockAttempts
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostBypassActivationLockAttempts(networkId,  input)
 		shell.Display(metadata, "BypassActivationLockAttempts", cmd.Flags())
 	},
 }
@@ -92,12 +89,9 @@ var PutFields = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutFields(networkId, format)
+		var format configure.Fields
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutFields(networkId,  input)
 		shell.Display(metadata, "Fields", cmd.Flags())
 	},
 }
@@ -178,18 +172,15 @@ shell.Display(metadata, "WlanLists", cmd.Flags())
 
 var PostModifyTags = &cobra.Command{
 	Use:   "ModifyTags",
-	Short: "Add, delete, or update the tags of a set of devices.",
+	Short: "Add, delete, or put the tags of a set of devices.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostModifyTags(networkId, format)
+		var format configure.ModifyTags
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostModifyTags(networkId,  input)
 		shell.Display(metadata, "ModifyTags", cmd.Flags())
 	},
 }
@@ -202,12 +193,9 @@ var PostCheckin = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostCheckin(networkId, format)
+		var format configure.SmIds
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostCheckin(networkId,  input)
 		shell.Display(metadata, "Checkin", cmd.Flags())
 	},
 }
@@ -245,12 +233,10 @@ var PostLockDevices = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
+		var format configure.SmIds
+		input, _ := shell.ReadConfigFile(cmd, &format)
 
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostLock(networkId, format)
+		metadata := configure.PostLock(networkId,  input)
 		shell.Display(metadata, "LockDevices", cmd.Flags())
 	},
 }
@@ -263,12 +249,10 @@ var PostMoveDevices = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
+		var format configure.SmIds
+		input, _ := shell.ReadConfigFile(cmd, &format)
 
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostMove(networkId, format)
+		metadata := configure.PostMove(networkId,  input)
 		shell.Display(metadata, "MoveDevices", cmd.Flags())
 	},
 }
@@ -297,12 +281,10 @@ var PostUnEnrollDevice = &cobra.Command{
 		if networkId == "" {
 			networkId = args[1]
 		}
-
+		var format configure.Unenroll
 		deviceId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostUnenroll(networkId, deviceId, format)
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostUnenroll(networkId, deviceId,  input)
 		shell.Display(metadata, "UnEnrollDevice", cmd.Flags())
 	},
 }
@@ -315,12 +297,9 @@ var PostWipeDevice = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PostWipeDevice(networkId, format)
+		var format configure.SmIds
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostWipeDevice(networkId,  input)
 		shell.Display(metadata, "WipeDevice", cmd.Flags())
 	},
 }

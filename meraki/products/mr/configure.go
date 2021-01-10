@@ -29,10 +29,9 @@ var PutAlternateMGMTInterface = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutAlternateManagementInterface(networkId, format)
+		var format configure.AlternateManagementInterface
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutAlternateManagementInterface(networkId,  input)
 		shell.Display(metadata, "AlternateMGMTInterface", cmd.Flags())
 	},
 }
@@ -58,10 +57,9 @@ var PutBluetoothNetworkSettings = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutBluetoothNetworkSettings(networkId, format)
+		var format configure.BluetoothNetworkSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutBluetoothNetworkSettings(networkId,  input)
 		shell.Display(metadata, "BluetoothNetworkSettings", cmd.Flags())
 	},
 }
@@ -87,10 +85,9 @@ var PutBluetoothDeviceSettings = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutBluetoothDeviceSettings(serial, format)
+		var format configure.BluetoothDeviceSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutBluetoothDeviceSettings(serial,  input)
 		shell.Display(metadata, "BluetoothDeviceSettings", cmd.Flags())
 	},
 }
@@ -116,10 +113,9 @@ var PutRadioSettings = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutRadioSettings(serial, format)
+		var format configure.RadioSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutRadioSettings(serial,  input)
 		shell.Display(metadata, "RadioSettings", cmd.Flags())
 	},
 }
@@ -181,10 +177,9 @@ var PutRFProfile = &cobra.Command{
 		}
 
 		rfProfileId := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutRFProfile(networkId, rfProfileId, format)
+		var format configure.RFProfile
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutRFProfile(networkId, rfProfileId,  input)
 		shell.Display(metadata, "RFProfile", cmd.Flags())
 	},
 }
@@ -197,11 +192,9 @@ var PostRFProfile = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PostRFProfile(networkId, format)
+		var format configure.RFProfile
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PostRFProfile(networkId,  input)
 		shell.Display(metadata, "RFProfile", cmd.Flags())
 	},
 }
@@ -227,10 +220,9 @@ var PutWirelessSettings = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSettings(networkId, format)
+		var format configure.Settings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSettings(networkId,  input)
 		shell.Display(metadata, "WirelessSettings", cmd.Flags())
 	},
 }
@@ -260,10 +252,9 @@ var PutL3FirewallRules = &cobra.Command{
 		}
 
 		number := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutL3FirewallRules(networkId, number, format)
+		var format configure.L3FirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutL3FirewallRules(networkId, number,  input)
 		shell.Display(metadata, "L3FirewallRules", cmd.Flags())
 	},
 }
@@ -293,10 +284,9 @@ var PutL7FirewallRules = &cobra.Command{
 		}
 
 		number := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutL7FirewallRules(networkId, number, format)
+		var format configure.L7FirewallRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutL7FirewallRules(networkId, number,  input)
 		shell.Display(metadata, "L7FirewallRules", cmd.Flags())
 	},
 }
@@ -361,11 +351,10 @@ var PutIdentityPSK = &cobra.Command{
 
 		number := args[0]
 		identityPskId := args[1]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.IdentityPSK
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PutIdentityPSK(networkId,
-			number, identityPskId, format)
+			number, identityPskId,  input)
 		shell.Display(metadata, "IdentityPSK", cmd.Flags())
 	},
 }
@@ -380,11 +369,10 @@ var PostIdentityPSK = &cobra.Command{
 		}
 
 		number := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
+		var format configure.IdentityPSK
+		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PostIdentityPSK(networkId,
-			number, format)
+			number,  input)
 		shell.Display(metadata, "IdentityPSK", cmd.Flags())
 	},
 }
@@ -413,10 +401,9 @@ var PutSplashSettings = &cobra.Command{
 			networkId = args[1]
 		}
 		number := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSplashPageSettings(networkId, number, format)
+		var format configure.SplashPageSettings
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSplashPageSettings(networkId, number,  input)
 		shell.Display(metadata, "SplashSettings", cmd.Flags())
 	},
 }
@@ -444,10 +431,9 @@ var PutTrafficShapingRules = &cobra.Command{
 			networkId = args[1]
 		}
 		number := args[0]
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutTrafficShapingRules(networkId, number, format)
+		var format configure.TrafficShapingRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutTrafficShapingRules(networkId, number,  input)
 		shell.Display(metadata, "TrafficShapingRules", cmd.Flags())
 	},
 }
@@ -484,7 +470,7 @@ var GetSSID = &cobra.Command{
 var PutSSID = &cobra.Command{
 	Use:   "SSID",
 	Short: "Update The MR SSIDs In A Network.",
-	Long:  `merakictl  update mr ssid {SSID#} -n {NetworkId} --input {FILENAME}.yaml`,
+	Long:  `merakictl  put mr ssid {SSID#} -n {NetworkId} --input {FILENAME}.yaml`,
 	Run: func(cmd *cobra.Command, args []string) {
 
 		// Flags
@@ -495,12 +481,9 @@ var PutSSID = &cobra.Command{
 
 		// SSID Number
 		ssidNumber := args[0]
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutSSID(networkId, ssidNumber, format)
+		var format configure.SSID
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSSID(networkId, ssidNumber,  input)
 		shell.Display(metadata, "SSID", cmd.Flags())
 
 	},

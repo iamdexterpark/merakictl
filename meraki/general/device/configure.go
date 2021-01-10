@@ -27,12 +27,9 @@ var PutManagementInterface = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutManagementInterface(serial,format)
+		var format configure.ManagementInterface
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutManagementInterface(serial,  input)
 		shell.Display(metadata, "ManagementInterface", cmd.Flags())
 	},
 }
@@ -46,7 +43,7 @@ var GetDevice = &cobra.Command{
 			serial = args[0]
 		}
 		metadata := configure.GetDevice(serial)
-		shell.Display(metadata, "device", cmd.Flags())
+		shell.Display(metadata, "Device", cmd.Flags())
 	},
 }
 
@@ -58,11 +55,9 @@ var PutDevice = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-
-		metadata := configure.PutDevice(serial, format)
-		shell.Display(metadata, "device", cmd.Flags())
+		var format configure.Device
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutDevice(serial,  input)
+		shell.Display(metadata, "Device", cmd.Flags())
 	},
 }

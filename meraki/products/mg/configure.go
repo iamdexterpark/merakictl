@@ -28,10 +28,9 @@ var PutConnectivityMonitor = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutConnectivityMonitoringDestinations(networkId, format)
+		var format configure.ConnectivityTesting
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutConnectivityMonitoringDestinations(networkId,  input)
 		shell.Display(metadata, "ConnectivityMonitor", cmd.Flags())
 	},
 }
@@ -57,10 +56,9 @@ var PutDHCP = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutDhcp(networkId, format)
+		var format configure.DHCP
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutDhcp(networkId,  input)
 		shell.Display(metadata, "DHCP", cmd.Flags())
 	},
 }
@@ -86,10 +84,9 @@ var PutLan = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutLan(serial, format)
+		var format configure.LAN
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutLan(serial,  input)
 		shell.Display(metadata, "Lan", cmd.Flags())
 	},
 }
@@ -115,10 +112,9 @@ var PutPortForwardingRules = &cobra.Command{
 		if serial == "" {
 			serial = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutPortForwardingRules(serial, format)
+		var format configure.PortForwardingRules
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutPortForwardingRules(serial,  input)
 		shell.Display(metadata, "PortForwardingRules", cmd.Flags())
 	},
 }
@@ -144,10 +140,9 @@ var PutSubnetPool = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutSubnetPool(networkId, format)
+		var format configure.SubnetPool
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutSubnetPool(networkId,  input)
 		shell.Display(metadata, "SubnetPool", cmd.Flags())
 	},
 }
@@ -173,10 +168,9 @@ var PutUplink = &cobra.Command{
 		if networkId == "" {
 			networkId = args[0]
 		}
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := configure.PutUplink(networkId, format)
+		var format configure.Uplink
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := configure.PutUplink(networkId,  input)
 		shell.Display(metadata, "Uplink", cmd.Flags())
 	},
 }

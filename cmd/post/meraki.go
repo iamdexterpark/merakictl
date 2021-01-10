@@ -1,4 +1,4 @@
-package create
+package post
 
 import (
 	"github.com/ddexterpark/merakictl/meraki/general/device"
@@ -40,15 +40,15 @@ var NetCmd = &cobra.Command{
 
 func init() {
 	NetCmd.AddCommand(network.PostBindNetwork)
-	NetCmd.AddCommand(network.PostClaimSerials)
-	NetCmd.AddCommand(network.PostFloorplan)
+	NetCmd.AddCommand(network.PostClaimDevices)
+	NetCmd.AddCommand(network.PostFloorPlan)
 	NetCmd.AddCommand(network.PostGroupPolicy)
 	NetCmd.AddCommand(network.PostHTTPServer)
 	NetCmd.AddCommand(network.PostMerakiAuthUser)
 	NetCmd.AddCommand(network.PostMQTTBroker)
 	NetCmd.AddCommand(network.PostPIIRequest)
-	NetCmd.AddCommand(network.PostProvisionClient)
-	NetCmd.AddCommand(network.PostRemoveSerials)
+	NetCmd.AddCommand(network.PostProvisionClients)
+	NetCmd.AddCommand(network.PostRemoveDevices)
 	NetCmd.AddCommand(network.PostSplitNetwork)
 	NetCmd.AddCommand(network.PostUnBindNetwork)
 	NetCmd.AddCommand(network.PostWebhookTest)

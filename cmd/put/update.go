@@ -1,4 +1,4 @@
-package update
+package put
 
 import (
 	"github.com/spf13/cobra"
@@ -7,6 +7,7 @@ import (
 // UpdateCmd
 var UpdateCmd = &cobra.Command{
 	Use:   "update",
+	Aliases: []string{"put"},
 	Short: "Updates configurations.",
 	Long:  "Base for all HTTP PUT Calls to Meraki Dashboard.",
 }

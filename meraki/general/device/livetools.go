@@ -8,20 +8,20 @@ import (
 
 var PostBlinkLEDs = &cobra.Command{
 	Use:   "BlinkLEDs",
-	Short: "Blink the LEDs on a device.",
+	Short: "Blink the LEDs on a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
 		if serial == "" {
 			serial = args[0]
 		}
-		metadata := livetools.PostBlinkLeds(serial)
+		metadata := livetools.PostBlinkLEDs(serial)
 		shell.Display(metadata, "BlinkLEDs", cmd.Flags())
 	},
 }
 
 var PostReboot = &cobra.Command{
 	Use:   "Reboot",
-	Short: "Reboot a device.",
+	Short: "Reboot a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
 		if serial == "" {

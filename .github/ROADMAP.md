@@ -1,6 +1,6 @@
 ## RoadMap
 
-### Alpha Release 2021 Q1 (OCT)
+### Alpha Release 2020
 - [x] Basic cli structure (claim, create, get, update, remove)
 - [x] Read environmental variables
 - [x] Error Handling
@@ -24,7 +24,7 @@
 - [x] Marshal JSON Data
 - [x] Marshal YAML Data
 
-### Beta Release 2021 Q1
+### Beta Release 2021
 - [x] Pagination Support
 - [x] verbose debug flag
 - [x] Diff Flag (GET: compare config file against current API state)
@@ -44,6 +44,5 @@
 
 ### Backlog
 - [ ] Meraki Filter by Tags Flag 
-- [ ] Proxy Support (certificate path, server, port)
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)
 - [ ] Static Binary Self Update

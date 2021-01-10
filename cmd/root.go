@@ -13,95 +13,48 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
+
 package cmd
 
 import (
-	"github.com/ddexterpark/merakictl/cmd/create"
+	"github.com/ddexterpark/merakictl/cmd/delete"
 	"github.com/ddexterpark/merakictl/cmd/get"
 	"github.com/ddexterpark/merakictl/cmd/misc"
-	"github.com/ddexterpark/merakictl/cmd/remove"
-	"github.com/ddexterpark/merakictl/cmd/update"
-	"github.com/mitchellh/go-homedir"
+	"github.com/ddexterpark/merakictl/cmd/post"
+	"github.com/ddexterpark/merakictl/cmd/put"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 	"log"
-	"os"
 )
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "merakictl",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "Command line interface for Meraki Dashboard API.",
+	Long: ``,
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the format command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatal(err)
 	}
 }
 
-var cfgFile string
-
-// initConfig reads in config file and ENV variables if set.
-func initConfig() {
-	if cfgFile != "" {
-		// Use config file from the flag.
-		viper.SetConfigFile(cfgFile)
-	} else {
-		// Find home directory.
-		home, err := homedir.Dir()
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// Search config in home directory with name ".merakictl" (without extension).
-		viper.AddConfigPath(home)
-		viper.AddConfigPath(currentdir())
-		viper.SetConfigName(".merakictl")
-	}
-
-	viper.AutomaticEnv() // read in environment variables that match
-
-	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-	}
-}
-
-// currentdir - get the current working directory
-func currentdir() (cwd string) {
-	cwd, err := os.Getwd()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return cwd
-}
-
 func init() {
-	cobra.OnInitialize(initConfig)
 	rootCmd.AddCommand(misc.CompletionCmd)
 	rootCmd.AddCommand(misc.Version)
 	//rootCmd.AddCommand(utilities.Upgrade)
-	rootCmd.AddCommand(get.GetCmd)
-	rootCmd.AddCommand(update.UpdateCmd)
-	rootCmd.AddCommand(create.CreateCmd)
-	rootCmd.AddCommand(remove.DeleteCmd)
+	rootCmd.AddCommand(get.ShowCmd)
+	rootCmd.AddCommand(put.UpdateCmd)
+	rootCmd.AddCommand(post.CreateCmd)
+	rootCmd.AddCommand(delete.DeleteCmd)
 
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "input", "", "input file (default is $HOME/.merakictl.yaml)")
+	// store input file name
+	var input string
+
+	// Flags and configuration settings.
+	rootCmd.PersistentFlags().StringVar(&input, "input", "", "input file can be YAML or JSON")
 	rootCmd.PersistentFlags().BoolP("diff", "d", false, "diff config file with dashboard API config")
 	rootCmd.PersistentFlags().BoolP("export", "e", false, "Export config to Yaml")
 	rootCmd.PersistentFlags().BoolP("json", "j", false, "Export config to JSON")

@@ -17,11 +17,9 @@ var PostPortCycle = &cobra.Command{
 		if serial == "" {
 			serial = args[1]
 		}
-
-		// Read Config File
-		var format interface{}
-		shell.RenderInput(&format)
-		metadata := livetools.PostCyclePorts(networkId, serial, format)
+		var format livetools.Cycle
+		input, _ := shell.ReadConfigFile(cmd, &format)
+		metadata := livetools.PostCyclePorts(networkId, serial,  input)
 		shell.Display(metadata, "CyclePorts", cmd.Flags())
 	},
 }
