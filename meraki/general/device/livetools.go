@@ -7,7 +7,7 @@ import (
 )
 
 var PostBlinkLEDs = &cobra.Command{
-	Use:   "BlinkLEDs",
+	Use:   "blinkLEDs",
 	Short: "Blink the LEDs on a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -20,7 +20,7 @@ var PostBlinkLEDs = &cobra.Command{
 }
 
 var PostReboot = &cobra.Command{
-	Use:   "Reboot",
+	Use:   "reboot",
 	Short: "Reboot a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())

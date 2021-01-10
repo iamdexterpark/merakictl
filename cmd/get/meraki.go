@@ -114,7 +114,7 @@ func init() {
 	DeviceCmd.AddCommand(device.GetDevice)
 	DeviceCmd.AddCommand(device.GetClients)
 	DeviceCmd.AddCommand(device.GetLLdpCdp)
-	DeviceCmd.AddCommand(device.GetUplink)
+	DeviceCmd.AddCommand(device.GetLossAndLatencyHistory)
 }
 
 var MXCmd = &cobra.Command{

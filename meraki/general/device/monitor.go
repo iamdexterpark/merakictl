@@ -7,7 +7,7 @@ import (
 )
 
 var GetClients = &cobra.Command{
-	Use:   "Clients",
+	Use:   "clients",
 	Short: "Return A Devices Clients",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -23,7 +23,7 @@ var GetClients = &cobra.Command{
 }
 
 var GetLLdpCdp = &cobra.Command{
-	Use:   "LLdpCdp",
+	Use:   "lldpCdp",
 	Short: "List LLDP and CDP information for a device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -36,8 +36,8 @@ var GetLLdpCdp = &cobra.Command{
 }
 
 
-var GetUplink = &cobra.Command{
-	Use:   "Uplink",
+var GetLossAndLatencyHistory = &cobra.Command{
+	Use:   "lossAndLatencyHistory",
 	Short: "Get the uplink loss percentage and latency in milliseconds for a wired network device",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())

@@ -7,7 +7,7 @@ import (
 )
 
 var GetManagementInterface = &cobra.Command{
-	Use:   "ManagementInterface",
+	Use:   "managementInterface",
 	Short: "Return The Management Interface Settings For A Device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -20,7 +20,7 @@ var GetManagementInterface = &cobra.Command{
 }
 
 var PutManagementInterface = &cobra.Command{
-	Use:   "ManagementInterface",
+	Use:   "managementInterface",
 	Short: "Update the management interface settings for a device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -35,7 +35,7 @@ var PutManagementInterface = &cobra.Command{
 }
 
 var GetDevice = &cobra.Command{
-	Use:   "Device",
+	Use:   "device",
 	Short: "Return A Single Device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -48,7 +48,7 @@ var GetDevice = &cobra.Command{
 }
 
 var PutDevice = &cobra.Command{
-	Use:   "Device",
+	Use:   "device",
 	Short: "Update the attributes of a device.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, _, serial := shell.ResolveFlags(cmd.Flags())
