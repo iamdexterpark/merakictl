@@ -7,7 +7,7 @@ import (
 )
 
 var GetCellularUsageHistory = &cobra.Command{
-	Use:   "CellularUsageHistory",
+	Use:   "cellularUsageHistory",
 	Short: "Return the client's daily cellular data usage history. Usage data is in kilobytes.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -22,7 +22,7 @@ var GetCellularUsageHistory = &cobra.Command{
 
 
 var GetConnectivity = &cobra.Command{
-Use:   "Connectivity",
+Use:   "connectivity",
 Short: "",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -43,7 +43,7 @@ shell.Display(metadata, "Connectivity", cmd.Flags())
 
 
 var GetDesktopLogs = &cobra.Command{
-Use:   "DesktopLogs",
+Use:   "desktopLogs",
 Short: "Return historical records of various Systems Manager network connection details for desktop devices.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -63,7 +63,7 @@ shell.Display(metadata, "DesktopLogs", cmd.Flags())
 
 
 var GetDeviceCommandLogs = &cobra.Command{
-Use:   "DeviceCommandLogs",
+Use:   "deviceCommandLogs",
 Short: "Return historical records of commands sent to Systems Manager devices. ",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -84,7 +84,7 @@ shell.Display(metadata, "DeviceCommandLogs", cmd.Flags())
 
 
 var GetPerformanceHistory = &cobra.Command{
-Use:   "PerformanceHistory",
+Use:   "performanceHistory",
 Short: "Return historical records of various Systems Manager client metrics for desktop devices.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())

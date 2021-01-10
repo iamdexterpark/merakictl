@@ -7,7 +7,7 @@ import (
 )
 
 var GetAirMarshal = &cobra.Command{
-	Use:   "AirMarshal",
+	Use:   "airMarshal",
 	Short: "List Air Marshal scan results from a network.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -24,7 +24,7 @@ var GetAirMarshal = &cobra.Command{
 
 
 var GetChannelUtilizationHistory = &cobra.Command{
-	Use:   "ChannelUtilizationHistory",
+	Use:   "channelUtilizationHistory",
 	Short: "Return AP channel utilization over time for a device or network client.",
 	Run: func(cmd *cobra.Command, args []string) {
 		_, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -48,7 +48,7 @@ var GetChannelUtilizationHistory = &cobra.Command{
 
 
 var GetClientCountHistory = &cobra.Command{
-Use:   "ClientCountHistory",
+Use:   "clientCountHistory",
 Short: "Return mr client counts over time for a network, device, or network client.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -73,7 +73,7 @@ shell.Display(metadata, "ClientCountHistory", cmd.Flags())
 
 
 var GetConnectionStat = &cobra.Command{
-Use:   "ConnectionStat",
+Use:   "connectionStat",
 Short: "Aggregated connectivity info for a given client on this network. Clients are identified by their MAC.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -96,7 +96,7 @@ shell.Display(metadata, "ConnectionStat", cmd.Flags())
 
 
 var GetConnectivityEvents = &cobra.Command{
-Use:   "ConnectivityEvents",
+Use:   "connectivityEvents",
 Short: "List the mr connectivity events for a client within a network in the timespan.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -128,7 +128,7 @@ shell.Display(metadata, "ConnectivityEvents", cmd.Flags())
 
 
 var GetLatencyHistory = &cobra.Command{
-Use:   "LatencyHistory",
+Use:   "latencyHistory",
 Short: "Return the latency history for a client. ",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -158,7 +158,7 @@ shell.Display(metadata, "LatencyHistory", cmd.Flags())
 
 
 var GetLatencyStat = &cobra.Command{
-Use:   "LatencyStat",
+Use:   "latencyStat",
 Short: "Aggregated latency info for a given client on this network. Clients are identified by their MAC.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -180,7 +180,7 @@ shell.Display(metadata, "LatencyStat", cmd.Flags())
 
 
 var GetLatencyStats = &cobra.Command{
-Use:   "LatencyStats",
+Use:   "latencyStats",
 Short: "Aggregated latency info for this network, grouped by clients.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -205,7 +205,7 @@ shell.Display(metadata, "LatencyStats", cmd.Flags())
 
 
 var GetDeviceConnectionStats = &cobra.Command{
-Use:   "DeviceConnectionStats",
+Use:   "deviceConnectionStats",
 Short: "Aggregated latency info for a given AP on this network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -228,7 +228,7 @@ shell.Display(metadata, "DeviceConnectionStats", cmd.Flags())
 
 
 var GetNetworkConnectionStats = &cobra.Command{
-Use:   "NetworkConnectionStats",
+Use:   "networkConnectionStats",
 Short: "Aggregated connectivity info for this network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -252,7 +252,7 @@ shell.Display(metadata, "NetworkConnectionStats", cmd.Flags())
 }
 
 var GetDataRateHistory = &cobra.Command{
-Use:   "DataRateHistory",
+Use:   "dataRateHistory",
 Short: "Return PHY data rates over time for a network, device, or network client.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -280,7 +280,7 @@ shell.Display(metadata, "DataRateHistory", cmd.Flags())
 
 
 var GetConnectionStats = &cobra.Command{
-Use:   "ConnectionStats",
+Use:   "connectionStats",
 Short: "Aggregated connectivity info for this network, grouped by node.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -303,7 +303,7 @@ shell.Display(metadata, "ConnectionStats", cmd.Flags())
 }
 
 var GetDeviceLatencyStats = &cobra.Command{
-Use:   "DeviceLatencyStats",
+Use:   "deviceLatencyStats",
 Short: "Aggregated latency info for this network, grouped by node.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -325,7 +325,7 @@ shell.Display(metadata, "DeviceLatencyStats", cmd.Flags())
 }
 
 var GetFailedConnections = &cobra.Command{
-Use:   "FailedConnections",
+Use:   "failedConnections",
 Short: "List of all failed client connection events on this network in a given time range.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -346,7 +346,7 @@ shell.Display(metadata, "FailedConnections", cmd.Flags())
 }
 
 var GetLatencyHistoryAverage = &cobra.Command{
-Use:   "LatencyHistoryAverage",
+Use:   "latencyHistoryAverage",
 Short: "Return average mr latency over time for a network, device, or network client.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -375,7 +375,7 @@ shell.Display(metadata, "LatencyHistoryAverage", cmd.Flags())
 }
 
 var GetAggregatedLatencies = &cobra.Command{
-Use:   "AggregatedLatencies",
+Use:   "aggregatedLatencies",
 Short: "Aggregated latency info for a given AP on this network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -398,7 +398,7 @@ shell.Display(metadata, "AggregatedLatencies", cmd.Flags())
 }
 
 var GetNetworkLatencyStats = &cobra.Command{
-Use:   "NetworkLatencyStats",
+Use:   "networkLatencyStats",
 Short: "Aggregated latency info for this network.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -421,7 +421,7 @@ shell.Display(metadata, "NetworkLatencyStats", cmd.Flags())
 }
 
 var GetMeshStatuses = &cobra.Command{
-Use:   "MeshStatuses",
+Use:   "meshStatuses",
 Short: "List mr mesh statuses for repeaters.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -440,7 +440,7 @@ shell.Display(metadata, "MeshStatuses", cmd.Flags())
 
 
 var GetSignalQualityHistory = &cobra.Command{
-Use:   "SignalQualityHistory",
+Use:   "signalQualityHistory",
 Short: "Return signal quality (SNR/RSSI) over time for a device or network client.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -469,7 +469,7 @@ shell.Display(metadata, "SignalQualityHistory", cmd.Flags())
 
 
 var GetStatus = &cobra.Command{
-Use:   "Status",
+Use:   "status",
 Short: "Return the SSID statuses of an access point.",
 Run: func(cmd *cobra.Command, args []string) {
 _, _, serial := shell.ResolveFlags(cmd.Flags())
@@ -484,7 +484,7 @@ shell.Display(metadata, "Status", cmd.Flags())
 
 
 var GetUsageHistory = &cobra.Command{
-Use:   "UsageHistory",
+Use:   "usageHistory",
 Short: "Return AP usage over time for a device or network client.",
 Run: func(cmd *cobra.Command, args []string) {
 _, networkId, _ := shell.ResolveFlags(cmd.Flags())
