@@ -7,7 +7,7 @@ import (
 )
 
 var GetMonitoredMediaServers = &cobra.Command{
-	Use:   "MonitoredMediaServers",
+	Use:   "monitoredMediaServers",
 	Short: "List the monitored media servers for this organization. Only valid for organizations with Meraki Insight.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -20,7 +20,7 @@ var GetMonitoredMediaServers = &cobra.Command{
 }
 
 var GetMonitoredMediaServer = &cobra.Command{
-	Use:   "MonitoredMediaServer",
+	Use:   "monitoredMediaServer",
 	Short: "Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -34,7 +34,7 @@ var GetMonitoredMediaServer = &cobra.Command{
 }
 
 var DelMonitoredMediaServer = &cobra.Command{
-	Use:   "MonitoredMediaServer",
+	Use:   "monitoredMediaServer",
 	Short: "Delete a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -48,7 +48,7 @@ var DelMonitoredMediaServer = &cobra.Command{
 }
 
 var PutMonitoredMediaServer = &cobra.Command{
-	Use:   "MonitoredMediaServer",
+	Use:   "monitoredMediaServer",
 	Short: "Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -64,7 +64,7 @@ var PutMonitoredMediaServer = &cobra.Command{
 }
 
 var PostMonitoredMediaServer = &cobra.Command{
-	Use:   "MonitoredMediaServer",
+	Use:   "monitoredMediaServer",
 	Short: "Return a monitored media server for this organization. Only valid for organizations with Meraki Insight.",
 	Run: func(cmd *cobra.Command, args []string) {
 		orgId, _, _ := shell.ResolveFlags(cmd.Flags())
