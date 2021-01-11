@@ -7,7 +7,7 @@ import (
 )
 
 var GetApiRequestsOverview = &cobra.Command{
-	Use:   "ApiRequestsOverview",
+	Use:   "apiRequestsOverview",
 	Short: "Return an aggregated overview of API requests data.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -26,7 +26,7 @@ var GetApiRequestsOverview = &cobra.Command{
 }
 
 var GetApiRequests = &cobra.Command{
-	Use:   "ApiRequests",
+	Use:   "apiRequests",
 	Short: "List the API requests made by an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -54,7 +54,7 @@ var GetApiRequests = &cobra.Command{
 }
 
 var GetConfigurationChanges = &cobra.Command{
-	Use:   "ConfigurationChanges",
+	Use:   "configurationChanges",
 	Short: "View the Change Log for your organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, networkId, _ := shell.ResolveFlags(cmd.Flags())
@@ -81,7 +81,7 @@ var GetConfigurationChanges = &cobra.Command{
 
 
 var GetDeviceStatuses = &cobra.Command{
-	Use:   "DeviceStatuses",
+	Use:   "deviceStatuses",
 	Short: "List the status of every Meraki device in the organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -101,7 +101,7 @@ var GetDeviceStatuses = &cobra.Command{
 
 
 var GetUplinksLossAndLatency = &cobra.Command{
-	Use:   "UplinksLossAndLatency",
+	Use:   "uplinksLossAndLatency",
 	Short: "Return the uplink loss and latency for every MX in the organization from at latest 2 minutes ago.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -123,7 +123,7 @@ var GetUplinksLossAndLatency = &cobra.Command{
 
 
 var GetLicenseOverview = &cobra.Command{
-	Use:   "LicenseOverview",
+	Use:   "licenseOverview",
 	Short: "Return an overview of the license state for an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -136,7 +136,7 @@ var GetLicenseOverview = &cobra.Command{
 }
 
 var GetOpenAPISpec = &cobra.Command{
-	Use:   "OpenAPISpec",
+	Use:   "openAPISpec",
 	Short: "Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -149,7 +149,7 @@ var GetOpenAPISpec = &cobra.Command{
 }
 
 var GetAlertTypes = &cobra.Command{
-	Use:   "AlertTypes",
+	Use:   "alertTypes",
 	Short: "Return a list of alert types to be used with managing webhook alerts.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())
@@ -162,7 +162,7 @@ var GetAlertTypes = &cobra.Command{
 }
 
 var GetWebhookLogs = &cobra.Command{
-	Use:   "WebhookLogs",
+	Use:   "webhookLogs",
 	Short: "Return the log of webhook POSTs sent.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())

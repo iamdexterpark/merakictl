@@ -7,7 +7,7 @@ import (
 // DeleteCmd
 var DeleteCmd = &cobra.Command{
 	Use:   "delete",
-	Aliases: []string{"no"},
+	Aliases: []string{"no", "del"},
 	Short: "Base for all HTTP DEL Calls to Meraki Dashboard.",
 }
 

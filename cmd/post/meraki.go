@@ -30,6 +30,11 @@ func init() {
 	OrgCmd.AddCommand(organization.PostIDP)
 	OrgCmd.AddCommand(organization.PostNetworks)
 	OrgCmd.AddCommand(organization.PostSamlRole)
+	OrgCmd.AddCommand(organization.PostAssignSeats)
+	OrgCmd.AddCommand(organization.PostMoveSeats)
+	OrgCmd.AddCommand(organization.PostMoveLicenses)
+	OrgCmd.AddCommand(organization.PostRenewSeats)
+	OrgCmd.AddCommand(organization.PostClaim)
 }
 
 var NetCmd = &cobra.Command{

@@ -43,6 +43,7 @@ var NetCmd = &cobra.Command{
 
 func init() {
 	NetCmd.AddCommand(network.PutAlertSettings)
+	NetCmd.AddCommand(network.PutClientPolicy)
 	NetCmd.AddCommand(network.PutSplashAuthorizationStatus)
 	NetCmd.AddCommand(network.PutFirmwareUpgrades)
 	NetCmd.AddCommand(network.PutFloorPlan)
@@ -52,6 +53,7 @@ func init() {
 	NetCmd.AddCommand(network.PutMQTTBroker)
 	NetCmd.AddCommand(network.PutNetflow)
 	NetCmd.AddCommand(network.PutNetwork)
+	NetCmd.AddCommand(network.GetNetwork)
 	NetCmd.AddCommand(network.PutSettings)
 	NetCmd.AddCommand(network.PutSNMP)
 	NetCmd.AddCommand(network.PutSyslogServers)
@@ -118,6 +120,7 @@ func init() {
 	MSCmd.AddCommand(ms.PutAccessControlLists)
 	MSCmd.AddCommand(ms.PutStaticRoute)
 	MSCmd.AddCommand(ms.PutDHCP)
+	MSCmd.AddCommand(ms.PutDSCP)
 	MSCmd.AddCommand(ms.PutSettings)
 	MSCmd.AddCommand(ms.PutAccessPolicy)
 	MSCmd.AddCommand(ms.PutDHCPServerPolicy)

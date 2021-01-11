@@ -14,7 +14,7 @@ var ShowCmd = &cobra.Command{
 }
 
 func init() {
-	ShowCmd.AddCommand(utilities.EnvironmentalVariables)
+	ShowCmd.AddCommand(utilities.Version)
 	ShowCmd.AddCommand(utilities.Test)
 	ShowCmd.AddCommand(OrgCmd)
 	ShowCmd.AddCommand(NetCmd)
