@@ -136,7 +136,7 @@ var GetLicenseOverview = &cobra.Command{
 }
 
 var GetOpenAPISpec = &cobra.Command{
-	Use:   "openAPISpec",
+	Use:   "openApiSpec",
 	Short: "Return the OpenAPI 2.0 Specification of the organization's API documentation in JSON.",
 	Run: func(cmd *cobra.Command, args []string) {
 		org, _, _ := shell.ResolveFlags(cmd.Flags())

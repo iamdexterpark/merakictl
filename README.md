@@ -4,17 +4,16 @@
 
 *Multi-language Documentation: [English](README.md), [日本語](README.ja.md), [简体中文](README.zh-cn.md).*
 
-A Community developed Golang SDK and command line tool for the Meraki Dashboard API. 
-For a Vendor supported API interface please see the wonderful: [Meraki Dashboard API Python Library](https://github.com/meraki/dashboard-api-python)
+A Community developed command line tool for the Meraki Dashboard API. 
+For the Vendor supported python SDK please see the wonderful: [Meraki Dashboard API Python Library](https://github.com/meraki/dashboard-api-python)
 
 ## Download Merakictl 
-This SDK can be used as a CLI-based Application without any prior programming experience. 
-It compiles into a cross-platform (Linux/Mac/Win) static binary. 
+This cli does not require any prior programming experience or knowledge of Go Lang to use.
 
-Currently, we are in Alpha version: [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+[Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
 
-## Compile CLI From Source Code (Optional) 
-
+## (Optional)  Compile CLI From Source Code
+Merakictl compiles into a cross-platform (Linux/Mac/Win) static binary.
 #### Installation
 Install the [Go](http://golang.org) programming language.
 
@@ -30,27 +29,36 @@ export PATH=$PATH:$GOPATH/bin
 go get github.com/ddexterpark/merakictl
 ```
 
-#### Compile CLI (Optional) 
+#### Compile Static Binary 
 ```shell script
     # Linux/MacOS
     cd /Users/{$USERNAME}/go/src/github.com/ddexterpark/merakictl
     go build main.go
+    
+    # Move executable to preferred location and declare in $PATH
     mv main /usr/local/sbin/merakictl
     export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+```
 
+```shell script
     # Windows 64-bit
     env GOOS=windows GOARCH=amd64 go build main.go
     
     # Windows 32-bit
     env GOOS=windows GOARCH=386 go build main.go
+```
+Now this binary should be available in your shell from any location by calling `merakictl`.
 
-    # AutoCompletion
+## Initial Setup
+
+#### AutoCompletion
+To enable tab-based autocompletion use the following command with your preferred shell as input.
+```shell script
+
     merakictl completion [bash|zsh|fish|powershell]
 ```
 
-At this point the CLI should be available by calling `merakictl` from any locatio.
-    
-## Environment Variables
+#### Set Environment Variables
 
 At minimum, to use this tool you will need to set an environmental variable for the API key. 
 There are also some optional env vars that you can set to customize your API calls:
@@ -84,7 +92,6 @@ Not all endpoints will work in v0.
     Default = 'v1'
 ```
 
-#### Auto Completion
     
 ## Syntax
 
@@ -93,50 +100,48 @@ Not all endpoints will work in v0.
 ```
 
  
-#### [COMMAND]
+#### COMMANDS
  
-Operation | Syntax | Description |
---- | --- | ---
-| **claim** | merakictl claim [order/serial/licence] [TARGET] | Claim orders, licences, serial numbers into dashboard. |
-| **create** | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags] | Creates (POST) new resources. |
-| **get** | merakictl get [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. |
-| **update** | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Updates (PUT) targeted resources. |
-| **remove** | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. |
-| **version** | merakictl version | Displays the version and associate release information of Merakictl. |
+Long | Short | Syntax | Description |
+--- | --- | ---  | ---
+show | get | merakictl show [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. 
+create | post | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags] | Creates (POST) new resources. 
+update | put | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Updates (PUT) targeted resources. 
+remove | del, no | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. 
 
-#### [SUBCOMMAND]
+#### SUBCOMMANDS
 
-Subcommands mirror the Meraki Dashboard hierarchy: 
+Subcommands mirror the Meraki Dashboard hierarchy.
 
-Object | Description
---- | --- |
-| Organization | Collection of Networks |
-| Network | Collection of Devices |
-| Device | Meraki Products |
+Long | Short | Syntax | Description
+--- | --- | ---  | ---
+Organization | org |  | Collection of Networks
+Network | net |  | Collection of Devices
+Device | sn |  | Meraki Product
+appliance | mx | |
+switch | ms | |
+wireless | mr | |
+gateway | mg | |
+camera | mv | |
+systems | sm | |
+insight | in | |
 
-
-Example syntax:
- ```shell script
-     merakictl get org list
-     merakictl get org networks
-     merakictl get network alert settings
-     merakictl get mx l3 firewall rules
-     merakictl get ms port
-     merakictl get mr ssid
- ```   
-In order to invoke these commands you will have to leverage flags to specify the target org/network/device/switchport/ssid/etc...
-
-#### [FLAGS]
+#### FLAGS
+In order to invoke most commands you will have to specify a target resource. 
+For convenience, merakictl is capable of name-based resolution. 
+This means you do not need to know the randomly generated IDs, 
+only the exact name of the organization, network or device.
 
 Flag Type | Long | Short | Description |
 --- | --- | --- | ---
+| Global | **--organization** | -o | Global flag for resolving names to OrganizationIds. |
+| Global | **--network** | -n | Global flag for resolving names to NetworkIds. |
+| Global | **--hostname** | -h | Global flag for resolving names to Device serial numbers. |
 | Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
-| Global | **--input** | | Global flag for using a yaml file for passing config to the Dashboard API |
+| Global | **--input** | | Global flag for passing yaml/json config files as command input |
 | Global | **--diff** | | Global flag for diffing config file with dashboard config |
 | Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
-| Global | **--organization** | -o | Global flag for Organization id. |
-| Global | **--network** | -n | Global flag for Network id. |
-| Global | **--hostname** |  | Global flag for Device Hostname. |
+
 
 ### Data Model
 Please see the examples directory for full reference guide. 
@@ -146,7 +151,7 @@ update or delete commands.
 In most cases the API commands preform overwrite operations, **any dashboard config not captured in the yaml file is at risk of being replaced.**
 
 
-#### Example Cmd
+#### Examples
  ```shell script
     # export list of orgs to yaml file
      merakictl get org list -e 
@@ -173,19 +178,9 @@ In most cases the API commands preform overwrite operations, **any dashboard con
 
 ### Disclaimer
 
-Merakictl is an extremely Powerful tool. With the Dashboard rate-limit, you have a theoretical potential to make:
-
-
-Number of API Calls | 5 | 300 | 180,000 | 1,400,000 |
---- | --- | --- | --- | --- |
-**Time to Complete** | **1 second** | **1 minute** | **1 hour** | **8 hours** |
-
-
-Please be cautious when making production changes. If you are unsure about the tool, look at the code. 
-
-Never run a program that you do not understand. Practice using this tool in a test environment before touching production.
-
-Create a production change plan. Implement every aspect of your plan in a test environment to ensure the highest levels of confidence in your change.   
+Please use merakictl responsibly. 
+It can be tempting to try out a new tool to solve some prod issues, 
+but it is always better to use a test environment and develop a change plan.
 
 #### Elements of a great production change plan include:
 - **Peer Review** Have someone else review your test plan, ask them to run it in your test environment.
