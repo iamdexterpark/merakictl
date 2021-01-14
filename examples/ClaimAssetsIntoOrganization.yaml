@@ -1,8 +1,0 @@
----
-orders:
-  - 4CXXXXXXX
-serials:
-  - Q234-ABCD-5678
-licenses:
-  - key: Z2XXXXXXXXXX
-    mode: addDevices
