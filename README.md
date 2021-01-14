@@ -95,7 +95,7 @@ Not all endpoints will work in v0.
     
 ## Syntax
 
-[FUll CLI CMD GUIDE](https://github.com/ddexterpark/merakictl/cmd/README.md)
+[FULL COMMAND GUIDE](https://github.com/ddexterpark/merakictl/cmd/README.md)
 
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
