@@ -95,6 +95,8 @@ Not all endpoints will work in v0.
     
 ## Syntax
 
+[FUll CLI CMD GUIDE](https://github.com/ddexterpark/merakictl/cmd/README.md)
+
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
 ```
@@ -143,15 +145,16 @@ Flag Type | Long | Short | Description |
 | Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
 
 
-### Data Model
-Please see the examples directory for full reference guide. 
-I highly recommended that you export the current configuration from the dashboard before running create, 
+### Importing and Exporting Data
+I highly recommended that you make a habit of exporting the current configuration from the dashboard before running create, 
 update or delete commands.
 
-In most cases the API commands preform overwrite operations, **any dashboard config not captured in the yaml file is at risk of being replaced.**
+Supported formats for importing and exporting data are JSON & YAML.
+
+IMPORTANT: In most cases the API commands preform overwrite operations, meaning **any dashboard config not captured in the yaml file is at risk of being replaced.**
 
 
-#### Examples
+#### Usage Example
  ```shell script
     # export list of orgs to yaml file
      merakictl get org list -e 
@@ -161,13 +164,13 @@ In most cases the API commands preform overwrite operations, **any dashboard con
 ```yaml
 ---
 - id: "100000000000000000"
-  name: MyOrganization
+  name: DextersLab
   samlConsumerUrl: https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
   samlConsumerUrls:
   - https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
   url: https://n1.meraki.com/o/A0bcDefg/manage/organization/overview
 - id: "671599294431625609"
-  name: YourOrganization
+  name: DextersProd
   samlConsumerUrl: https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
   samlConsumerUrls:
   - https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
@@ -179,8 +182,8 @@ In most cases the API commands preform overwrite operations, **any dashboard con
 ### Disclaimer
 
 Please use merakictl responsibly. 
-It can be tempting to try out a new tool to solve some prod issues, 
-but it is always better to use a test environment and develop a change plan.
+It can be tempting to immediately try out a new tool to solve some production issues, 
+but it is always better to use a test environment first and develop a change plan based on empirical evidence.
 
 #### Elements of a great production change plan include:
 - **Peer Review** Have someone else review your test plan, ask them to run it in your test environment.
