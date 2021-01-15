@@ -65,15 +65,15 @@ There are also some optional env vars that you can set to customize your API cal
 
 #### Required
 
-**MERAKI_API_TOKEN**
+**MERAKI_DASHBOARD_API_KEY**
 ```shell script
       Bash -
-      export MERAKI_API_TOKEN=1234567890987654321
-      echo $MERAKI_API_TOKEN 
+      export MERAKI_DASHBOARD_API_KEY=1234567890987654321
+      echo $MERAKI_DASHBOARD_API_KEY
       
       PowerShell -
-            setx MERAKI_API_TOKEN "1234567890987654321"
-            echo %MERAKI_API_TOKEN%
+            setx MERAKI_DASHBOARD_API_KEY "1234567890987654321"
+            echo %MERAKI_DASHBOARD_API_KEY%
 ```
 #### Optional
  
@@ -101,9 +101,9 @@ Not all endpoints will work in v0.
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
 ```
 
- 
+
 #### COMMANDS
- 
+
 Long | Short | Syntax | Description |
 --- | --- | ---  | ---
 show | get | merakictl show [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. 
