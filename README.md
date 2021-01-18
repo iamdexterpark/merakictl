@@ -4,59 +4,74 @@
 
 *Multi-language Documentation: [English](README.md), [日本語](README.ja.md), [简体中文](README.zh-cn.md).*
 
-A Community developed command line tool for the Meraki Dashboard API. 
-For the Vendor supported python SDK please see the wonderful: [Meraki Dashboard API Python Library](https://github.com/meraki/dashboard-api-python)
+Merakictl is a community developed command line tool for interfacing with the Meraki Dashboard API. 
+It allows you to query and alter network configs from a familiar cli-based environment. 
 
-## Download Merakictl 
-This cli does not require any prior programming experience or knowledge of Go Lang to use.
+This tool leverages a community supported Go Lang Library: [dashboard-api-golang](https://github.com/ddexterpark/dashboard-api-golang)
 
-[Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+For the vendor supported python Library: [dashboard-api-python](https://github.com/meraki/dashboard-api-python)
+  
 
-## (Optional)  Compile CLI From Source Code
-Merakictl compiles into a cross-platform (Linux/Mac/Win) static binary.
-#### Installation
+## Compile CLI From Source Code (Optional)
+The following steps are very optional and intended only for those who wish to compile from source code. 
+
+For everyone else, I preemptively compiled this tool into static binaries for multiple platforms.
+
+Please see the `Download Merakictl` section for details.
+
+#### Install Go Lang (Optional)
 Install the [Go](http://golang.org) programming language.
 
-#### Set PATH
+#### Set Go Lang PATH (Optional)
 ```bash
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 ```
-
-#### Download Project
-
+#### Import Project (Optional)
 ```bash
 go get github.com/ddexterpark/merakictl
 ```
 
-#### Compile Static Binary 
+#### Compile Static Binary (Optional)
 ```shell script
-    # Linux/MacOS
     cd /Users/{$USERNAME}/go/src/github.com/ddexterpark/merakictl
     go build main.go
-    
-    # Move executable to preferred location and declare in $PATH
-    mv main /usr/local/sbin/merakictl
-    export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+
 ```
 
+## Download Merakictl 
+This CLI tool does not require any prior programming experience or knowledge of Go Lang to use. 
+Please check the releases page to download the latest version. 
+Use this reference chart to select the appropriate version:
+
+### [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+
+$OS | $ARCH
+--- | --- 
+linux | 386
+linux | amd64
+darwin | 386
+darwin | amd64
+windows | 386
+windows | amd64
+
+#### Export Path to merakictl
+
 ```shell script
-    # Windows 64-bit
-    env GOOS=windows GOARCH=amd64 go build main.go
-    
-    # Windows 32-bit
-    env GOOS=windows GOARCH=386 go build main.go
+    # Linux/MacOS
+
+    # Move executable to preferred location and append in $PATH
+    mv merakictl-$OS-$ARCH /usr/local/sbin/merakictl
+    export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+
+    # Windows
+    # Move executable to executable location (Powershell)
+    Move-Item -Path "merakictl-windows-$ARCH.exe" -Destination "C:\Program Files\merakictl.exe"
+
 ```
 Now this binary should be available in your shell from any location by calling `merakictl`.
 
-## Initial Setup
-
-#### AutoCompletion
-To enable tab-based autocompletion use the following command with your preferred shell as input.
-```shell script
-
-    merakictl completion [bash|zsh|fish|powershell]
-```
+## Initial Setup  
 
 #### Set Environment Variables
 
@@ -75,11 +90,18 @@ There are also some optional env vars that you can set to customize your API cal
             setx MERAKI_DASHBOARD_API_KEY "1234567890987654321"
             echo %MERAKI_DASHBOARD_API_KEY%
 ```
-#### Optional
+[Generate a Meraki Dashboard API Key]( https://documentation.meraki.com/General_Administration/Other_Topics/The_Cisco_Meraki_Dashboard_API)
+
+#### Optional Variables
+
+This variable allows you to change the base URL used when making API calls. 
+This is useful for targeting specific shards or regions.
+
+By default, we leverage the mega-proxy, the Meraki API's Global Load-Balancer.
  
 **MERAKI_API_URL**
 ```shell script
-        Default = 'https://api.meraki.com/api/'
+        Default = 'https://api-mp.meraki.com/api/'
         China = 'https://api.meraki.cn/api/' 
 ```
 
@@ -92,15 +114,20 @@ Not all endpoints will work in v0.
     Default = 'v1'
 ```
 
-    
+#### AutoCompletion
+To enable tab-based autocompletion use the following command with your preferred shell as input.
+```shell script
+
+    merakictl completion [bash|zsh|fish|powershell]
+```
+
 ## Syntax
 
-[FULL COMMAND GUIDE](https://github.com/ddexterpark/merakictl/cmd/README.md)
+The full command guide is available [here](https://github.com/ddexterpark/merakictl/tree/master/cmd/README.md)
 
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
 ```
-
 
 #### COMMANDS
 
@@ -120,64 +147,23 @@ Long | Short | Syntax | Description
 Organization | org |  | Collection of Networks
 Network | net |  | Collection of Devices
 Device | sn |  | Meraki Product
-appliance | mx | |
-switch | ms | |
-wireless | mr | |
-gateway | mg | |
-camera | mv | |
-systems | sm | |
-insight | in | |
-
-#### FLAGS
-In order to invoke most commands you will have to specify a target resource. 
-For convenience, merakictl is capable of name-based resolution. 
-This means you do not need to know the randomly generated IDs, 
-only the exact name of the organization, network or device.
-
-Flag Type | Long | Short | Description |
---- | --- | --- | ---
-| Global | **--organization** | -o | Global flag for resolving names to OrganizationIds. |
-| Global | **--network** | -n | Global flag for resolving names to NetworkIds. |
-| Global | **--hostname** | -h | Global flag for resolving names to Device serial numbers. |
-| Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
-| Global | **--input** | | Global flag for passing yaml/json config files as command input |
-| Global | **--diff** | | Global flag for diffing config file with dashboard config |
-| Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
-
-
-### Importing and Exporting Data
-I highly recommended that you make a habit of exporting the current configuration from the dashboard before running create, 
-update or delete commands.
-
-Supported formats for importing and exporting data are JSON & YAML.
-
-IMPORTANT: In most cases the API commands preform overwrite operations, meaning **any dashboard config not captured in the yaml file is at risk of being replaced.**
+appliance | mx | | Meraki MX Security Appliance
+switch | ms | | Meraki MS Switches
+wireless | mr | | Meraki MR Wirelesss Access  Points
+gateway | mg | | Meraki MG Cellualar Gateway
+camera | mv | | Meraki MV Cameras
+systems | sm | | Meraki SM Systems Management Solution
+insight | in | | Meraki Insight Application Telemetry
 
 
 #### Usage Example
  ```shell script
-    # export list of orgs to yaml file
-     merakictl get org list -e 
+    merakictl show organization list
+    merakictl show org networks --organization 'DextersLab'
+    merakictl show network devices --network 'My Network'  -o 'DextersLab'
+    merakictl show mr ssids -n 'My Network'  -o 'DextersLab' --export
+    merakictl update mr ssid 0 -n 'My Network'  -o 'DextersLab' --import SSIDS.yaml
  ```  
-
-#### organizations.yaml
-```yaml
----
-- id: "100000000000000000"
-  name: DextersLab
-  samlConsumerUrl: https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
-  samlConsumerUrls:
-  - https://n1.meraki.com/saml/login/A0bcDefg/hijO-kLmnoPq
-  url: https://n1.meraki.com/o/A0bcDefg/manage/organization/overview
-- id: "671599294431625609"
-  name: DextersProd
-  samlConsumerUrl: https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
-  samlConsumerUrls:
-  - https://n2.meraki.com/saml/login/R1stUvwx/yzy2-xWvutSr
-  url: https://n2.meraki.com/o/R1stUvwx/manage/organization/overview
-```
-
-
 
 ### Disclaimer
 

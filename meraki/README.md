@@ -3,35 +3,80 @@
 
 *Main Documentation: [English](https://github.com/ddexterpark/merakictl/README.md)*
 
+#### COMMANDS
+
+Long | Short | Syntax | Description |
+--- | --- | ---  | ---
+show | get | merakictl show [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. 
+create | post | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags] | Creates (POST) new resources. 
+update | put | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Updates (PUT) targeted resources. 
+remove | del, no | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. 
+
+#### SUBCOMMANDS
+
+Subcommands mirror the Meraki Dashboard hierarchy.
+
+Long | Short | Syntax | Description
+--- | --- | ---  | ---
+Organization | org |  | Collection of Networks
+Network | net |  | Collection of Devices
+Device | sn |  | Meraki Product
+appliance | mx | | Meraki MX Security Appliance
+switch | ms | | Meraki MS Switches
+wireless | mr | | Meraki MR Wirelesss Access  Points
+gateway | mg | | Meraki MG Cellualar Gateway
+camera | mv | | Meraki MV Cameras
+systems | sm | | Meraki SM Systems Management Solution
+insight | in | | Meraki Insight Application Telemetry
+
+
+
+#### FLAGS
+In order to invoke most commands you will have to specify a target resource. 
+For convenience, merakictl is capable of name-based resolution. 
+This means you do not need to know the randomly generated IDs, 
+only the exact name of the organization, network or device.
+
+Flag Type | Long | Short | Description |
+--- | --- | --- | ---
+| Global | **--organization** | -o | Global flag for resolving names to OrganizationIds. |
+| Global | **--network** | -n | Global flag for resolving names to NetworkIds. |
+| Global | **--hostname** | -h | Global flag for resolving names to Device serial numbers. |
+| Global | **--export** | -e | Global flag for extracting config from the Meraki API via get commands. |
+| Global | **--input** | | Global flag for passing yaml/json config files as command input |
+| Global | **--diff** | | Global flag for diffing config file with dashboard config |
+| Global | **--verbose** | -v | Global flag to display the http request & response for troubleshooting. |
+
+
 ## Organization 
-[English](https://github.com/ddexterpark/merakictl/meraki/general/organization/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/organization/README.md)
 
 ## Network
-[English](https://github.com/ddexterpark/merakictl/meraki/general/network/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/network/README.md)
 
 ## Device
-[English](https://github.com/ddexterpark/merakictl/meraki/general/device/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/device/README.md)
 
 ## MX Appliance 
-[English](https://github.com/ddexterpark/merakictl/meraki/products/mx/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mx/README.md)
  
 ## Camera MV
-[English](https://github.com/ddexterpark/merakictl/meraki/products/mv/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mv/README.md)
  
 ## Cellular Gateway mg
-[English](https://github.com/ddexterpark/merakictl/meraki/products/mg/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mg/README.md)
   
 ## Switch MS
-[English](https://github.com/ddexterpark/merakictl/meraki/products/ms/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/ms/README.md)
 
 ## Wireless MR
-[English](https://github.com/ddexterpark/merakictl/meraki/products/mr/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mr/README.md)
  
 ## SM
-[English](https://github.com/ddexterpark/merakictl/meraki/products/sm/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/sm/README.md)
 
 ## Insight
-[English](https://github.com/ddexterpark/merakictl/meraki/products/insight/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/insight/README.md)
 
 
 ## Filters
