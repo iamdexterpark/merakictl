@@ -123,7 +123,7 @@ To enable tab-based autocompletion use the following command with your preferred
 
 ## Syntax
 
-The full command guide is available [here](https://github.com/ddexterpark/merakictl/tree/master/cmd/README.md)
+The full command guide is available [here](https://github.com/ddexterpark/merakictl/tree/master/meraki/README.md)
 
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]
