@@ -46,3 +46,4 @@
 - [ ] Meraki Filter by Tags Flag 
 - [ ] Hash passwords/secrets for dynamic encryption/decryption using ENV VAR to store seed secret (Encourage users not to store clear text creds in exported yaml/json config)
 - [ ] Static Binary Self Update
+- [ ] Turn Merakictl into a Self-contained Shell
