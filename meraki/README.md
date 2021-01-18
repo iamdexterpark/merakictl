@@ -1,7 +1,7 @@
 # Merakictl CLI Reference 
 
 
-*Main Documentation: [English](https://github.com/ddexterpark/merakictl/README.md)*
+*Main Documentation: [English](https://github.com/ddexterpark/merakictl/blob/master/README.md)*
 
 #### COMMANDS
 
