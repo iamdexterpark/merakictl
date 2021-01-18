@@ -2,7 +2,7 @@
 
 *Main Documentation: [English](https://github.com/ddexterpark/merakictl/blob/master/README.md)*
 
-*CLI Reference Overview: [English](https://github.com/ddexterpark/merakictl/tree/master/meraki/README.md)*
+*CLI Reference Overview: [English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/README.md)*
 
 ## Organization
 
@@ -22,9 +22,6 @@ All Organization level API calls.
  GET  | actionBatch | merakictl get organization actionBatch {actionBatchId} {organizationId} | | Return A Single Action Batch.
  DEL  | actionBatch | merakictl del organization actionBatch | merakictl del organization actionBatch {actionBatchId} {organizationId} | | Delete an action batch.
  PUT  | actionBatch | merakictl put organization actionBatch | merakictl put organization actionBatch {actionBatchId} {organizationId} | | Update an action batch.
- 
-
- 
  GET  | admins | merakictl get organization admins {organizationId} | | List The Dashboard Administrators In This Organization.
  GET  | brandingPolicies | merakictl get organization brandingpolicies {organizationId} | | Return The Branding Policy IDs Of An Organization.
  GET  | brandingPolicy | merakictl get organization brandingPolicy {brandingPolicyId} {organizationId} | | Return The Branding Policies Of An Organization.

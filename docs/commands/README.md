@@ -49,34 +49,34 @@ Flag Type | Long | Short | Description |
 
 
 ## Organization 
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/organization/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/organization.md)
 
 ## Network
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/network/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/network.md)
 
 ## Device
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/general/device/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/device.md)
 
 ## MX Appliance 
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mx/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/mx.md)
  
 ## Camera MV
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mv/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/mv.md)
  
 ## Cellular Gateway mg
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mg/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/mg.md)
   
 ## Switch MS
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/ms/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/ms.md)
 
 ## Wireless MR
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/mr/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/mr.md)
  
 ## SM
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/sm/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/sm.md)
 
 ## Insight
-[English](https://github.com/ddexterpark/merakictl/tree/master/meraki/products/insight/README.md)
+[English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/insight.md)
 
 
 ## Filters

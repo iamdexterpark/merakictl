@@ -2,7 +2,7 @@
 # merakictl
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/ddexterpark/merakictl)
 
-*Multi-language Documentation: [English](README.md), [日本語](README.ja.md), [简体中文](README.zh-cn.md).*
+*Multi-language Documentation: [English](README.md), [日本語](docs/README.ja.md), [简体中文](docs/README.zh-cn.md).*
 
 Merakictl is a community developed command line tool for interfacing with the Meraki Dashboard API. 
 It allows you to query and alter network configs from a familiar cli-based environment. 
@@ -123,7 +123,7 @@ To enable tab-based autocompletion use the following command with your preferred
 
 ## Syntax
 
-The full command guide is available [here](https://github.com/ddexterpark/merakictl/tree/master/meraki/README.md)
+The full command guide is available [here](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/README.md)
 
 ```shell script
     merakictl [COMMAND] [SUBCOMMAND] [TARGET]  [flags]

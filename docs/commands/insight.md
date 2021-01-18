@@ -2,7 +2,7 @@
 
 *Main Documentation: [English](https://github.com/ddexterpark/merakictl/blob/master/README.md)*
 
-*CLI Reference Overview: [English](https://github.com/ddexterpark/merakictl/tree/master/meraki/README.md)*
+*CLI Reference Overview: [English](https://github.com/ddexterpark/merakictl/tree/master/docs/commands/README.md)*
 
 
 ## Insight  
