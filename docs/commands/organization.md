@@ -16,7 +16,6 @@ All Organization level API calls.
 ----- | --------- | ------ | ----------- | ----------- |
  GET  | list | merakictl get organization list | | List the organizations that the user has privileges on.
  GET  | details | merakictl get organization info {organizationId} | | List a specific organization that the user has privileges on.
- 
  POST | actionBatch | merakictl post organization actionBatch | | Create an action batch.
  GET  | actionBatches | merakictl get organization actionBatches {organizationId} | | Return The List Of Action Batches In The Organization.
  GET  | actionBatch | merakictl get organization actionBatch {actionBatchId} {organizationId} | | Return A Single Action Batch.
