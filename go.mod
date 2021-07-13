@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/ddexterpark/dashboard-api-golang v0.0.0-20210110043749-4137d274e50b
+	github.com/ddexterpark/dashboard-api-golang v0.0.0-20210713144337-af189b85f8b6
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/kr/pretty v0.2.1
 	github.com/magiconair/properties v1.8.4 // indirect
@@ -19,6 +19,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5
 	github.com/spf13/viper v1.7.1
+	github.com/zcalusic/sysinfo v0.0.0-20201228191146-22fe1fd10b0f
 	golang.org/x/sys v0.0.0-20201204225414-ed752295db88 // indirect
 	golang.org/x/text v0.3.4 // indirect
 	gopkg.in/d4l3k/messagediff.v1 v1.2.1
