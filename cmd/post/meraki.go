@@ -21,20 +21,20 @@ var OrgCmd = &cobra.Command{
 
 func init() {
 	OrgCmd.AddCommand(organization.PostActionBatch)
+	OrgCmd.AddCommand(organization.PostAdmins)
+	OrgCmd.AddCommand(organization.PostAssignSeats)
+	OrgCmd.AddCommand(organization.PostBrandingPolicy)
+	OrgCmd.AddCommand(organization.PostClaim)
 	OrgCmd.AddCommand(organization.PostClone)
 	OrgCmd.AddCommand(organization.PostCombineNetworks)
-	OrgCmd.AddCommand(organization.PostOrganization)
-	OrgCmd.AddCommand(organization.PostAdmins)
-	OrgCmd.AddCommand(organization.PostBrandingPolicy)
 	OrgCmd.AddCommand(organization.PostConfigurationTemplate)
 	OrgCmd.AddCommand(organization.PostIDP)
-	OrgCmd.AddCommand(organization.PostNetworks)
-	OrgCmd.AddCommand(organization.PostSamlRole)
-	OrgCmd.AddCommand(organization.PostAssignSeats)
-	OrgCmd.AddCommand(organization.PostMoveSeats)
 	OrgCmd.AddCommand(organization.PostMoveLicenses)
+	OrgCmd.AddCommand(organization.PostMoveSeats)
+	OrgCmd.AddCommand(organization.PostNetworks)
+	OrgCmd.AddCommand(organization.PostOrganization)
 	OrgCmd.AddCommand(organization.PostRenewSeats)
-	OrgCmd.AddCommand(organization.PostClaim)
+	OrgCmd.AddCommand(organization.PostSamlRole)
 }
 
 var NetCmd = &cobra.Command{
@@ -93,21 +93,19 @@ var MSCmd = &cobra.Command{
 
 func init() {
 	MSCmd.AddCommand(ms.PostAccessPolicy)
-	MSCmd.AddCommand(ms.PostRemoveFromStack)
 	MSCmd.AddCommand(ms.PostAddToStack)
 	MSCmd.AddCommand(ms.PostClone)
-	MSCmd.AddCommand(ms.PostStaticRoute)
-	MSCmd.AddCommand(ms.PostAccessPolicy)
 	MSCmd.AddCommand(ms.PostL3Interface)
 	MSCmd.AddCommand(ms.PostLinkAggregations)
 	MSCmd.AddCommand(ms.PostPortCycle)
 	MSCmd.AddCommand(ms.PostPortSchedules)
 	MSCmd.AddCommand(ms.PostQoSRule)
+	MSCmd.AddCommand(ms.PostRemoveFromStack)
 	MSCmd.AddCommand(ms.PostRendezvousPoint)
 	MSCmd.AddCommand(ms.PostStackL3Interface)
 	MSCmd.AddCommand(ms.PostStackStaticRoute)
+	MSCmd.AddCommand(ms.PostStaticRoute)
 	MSCmd.AddCommand(ms.PostSwitchStack)
-	MSCmd.AddCommand(ms.GetPortsStatuses)
 }
 
 var MRCmd = &cobra.Command{
@@ -128,7 +126,7 @@ var MGCmd = &cobra.Command{
 }
 
 func init() {
-	MGCmd.AddCommand()
+	// MGCmd.AddCommand()
 }
 
 
@@ -150,14 +148,14 @@ var SMCmd = &cobra.Command{
 
 func init() {
 	SMCmd.AddCommand(sm.PostBypassActivationLockAttempts)
-	SMCmd.AddCommand(sm.PostWipeDevice)
 	SMCmd.AddCommand(sm.PostCheckin)
-	SMCmd.AddCommand(sm.PostModifyTags)
 	SMCmd.AddCommand(sm.PostLockDevices)
+	SMCmd.AddCommand(sm.PostModifyTags)
 	SMCmd.AddCommand(sm.PostMoveDevices)
 	SMCmd.AddCommand(sm.PostRefreshDevice)
 	SMCmd.AddCommand(sm.PostTargetGroup)
 	SMCmd.AddCommand(sm.PostUnEnrollDevice)
+	SMCmd.AddCommand(sm.PostWipeDevice)
 }
 
 var InsightCmd = &cobra.Command{
@@ -168,5 +166,4 @@ var InsightCmd = &cobra.Command{
 
 func init() {
 	InsightCmd.AddCommand(insight.PostMonitoredMediaServer)
-
 }
