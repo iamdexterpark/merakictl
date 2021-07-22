@@ -21,18 +21,18 @@ var OrgCmd = &cobra.Command{
 }
 
 func init() {
-	OrgCmd.AddCommand(organization.PutOrganization)
-	OrgCmd.AddCommand(organization.PutBrandingPolicyPriorities)
-	OrgCmd.AddCommand(organization.PutBrandingPolicy)
-	OrgCmd.AddCommand(organization.PutSNMP)
 	OrgCmd.AddCommand(organization.PutActionBatch)
 	OrgCmd.AddCommand(organization.PutAdmins)
+	OrgCmd.AddCommand(organization.PutBrandingPolicy)
+	OrgCmd.AddCommand(organization.PutBrandingPolicyPriorities)
 	OrgCmd.AddCommand(organization.PutConfigurationTemplate)
 	OrgCmd.AddCommand(organization.PutIDP)
 	OrgCmd.AddCommand(organization.PutLicence)
 	OrgCmd.AddCommand(organization.PutLoginSecurity)
+	OrgCmd.AddCommand(organization.PutOrganization)
 	OrgCmd.AddCommand(organization.PutSAML)
 	OrgCmd.AddCommand(organization.PutSamlRole)
+	OrgCmd.AddCommand(organization.PutSNMP)
 }
 
 var NetCmd = &cobra.Command{
@@ -44,7 +44,6 @@ var NetCmd = &cobra.Command{
 func init() {
 	NetCmd.AddCommand(network.PutAlertSettings)
 	NetCmd.AddCommand(network.PutClientPolicy)
-	NetCmd.AddCommand(network.PutSplashAuthorizationStatus)
 	NetCmd.AddCommand(network.PutFirmwareUpgrades)
 	NetCmd.AddCommand(network.PutFloorPlan)
 	NetCmd.AddCommand(network.PutGroupPolicy)
@@ -53,9 +52,9 @@ func init() {
 	NetCmd.AddCommand(network.PutMQTTBroker)
 	NetCmd.AddCommand(network.PutNetflow)
 	NetCmd.AddCommand(network.PutNetwork)
-	NetCmd.AddCommand(network.GetNetwork)
 	NetCmd.AddCommand(network.PutSettings)
 	NetCmd.AddCommand(network.PutSNMP)
+	NetCmd.AddCommand(network.PutSplashAuthorizationStatus)
 	NetCmd.AddCommand(network.PutSyslogServers)
 	NetCmd.AddCommand(network.PutTrafficAnalysis)
 }
@@ -81,8 +80,6 @@ var MXCmd = &cobra.Command{
 
 func init() {
 	MXCmd.AddCommand(mx.PutBGP)
-	MXCmd.AddCommand(mx.PutPortForwardingRules)
-	MXCmd.AddCommand(mx.PutPort)
 	MXCmd.AddCommand(mx.PutCellularFirewallRules)
 	MXCmd.AddCommand(mx.PutConnectivityMonitoringDestinations)
 	MXCmd.AddCommand(mx.PutContentFiltering)
@@ -96,6 +93,8 @@ func init() {
 	MXCmd.AddCommand(mx.PutOneToManyNatRules)
 	MXCmd.AddCommand(mx.PutOneToOneNatRules)
 	MXCmd.AddCommand(mx.PutOrganizationIntrusion)
+	MXCmd.AddCommand(mx.PutPort)
+	MXCmd.AddCommand(mx.PutPortForwardingRules)
 	MXCmd.AddCommand(mx.PutSingleLan)
 	MXCmd.AddCommand(mx.PutSiteToSiteVPN)
 	MXCmd.AddCommand(mx.PutStaticRoute)
@@ -118,12 +117,10 @@ var MSCmd = &cobra.Command{
 
 func init() {
 	MSCmd.AddCommand(ms.PutAccessControlLists)
-	MSCmd.AddCommand(ms.PutStaticRoute)
-	MSCmd.AddCommand(ms.PutDHCP)
-	MSCmd.AddCommand(ms.PutDSCP)
-	MSCmd.AddCommand(ms.PutSettings)
 	MSCmd.AddCommand(ms.PutAccessPolicy)
+	MSCmd.AddCommand(ms.PutDHCP)
 	MSCmd.AddCommand(ms.PutDHCPServerPolicy)
+	MSCmd.AddCommand(ms.PutDSCP)
 	MSCmd.AddCommand(ms.PutL3Interface)
 	MSCmd.AddCommand(ms.PutLinkAggregations)
 	MSCmd.AddCommand(ms.PutMTU)
@@ -133,9 +130,11 @@ func init() {
 	MSCmd.AddCommand(ms.PutQoSRule)
 	MSCmd.AddCommand(ms.PutQoSRuleOrder)
 	MSCmd.AddCommand(ms.PutRendezvousPoint)
+	MSCmd.AddCommand(ms.PutSettings)
 	MSCmd.AddCommand(ms.PutStackDHCP)
 	MSCmd.AddCommand(ms.PutStackL3Interface)
 	MSCmd.AddCommand(ms.PutStackStaticRoute)
+	MSCmd.AddCommand(ms.PutStaticRoute)
 	MSCmd.AddCommand(ms.PutStormControl)
 	MSCmd.AddCommand(ms.PutSTP)
 	MSCmd.AddCommand(ms.PutSwitchPort)
@@ -150,17 +149,17 @@ var MRCmd = &cobra.Command{
 }
 
 func init() {
-	MRCmd.AddCommand(mr.PutSSID)
-	MRCmd.AddCommand(mr.PutTrafficShapingRules)
-	MRCmd.AddCommand(mr.PutL7FirewallRules)
-	MRCmd.AddCommand(mr.PutL3FirewallRules)
 	MRCmd.AddCommand(mr.PutAlternateManagementInterface)
 	MRCmd.AddCommand(mr.PutBluetoothDeviceSettings)
 	MRCmd.AddCommand(mr.PutBluetoothNetworkSettings)
 	MRCmd.AddCommand(mr.PutIdentityPSK)
+	MRCmd.AddCommand(mr.PutL3FirewallRules)
+	MRCmd.AddCommand(mr.PutL7FirewallRules)
 	MRCmd.AddCommand(mr.PutRadioSettings)
 	MRCmd.AddCommand(mr.PutRFProfile)
 	MRCmd.AddCommand(mr.PutSplashSettings)
+	MRCmd.AddCommand(mr.PutSSID)
+	MRCmd.AddCommand(mr.PutTrafficShapingRules)
 	MRCmd.AddCommand(mr.PutWirelessSettings)
 }
 
@@ -212,5 +211,4 @@ var InsightCmd = &cobra.Command{
 
 func init() {
 	InsightCmd.AddCommand(insight.PutMonitoredMediaServer)
-
 }
