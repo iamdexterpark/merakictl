@@ -37,6 +37,9 @@ go get github.com/ddexterpark/merakictl
     cd /Users/{$USERNAME}/go/src/github.com/ddexterpark/merakictl
     go build main.go
 
+    # Make binary exicutable on *nix systems
+    chmod +x main.go
+
 ```
 
 ## Download Merakictl 
@@ -99,13 +102,13 @@ This is useful for targeting specific shards or regions.
 
 By default, we leverage the mega-proxy, the Meraki API's Global Load-Balancer.
  
-**MERAKI_API_URL**
+**MERAKI_DASHBOARD_API_URL**
 ```shell script
-        Default = 'https://api-mp.meraki.com/api/'
-        China = 'https://api.meraki.cn/api/' 
+        Default = "https://api-mp.meraki.com/api/"
+        China = "https://api.meraki.cn/api/" 
 ```
 
-**MERAKI_API_VERSION**
+**MERAKI_DASHBOARD_API_VERSION**
 
 The default version is v1, this tool has limited support for v0 as it is being sunset in 2022. 
 Not all endpoints will work in v0.

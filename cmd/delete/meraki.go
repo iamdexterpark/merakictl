@@ -1,6 +1,5 @@
 package delete
 
-
 import (
 	"github.com/ddexterpark/merakictl/meraki/general/network"
 	"github.com/ddexterpark/merakictl/meraki/general/organization"
@@ -20,12 +19,12 @@ var OrgCmd = &cobra.Command{
 }
 
 func init() {
-	OrgCmd.AddCommand(organization.DelOrganization)
 	OrgCmd.AddCommand(organization.DelActionBatch)
 	OrgCmd.AddCommand(organization.DelAdmins)
 	OrgCmd.AddCommand(organization.DelBrandingPolicy)
 	OrgCmd.AddCommand(organization.DelConfigurationTemplate)
 	OrgCmd.AddCommand(organization.DelIDP)
+	OrgCmd.AddCommand(organization.DelOrganization)
 	OrgCmd.AddCommand(organization.DelSamlRole)
 }
 
@@ -43,7 +42,6 @@ func init() {
 	NetCmd.AddCommand(network.DelMQTTBroker)
 	NetCmd.AddCommand(network.DelNetwork)
 	NetCmd.AddCommand(network.DelPIIRequest)
-
 }
 
 var DeviceCmd = &cobra.Command{
@@ -78,7 +76,6 @@ var MSCmd = &cobra.Command{
 
 func init() {
 	MSCmd.AddCommand(ms.DelAccessPolicy)
-	MSCmd.AddCommand(ms.DelStaticRoute)
 	MSCmd.AddCommand(ms.DelL3Interface)
 	MSCmd.AddCommand(ms.DelLinkAggregations)
 	MSCmd.AddCommand(ms.DelPortSchedules)
@@ -86,6 +83,7 @@ func init() {
 	MSCmd.AddCommand(ms.DelRendezvousPoint)
 	MSCmd.AddCommand(ms.DelStackL3Interface)
 	MSCmd.AddCommand(ms.DelStackStaticRoute)
+	MSCmd.AddCommand(ms.DelStaticRoute)
 	MSCmd.AddCommand(ms.DelSwitchStack)
 }
 
@@ -107,7 +105,7 @@ var MGCmd = &cobra.Command{
 }
 
 func init() {
-	MGCmd.AddCommand()
+	// MGCmd.AddCommand(mg.)
 }
 
 
@@ -139,5 +137,4 @@ var InsightCmd = &cobra.Command{
 
 func init() {
 	InsightCmd.AddCommand(insight.DelMonitoredMediaServer)
-
 }
