@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	github.com/blang/semver v3.5.1+incompatible
-	github.com/ddexterpark/dashboard-api-golang v0.0.0-20210713144337-af189b85f8b6
+	github.com/ddexterpark/dashboard-api-golang v0.0.0-20210725041911-007de63d94b3
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/kr/pretty v0.2.1
 	github.com/magiconair/properties v1.8.4 // indirect

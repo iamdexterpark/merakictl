@@ -24,7 +24,7 @@ func init() {
 	OrgCmd.AddCommand(organization.PostAdmins)
 	OrgCmd.AddCommand(organization.PostAssignSeats)
 	OrgCmd.AddCommand(organization.PostBrandingPolicy)
-	OrgCmd.AddCommand(organization.PostClaim)
+	OrgCmd.AddCommand(organization.PostClaimDevicesLicensesAndOrders)
 	OrgCmd.AddCommand(organization.PostClone)
 	OrgCmd.AddCommand(organization.PostCombineNetworks)
 	OrgCmd.AddCommand(organization.PostConfigurationTemplate)

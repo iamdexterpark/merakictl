@@ -546,7 +546,7 @@ var PostNetworks = &cobra.Command{
 		if org == "" {
 			org = args[0]
 		}
-		var format configure.Networks
+		var format configure.CreateNetwork
 		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PostNetworks(org, input)
 
@@ -842,7 +842,7 @@ var PostOrganization = &cobra.Command{
 	},
 }
 
-var PostClaim = &cobra.Command{
+var PostClaimDevicesLicensesAndOrders = &cobra.Command{
 	Use:   "claim",
 	Short: "Claim a list of devices, licenses, and/or orders into an organization.",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -850,9 +850,9 @@ var PostClaim = &cobra.Command{
 		if org == "" {
 			org = args[0]
 		}
-		var format configure.Claim
+		var format configure.ClaimDevicesLicensesAndOrders
 		input, _ := shell.ReadConfigFile(cmd, &format)
-		metadata := configure.PostClaim(org, input)
+		metadata := configure.PostClaimDevicesLicensesAndOrders(org, input)
 		shell.Display(metadata, "organization", cmd.Flags())
 	},
 }
