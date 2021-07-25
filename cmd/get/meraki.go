@@ -99,6 +99,7 @@ func init() {
 	NetCmd.AddCommand(network.GetSyslogServers)
 	NetCmd.AddCommand(network.GetTraffic)
 	NetCmd.AddCommand(network.GetTrafficAnalysis)
+	NetCmd.AddCommand(network.GetTrafficShaping)
 	NetCmd.AddCommand(network.GetWebhookTest)
 }
 
