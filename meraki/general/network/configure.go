@@ -134,10 +134,7 @@ var PostClaimDevices = &cobra.Command{
 			networkId = args[1]
 		}
 
-		format := args[0]
-		if format == "" {
-
-		}
+		var format interface{}
 		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PostClaimDevices(networkId,  input)
 		shell.Display(metadata, "ClaimSerials", cmd.Flags())
@@ -152,9 +149,7 @@ var PostRemoveDevices = &cobra.Command{
 		if networkId == "" {
 			networkId = args[1]
 		}
-		format := args[0]
-		if format == "" {
-		}
+		var format interface{}
 		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PostRemoveDevices(networkId,  input)
 		shell.Display(metadata, "RemoveDevices", cmd.Flags())
@@ -183,10 +178,7 @@ var PutFirmwareUpgrades = &cobra.Command{
 		if networkId == "" {
 			networkId = args[1]
 		}
-		format := args[0]
-		if format == "" {
-
-		}
+		var format configure.FirmwareUpgrades
 		input, _ := shell.ReadConfigFile(cmd, &format)
 		metadata := configure.PutFirmwareUpgrades(networkId,  input)
 		shell.Display(metadata, "FirmwareUpgrades", cmd.Flags())
