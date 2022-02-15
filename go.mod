@@ -3,6 +3,7 @@ module github.com/ddexterpark/merakictl
 go 1.14
 
 require (
+	github.com/ulikunitz/xz v0.5.8
 	github.com/blang/semver v3.5.1+incompatible
 	github.com/ddexterpark/dashboard-api-golang v0.0.0-20210725041911-007de63d94b3
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
