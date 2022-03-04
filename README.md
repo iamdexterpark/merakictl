@@ -10,7 +10,40 @@ It allows you to query and alter network configs from a familiar cli-based envir
 This tool leverages a community supported Go Lang Library: [dashboard-api-golang](https://github.com/ddexterpark/dashboard-api-golang)
 
 For the vendor supported python Library: [dashboard-api-python](https://github.com/meraki/dashboard-api-python)
-  
+
+
+## Download Merakictl
+This CLI tool does not require any prior programming experience or knowledge of Go Lang to use.
+Please check the releases page to download the latest version.
+Use this reference chart to select the appropriate version:
+
+### [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
+
+| $OS     | $ARCH                                                      |
+|---------|------------------------------------------------------------|
+| Linux   | [386](https://github.com/ddexterpark/merakictl/releases)   |
+| Linux   | [amd64](https://github.com/ddexterpark/merakictl/releases) |
+| OSX     | [386](https://github.com/ddexterpark/merakictl/releases)   |
+| OSX     | [amd64](https://github.com/ddexterpark/merakictl/releases) |
+| Windows | [386](https://github.com/ddexterpark/merakictl/releases)   |
+| windows | [amd64](https://github.com/ddexterpark/merakictl/releases) |
+
+#### Export Path to merakictl
+
+```shell script
+    # Linux/MacOS
+
+    # Move executable to preferred location and append in $PATH
+    mv merakictl-$OS-$ARCH /usr/local/sbin/merakictl
+    export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
+
+    # Windows
+    # Move executable to executable location (Powershell)
+    Move-Item -Path "merakictl-windows-$ARCH.exe" -Destination "C:\Program Files\merakictl.exe"
+
+```
+Now this binary should be available in your shell from any location by calling `merakictl`.
+
 
 ## Compile CLI From Source Code (Optional)
 The following steps are very optional and intended only for those who wish to compile from source code. 
@@ -42,37 +75,6 @@ go get github.com/ddexterpark/merakictl
 
 ```
 
-## Download Merakictl 
-This CLI tool does not require any prior programming experience or knowledge of Go Lang to use. 
-Please check the releases page to download the latest version. 
-Use this reference chart to select the appropriate version:
-
-### [Download Merakictl](https://github.com/ddexterpark/merakictl/releases)
-
-$OS | $ARCH
---- | --- 
-linux | 386
-linux | amd64
-darwin | 386
-darwin | amd64
-windows | 386
-windows | amd64
-
-#### Export Path to merakictl
-
-```shell script
-    # Linux/MacOS
-
-    # Move executable to preferred location and append in $PATH
-    mv merakictl-$OS-$ARCH /usr/local/sbin/merakictl
-    export PATH=/usr/local/bin:/usr/local/sbin:"$PATH"
-
-    # Windows
-    # Move executable to executable location (Powershell)
-    Move-Item -Path "merakictl-windows-$ARCH.exe" -Destination "C:\Program Files\merakictl.exe"
-
-```
-Now this binary should be available in your shell from any location by calling `merakictl`.
 
 ## Initial Setup  
 
@@ -134,29 +136,29 @@ The full command guide is available [here](https://github.com/ddexterpark/meraki
 
 #### COMMANDS
 
-Long | Short | Syntax | Description |
---- | --- | ---  | ---
-show | get | merakictl show [COMMAND] [SUBCOMMAND] [TARGET] [flags]| Operation for displaying (GET) api resources. 
-create | post | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags] | Creates (POST) new resources. 
-update | put | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Updates (PUT) targeted resources. 
-remove | del, no | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags]| Destructive (DELETE) API call for removing resources from the Dashboard. 
+| Long   | Short   | Syntax                                                    | Description                                                              |
+|--------|---------|-----------------------------------------------------------|--------------------------------------------------------------------------|
+| show   | get     | merakictl show [COMMAND] [SUBCOMMAND] [TARGET] [flags]    | Operation for displaying (GET) api resources.                            |
+| create | post    | merakictl create [COMMAND] [SUBCOMMAND] [TARGET] [flags]  | Creates (POST) new resources.                                            |
+| update | put     | merakictl update [COMMAND] [SUBCOMMAND] [TARGET]  [flags] | Updates (PUT) targeted resources.                                        |
+| remove | del, no | merakictl remove [COMMAND] [SUBCOMMAND] [TARGET]  [flags] | Destructive (DELETE) API call for removing resources from the Dashboard. |
 
 #### SUBCOMMANDS
 
 Subcommands mirror the Meraki Dashboard hierarchy.
 
-Long | Short | Syntax | Description
---- | --- | ---  | ---
-Organization | org |  | Collection of Networks
-Network | net |  | Collection of Devices
-Device | sn |  | Meraki Product
-appliance | mx | | Meraki MX Security Appliance
-switch | ms | | Meraki MS Switches
-wireless | mr | | Meraki MR Wirelesss Access  Points
-gateway | mg | | Meraki MG Cellualar Gateway
-camera | mv | | Meraki MV Cameras
-systems | sm | | Meraki SM Systems Management Solution
-insight | in | | Meraki Insight Application Telemetry
+| Long         | Short | Syntax | Description                           |
+|--------------|-------|--------|---------------------------------------|
+| Organization | org   |        | Collection of Networks                |
+| Network      | net   |        | Collection of Devices                 |
+| Device       | sn    |        | Meraki Product                        |
+| appliance    | mx    |        | Meraki MX Security Appliance          |
+| switch       | ms    |        | Meraki MS Switches                    |
+| wireless     | mr    |        | Meraki MR Wirelesss Access  Points    |
+| gateway      | mg    |        | Meraki MG Cellualar Gateway           |
+| camera       | mv    |        | Meraki MV Cameras                     |
+| systems      | sm    |        | Meraki SM Systems Management Solution |
+| insight      | in    |        | Meraki Insight Application Telemetry  |
 
 
 #### Usage Example
