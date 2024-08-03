@@ -1,3 +1,9 @@
+THIS TOOL IS NOW DEPRECATED. PLEASE CHECK OUT THE MERAKI TERRAFORM PROVIDER FOR A DECLARITIVE HCL WORKFLOW: 
+
+
+[terraform-provider-meraki](https://github.com/core-infra-svcs/terraform-provider-meraki)
+
+
 
 # merakictl
 [![published](https://static.production.devnetcloud.com/codeexchange/assets/images/devnet-published.svg)](https://developer.cisco.com/codeexchange/github/repo/ddexterpark/merakictl)
